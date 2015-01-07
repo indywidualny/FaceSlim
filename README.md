@@ -1,6 +1,6 @@
 With Fb Lite you can keep in touch with your friends even if you are not using the official Facebook app! 
 
-Download link: https://github.com/indywidualny/FacebookLite/blob/master/app/app-release.apk?raw=true
+Download link: https://github.com/indywidualny/FacebookLite/releases
 
 What makes the application awesome:
 
