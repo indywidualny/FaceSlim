@@ -15,8 +15,8 @@ Refresh the page by pulling down with your finger. External links will open in y
 
 Screenshots:
 
-* [Lollipop] https://www.dropbox.com/s/k0v5ocbmp2hao1m/en_Screenshot_2015-01-06-14-27-54.png?dl=0
-* [Lollipop] [pl] https://www.dropbox.com/s/wumd2xb2kpzdh3x/Screenshot_2015-01-06-14-28-37.png?dl=0
+* [Lollipop] https://www.dropbox.com/s/4s0x88sp49hxm4n/en_Lollipop_2015-01-06.png?dl=0
+* [Lollipop] [pl] https://www.dropbox.com/s/jgcpnrwqk3gm7qz/pl_Lollipop_2015-01-06.png?dl=0
 * [KitKat] https://www.dropbox.com/s/qd7qw8zucplob9o/kitkat_adv.png?dl=0
 * [KitKat] [pl] https://www.dropbox.com/s/stnpvxgk6gb7t1x/Screenshot_20150106_211529.png?dl=0
 * [KitKat] [7-inch tablet] https://www.dropbox.com/s/ztl1490p2mhbb5f/7_inch_tablet.png?dl=0
