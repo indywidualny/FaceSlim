@@ -1,7 +1,5 @@
 package org.indywidualni.fblite;
 
-// handling external links as intents
-
 import android.content.Intent;
 import android.net.Uri;
 import android.webkit.WebView;
@@ -9,16 +7,11 @@ import android.webkit.WebViewClient;
 
 public class MyAppWebViewClient extends WebViewClient {
 
+    // handling external links as intents
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
 
-        /*
-        TODO:  for version 1.0.1
-        TODO:  endsWith("m.facebook.com") instead of startsWith
-        TODO:  zero.facebook.com  and  0.facebook.com
-        */
-
-        if( Uri.parse(url).getHost().endsWith("m.facebook.com") || Uri.parse(url).getHost().endsWith("h.facebook.com") || Uri.parse(url).getHost().endsWith("l.facebook.com") ) {
+        if( Uri.parse(url).getHost().endsWith("m.facebook.com") || Uri.parse(url).getHost().endsWith("h.facebook.com") || Uri.parse(url).getHost().endsWith("l.facebook.com") || Uri.parse(url).getHost().endsWith("0.facebook.com") || Uri.parse(url).getHost().endsWith("zero.facebook.com") ) {
             return false;
         }
 
@@ -26,4 +19,5 @@ public class MyAppWebViewClient extends WebViewClient {
         view.getContext().startActivity(intent);
         return true;
     }
+
 }

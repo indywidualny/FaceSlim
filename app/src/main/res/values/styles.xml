@@ -6,9 +6,5 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="android:windowNoTitle">true</item> <!-- Remove action bar -->
         <item name="windowActionBar">false</item> <!-- The same for 2.x version -->
-
-        <!-- Just in case, not used now -->
-        <item name="android:windowActionBarOverlay">false</item> <!-- No overlay (at status bar) -->
-        <item name="windowActionBarOverlay">false</item> <!-- Support library compatibility -->
     </style>
 </resources>

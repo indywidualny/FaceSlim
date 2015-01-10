@@ -7,10 +7,6 @@
         <item name="android:windowNoTitle">true</item> <!-- Remove action bar -->
         <item name="windowActionBar">false</item> <!-- The same for 2.x version -->
 
-        <!-- Just in case, not used now -->
-        <item name="android:windowActionBarOverlay">false</item> <!-- No overlay (at status bar) -->
-        <item name="windowActionBarOverlay">false</item> <!-- Support library compatibility -->
-
         <!-- Translucent status bar with background color (for KitKat only) -->
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:fitsSystemWindows">true</item>
