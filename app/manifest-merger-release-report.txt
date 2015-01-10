@@ -19,8 +19,8 @@ ADDED from AndroidManifest.xml:3:1
 		ADDED from AndroidManifest.xml:3:11
 uses-sdk
 ADDED from AndroidManifest.xml:9:5
-MERGED from com.android.support:appcompat-v7:21.0.3:15:5
 MERGED from com.android.support:support-v4:21.0.3:15:5
+MERGED from com.android.support:appcompat-v7:21.0.3:15:5
 MERGED from com.android.support:support-v4:21.0.3:15:5
 	android:targetSdkVersion
 		INJECTED from AndroidManifest.xml:0:0
@@ -33,32 +33,36 @@ uses-permission#android.permission.INTERNET
 ADDED from AndroidManifest.xml:11:5
 	android:name
 		ADDED from AndroidManifest.xml:11:22
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from AndroidManifest.xml:12:5
+	android:name
+		ADDED from AndroidManifest.xml:12:22
 application
-ADDED from AndroidManifest.xml:13:5
+ADDED from AndroidManifest.xml:14:5
+MERGED from com.android.support:support-v4:21.0.3:16:5
 MERGED from com.android.support:appcompat-v7:21.0.3:16:5
 MERGED from com.android.support:support-v4:21.0.3:16:5
-MERGED from com.android.support:support-v4:21.0.3:16:5
 	android:label
-		ADDED from AndroidManifest.xml:15:9
-	android:icon
-		ADDED from AndroidManifest.xml:14:9
-	android:theme
 		ADDED from AndroidManifest.xml:16:9
+	android:icon
+		ADDED from AndroidManifest.xml:15:9
+	android:theme
+		ADDED from AndroidManifest.xml:17:9
 activity#org.indywidualni.fblite.MainActivity
-ADDED from AndroidManifest.xml:17:9
+ADDED from AndroidManifest.xml:18:9
 	android:label
-		ADDED from AndroidManifest.xml:18:13
-	android:configChanges
-		ADDED from AndroidManifest.xml:20:13
-	android:name
 		ADDED from AndroidManifest.xml:19:13
-intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from AndroidManifest.xml:21:13
-action#android.intent.action.MAIN
-ADDED from AndroidManifest.xml:22:17
+	android:configChanges
+		ADDED from AndroidManifest.xml:21:13
 	android:name
-		ADDED from AndroidManifest.xml:22:25
-category#android.intent.category.LAUNCHER
+		ADDED from AndroidManifest.xml:20:13
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from AndroidManifest.xml:22:13
+action#android.intent.action.MAIN
 ADDED from AndroidManifest.xml:23:17
 	android:name
-		ADDED from AndroidManifest.xml:23:27
+		ADDED from AndroidManifest.xml:23:25
+category#android.intent.category.LAUNCHER
+ADDED from AndroidManifest.xml:24:17
+	android:name
+		ADDED from AndroidManifest.xml:24:27
