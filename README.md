@@ -1,17 +1,24 @@
-With Fb Lite you can keep in touch with your friends even if you are not using the official Facebook app! 
+With Facebook Lite you can keep in touch with your friends even if you are not using the official Facebook app! Detailed description and more information below.
 
 Download link: https://github.com/indywidualny/FacebookLite/releases
 
-What makes the application awesome:
+Changelog & what makes the application awesome:
 
-* modern design (material) 
+1.1
+* photo upload (Camera or File Chooser)
+* new permission (WRITE_EXTERNAL_STORAGE)
+(camera photos are saved in Pictures/FacebookLite)
+(photo upload may not work on KitKat)
+
+1.0
+* modern design (Material)
 * chat support 
 * pull to refresh
-* NO ADS
+* NO ADS at all
 * always in your language 
 * no extra permissions (INTERNET only) 
 
-Refresh the page by pulling down with your finger. External links will open in your system browser as well as the full size images so you can zoom in, save, etc. The latest devices (KitKat and Lollipop) - blue status bar background. This application only requires access to the Internet - any additional permissions are not needed. The application will always be free and without ads! 
+Refresh the page by pulling down with your finger. External links will open in your system browser as well as the full size images so you can zoom in, save, etc. The latest devices (KitKat and Lollipop) - blue status bar background. Minimum permissions needed. The application will always be free and without ads!
 
 Screenshots:
 

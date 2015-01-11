@@ -129,7 +129,7 @@ public class MainActivity extends Activity {
 
                 // create an image file name
                 imageStorageDir  = new File(imageStorageDir + File.separator + "IMG_" + String.valueOf(System.currentTimeMillis()) + ".jpg");
-                return imageStorageDir ;
+                return imageStorageDir;
             }
 
             // openFileChooser for Android 3.0+
