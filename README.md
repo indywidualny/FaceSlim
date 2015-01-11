@@ -7,8 +7,8 @@ Changelog & what makes the application awesome:
 1.1
 * photo upload (Camera or File Chooser)
 * new permission (WRITE_EXTERNAL_STORAGE)
-(camera photos are saved in Pictures/FacebookLite)
-(photo upload may not work on KitKat)
+* (camera photos are saved in Pictures/FacebookLite)
+* (photo upload may not work on KitKat)
 
 1.0
 * modern design (Material)
