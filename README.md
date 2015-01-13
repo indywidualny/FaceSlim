@@ -4,6 +4,11 @@ Download link: https://github.com/indywidualny/FacebookLite/releases
 
 Changelog & what makes the application awesome:
 
+1.1.1
+* network error during app startup fixed (minor change, download link below)
+* (rarely there was an error even when there was a network connection)
+* https://github.com/indywidualny/FacebookLite/raw/master/app/app-release.apk
+
 1.1
 * photo upload (Camera or File Chooser)
 * new permission (WRITE_EXTERNAL_STORAGE)
@@ -31,7 +36,7 @@ Screenshots:
 
 Copyright notice: Facebook is a trademark of Facebook Inc. This app is NOT connected to Facebook Inc. whatsoever. This app only helps using the official Facebook Mobile website. 
 
-Important: It does NOT display notifications (I recommend Notiface) and has some limitations (eg. no access to your location so you cannot check-in automatically, no access to your files so you cannot send pictures for now) 
+Important: It does NOT display notifications (I recommend Notiface) and has some limitations (eg. no access to your location so you cannot check-in automatically)
 
 App suspended by Google Play.
 Now open source and avaliable to everyone.
