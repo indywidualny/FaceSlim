@@ -3,6 +3,7 @@ package org.indywidualni.fblite;
 import java.io.File;
 import java.io.IOException;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
@@ -44,6 +45,15 @@ public class MainActivity extends Activity {
 
         // define url that will open in webView
         String webViewUrl = "http://m.facebook.com";
+
+        // when someone clicks a Facebook link start the app with that link
+        if(getIntent().getDataString() != null) {
+            webViewUrl = getIntent().getDataString();
+            // show information about loading an external link
+            Context c = MainActivity.this;
+            Toast toast = Toast.makeText(c, R.string.loading_link, Toast.LENGTH_LONG);
+            toast.show();
+        }
 
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
         swipeRefreshLayout.setOnRefreshListener(onRefreshListener);
@@ -272,6 +282,20 @@ public class MainActivity extends Activity {
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
+    }
+
+    // app is already running and someone clicks a Facebook link outside the app
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        // show information about loading an external link
+        Context c = MainActivity.this;
+        Toast toast = Toast.makeText(c, R.string.loading_link, Toast.LENGTH_LONG);
+        toast.show();
+        // grab an intent and load instead of the current page
+        String webViewUrl = getIntent().getDataString();
+        webView.loadUrl(webViewUrl);
     }
 
     // handling back button

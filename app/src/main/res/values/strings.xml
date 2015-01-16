@@ -3,4 +3,5 @@
 <resources>
     <string name="app_name" translatable="false">Facebook Lite</string>
     <string name="image_chooser">Image Chooser</string>
+    <string name="loading_link">Opening a link</string>
 </resources>

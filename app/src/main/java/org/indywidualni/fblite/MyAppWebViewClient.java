@@ -14,7 +14,7 @@ public class MyAppWebViewClient extends WebViewClient {
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
 
-        if( Uri.parse(url).getHost().endsWith("m.facebook.com") || Uri.parse(url).getHost().endsWith("h.facebook.com") || Uri.parse(url).getHost().endsWith("l.facebook.com") || Uri.parse(url).getHost().endsWith("0.facebook.com") || Uri.parse(url).getHost().endsWith("zero.facebook.com") ) {
+        if( Uri.parse(url).getHost().endsWith("facebook.com") || Uri.parse(url).getHost().endsWith("m.facebook.com") || Uri.parse(url).getHost().endsWith("h.facebook.com") || Uri.parse(url).getHost().endsWith("l.facebook.com") || Uri.parse(url).getHost().endsWith("0.facebook.com") || Uri.parse(url).getHost().endsWith("zero.facebook.com") ) {
             return false;
         }
 

@@ -2,4 +2,5 @@
 
 <resources>
     <string name="image_chooser">Wybierz źródło</string>
+    <string name="loading_link">Otwieram link</string>
 </resources>
