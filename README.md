@@ -4,10 +4,11 @@ Download link: https://github.com/indywidualny/FacebookLite/releases
 
 Changelog & what makes the application awesome:
 
-1.1.1
-* network error during app startup fixed (minor change, download link below)
-* (rarely there was an error even when there was a network connection)
-* https://github.com/indywidualny/FacebookLite/raw/master/app/app-release.apk
+1.2
+* all Facebook links can now be opened in the app (in mobile view)
+* for notification support just install Notiface: http://goo.gl/ZM7m98
+* (when new notification is received just click it to open Facebook Lite)
+* rare network error during app startup fixed
 
 1.1
 * photo upload (Camera or File Chooser)
@@ -39,6 +40,6 @@ Copyright notice: Facebook is a trademark of Facebook Inc. This app is NOT conne
 Important: It does NOT display notifications (I recommend Notiface) and has some limitations (eg. no access to your location so you cannot check-in automatically)
 
 App suspended by Google Play.
-Now open source and avaliable to everyone.
+Now open source and available to everyone.
 
 Have fun! ;)

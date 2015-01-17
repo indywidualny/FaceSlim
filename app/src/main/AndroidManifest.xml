@@ -3,7 +3,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.indywidualni.fblite"
     android:versionCode="1"
-    android:versionName="1.1.2"
+    android:versionName="1.2"
     android:hardwareAccelerated="true" >
 
     <uses-sdk android:minSdkVersion="14" />
