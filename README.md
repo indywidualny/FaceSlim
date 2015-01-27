@@ -28,12 +28,12 @@ Refresh the page by pulling down with your finger. External links will open in y
 
 Screenshots:
 
-* [Lollipop] https://www.dropbox.com/s/4s0x88sp49hxm4n/en_Lollipop_2015-01-06.png?dl=0
-* [Lollipop] [pl] https://www.dropbox.com/s/jgcpnrwqk3gm7qz/pl_Lollipop_2015-01-06.png?dl=0
-* [KitKat] https://www.dropbox.com/s/qd7qw8zucplob9o/kitkat_adv.png?dl=0
-* [KitKat] [pl] https://www.dropbox.com/s/stnpvxgk6gb7t1x/Screenshot_20150106_211529.png?dl=0
-* [KitKat] [7-inch tablet] https://www.dropbox.com/s/ztl1490p2mhbb5f/7_inch_tablet.png?dl=0
-* [KitKat] [10-inch tablet] https://www.dropbox.com/s/g9be7kj1bp54pr5/10_inch_tablet.png?dl=0
+* [Lollipop] https://www.dropbox.com/s/4s0x88sp49hxm4n/en_Lollipop_2015-01-06.png
+* [Lollipop] [pl] https://www.dropbox.com/s/jgcpnrwqk3gm7qz/pl_Lollipop_2015-01-06.png
+* [KitKat] https://www.dropbox.com/s/qd7qw8zucplob9o/kitkat_adv.png
+* [KitKat] [pl] https://www.dropbox.com/s/stnpvxgk6gb7t1x/Screenshot_20150106_211529.png
+* [KitKat] [7-inch tablet] https://www.dropbox.com/s/ztl1490p2mhbb5f/7_inch_tablet.png
+* [KitKat] [10-inch tablet] https://www.dropbox.com/s/g9be7kj1bp54pr5/10_inch_tablet.png
 
 Copyright notice: Facebook is a trademark of Facebook Inc. This app is NOT connected to Facebook Inc. whatsoever. This app only helps using the official Facebook Mobile website. 
 

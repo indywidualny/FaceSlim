@@ -7,4 +7,10 @@
         <item name="android:windowNoTitle">true</item> <!-- Remove action bar -->
         <item name="windowActionBar">false</item> <!-- The same for 2.x version -->
     </style>
+
+    <style name="Theme.AppCompat.WithActionBar" parent="@style/Theme.AppCompat.Light">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:textColorPrimary">@color/colorTitle</item>
+    </style>
 </resources>

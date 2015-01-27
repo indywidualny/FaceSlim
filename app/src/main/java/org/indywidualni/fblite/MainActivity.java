@@ -14,17 +14,29 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Parcelable;
 import android.provider.MediaStore;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
+import android.view.View;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
+    // variables for drawer layout
+    private DrawerLayout mDrawerLayout;
+    private ListView mDrawerList;
+    private String[] itemList;
+
     SwipeRefreshLayout swipeRefreshLayout;
     private WebView webView;
+    private ProgressBar progressBar;
 
     // variables for camera and choosing files methods
     private static final int FILECHOOSER_RESULTCODE = 1;
@@ -42,6 +54,14 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // piece of code for drawer layout
+        itemList = getResources().getStringArray(R.array.item_array);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+        // set up the drawer's list view with items and click listener
+        mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, itemList));
+        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
         // define url that will open in webView
         String webViewUrl = "http://m.facebook.com";
@@ -62,6 +82,7 @@ public class MainActivity extends Activity {
         // webView code without handling external links
         webView = (WebView) findViewById(R.id.webView1);
         webView.getSettings().setJavaScriptEnabled(true);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         //webView.getSettings().setUseWideViewPort(true);
         //webView.getSettings().setLoadWithOverviewMode(true);
@@ -75,10 +96,21 @@ public class MainActivity extends Activity {
         // we will define openFileChooser for select file from camera
         webView.setWebChromeClient(new WebChromeClient() {
 
+            // page loading progress, gone when fully loaded
+            public void onProgressChanged(WebView view, int progress) {
+                if(progress < 100 && progressBar.getVisibility() == ProgressBar.GONE) {
+                    progressBar.setVisibility(ProgressBar.VISIBLE);
+                }
+                progressBar.setProgress(progress);
+                if(progress == 100) {
+                    progressBar.setVisibility(ProgressBar.GONE);
+                }
+            }
+
             // for Lollipop, all in one
             public boolean onShowFileChooser(
-                WebView webView, ValueCallback<Uri[]> filePathCallback,
-                WebChromeClient.FileChooserParams fileChooserParams) {
+                    WebView webView, ValueCallback<Uri[]> filePathCallback,
+                    WebChromeClient.FileChooserParams fileChooserParams) {
                 if (mFilePathCallback != null) {
                     mFilePathCallback.onReceiveValue(null);
                 }
@@ -182,10 +214,9 @@ public class MainActivity extends Activity {
             }
 
             // openFileChooser for other Android versions
-            /* NO FUCKING WAY TO MAKE IT WORK ON KITKAT
-               lack of implementation of openFileChooser() or onShowFileChooser()
+            /* may not work on KitKat due to lack of implementation of openFileChooser() or onShowFileChooser()
                https://code.google.com/p/android/issues/detail?id=62220
-               these Google guys just made me angry  */
+               however newer versions of KitKat fixed it on some devices */
             public void openFileChooser(ValueCallback<Uri> uploadMsg, String acceptType, String capture) {
                 openFileChooser(uploadMsg, acceptType);
             }
@@ -260,23 +291,63 @@ public class MainActivity extends Activity {
 
     SwipeRefreshLayout.OnRefreshListener onRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
 
-    // refreshing pages
-    @Override
-    public void onRefresh() {
-        // reloading page: two ways of doing it
-        //webView.loadUrl( "javascript:window.location.reload( true )" );
-        webView.reload();
+        // refreshing pages
+        @Override
+        public void onRefresh() {
+            // reloading page: two ways of doing it
+            //webView.loadUrl( "javascript:window.location.reload( true )" );
+            webView.reload();
 
-        new Handler().postDelayed(new Runnable() {
+            new Handler().postDelayed(new Runnable() {
 
-            @Override
-            public void run() {
-                swipeRefreshLayout.setRefreshing(false);
-                // done!
-            }
+                @Override
+                public void run() {
+                    swipeRefreshLayout.setRefreshing(false);
+                    // done!
+                }
 
-        }, 2000);
-    }};
+            }, 2000);
+        }};
+
+    // the click listener for ListView in the navigation drawer
+    private class DrawerItemClickListener implements ListView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            selectItem(position);
+        }
+    }
+
+    // when a drawer item is clicked do instructions from below
+    private void selectItem(int position) {
+        switch(position) {
+            case 0:
+                webView.loadUrl("https://m.facebook.com");
+                break;
+            case 1:
+                webView.loadUrl("https://m.facebook.com/messages");
+                break;
+            case 2:
+                webView.loadUrl("https://m.facebook.com/buddylist.php");
+                break;
+            case 3:
+                webView.loadUrl("https://m.facebook.com/events");
+                break;
+            case 4:
+                Intent settings = new Intent(this, SettingsActivity.class);
+                startActivity(settings);
+                break;
+            case 5:
+                Intent about = new Intent(this, AboutActivity.class);
+                startActivity(about);
+                break;
+            default:
+                // silence is golden
+                break;
+        }
+        // update selected item, then close the drawer
+        mDrawerList.setItemChecked(position, true);
+        mDrawerLayout.closeDrawer(mDrawerList);
+    }
 
     // survive screen orientation change
     @Override
@@ -289,13 +360,14 @@ public class MainActivity extends Activity {
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         setIntent(intent);
-        // show information about loading an external link
-        Context c = MainActivity.this;
-        Toast toast = Toast.makeText(c, R.string.loading_link, Toast.LENGTH_LONG);
-        toast.show();
         // grab an intent and load instead of the current page
         String webViewUrl = getIntent().getDataString();
         webView.loadUrl(webViewUrl);
+        // show information about loading an external link
+        /* TODO: It shows too often - so annoying
+        Context c = MainActivity.this;
+        Toast toast = Toast.makeText(c, R.string.loading_link, Toast.LENGTH_LONG);
+        toast.show(); */
     }
 
     // handling back button

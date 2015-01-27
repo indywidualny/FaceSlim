@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <resources>
+
     <string name="image_chooser">Wybierz źródło</string>
     <string name="loading_link">Otwieram link</string>
+
+    <string-array name="item_array">
+        <item>Najnowsze</item>
+        <item>Wiadomości</item>
+        <item>Czat (osoby on-line)</item>
+        <item>Wydarzenia</item>
+        <item>Ustawienia aplikacji</item>
+        <item>Informacje &amp; autor</item>
+    </string-array>
+
+    <string name="title_activity_settings">Ustawienia aplikacji</string>
+    <string name="title_activity_about">Informacje &amp; autor</string>
+
 </resources>

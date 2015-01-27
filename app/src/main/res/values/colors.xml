@@ -3,5 +3,8 @@
 <resources>
     <color name="colorPrimary">#3b579d</color>
     <color name="colorPrimaryDark">#003366</color>
-    <color name="windowBackground">#ffffff</color>
+    <color name="colorAccent">#3b579d</color>
+    <color name="windowBackground">#3b579d</color>
+    <color name="progressBackground">#d4dae8</color>
+    <color name="colorTitle">#ffffff</color>
 </resources>
