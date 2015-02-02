@@ -1,8 +1,18 @@
 With Facebook Lite you can keep in touch with your friends even if you are not using the official Facebook app! Detailed description and more information below.
 
-Download link: https://github.com/indywidualny/FacebookLite/releases
+Releases | [pl] instalacja: https://github.com/indywidualny/FacebookLite/releases
 
 Changelog & what makes the application awesome:
+
+1.3
+* swipe from the left edge for app menu
+* progress bar while loading
+* useful shortcuts (messages, friends on-line, groups...)
+* transparent navigation bar (option to enable)
+* clearing app cache
+* Settings and About & Dev
+* contact me and Notiface (for notifications) recommendation
+* fb.me links can be opened in the app
 
 1.2
 * all Facebook links can now be opened in the app (in mobile view)
@@ -25,6 +35,9 @@ Changelog & what makes the application awesome:
 * no extra permissions (INTERNET only) 
 
 Refresh the page by pulling down with your finger. External links will open in your system browser as well as the full size images so you can zoom in, save, etc. The latest devices (KitKat and Lollipop) - blue status bar background. Minimum permissions needed. The application will always be free and without ads!
+
+[pl] Temat na polskim forum dotyczący aplikacji:
+* http://forum.android.com.pl/f389/facebook-lite-493859/
 
 Screenshots:
 
