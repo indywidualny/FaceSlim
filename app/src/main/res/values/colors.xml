@@ -6,5 +6,7 @@
     <color name="colorAccent">#3b579d</color>
     <color name="windowBackground">#3b579d</color>
     <color name="progressBackground">#d4dae8</color>
-    <color name="colorTitle">#ffffff</color>
+    <color name="titleColor">#ffffff</color>
+    <color name="drawerItems">#ffffff</color>
+    <color name="preferenceTitle">#000000</color>
 </resources>

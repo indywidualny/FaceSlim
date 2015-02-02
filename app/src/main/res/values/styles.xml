@@ -4,13 +4,19 @@
     <style name="Theme.AppCompat.Light.NoActionBar" parent="@style/Theme.AppCompat.Light">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowNoTitle">true</item> <!-- Remove action bar -->
         <item name="windowActionBar">false</item> <!-- The same for 2.x version -->
     </style>
 
-    <style name="Theme.AppCompat.WithActionBar" parent="@style/Theme.AppCompat.Light">
+    <style name="Theme.AppCompat.WithActionBar" parent="@style/Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="android:textColorPrimary">@color/colorTitle</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@color/titleColor</item>
+    </style>
+
+    <style name="Theme.AppCompat.Preferences" parent="@style/Theme.AppCompat.WithActionBar">
+        <item name="android:textColor">@color/preferenceTitle</item>
     </style>
 </resources>

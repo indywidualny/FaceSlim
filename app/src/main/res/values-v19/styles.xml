@@ -7,13 +7,17 @@
 
         <!-- Translucent status bar with background color (for KitKat only) -->
         <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:fitsSystemWindows">true</item>
-        <item name="android:clipToPadding">false</item>
+        <!-- <item name="android:fitsSystemWindows">true</item>
+        <item name="android:clipToPadding">false</item> -->
         <item name="android:background">@color/colorPrimaryDark</item>
     </style>
 
     <style name="Theme.AppCompat.WithActionBar" parent="@style/Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <!-- Screw the KitKat translucent status bar - it's so problematic -->
+    </style>
+
+    <style name="Theme.AppCompat.Preferences" parent="@style/Theme.AppCompat.WithActionBar">
+        <item name="android:textColor">@color/preferenceTitle</item>
     </style>
 </resources>

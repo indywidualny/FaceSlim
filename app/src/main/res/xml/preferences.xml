@@ -1,0 +1,30 @@
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="@string/preference_category1">
+
+        <CheckBoxPreference
+            android:key="progress_bar"
+            android:title="@string/progress_bar"
+            android:defaultValue="true"/>
+
+        <CheckBoxPreference
+            android:key="transparent_nav"
+            android:title="@string/transparent_nav"
+            android:summary="@string/transparent_nav_description"
+            android:defaultValue="false"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/preference_category2">
+
+        <Preference
+            android:key="clear_cache"
+            android:title="@string/clear_cache"
+            android:summary="@string/clear_cache_description"/>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

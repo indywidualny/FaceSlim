@@ -8,6 +8,7 @@
         <item>Najnowsze</item>
         <item>Wiadomości</item>
         <item>Czat (osoby on-line)</item>
+        <item>Grupy</item>
         <item>Wydarzenia</item>
         <item>Ustawienia aplikacji</item>
         <item>Informacje &amp; autor</item>
@@ -15,5 +16,15 @@
 
     <string name="title_activity_settings">Ustawienia aplikacji</string>
     <string name="title_activity_about">Informacje &amp; autor</string>
+    <string name="clear_cache">Wyczyść cache</string>
+    <string name="clear_cache_description">Wyczyść pamięć podręczną aplikacji. Zostaniesz również wylogowany</string>
+    <string name="email_author">Napisz do mnie</string>
+    <string name="preference_category1">Interfejs</string>
+    <string name="preference_category2">Zaawansowane</string>
+    <string name="progress_bar">Pasek postępu</string>
+    <string name="transparent_nav">Przezroczysty navbar</string>
+    <string name="transparent_nav_description">Tylko KitKat lub Lollipop</string>
+    <string name="choose_email_client">Wybierz klienta poczty</string>
+    <string name="clearing_cache">Czyszczę cache&#8230;</string>
 
 </resources>

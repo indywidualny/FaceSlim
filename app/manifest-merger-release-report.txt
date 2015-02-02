@@ -92,28 +92,28 @@ ADDED from AndroidManifest.xml:33:17
 	android:scheme
 		ADDED from AndroidManifest.xml:33:51
 activity#org.indywidualni.fblite.SettingsActivity
-ADDED from AndroidManifest.xml:39:9
+ADDED from AndroidManifest.xml:41:9
 	android:label
-		ADDED from AndroidManifest.xml:41:13
-	android:parentActivityName
-		ADDED from AndroidManifest.xml:42:13
-	android:theme
 		ADDED from AndroidManifest.xml:43:13
-	android:name
-		ADDED from AndroidManifest.xml:40:13
-meta-data#android.support.PARENT_ACTIVITY
-ADDED from AndroidManifest.xml:44:13
-	android:value
-		ADDED from AndroidManifest.xml:46:17
-	android:name
-		ADDED from AndroidManifest.xml:45:17
-activity#org.indywidualni.fblite.AboutActivity
-ADDED from AndroidManifest.xml:48:9
-	android:label
-		ADDED from AndroidManifest.xml:50:13
 	android:parentActivityName
-		ADDED from AndroidManifest.xml:51:13
+		ADDED from AndroidManifest.xml:44:13
 	android:theme
-		ADDED from AndroidManifest.xml:52:13
+		ADDED from AndroidManifest.xml:45:13
 	android:name
-		ADDED from AndroidManifest.xml:49:13
+		ADDED from AndroidManifest.xml:42:13
+meta-data#android.support.PARENT_ACTIVITY
+ADDED from AndroidManifest.xml:46:13
+	android:value
+		ADDED from AndroidManifest.xml:48:17
+	android:name
+		ADDED from AndroidManifest.xml:47:17
+activity#org.indywidualni.fblite.AboutActivity
+ADDED from AndroidManifest.xml:50:9
+	android:label
+		ADDED from AndroidManifest.xml:52:13
+	android:parentActivityName
+		ADDED from AndroidManifest.xml:53:13
+	android:theme
+		ADDED from AndroidManifest.xml:54:13
+	android:name
+		ADDED from AndroidManifest.xml:51:13

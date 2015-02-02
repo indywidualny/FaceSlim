@@ -8,6 +8,6 @@
     android:gravity="center_vertical"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    android:textColor="#fff"
+    android:textColor="@color/drawerItems"
     android:background="@drawable/menu_selector"
     android:minHeight="?android:attr/listPreferredItemHeightSmall"/>

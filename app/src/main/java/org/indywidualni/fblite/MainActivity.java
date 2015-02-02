@@ -5,6 +5,7 @@ import java.io.IOException;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.net.Uri;
@@ -13,16 +14,19 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Parcelable;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -54,6 +58,28 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // get shared preferences
+        final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        // KitKat layout fix
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
+            // apply top padding to avoid layout being hidden by the status bar
+            LinearLayout contentMain = (LinearLayout) findViewById(R.id.content_main);
+            contentMain.setPadding(0, getStatusBarHeight(), 0, 0);
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            // transparent navBar (above KitKat) when it's enabled
+            if (preferences.getBoolean("transparent_nav", false)) {
+                getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+                // apply top padding to avoid layout being hidden by the status bar
+                LinearLayout contentMain = (LinearLayout) findViewById(R.id.content_main);
+                contentMain.setPadding(0, getStatusBarHeight(), 0, 0);
+                // bug fix for resizing the view while opening soft keyboard
+                AndroidBug5497Workaround.assistActivity(this);
+            }
+        }
 
         // piece of code for drawer layout
         itemList = getResources().getStringArray(R.array.item_array);
@@ -98,11 +124,17 @@ public class MainActivity extends Activity {
 
             // page loading progress, gone when fully loaded
             public void onProgressChanged(WebView view, int progress) {
-                if(progress < 100 && progressBar.getVisibility() == ProgressBar.GONE) {
-                    progressBar.setVisibility(ProgressBar.VISIBLE);
-                }
-                progressBar.setProgress(progress);
-                if(progress == 100) {
+                // display it only when it's enabled (default true)
+                if (preferences.getBoolean("progress_bar", true)) {
+                    if (progress < 100 && progressBar.getVisibility() == ProgressBar.GONE) {
+                        progressBar.setVisibility(ProgressBar.VISIBLE);
+                    }
+                    progressBar.setProgress(progress);
+                    if (progress == 100) {
+                        progressBar.setVisibility(ProgressBar.GONE);
+                    }
+                } else {
+                    // if progress bar is disabled hide it immediately
                     progressBar.setVisibility(ProgressBar.GONE);
                 }
             }
@@ -225,6 +257,16 @@ public class MainActivity extends Activity {
 
     }
 
+    // get status bar height (needed for transparent nav bar)
+    public int getStatusBarHeight() {
+        int result = 0;
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
+    }
+
     // return here when file selected from camera or from SD Card
     @Override
     public void onActivityResult (int requestCode, int resultCode, Intent data) {
@@ -330,13 +372,16 @@ public class MainActivity extends Activity {
                 webView.loadUrl("https://m.facebook.com/buddylist.php");
                 break;
             case 3:
-                webView.loadUrl("https://m.facebook.com/events");
+                webView.loadUrl("https://m.facebook.com/groups/?category=membership");
                 break;
             case 4:
+                webView.loadUrl("https://m.facebook.com/events");
+                break;
+            case 5:
                 Intent settings = new Intent(this, SettingsActivity.class);
                 startActivity(settings);
                 break;
-            case 5:
+            case 6:
                 Intent about = new Intent(this, AboutActivity.class);
                 startActivity(about);
                 break;
@@ -355,7 +400,7 @@ public class MainActivity extends Activity {
         super.onConfigurationChanged(newConfig);
     }
 
-    // app is already running and someone clicks a Facebook link outside the app
+    // app is already running and gets a new intent
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
@@ -363,11 +408,43 @@ public class MainActivity extends Activity {
         // grab an intent and load instead of the current page
         String webViewUrl = getIntent().getDataString();
         webView.loadUrl(webViewUrl);
-        // show information about loading an external link
-        /* TODO: It shows too often - so annoying
-        Context c = MainActivity.this;
-        Toast toast = Toast.makeText(c, R.string.loading_link, Toast.LENGTH_LONG);
-        toast.show(); */
+
+        // get shared preferences
+        final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
+            // transparent navBar (above KitKat) when it's enabled
+            if (preferences.getBoolean("transparent_nav", false)) {
+                getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+                // apply top padding to avoid layout being hidden by the status bar
+                LinearLayout contentMain = (LinearLayout) findViewById(R.id.content_main);
+                contentMain.setPadding(0, getStatusBarHeight(), 0, 0);
+                // bug fix for resizing the view while opening soft keyboard
+                AndroidBug5497Workaround.assistActivity(this);
+            } else {
+                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+                // apply top padding to avoid layout being hidden by the status bar
+                LinearLayout contentMain = (LinearLayout) findViewById(R.id.content_main);
+                contentMain.setPadding(0, getStatusBarHeight(), 0, 0);
+            }
+        }
+
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
+            // transparent navBar (above KitKat) when it's enabled
+            if (preferences.getBoolean("transparent_nav", false)) {
+                getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+                // apply top padding to avoid layout being hidden by the status bar
+                LinearLayout contentMain = (LinearLayout) findViewById(R.id.content_main);
+                contentMain.setPadding(0, getStatusBarHeight(), 0, 0);
+                // bug fix for resizing the view while opening soft keyboard
+                AndroidBug5497Workaround.assistActivity(this);
+            } else {
+                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+                // reset padding, Lollipop needs zeros
+                LinearLayout contentMain = (LinearLayout) findViewById(R.id.content_main);
+                contentMain.setPadding(0, 0, 0, 0);
+            }
+        }
     }
 
     // handling back button
