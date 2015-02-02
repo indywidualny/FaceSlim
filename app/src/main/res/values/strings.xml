@@ -15,7 +15,7 @@
         <item>About &amp; Dev</item>
     </string-array>
 
-    <string name="about_first" translatable="false">Facebook Lite by Krzysztof \'Koras\' Grabowski \ngithub.com/indywidualny/FacebookLite</string>
+    <string name="about_first" translatable="false">Facebook Lite by Krzysztof \'Koras\' Grabowski \n\ngithub.com/indywidualny/FacebookLite\nindywidualni.org</string>
     <string name="title_activity_settings">Settings</string>
     <string name="title_activity_about">About &amp; Dev</string>
 
@@ -28,6 +28,6 @@
     <string name="clear_cache_description">Clear app cache. It will also log you out</string>
     <string name="email_author">Contact me</string>
     <string name="choose_email_client">Choose e-mail client</string>
-    <string name="clearing_cache">Clearing cache&#8230;</string>
+    <string name="notifications">Notifications</string>
 
 </resources>

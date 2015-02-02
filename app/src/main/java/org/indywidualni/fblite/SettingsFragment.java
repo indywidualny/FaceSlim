@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.util.Log;
-import android.widget.Toast;
 import java.io.File;
 
 public class SettingsFragment extends PreferenceFragment {
@@ -21,10 +20,9 @@ public class SettingsFragment extends PreferenceFragment {
         findPreference("clear_cache").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                // it only works below KitKat! since KitKat WebView has its own cache dir
+                Log.v("SettingsFragment", "clearing cache...");
+                // clear cache dirs
                 deleteCache(getActivity().getApplicationContext());
-                Toast.makeText(getActivity(), getString(R.string.clearing_cache), Toast.LENGTH_SHORT).show();
-                Log.v("SettingsFragment", "cache cleared");
                 // restart the app (really ugly way of doing it but...)
                 android.os.Process.killProcess(android.os.Process.myPid());
                 return true;

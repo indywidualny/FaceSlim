@@ -33,6 +33,10 @@ public class AboutActivity extends ActionBarActivity {
                 emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Facebook Lite: About & Dev");
                 startActivity(Intent.createChooser(emailIntent, getString(R.string.choose_email_client)));
                 return true;
+            case R.id.notifications:
+                // for notifications I recommend Notiface
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.aquasoup.notiface")));
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

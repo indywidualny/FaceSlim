@@ -3,4 +3,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/email_me"
         android:title="@string/email_author"/>
+
+    <item android:id="@+id/notifications"
+        android:title="@string/notifications"/>
 </menu>
