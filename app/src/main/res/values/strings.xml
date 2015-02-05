@@ -23,9 +23,9 @@
     <string name="preference_category2">Advanced Settings</string>
     <string name="progress_bar">Progress bar</string>
     <string name="transparent_nav">Transparent navbar</string>
-    <string name="transparent_nav_description">KitKat and Lollipop only</string>
+    <string name="transparent_nav_description">KitKat and Lollipop. After the change restart is recommended to avoid layout issues.</string>
     <string name="clear_cache">Clear cache</string>
-    <string name="clear_cache_description">Clear app cache. It will also log you out</string>
+    <string name="clear_cache_description">Clear app cache. It will also log you out.</string>
     <string name="email_author">Contact me</string>
     <string name="choose_email_client">Choose e-mail client</string>
     <string name="notifications">Notifications</string>

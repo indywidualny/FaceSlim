@@ -67,6 +67,8 @@ public class MainActivity extends Activity {
             // apply top padding to avoid layout being hidden by the status bar
             LinearLayout contentMain = (LinearLayout) findViewById(R.id.content_main);
             contentMain.setPadding(0, getStatusBarHeight(), 0, 0);
+            // bug fix for resizing the view while opening soft keyboard
+            AndroidBug5497Workaround.assistActivity(this);
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -416,16 +418,8 @@ public class MainActivity extends Activity {
             // transparent navBar (above KitKat) when it's enabled
             if (preferences.getBoolean("transparent_nav", false)) {
                 getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-                // apply top padding to avoid layout being hidden by the status bar
-                LinearLayout contentMain = (LinearLayout) findViewById(R.id.content_main);
-                contentMain.setPadding(0, getStatusBarHeight(), 0, 0);
-                // bug fix for resizing the view while opening soft keyboard
-                AndroidBug5497Workaround.assistActivity(this);
             } else {
                 getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-                // apply top padding to avoid layout being hidden by the status bar
-                LinearLayout contentMain = (LinearLayout) findViewById(R.id.content_main);
-                contentMain.setPadding(0, getStatusBarHeight(), 0, 0);
             }
         }
 

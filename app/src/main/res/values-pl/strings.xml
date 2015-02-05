@@ -23,7 +23,7 @@
     <string name="preference_category2">Zaawansowane</string>
     <string name="progress_bar">Pasek postępu</string>
     <string name="transparent_nav">Przezroczysty navbar</string>
-    <string name="transparent_nav_description">Tylko KitKat lub Lollipop</string>
+    <string name="transparent_nav_description">KitKat lub Lollipop. Po zmianie zalecany jest restart, by uniknąć problemów widoku.</string>
     <string name="choose_email_client">Wybierz klienta poczty</string>
     <string name="notifications">Powiadomienia</string>
 
