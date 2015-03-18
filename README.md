@@ -1,7 +1,7 @@
 With Facebook Lite you can keep in touch with your friends even if you are not using the official Facebook app! Detailed description and more information below.
 
-Install from F-Droid and get updates: https://f-droid.org/app/org.indywidualni.fblite
-Releases | [pl] wydania: https://github.com/indywidualny/FacebookLite/releases
+* Install from F-Droid and get updates: https://f-droid.org/app/org.indywidualni.fblite
+* Releases | [pl] wydania: https://github.com/indywidualny/FacebookLite/releases
 
 Changelog & what makes the application awesome:
 
