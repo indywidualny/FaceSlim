@@ -1,6 +1,7 @@
 With Facebook Lite you can keep in touch with your friends even if you are not using the official Facebook app! Detailed description and more information below.
 
-Releases | [pl] instalacja: https://github.com/indywidualny/FacebookLite/releases
+Install from F-Droid and get updates: https://f-droid.org/app/org.indywidualni.fblite
+Releases | [pl] wydania: https://github.com/indywidualny/FacebookLite/releases
 
 Changelog & what makes the application awesome:
 
@@ -50,7 +51,7 @@ Screenshots:
 
 Copyright notice: Facebook is a trademark of Facebook Inc. This app is NOT connected to Facebook Inc. whatsoever. This app only helps using the official Facebook Mobile website. 
 
-Important: It does NOT display notifications (I recommend Notiface) and has some limitations (eg. no access to your location so you cannot check-in automatically)
+Important: It does NOT display notifications (I recommend Notiface) and has some limitations (eg. no access to your location so you cannot check-in automatically). Install using F-Droid client to get updates.
 
 App suspended by Google Play.
 Now open source and available to everyone.
