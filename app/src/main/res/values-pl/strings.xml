@@ -5,6 +5,7 @@
     <string name="loading_link">Otwieram link</string>
 
     <string-array name="item_array">
+        <item>Skocz na górę\u0020 &#8593;</item>
         <item>Najnowsze</item>
         <item>Wiadomości</item>
         <item>Czat (osoby on-line)</item>

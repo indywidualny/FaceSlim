@@ -1,8 +1,16 @@
 With Facebook Lite you can keep in touch with your friends even if you are not using the official Facebook app! Detailed description and more information below.
 
-Releases | [pl] instalacja: https://github.com/indywidualny/FacebookLite/releases
+[![Facebook Lite on fdroid.org](https://camo.githubusercontent.com/7df0eafa4433fa4919a56f87c3d99cf81b68d01c/68747470733a2f2f662d64726f69642e6f72672f77696b692f696d616765732f632f63342f462d44726f69642d627574746f6e5f617661696c61626c652d6f6e2e706e67 "Download from fdroid.org")](https://f-droid.org/app/org.indywidualni.fblite)
+
+Releases | [pl] wydania: https://github.com/indywidualny/FacebookLite/releases
 
 Changelog & what makes the application awesome:
+
+1.4
+* jump to top (no more painful scrolling!)
+* layout fix for KitKat (text in a toast)
+* auto-updates through F-Droid client
+* slightly changed About & Dev
 
 1.3
 * swipe from the left edge for app menu
@@ -28,11 +36,11 @@ Changelog & what makes the application awesome:
 
 1.0
 * modern design (Material)
-* chat support 
+* chat support
 * pull to refresh
 * NO ADS at all
-* always in your language 
-* no extra permissions (INTERNET only) 
+* always in your language
+* no extra permissions (INTERNET only)
 
 Refresh the page by pulling down with your finger. External links will open in your system browser as well as the full size images so you can zoom in, save, etc. The latest devices (KitKat and Lollipop) - blue status bar background. Minimum permissions needed. The application will always be free and without ads!
 
@@ -48,9 +56,9 @@ Screenshots:
 * [KitKat] [7-inch tablet] https://www.dropbox.com/s/ztl1490p2mhbb5f/7_inch_tablet.png
 * [KitKat] [10-inch tablet] https://www.dropbox.com/s/g9be7kj1bp54pr5/10_inch_tablet.png
 
-Copyright notice: Facebook is a trademark of Facebook Inc. This app is NOT connected to Facebook Inc. whatsoever. This app only helps using the official Facebook Mobile website. 
+Copyright notice: Facebook is a trademark of Facebook Inc. This app is NOT connected to Facebook Inc. whatsoever. This app only helps using the official Facebook Mobile website.
 
-Important: It does NOT display notifications (I recommend Notiface) and has some limitations (eg. no access to your location so you cannot check-in automatically)
+Important: It does NOT display notifications (I recommend Notiface) and has some limitations (eg. no access to your location so you cannot check-in automatically). Install using F-Droid client to get updates.
 
 App suspended by Google Play.
 Now open source and available to everyone.

@@ -98,7 +98,7 @@ public class MainActivity extends Activity {
         if(getIntent().getDataString() != null) {
             webViewUrl = getIntent().getDataString();
             // show information about loading an external link
-            Context c = MainActivity.this;
+            Context c = getApplicationContext();
             Toast toast = Toast.makeText(c, R.string.loading_link, Toast.LENGTH_LONG);
             toast.show();
         }
@@ -365,25 +365,28 @@ public class MainActivity extends Activity {
     private void selectItem(int position) {
         switch(position) {
             case 0:
-                webView.loadUrl("https://m.facebook.com");
+                webView.loadUrl("javascript:scroll(0,0)");
                 break;
             case 1:
-                webView.loadUrl("https://m.facebook.com/messages");
+                webView.loadUrl("https://m.facebook.com");
                 break;
             case 2:
-                webView.loadUrl("https://m.facebook.com/buddylist.php");
+                webView.loadUrl("https://m.facebook.com/messages");
                 break;
             case 3:
-                webView.loadUrl("https://m.facebook.com/groups/?category=membership");
+                webView.loadUrl("https://m.facebook.com/buddylist.php");
                 break;
             case 4:
-                webView.loadUrl("https://m.facebook.com/events");
+                webView.loadUrl("https://m.facebook.com/groups/?category=membership");
                 break;
             case 5:
+                webView.loadUrl("https://m.facebook.com/events");
+                break;
+            case 6:
                 Intent settings = new Intent(this, SettingsActivity.class);
                 startActivity(settings);
                 break;
-            case 6:
+            case 7:
                 Intent about = new Intent(this, AboutActivity.class);
                 startActivity(about);
                 break;

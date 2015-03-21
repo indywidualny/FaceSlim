@@ -6,6 +6,7 @@
     <string name="loading_link">Opening a link</string>
 
     <string-array name="item_array">
+        <item>Jump to Top\u0020 &#8593;</item>
         <item>News Feed</item>
         <item>Messages</item>
         <item>Chat (Friends Online)</item>
@@ -15,7 +16,7 @@
         <item>About &amp; Dev</item>
     </string-array>
 
-    <string name="about_first" translatable="false">Facebook Lite by Krzysztof \'Koras\' Grabowski \n\ngithub.com/indywidualny/FacebookLite\nindywidualni.org</string>
+    <string name="about_first" translatable="false">Facebook Lite by Krzysztof \'Koras\' Grabowski \n\ngithub.com/indywidualny/FacebookLite\nf-droid.org/app/org.indywidualni.fblite\n\nindywidualni.org</string>
     <string name="title_activity_settings">Settings</string>
     <string name="title_activity_about">About &amp; Dev</string>
 
