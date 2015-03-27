@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
@@ -80,6 +81,14 @@ public class MainActivity extends Activity {
                 contentMain.setPadding(0, getStatusBarHeight(), 0, 0);
                 // bug fix for resizing the view while opening soft keyboard
                 AndroidBug5497Workaround.assistActivity(this);
+
+                // bug fix (1.4.1) for launching the app in landscape mode
+                if(getResources().getConfiguration().orientation == 0 && Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT)
+                    contentMain.setPadding(0, getStatusBarHeight(), getNavigationBarHeight(getApplicationContext(), 0), 0);
+                else if (getResources().getConfiguration().orientation == 0 && Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
+                    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+                    contentMain.setPadding(0, 0, 0, getStatusBarHeight());
+                }
             }
         }
 
@@ -260,13 +269,23 @@ public class MainActivity extends Activity {
     }
 
     // get status bar height (needed for transparent nav bar)
-    public int getStatusBarHeight() {
+    private int getStatusBarHeight() {
         int result = 0;
         int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
         if (resourceId > 0) {
             result = getResources().getDimensionPixelSize(resourceId);
         }
         return result;
+    }
+
+    // get navigation bar height
+    private int getNavigationBarHeight(Context context, int orientation) {
+        Resources resources = context.getResources();
+        int resourceId = resources.getIdentifier(orientation == Configuration.ORIENTATION_PORTRAIT ? "navigation_bar_height" : "navigation_bar_height_landscape", "dimen", "android");
+        if (resourceId > 0) {
+            return resources.getDimensionPixelSize(resourceId);
+        }
+        return 0;
     }
 
     // return here when file selected from camera or from SD Card
@@ -403,6 +422,30 @@ public class MainActivity extends Activity {
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
+
+        // get shared preferences
+        final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        // bug fix (1.4.1) for landscape mode
+        if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE && preferences.getBoolean("transparent_nav", false)) {
+            if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
+                LinearLayout contentMain = (LinearLayout) findViewById(R.id.content_main);
+                contentMain.setPadding(0, getStatusBarHeight(), getNavigationBarHeight(getApplicationContext(), 0), 0);
+            } else if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
+                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+                LinearLayout contentMain = (LinearLayout) findViewById(R.id.content_main);
+                contentMain.setPadding(0, 0, 0, getStatusBarHeight());
+            }
+        } else {
+            if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
+                LinearLayout contentMain = (LinearLayout) findViewById(R.id.content_main);
+                contentMain.setPadding(0, getStatusBarHeight(), 0, 0);
+            } else if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
+                getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+                LinearLayout contentMain = (LinearLayout) findViewById(R.id.content_main);
+                contentMain.setPadding(0, getStatusBarHeight(), 0, 0);
+            }
+        }
     }
 
     // app is already running and gets a new intent
