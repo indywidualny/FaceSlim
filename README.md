@@ -8,9 +8,12 @@ Changelog & what makes the application awesome:
 
 1.4
 * jump to top (no more painful scrolling!)
+* activation and deactivation of transparent navbar is applied immediately
+* horizontal mode with transparent navbar activated works properly now
 * layout fix for KitKat (text in a toast)
+* major changes on About & Dev
+* the app supports Android 5.1.0
 * auto-updates through F-Droid client
-* slightly changed About & Dev
 
 1.3
 * swipe from the left edge for app menu
