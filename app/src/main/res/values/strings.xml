@@ -4,6 +4,7 @@
     <string name="app_name" translatable="false">Facebook Lite</string>
     <string name="image_chooser">Image Chooser</string>
     <string name="loading_link">Opening a link</string>
+    <string name="applying_changes">Applying changes</string>
 
     <string-array name="item_array">
         <item>Jump to Top\u0020 &#8593;</item>
@@ -16,15 +17,18 @@
         <item>About &amp; Dev</item>
     </string-array>
 
-    <string name="about_first" translatable="false">Facebook Lite by Krzysztof \'Koras\' Grabowski \n\ngithub.com/indywidualny/FacebookLite\nf-droid.org/app/org.indywidualni.fblite\n\nindywidualni.org</string>
+    <string name="author" translatable="false">by Krzysztof \'Koras\' Grabowski</string>
+    <string name="github_link" translatable="false"><a href="https://github.com/indywidualny/FacebookLite">github.com/indywidualny/FacebookLite</a></string>
+    <string name="f_droid_link" translatable="false"><a href="https://f-droid.org/app/org.indywidualni.fblite">f-droid.org/app/org.indywidualni.fblite</a></string>
+    <string name="indywidualni_link" translatable="false"><a href="http://indywidualni.org">indywidualni.org</a></string>
+
     <string name="title_activity_settings">Settings</string>
     <string name="title_activity_about">About &amp; Dev</string>
-
     <string name="preference_category1">Interface</string>
     <string name="preference_category2">Advanced Settings</string>
     <string name="progress_bar">Progress bar</string>
     <string name="transparent_nav">Transparent navbar</string>
-    <string name="transparent_nav_description">KitKat and Lollipop. After the change restart is recommended to avoid layout issues.</string>
+    <string name="transparent_nav_description">KitKat and Lollipop. After the change the app will be restarted to avoid layout issues.</string>
     <string name="clear_cache">Clear cache</string>
     <string name="clear_cache_description">Clear app cache. It will also log you out.</string>
     <string name="email_author">Contact me</string>

@@ -1,10 +1,12 @@
 package org.indywidualni.fblite;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.util.Log;
+import android.widget.Toast;
 import java.io.File;
 
 public class SettingsFragment extends PreferenceFragment {
@@ -25,6 +27,22 @@ public class SettingsFragment extends PreferenceFragment {
                 deleteCache(getActivity().getApplicationContext());
                 // restart the app (really ugly way of doing it but...)
                 android.os.Process.killProcess(android.os.Process.myPid());
+                return true;
+            }
+        });
+
+        // listener for changing transparent_nav preference
+        findPreference("transparent_nav").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                Log.v("SettingsFragment", "transparent_nav changed");
+                // notify user about relaunching the app
+                Toast.makeText(getActivity(), getString(R.string.applying_changes), Toast.LENGTH_SHORT).show();
+                // sending intent to onNewIntent() of MainActivity
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                intent.putExtra("transparent_nav_changed", true);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
                 return true;
             }
         });

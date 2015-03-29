@@ -3,6 +3,7 @@
 
     <string name="image_chooser">Wybierz źródło</string>
     <string name="loading_link">Otwieram link</string>
+    <string name="applying_changes">Stosuję zmiany</string>
 
     <string-array name="item_array">
         <item>Skocz na górę\u0020 &#8593;</item>
@@ -24,7 +25,7 @@
     <string name="preference_category2">Zaawansowane</string>
     <string name="progress_bar">Pasek postępu</string>
     <string name="transparent_nav">Przezroczysty navbar</string>
-    <string name="transparent_nav_description">KitKat lub Lollipop. Po zmianie zalecany jest restart, by uniknąć problemów widoku.</string>
+    <string name="transparent_nav_description">KitKat lub Lollipop. Po zmianie nastąpi restart, by uniknąć problemów widoku.</string>
     <string name="choose_email_client">Wybierz klienta poczty</string>
     <string name="notifications">Powiadomienia</string>
 

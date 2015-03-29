@@ -83,9 +83,9 @@ public class MainActivity extends Activity {
                 AndroidBug5497Workaround.assistActivity(this);
 
                 // bug fix (1.4.1) for launching the app in landscape mode
-                if(getResources().getConfiguration().orientation == 0 && Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT)
+                if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE && Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT)
                     contentMain.setPadding(0, getStatusBarHeight(), getNavigationBarHeight(getApplicationContext(), 0), 0);
-                else if (getResources().getConfiguration().orientation == 0 && Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
+                else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE && Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
                     getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
                     contentMain.setPadding(0, 0, 0, getStatusBarHeight());
                 }
@@ -436,7 +436,7 @@ public class MainActivity extends Activity {
                 LinearLayout contentMain = (LinearLayout) findViewById(R.id.content_main);
                 contentMain.setPadding(0, 0, 0, getStatusBarHeight());
             }
-        } else {
+        } else if(newConfig.orientation == Configuration.ORIENTATION_PORTRAIT && preferences.getBoolean("transparent_nav", false)) {
             if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
                 LinearLayout contentMain = (LinearLayout) findViewById(R.id.content_main);
                 contentMain.setPadding(0, getStatusBarHeight(), 0, 0);
@@ -457,33 +457,11 @@ public class MainActivity extends Activity {
         String webViewUrl = getIntent().getDataString();
         webView.loadUrl(webViewUrl);
 
-        // get shared preferences
-        final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-
-        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
-            // transparent navBar (above KitKat) when it's enabled
-            if (preferences.getBoolean("transparent_nav", false)) {
-                getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-            } else {
-                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-            }
-        }
-
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
-            // transparent navBar (above KitKat) when it's enabled
-            if (preferences.getBoolean("transparent_nav", false)) {
-                getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-                // apply top padding to avoid layout being hidden by the status bar
-                LinearLayout contentMain = (LinearLayout) findViewById(R.id.content_main);
-                contentMain.setPadding(0, getStatusBarHeight(), 0, 0);
-                // bug fix for resizing the view while opening soft keyboard
-                AndroidBug5497Workaround.assistActivity(this);
-            } else {
-                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-                // reset padding, Lollipop needs zeros
-                LinearLayout contentMain = (LinearLayout) findViewById(R.id.content_main);
-                contentMain.setPadding(0, 0, 0, 0);
-            }
+        // recreate activity when transparent_nav was just changed
+        if (getIntent().getBooleanExtra("transparent_nav_changed", false)) {
+            finish(); // finish and create a new Instance
+            Intent restarter = new Intent(MainActivity.this, MainActivity.class);
+            startActivity(restarter);
         }
     }
 
