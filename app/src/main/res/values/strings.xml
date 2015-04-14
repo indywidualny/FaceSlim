@@ -26,13 +26,23 @@
     <string name="title_activity_about">About &amp; Dev</string>
     <string name="preference_category1">Interface</string>
     <string name="preference_category2">Advanced Settings</string>
-    <string name="progress_bar">Progress bar</string>
-    <string name="transparent_nav">Transparent navbar</string>
+    <string name="progress_bar">Progress Bar</string>
+    <string name="transparent_nav">Transparent Navbar</string>
     <string name="transparent_nav_description">KitKat and Lollipop. After the change the app will be restarted to avoid layout issues.</string>
-    <string name="clear_cache">Clear cache</string>
+    <string name="clear_cache">Clear Cache</string>
     <string name="clear_cache_description">Clear app cache. It will also log you out.</string>
     <string name="email_author">Contact me</string>
     <string name="choose_email_client">Choose e-mail client</string>
     <string name="notifications">Notifications</string>
+    <string name="no_network">You are offline ;)</string>
+    <string name="hardware_acceleration">Hardware Acceleration</string>
+    <string name="hardware_acceleration_description">Disable it only on low memory devices (in case of problems).</string>
+    <string name="share_link">Share the link</string>
+    <string name="long_clicks">Long Clicks</string>
+    <string name="long_clicks_description">Long click a link or an image link to share.</string>
+    <string name="me_google_play">Me at Google Play</string>
+    <string name="preference_category3">Experimental</string>
+    <string name="dark_theme">Dark Theme</string>
+    <string name="dark_theme_description">Turn Facebook black. You know css? Help me improve!\u0020 -\u0020 res/raw/black.css</string>
 
 </resources>

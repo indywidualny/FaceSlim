@@ -28,5 +28,15 @@
     <string name="transparent_nav_description">KitKat lub Lollipop. Po zmianie nastąpi restart, by uniknąć problemów widoku.</string>
     <string name="choose_email_client">Wybierz klienta poczty</string>
     <string name="notifications">Powiadomienia</string>
+    <string name="no_network">Jesteś offline ;)</string>
+    <string name="hardware_acceleration">Przyspieszenie sprzętowe</string>
+    <string name="hardware_acceleration_description">Deaktywuj jedynie na urządzeniach z małą ilością pamięci (w razie problemów).</string>
+    <string name="share_link">Udostępnij link</string>
+    <string name="long_clicks">Długie kliknięcia</string>
+    <string name="long_clicks_description">Przytrzymaj link lub foto link by udostępnić.</string>
+    <string name="me_google_play">Autor w Google Play</string>
+    <string name="preference_category3">Eksperymentalne</string>
+    <string name="dark_theme">Ciemny motyw</string>
+    <string name="dark_theme_description">Dla fanów czerni. Znasz css? Pomóż mi go dopracować!\u0020 -\u0020 res/raw/black.css</string>
 
 </resources>

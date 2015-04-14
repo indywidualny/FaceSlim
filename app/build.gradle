@@ -2,14 +2,14 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 22
-    buildToolsVersion "22"
+    buildToolsVersion "22.0.1"
 
     defaultConfig {
         applicationId "org.indywidualni.fblite"
         minSdkVersion 14
         targetSdkVersion 22
-        versionCode 3
-        versionName "1.4.1"
+        versionCode 4
+        versionName "1.5.0"
     }
     buildTypes {
         release {

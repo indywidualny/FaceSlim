@@ -1,0 +1,77 @@
+body, #root, .storyStream, ._2v9s,
+#m_newsfeed_stream,
+._55wo,
+#header,
+.acb, .acg, .aclb, textarea,
+._59e9, .nontouch ._5ui0,
+input[type=text],
+.acw, ._5up8,
+.tlLinkContainer, .aps,
+.jewel .flyout .header,
+.tlBody, #timelineBody, .timelineX, .timeline .feed, .timeline .tlPrelude, .timeline .tlFeedPlaceholder,
+.touch ._5c9u, .touch ._5ca9,
+._55wm, .timelinePublisher,
+._uwu, ._uww
+{
+  background :rgb(0, 0, 0) !important;
+}
+
+.composerLinkText, .fcg {
+  color: rgb(210, 210, 210) !important
+}
+
+/*white text*/
+body,textarea,
+.composerTextSelected,
+input[type=text],
+.timeline .cover .profileName,
+.tlActorText, .tlLinkTitle,
+.tlLinkTitleOnly,
+.fcb
+{
+color:rgb(210,210,210) !important;
+}
+
+/*blue/link text*/
+a, .actor
+{
+  color: #71A6D6 !important;
+}
+
+/* dark important*/
+.acy,
+.nontouch ._55mb .actor-link,
+.nontouch a.btnD,
+.inlineMedia.storyAttachment
+{
+  background-color: #304702 !important;
+}
+
+.statusBox {
+  background: rgb(100, 100, 100) !important
+}
+
+.ufiBorder {
+  border-color: #555 !important;
+}
+/* buttons */
+.button>a.touchable, .btn, .touch ._5c9u {
+  background-color: rgb(50, 50, 50) !important
+}
+
+.flyout {
+  border: 1px solid rgb(90, 90, 90) !important
+}
+
+/* context menu */
+._5c0e {
+    background: rgb(150,150,150) !important;
+}
+
+article {
+  border: 1px solid rgb(40, 40, 40) !important
+}
+
+article h3 {
+  color: #999 !important
+}

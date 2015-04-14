@@ -32,88 +32,92 @@ uses-permission#android.permission.INTERNET
 ADDED from AndroidManifest.xml:11:5
 	android:name
 		ADDED from AndroidManifest.xml:11:22
-uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+uses-permission#android.permission.ACCESS_NETWORK_STATE
 ADDED from AndroidManifest.xml:12:5
 	android:name
 		ADDED from AndroidManifest.xml:12:22
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from AndroidManifest.xml:13:5
+	android:name
+		ADDED from AndroidManifest.xml:13:22
 application
-ADDED from AndroidManifest.xml:14:5
+ADDED from AndroidManifest.xml:15:5
 MERGED from com.android.support:support-v4:22.0.0:22:5
 MERGED from com.android.support:appcompat-v7:22.0.0:22:5
 MERGED from com.android.support:support-v4:22.0.0:22:5
 	android:label
-		ADDED from AndroidManifest.xml:18:9
-	android:hardwareAccelerated
-		ADDED from AndroidManifest.xml:16:9
-	android:allowBackup
-		ADDED from AndroidManifest.xml:15:9
-	android:icon
-		ADDED from AndroidManifest.xml:17:9
-	android:theme
 		ADDED from AndroidManifest.xml:19:9
+	android:hardwareAccelerated
+		ADDED from AndroidManifest.xml:17:9
+	android:allowBackup
+		ADDED from AndroidManifest.xml:16:9
+	android:icon
+		ADDED from AndroidManifest.xml:18:9
+	android:theme
+		ADDED from AndroidManifest.xml:20:9
 activity#org.indywidualni.fblite.MainActivity
-ADDED from AndroidManifest.xml:20:9
+ADDED from AndroidManifest.xml:21:9
 	android:label
-		ADDED from AndroidManifest.xml:22:13
-	android:launchMode
-		ADDED from AndroidManifest.xml:24:13
-	android:configChanges
 		ADDED from AndroidManifest.xml:23:13
+	android:launchMode
+		ADDED from AndroidManifest.xml:25:13
+	android:configChanges
+		ADDED from AndroidManifest.xml:24:13
 	android:name
-		ADDED from AndroidManifest.xml:21:13
+		ADDED from AndroidManifest.xml:22:13
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from AndroidManifest.xml:25:13
+ADDED from AndroidManifest.xml:26:13
 action#android.intent.action.MAIN
-ADDED from AndroidManifest.xml:26:17
-	android:name
-		ADDED from AndroidManifest.xml:26:25
-category#android.intent.category.LAUNCHER
 ADDED from AndroidManifest.xml:27:17
 	android:name
-		ADDED from AndroidManifest.xml:27:27
-intent-filter#android.intent.action.VIEW+android.intent.category.BROWSABLE+android.intent.category.DEFAULT
-ADDED from AndroidManifest.xml:29:13
-category#android.intent.category.DEFAULT
-ADDED from AndroidManifest.xml:30:17
+		ADDED from AndroidManifest.xml:27:25
+category#android.intent.category.LAUNCHER
+ADDED from AndroidManifest.xml:28:17
 	android:name
-		ADDED from AndroidManifest.xml:30:27
-category#android.intent.category.BROWSABLE
+		ADDED from AndroidManifest.xml:28:27
+intent-filter#android.intent.action.VIEW+android.intent.category.BROWSABLE+android.intent.category.DEFAULT
+ADDED from AndroidManifest.xml:30:13
+category#android.intent.category.DEFAULT
 ADDED from AndroidManifest.xml:31:17
 	android:name
 		ADDED from AndroidManifest.xml:31:27
-action#android.intent.action.VIEW
+category#android.intent.category.BROWSABLE
 ADDED from AndroidManifest.xml:32:17
 	android:name
-		ADDED from AndroidManifest.xml:32:25
-data
+		ADDED from AndroidManifest.xml:32:27
+action#android.intent.action.VIEW
 ADDED from AndroidManifest.xml:33:17
+	android:name
+		ADDED from AndroidManifest.xml:33:25
+data
+ADDED from AndroidManifest.xml:34:17
 	android:host
-		ADDED from AndroidManifest.xml:33:23
+		ADDED from AndroidManifest.xml:34:23
 	android:scheme
-		ADDED from AndroidManifest.xml:33:51
+		ADDED from AndroidManifest.xml:34:51
 activity#org.indywidualni.fblite.SettingsActivity
-ADDED from AndroidManifest.xml:41:9
+ADDED from AndroidManifest.xml:42:9
 	android:label
-		ADDED from AndroidManifest.xml:43:13
-	android:parentActivityName
 		ADDED from AndroidManifest.xml:44:13
-	android:theme
-		ADDED from AndroidManifest.xml:45:13
-	android:name
-		ADDED from AndroidManifest.xml:42:13
-meta-data#android.support.PARENT_ACTIVITY
-ADDED from AndroidManifest.xml:46:13
-	android:value
-		ADDED from AndroidManifest.xml:48:17
-	android:name
-		ADDED from AndroidManifest.xml:47:17
-activity#org.indywidualni.fblite.AboutActivity
-ADDED from AndroidManifest.xml:50:9
-	android:label
-		ADDED from AndroidManifest.xml:52:13
 	android:parentActivityName
-		ADDED from AndroidManifest.xml:53:13
+		ADDED from AndroidManifest.xml:45:13
 	android:theme
-		ADDED from AndroidManifest.xml:54:13
+		ADDED from AndroidManifest.xml:46:13
 	android:name
-		ADDED from AndroidManifest.xml:51:13
+		ADDED from AndroidManifest.xml:43:13
+meta-data#android.support.PARENT_ACTIVITY
+ADDED from AndroidManifest.xml:47:13
+	android:value
+		ADDED from AndroidManifest.xml:49:17
+	android:name
+		ADDED from AndroidManifest.xml:48:17
+activity#org.indywidualni.fblite.AboutActivity
+ADDED from AndroidManifest.xml:51:9
+	android:label
+		ADDED from AndroidManifest.xml:53:13
+	android:parentActivityName
+		ADDED from AndroidManifest.xml:54:13
+	android:theme
+		ADDED from AndroidManifest.xml:55:13
+	android:name
+		ADDED from AndroidManifest.xml:52:13

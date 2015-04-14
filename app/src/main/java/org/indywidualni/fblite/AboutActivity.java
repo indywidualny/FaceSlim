@@ -50,6 +50,10 @@ public class AboutActivity extends ActionBarActivity {
                 emailIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name) + ": " + getString(R.string.title_activity_about));
                 startActivity(Intent.createChooser(emailIntent, getString(R.string.choose_email_client)));
                 return true;
+            case R.id.me_google_play:
+                // author at google play
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/developer?id=Indywidualni")));
+                return true;
             case R.id.notifications:
                 // for notifications I recommend Notiface
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.aquasoup.notiface")));

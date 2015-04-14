@@ -9,11 +9,14 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.Message;
 import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
@@ -55,13 +58,35 @@ public class MainActivity extends Activity {
     // error handling
     private static final String TAG = MainActivity.class.getSimpleName();
 
+    // context of application for non context classes
+    private static Context contextOfApplication;
+
+    // context getter
+    public static Context getContextOfApplication() {
+        return contextOfApplication;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // set context at application start
+        contextOfApplication = getApplicationContext();
+
         // get shared preferences
         final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        // hardware acceleration
+        if (preferences.getBoolean("hardware_acceleration", true)) {
+            LinearLayout contentMain = (LinearLayout) findViewById(R.id.content_main);
+            contentMain.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+            Log.v("Hardware Acceleration", "Enabled");
+        } else {
+            LinearLayout contentMain = (LinearLayout) findViewById(R.id.content_main);
+            contentMain.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+            Log.v("Hardware Acceleration", "Disabled");
+        }
 
         // KitKat layout fix
         if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
@@ -103,15 +128,6 @@ public class MainActivity extends Activity {
         // define url that will open in webView
         String webViewUrl = "http://m.facebook.com";
 
-        // when someone clicks a Facebook link start the app with that link
-        if(getIntent().getDataString() != null) {
-            webViewUrl = getIntent().getDataString();
-            // show information about loading an external link
-            Context c = getApplicationContext();
-            Toast toast = Toast.makeText(c, R.string.loading_link, Toast.LENGTH_LONG);
-            toast.show();
-        }
-
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
         swipeRefreshLayout.setOnRefreshListener(onRefreshListener);
         swipeRefreshLayout.setColorSchemeColors(Color.BLUE);
@@ -124,6 +140,16 @@ public class MainActivity extends Activity {
         //webView.getSettings().setUseWideViewPort(true);
         //webView.getSettings().setLoadWithOverviewMode(true);
         webView.getSettings().setAllowFileAccess(true);
+
+        // when someone clicks a Facebook link start the app with that link
+        if(getIntent() != null && getIntent().getDataString() != null) {
+            webViewUrl = getIntent().getDataString();
+            // show information about loading an external link
+            Toast.makeText(getApplicationContext(), getString(R.string.loading_link), Toast.LENGTH_SHORT).show();
+        }
+
+        // notify when there is no internet connection
+        checkInternetConnection(getApplicationContext());
 
         // load url in webView
         webView.loadUrl(webViewUrl);
@@ -266,7 +292,43 @@ public class MainActivity extends Activity {
 
         });
 
+        // OnLongClickListener for detecting long clicks on links and images
+        webView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                // activate long clicks on links and image links according to settings
+                if (preferences.getBoolean("long_clicks", false)) {
+                    WebView.HitTestResult result = webView.getHitTestResult();
+                    if (result.getType() == WebView.HitTestResult.SRC_ANCHOR_TYPE || result.getType() == WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE) {
+                        Message msg = linkHandler.obtainMessage();
+                        webView.requestFocusNodeHref(msg);
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
+
     }
+
+    // handle long clicks on links
+    private Handler linkHandler = new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(Message msg) {
+            String url = (String) msg.getData().get("url");
+
+            if (url != null) {
+                Log.v("Link long clicked", url);
+                // create share intent for long clicked url
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_TEXT,  url);
+                startActivity(Intent.createChooser(intent, getString(R.string.share_link)));
+                return true;
+            }
+            return false;
+        }
+    });
 
     // get status bar height (needed for transparent nav bar)
     private int getStatusBarHeight() {
@@ -286,6 +348,14 @@ public class MainActivity extends Activity {
             return resources.getDimensionPixelSize(resourceId);
         }
         return 0;
+    }
+
+    // notify when there is no internet connection
+    private void checkInternetConnection(Context c) {
+        final ConnectivityManager conMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        final NetworkInfo activeNetwork = conMgr.getActiveNetworkInfo();
+        if (activeNetwork == null || !activeNetwork.isConnected())
+            Toast.makeText(c, getString(R.string.no_network), Toast.LENGTH_SHORT).show();
     }
 
     // return here when file selected from camera or from SD Card
@@ -357,8 +427,10 @@ public class MainActivity extends Activity {
         // refreshing pages
         @Override
         public void onRefresh() {
-            // reloading page: two ways of doing it
-            //webView.loadUrl( "javascript:window.location.reload( true )" );
+            // notify when there is no internet connection
+            checkInternetConnection(getApplicationContext());
+
+            // reloading page
             webView.reload();
 
             new Handler().postDelayed(new Runnable() {
@@ -453,9 +525,26 @@ public class MainActivity extends Activity {
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         setIntent(intent);
-        // grab an intent and load instead of the current page
+        // grab an intent
         String webViewUrl = getIntent().getDataString();
+
+        // notify when there is no internet connection
+        checkInternetConnection(getApplicationContext());
+
+        // load a grabbed intent instead of the current page
         webView.loadUrl(webViewUrl);
+
+        // hardware acceleration
+        final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        if (preferences.getBoolean("hardware_acceleration", true)) {
+            LinearLayout contentMain = (LinearLayout) findViewById(R.id.content_main);
+            contentMain.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+            Log.v("Hardware Acceleration", "Enabled");
+        } else {
+            LinearLayout contentMain = (LinearLayout) findViewById(R.id.content_main);
+            contentMain.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+            Log.v("Hardware Acceleration", "Disabled");
+        }
 
         // recreate activity when transparent_nav was just changed
         if (getIntent().getBooleanExtra("transparent_nav_changed", false)) {

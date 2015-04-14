@@ -10,6 +10,12 @@
             android:defaultValue="true"/>
 
         <CheckBoxPreference
+            android:key="long_clicks"
+            android:title="@string/long_clicks"
+            android:summary="@string/long_clicks_description"
+            android:defaultValue="false"/>
+
+        <CheckBoxPreference
             android:key="transparent_nav"
             android:title="@string/transparent_nav"
             android:summary="@string/transparent_nav_description"
@@ -18,7 +24,24 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        android:title="@string/preference_category3">
+
+        <CheckBoxPreference
+            android:key="dark_theme"
+            android:title="@string/dark_theme"
+            android:summary="@string/dark_theme_description"
+            android:defaultValue="false"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
         android:title="@string/preference_category2">
+
+        <CheckBoxPreference
+            android:key="hardware_acceleration"
+            android:title="@string/hardware_acceleration"
+            android:summary="@string/hardware_acceleration_description"
+            android:defaultValue="true"/>
 
         <Preference
             android:key="clear_cache"

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-    <color name="colorPrimary">#3b579d</color>
+    <color name="colorPrimary">#3b5998</color>
     <color name="colorPrimaryDark">#003366</color>
-    <color name="colorAccent">#3b579d</color>
-    <color name="windowBackground">#3b579d</color>
+    <color name="colorAccent">#3b5998</color>
+    <color name="windowBackground">#3b5998</color>
     <color name="progressBackground">#d4dae8</color>
     <color name="titleColor">#ffffff</color>
     <color name="drawerItems">#ffffff</color>
