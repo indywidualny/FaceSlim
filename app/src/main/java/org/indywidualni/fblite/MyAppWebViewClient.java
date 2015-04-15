@@ -17,14 +17,15 @@ public class MyAppWebViewClient extends WebViewClient {
     // variable for onReceivedError
     private boolean refreshed;
 
-    // it have to be static to avoid overwriting again and again
-    private static String cssFile;
-
     // get application context from MainActivity
-    private Context context = MainActivity.getContextOfApplication();
+    private static Context context = MainActivity.getContextOfApplication();
 
     // get shared preferences
     final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+
+    // convert css file to string only one time
+    private static String cssFile;
+    private static final String cssFixed = "#header{ position: fixed !important; z-index: 500; top: 0px; } #root{ padding-top: 44px; }";
 
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -51,7 +52,9 @@ public class MyAppWebViewClient extends WebViewClient {
     public void onPageFinished(WebView view, String url) {
         // turn facebook black (experimental)
         if (preferences.getBoolean("dark_theme", false)) {
-            cssFile = readRawTextFile(context, R.raw.black);
+            // fill it with data only one time
+            if (cssFile == null)
+                cssFile = readRawTextFile(context, R.raw.black);
             view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); node.innerHTML = str; document.body.appendChild(node); } addStyleString('" + cssFile + "');");
         }
         // apply extra bottom padding for transparent navigation
@@ -60,7 +63,6 @@ public class MyAppWebViewClient extends WebViewClient {
         }
         // blue navigation bar always on top
         if (preferences.getBoolean("fixed_nav", false)) {
-            final String cssFixed = "._129_, ._129-, ._55wp, ._52z5, ._451a, ._3qet, ._17gp{ position: fixed !important; z-index: 500; top: 0px; } #root, #structured_composer{ padding-top: 44px; }";
             view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); node.innerHTML = str; document.body.appendChild(node); } addStyleString('" + cssFixed + "');");
         }
     }

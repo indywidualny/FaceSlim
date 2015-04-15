@@ -40,7 +40,23 @@ public class SettingsFragment extends PreferenceFragment {
                 Toast.makeText(getActivity(), getString(R.string.applying_changes), Toast.LENGTH_SHORT).show();
                 // sending intent to onNewIntent() of MainActivity
                 Intent intent = new Intent(getActivity(), MainActivity.class);
-                intent.putExtra("transparent_nav_changed", true);
+                intent.putExtra("core_settings_changed", true);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                return true;
+            }
+        });
+
+        // listener for changing hardware_acceleration preference
+        findPreference("hardware_acceleration").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                Log.v("SettingsFragment", "hardware_acceleration changed");
+                // notify user about relaunching the app
+                Toast.makeText(getActivity(), getString(R.string.applying_changes), Toast.LENGTH_SHORT).show();
+                // sending intent to onNewIntent() of MainActivity
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                intent.putExtra("core_settings_changed", true);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 return true;

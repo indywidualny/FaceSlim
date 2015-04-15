@@ -77,15 +77,11 @@ public class MainActivity extends Activity {
         // get shared preferences
         final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        // hardware acceleration
-        if (preferences.getBoolean("hardware_acceleration", true)) {
-            LinearLayout contentMain = (LinearLayout) findViewById(R.id.content_main);
-            contentMain.setLayerType(View.LAYER_TYPE_HARDWARE, null);
-            Log.v("Hardware Acceleration", "Enabled");
-        } else {
+        // disable hardware acceleration
+        if (!preferences.getBoolean("hardware_acceleration", true)) {
             LinearLayout contentMain = (LinearLayout) findViewById(R.id.content_main);
             contentMain.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-            Log.v("Hardware Acceleration", "Disabled");
+            Log.v("Hardware Acceleration", "disabled for a webView");
         }
 
         // KitKat layout fix
@@ -534,23 +530,11 @@ public class MainActivity extends Activity {
         // load a grabbed intent instead of the current page
         webView.loadUrl(webViewUrl);
 
-        // hardware acceleration
-        final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        if (preferences.getBoolean("hardware_acceleration", true)) {
-            LinearLayout contentMain = (LinearLayout) findViewById(R.id.content_main);
-            contentMain.setLayerType(View.LAYER_TYPE_HARDWARE, null);
-            Log.v("Hardware Acceleration", "Enabled");
-        } else {
-            LinearLayout contentMain = (LinearLayout) findViewById(R.id.content_main);
-            contentMain.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-            Log.v("Hardware Acceleration", "Disabled");
-        }
-
         // recreate activity when transparent_nav was just changed
-        if (getIntent().getBooleanExtra("transparent_nav_changed", false)) {
+        if (getIntent().getBooleanExtra("core_settings_changed", false)) {
             finish(); // finish and create a new Instance
-            Intent restarter = new Intent(MainActivity.this, MainActivity.class);
-            startActivity(restarter);
+            Intent restart = new Intent(MainActivity.this, MainActivity.class);
+            startActivity(restart);
         }
     }
 
