@@ -2,6 +2,8 @@ package org.indywidualni.fblite;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.ref.WeakReference;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -307,24 +309,36 @@ public class MainActivity extends Activity {
 
     }
 
-    // handle long clicks on links
-    private Handler linkHandler = new Handler(new Handler.Callback() {
-        @Override
-        public boolean handleMessage(Message msg) {
-            String url = (String) msg.getData().get("url");
+    // handle long clicks on links, an awesome way to avoid memory leaks
+    private static class MyHandler extends Handler {
+        private final WeakReference<MainActivity> mActivity;
 
-            if (url != null) {
-                Log.v("Link long clicked", url);
-                // create share intent for long clicked url
-                Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.setType("text/plain");
-                intent.putExtra(Intent.EXTRA_TEXT,  url);
-                startActivity(Intent.createChooser(intent, getString(R.string.share_link)));
-                return true;
-            }
-            return false;
+        public MyHandler(MainActivity activity) {
+            mActivity = new WeakReference<MainActivity>(activity);
         }
-    });
+
+        @Override
+        public void handleMessage(Message msg) {
+            MainActivity activity = mActivity.get();
+            if (activity != null) {
+
+                // get url to share
+                String url = (String) msg.getData().get("url");
+
+                if (url != null) {
+                    Log.v("Link long clicked", url);
+                    // create share intent for long clicked url
+                    Intent intent = new Intent(Intent.ACTION_SEND);
+                    intent.setType("text/plain");
+                    intent.putExtra(Intent.EXTRA_TEXT, url);
+                    activity.startActivity(Intent.createChooser(intent, activity.getString(R.string.share_link)));
+                }
+            }
+        }
+    }
+
+    // create linkHandler, OnLongClickListener wants it bad
+    private final MyHandler linkHandler = new MyHandler(this);
 
     // get status bar height (needed for transparent nav bar)
     private int getStatusBarHeight() {
