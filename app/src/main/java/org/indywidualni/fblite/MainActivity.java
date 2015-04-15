@@ -3,7 +3,6 @@ package org.indywidualni.fblite;
 import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
