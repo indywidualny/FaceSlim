@@ -34,9 +34,11 @@
     <string name="share_link">Udostępnij link</string>
     <string name="long_clicks">Długie kliknięcia</string>
     <string name="long_clicks_description">Przytrzymaj link lub foto link by udostępnić.</string>
-    <string name="me_google_play">Autor w Google Play</string>
+    <string name="me_google_play">Google Play</string>
     <string name="preference_category3">Eksperymentalne</string>
     <string name="dark_theme">Ciemny motyw</string>
     <string name="dark_theme_description">Dla fanów czerni. Znasz css? Pomóż mi go dopracować!\u0020 -\u0020 res/raw/black.css</string>
+    <string name="fixed_nav">Przyklej niebieski pasek</string>
+    <string name="fixed_nav_description">Przyciski nawigacyjne zawsze na górze.</string>
 
 </resources>

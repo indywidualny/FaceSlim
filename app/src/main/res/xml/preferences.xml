@@ -16,6 +16,12 @@
             android:defaultValue="false"/>
 
         <CheckBoxPreference
+            android:key="fixed_nav"
+            android:title="@string/fixed_nav"
+            android:summary="@string/fixed_nav_description"
+            android:defaultValue="false"/>
+
+        <CheckBoxPreference
             android:key="transparent_nav"
             android:title="@string/transparent_nav"
             android:summary="@string/transparent_nav_description"

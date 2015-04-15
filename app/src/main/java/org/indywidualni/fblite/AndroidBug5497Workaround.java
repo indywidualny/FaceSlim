@@ -1,7 +1,10 @@
 package org.indywidualni.fblite;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Rect;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
@@ -18,6 +21,10 @@ public class AndroidBug5497Workaround {
     private View mChildOfContent;
     private int usableHeightPrevious;
     private FrameLayout.LayoutParams frameLayoutParams;
+
+    // get application context from MainActivity & get shared preferences
+    private Context context = MainActivity.getContextOfApplication();
+    final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
 
     private AndroidBug5497Workaround(Activity activity) {
         FrameLayout content = (FrameLayout) activity.findViewById(android.R.id.content);
@@ -50,6 +57,11 @@ public class AndroidBug5497Workaround {
     private int computeUsableHeight() {
         Rect r = new Rect();
         mChildOfContent.getWindowVisibleDisplayFrame(r);
+
+        // if transparent navigation enabled avoid too large bottom padding
+        if (preferences.getBoolean("transparent_nav", false))
+            return (r.bottom - r.top + 144);
+
         // additional 48 added for better text editing
         return (r.bottom - r.top + 48);
     }

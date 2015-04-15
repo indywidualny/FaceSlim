@@ -49,14 +49,19 @@ public class MyAppWebViewClient extends WebViewClient {
 
     @Override
     public void onPageFinished(WebView view, String url) {
-        // turn facebook black (highly experimental)
+        // turn facebook black (experimental)
         if (preferences.getBoolean("dark_theme", false)) {
             cssFile = readRawTextFile(context, R.raw.black);
             view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); node.innerHTML = str; document.body.appendChild(node); } addStyleString('" + cssFile + "');");
         }
         // apply extra bottom padding for transparent navigation
         if (preferences.getBoolean("transparent_nav", false)) {
-            view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); node.innerHTML = str; document.body.appendChild(node); } addStyleString('body{ padding-bottom: 47px; }');");
+            view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); node.innerHTML = str; document.body.appendChild(node); } addStyleString('body{ padding-bottom: 48px; }');");
+        }
+        // blue navigation bar always on top
+        if (preferences.getBoolean("fixed_nav", false)) {
+            final String cssFixed = "._129_, ._129-, ._55wp, ._52z5, ._451a, ._3qet, ._17gp{ position: fixed !important; z-index: 500; top: 0px; } #root, #structured_composer{ padding-top: 44px; }";
+            view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); node.innerHTML = str; document.body.appendChild(node); } addStyleString('" + cssFixed + "');");
         }
     }
 
