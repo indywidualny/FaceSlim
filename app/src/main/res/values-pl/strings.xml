@@ -24,12 +24,12 @@
     <string name="preference_category1">Interfejs</string>
     <string name="preference_category2">Zaawansowane</string>
     <string name="progress_bar">Pasek postępu</string>
-    <string name="transparent_nav">Przezroczysty navbar</string>
+    <string name="transparent_nav">Przezroczysty navbar &#8635;</string>
     <string name="transparent_nav_description">KitKat lub Lollipop. Po zmianie nastąpi restart, by uniknąć problemów widoku.</string>
     <string name="choose_email_client">Wybierz klienta poczty</string>
     <string name="notifications">Powiadomienia</string>
     <string name="no_network">Jesteś offline ;)</string>
-    <string name="hardware_acceleration">Przyspieszenie sprzętowe</string>
+    <string name="hardware_acceleration">Przyspieszenie sprzętowe &#8635;</string>
     <string name="hardware_acceleration_description">Deaktywuj jedynie na urządzeniach z małą ilością pamięci (w razie problemów).</string>
     <string name="share_link">Udostępnij link</string>
     <string name="long_clicks">Długie kliknięcia</string>

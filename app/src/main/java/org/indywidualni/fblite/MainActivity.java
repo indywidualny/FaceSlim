@@ -78,13 +78,6 @@ public class MainActivity extends Activity {
         // get shared preferences
         final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        // disable hardware acceleration
-        if (!preferences.getBoolean("hardware_acceleration", true)) {
-            LinearLayout contentMain = (LinearLayout) findViewById(R.id.content_main);
-            contentMain.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-            Log.v("Hardware Acceleration", "disabled for a webView");
-        }
-
         // KitKat layout fix
         if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
             // apply top padding to avoid layout being hidden by the status bar
@@ -121,6 +114,13 @@ public class MainActivity extends Activity {
         // set up the drawer's list view with items and click listener
         mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, itemList));
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+
+        // disable hardware acceleration if
+        if (!preferences.getBoolean("hardware_acceleration", true)) {
+            View root = mDrawerLayout.getRootView();
+            root.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+            Log.v("Hardware Acceleration", "disabled for this view");
+        }
 
         // define url that will open in webView
         String webViewUrl = "http://m.facebook.com";

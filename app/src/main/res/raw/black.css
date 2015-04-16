@@ -14,14 +14,19 @@ input[type=text],
 .tlBody, #timelineBody, .timelineX, .timeline .feed, .timeline .tlPrelude, .timeline .tlFeedPlaceholder,
 .touch ._5c9u, .touch ._5ca9,
 ._55wm, .timelinePublisher,
-._uwu, ._uww, .scrollAreaBody, .al
+._uwu, ._uww, .scrollAreaBody, .al, .apl
 {
   background : rgb(0, 0, 0) !important;
 }
 
+._50cg._2ss
+{
+  background-color: #303030 !important;
+}
+
 .composerLinkText, .fcg
 {
-  color: rgb(210, 210, 210) !important
+  color: rgb(210, 210, 210) !important;
 }
 
 /* white text */
@@ -54,7 +59,7 @@ a, .actor, .mfsl, .fcw, .title, .blueName, ._5aw4, ._vqv, ._5yll
 .statusBox, ._5whq, ._56bt,
 .composerInput, .mentions-input
 {
-  background: rgb(50, 50, 50) !important
+  background: rgb(50, 50, 50) !important;
 }
 
 .ufiBorder
@@ -65,12 +70,12 @@ a, .actor, .mfsl, .fcw, .title, .blueName, ._5aw4, ._vqv, ._5yll
 /* buttons */
 .button>a.touchable, .btn, .touch ._5c9u
 {
-  background-color: rgb(50, 50, 50) !important
+  background-color: rgb(50, 50, 50) !important;
 }
 
 .flyout
 {
-  border: 1px solid rgb(40, 40, 40) !important
+  border: 1px solid rgb(40, 40, 40) !important;
 }
 
 /* context menu */
@@ -81,10 +86,10 @@ a, .actor, .mfsl, .fcw, .title, .blueName, ._5aw4, ._vqv, ._5yll
 
 article, ._4o50, .acw
 {
-  border: 1px solid rgb(40, 40, 40) !important
+  border: 1px solid rgb(40, 40, 40) !important;
 }
 
 article h3
 {
-  color: #999 !important
+  color: #999 !important;
 }
