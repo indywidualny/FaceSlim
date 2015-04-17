@@ -6,6 +6,18 @@ Releases | [pl] wydania: https://github.com/indywidualny/FacebookLite/releases
 
 Changelog & what makes the application awesome:
 
+1.5
+* new icon (more Facebook like)
+* long click on links and image links to share | copy url
+* fixed Facebook navigation bar (refresh after changing it)
+* the app will remind you to activate Internet connection if offline
+* extra bottom padding for transparent navbar - links are always clickable
+* app colors match Facebook site
+* possibility to disable hardware acceleration on low end devices (less memory)
+* black theme (refresh a page after changing it) - experimental!
+* my Google Play link at About & Dev - check out my other apps, one so far :)
+* bugfixes (opening links)
+
 1.4
 * jump to top (no more painful scrolling!)
 * activation and deactivation of transparent navbar is applied immediately

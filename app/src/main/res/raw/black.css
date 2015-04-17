@@ -10,18 +10,18 @@ body, #root, .storyStream, ._2v9s,
 input[type=text],
 .acw, ._5up8,
 .tlLinkContainer, .aps,
-.jewel .flyout .header,
+.jewel .flyout .header, .appCenterCategorySelectorButton,
 .tlBody, #timelineBody, .timelineX, .timeline .feed, .timeline .tlPrelude, .timeline .tlFeedPlaceholder,
-.touch ._5c9u, .touch ._5ca9,
-._55wm, .timelinePublisher,
-._uwu, ._uww, .scrollAreaBody, .al, .apl
+.touch ._5c9u, .touch ._5ca9, .innerLink,
+._55wm, .timelinePublisher, ._5dy4, ._52x3, #m_group_stories_container, .albums, .subpage,
+._uwu, ._uww, .scrollAreaBody, .al, .apl, .structuredPublisher, .groupChromeView
 {
   background : rgb(0, 0, 0) !important;
 }
 
 ._50cg._2ss
 {
-  background-color: #303030 !important;
+  background-color: rgb(0, 0, 0) !important;
 }
 
 .composerLinkText, .fcg
@@ -34,15 +34,15 @@ body,textarea,
 .composerTextSelected,
 .composerInput, .mentions-input,
 input[type=text], ._5001,
-.timeline .cover .profileName,
-.tlActorText, .tlLinkTitle, ._5379, ._5cqn, ._592p,
-.tlLinkTitleOnly, ._5rgt, ._52x2, ._52jh, ._52ja, ._56bz
+.timeline .cover .profileName, .appListTitle, ._52jd, ._52jb, ._52jg, ._5qc3,
+.tlActorText, .tlLinkTitle, ._5379, ._5cqn, ._592p, ._3c9l, ._4yrh, .name, .btn, .upText,
+.tlLinkTitleOnly, ._5rgt, ._52x2, ._52jh, ._52ja, ._56bz, ._2tbu, ._1mwn, ._55sr, ._5t6r
 {
 color: rgb(210,210,210) !important;
 }
 
 /* blue link text */
-a, .actor, .mfsl, .fcw, .title, .blueName, ._5aw4, ._vqv, ._5yll
+a, .actor, .mfsl, .fcw, .title, .blueName, ._5aw4, ._vqv, ._5yll, ._5qc3
 {
   color: #DFEFF0 !important;
 }
@@ -56,8 +56,8 @@ a, .actor, .mfsl, .fcw, .title, .blueName, ._5aw4, ._vqv, ._5yll
   background-color: #304702 !important;
 }
 
-.statusBox, ._5whq, ._56bt,
-.composerInput, .mentions-input
+.statusBox, ._5whq, ._56bt, ._5c5h,
+.composerInput, .mentions-input, ._1svy
 {
   background: rgb(50, 50, 50) !important;
 }
