@@ -23,9 +23,13 @@ public class MyAppWebViewClient extends WebViewClient {
     // get shared preferences
     final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
 
+    // get window's needed height
+    private static final float density = context.getResources().getDisplayMetrics().density;
+    private static final float height = (context.getResources().getDisplayMetrics().heightPixels - 48) / density - 44;
+
     // convert css file to string only one time
     private static String cssFile;
-    private static final String cssFixed = "#header{ position: fixed !important; z-index: 500; top: 0px; } #root{ padding-top: 44px; }";
+    private static final String cssFixed = "#header{ position: fixed; z-index: 11; top: 0px; } #root{ padding-top: 44px; } .flyout{ max-height: " + height + "px; overflow-y: scroll; }";
 
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -57,13 +61,13 @@ public class MyAppWebViewClient extends WebViewClient {
                 cssFile = readRawTextFile(context, R.raw.black);
             view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); node.innerHTML = str; document.body.appendChild(node); } addStyleString('" + cssFile + "');");
         }
-        // apply extra bottom padding for transparent navigation
-        if (preferences.getBoolean("transparent_nav", false)) {
-            view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); node.innerHTML = str; document.body.appendChild(node); } addStyleString('body{ padding-bottom: 48px; }');");
-        }
         // blue navigation bar always on top
         if (preferences.getBoolean("fixed_nav", false)) {
             view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); node.innerHTML = str; document.body.appendChild(node); } addStyleString('" + cssFixed + "');");
+        }
+        // apply extra bottom padding for transparent navigation
+        if (preferences.getBoolean("transparent_nav", false)) {
+            view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); node.innerHTML = str; document.body.appendChild(node); } addStyleString('body{ padding-bottom: 48px; }');");
         }
     }
 
