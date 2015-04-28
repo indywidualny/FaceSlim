@@ -25,7 +25,7 @@ public class MyAppWebViewClient extends WebViewClient {
 
     // get window's needed height
     private static final float density = context.getResources().getDisplayMetrics().density;
-    private static final float height = (context.getResources().getDisplayMetrics().heightPixels - 48) / density - 44;
+    private static final float height = (context.getResources().getDisplayMetrics().heightPixels - 48) / density - 44 + 8;
 
     // convert css file to string only one time
     private static String cssFile;
