@@ -10,8 +10,6 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -35,6 +33,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+import com.google.android.gms.analytics.GoogleAnalytics;
 
 public class MainActivity extends Activity {
 
@@ -59,24 +58,24 @@ public class MainActivity extends Activity {
     // error handling
     private static final String TAG = MainActivity.class.getSimpleName();
 
-    // context of application for non context classes
-    private static Context contextOfApplication;
-
-    // context getter
-    public static Context getContextOfApplication() {
-        return contextOfApplication;
-    }
+    // shared preferences
+    private SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // set context at application start
-        contextOfApplication = getApplicationContext();
-
         // get shared preferences
-        final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        /**
+         * get a Google Analytics Tracker (should auto-report)
+         * don't do it when Facebook zero is enabled and it's active
+         * otherwise someone could be charged and it's not ok
+         */
+        if (!preferences.getBoolean("facebook_zero", false) || !Connectivity.isConnectedMobile(getApplicationContext()))
+            ((MyApplication) getApplication()).getTracker(MyApplication.TrackerName.APP_TRACKER);
 
         // KitKat layout fix
         if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
@@ -138,15 +137,22 @@ public class MainActivity extends Activity {
         //webView.getSettings().setLoadWithOverviewMode(true);
         webView.getSettings().setAllowFileAccess(true);
 
-        // when someone clicks a Facebook link start the app with that link
-        if(getIntent() != null && getIntent().getDataString() != null) {
+        // when someone clicks a Facebook link start the app with that link  TODO: check it!
+        if((getIntent() != null && getIntent().getDataString() != null) &&
+                (!preferences.getBoolean("facebook_zero", false) || !Connectivity.isConnectedMobile(getApplicationContext()))) {
             webViewUrl = getIntent().getDataString();
             // show information about loading an external link
             Toast.makeText(getApplicationContext(), getString(R.string.loading_link), Toast.LENGTH_SHORT).show();
-        }
+        } else if(preferences.getBoolean("facebook_zero", false) && Connectivity.isConnectedMobile(getApplicationContext()))
+            Toast.makeText(getApplicationContext(), getString(R.string.facebook_zero_active), Toast.LENGTH_SHORT).show();
 
         // notify when there is no internet connection
-        checkInternetConnection(getApplicationContext());
+        if (!Connectivity.isConnected(getApplicationContext()))
+            Toast.makeText(getApplicationContext(), getString(R.string.no_network), Toast.LENGTH_SHORT).show();
+
+        // facebook zero if activated and connected to a mobile network
+        if (preferences.getBoolean("facebook_zero", false) && Connectivity.isConnectedMobile(getApplicationContext()))
+            webViewUrl = "https://0.facebook.com";
 
         // load url in webView
         webView.loadUrl(webViewUrl);
@@ -350,21 +356,13 @@ public class MainActivity extends Activity {
     }
 
     // get navigation bar height
-    private int getNavigationBarHeight(Context context, int orientation) {
+    public static int getNavigationBarHeight(Context context, int orientation) {
         Resources resources = context.getResources();
         int resourceId = resources.getIdentifier(orientation == Configuration.ORIENTATION_PORTRAIT ? "navigation_bar_height" : "navigation_bar_height_landscape", "dimen", "android");
         if (resourceId > 0) {
             return resources.getDimensionPixelSize(resourceId);
         }
         return 0;
-    }
-
-    // notify when there is no internet connection
-    private void checkInternetConnection(Context c) {
-        final ConnectivityManager conMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        final NetworkInfo activeNetwork = conMgr.getActiveNetworkInfo();
-        if (activeNetwork == null || !activeNetwork.isConnected())
-            Toast.makeText(c, getString(R.string.no_network), Toast.LENGTH_SHORT).show();
     }
 
     // return here when file selected from camera or from SD Card
@@ -437,7 +435,8 @@ public class MainActivity extends Activity {
         @Override
         public void onRefresh() {
             // notify when there is no internet connection
-            checkInternetConnection(getApplicationContext());
+            if (!Connectivity.isConnected(getApplicationContext()))
+                Toast.makeText(getApplicationContext(), getString(R.string.no_network), Toast.LENGTH_SHORT).show();
 
             // reloading page
             webView.reload();
@@ -463,40 +462,90 @@ public class MainActivity extends Activity {
 
     // when a drawer item is clicked do instructions from below
     private void selectItem(int position) {
-        switch(position) {
-            case 0:
-                webView.loadUrl("javascript:scroll(0,0)");
-                break;
-            case 1:
-                webView.loadUrl("https://m.facebook.com");
-                break;
-            case 2:
-                webView.loadUrl("https://m.facebook.com/messages");
-                break;
-            case 3:
-                webView.loadUrl("https://m.facebook.com/buddylist.php");
-                break;
-            case 4:
-                webView.loadUrl("https://m.facebook.com/groups/?category=membership");
-                break;
-            case 5:
-                webView.loadUrl("https://m.facebook.com/events");
-                break;
-            case 6:
-                Intent settings = new Intent(this, SettingsActivity.class);
-                startActivity(settings);
-                break;
-            case 7:
-                Intent about = new Intent(this, AboutActivity.class);
-                startActivity(about);
-                break;
-            default:
-                // silence is golden
-                break;
+        // if someone is using Facebook Zero the menu is different
+        if (preferences.getBoolean("facebook_zero", false) && Connectivity.isConnectedMobile(getApplicationContext())) {
+            switch (position) {
+                case 0:
+                    webView.loadUrl("javascript:scroll(0,0)");
+                    break;
+                case 1:
+                    webView.loadUrl("https://0.facebook.com");
+                    break;
+                case 2:
+                    webView.loadUrl("https://0.facebook.com/messages");
+                    break;
+                case 3:
+                    webView.loadUrl("https://0.facebook.com/buddylist.php");
+                    break;
+                case 4:
+                    webView.loadUrl("https://0.facebook.com/groups/?category=membership");
+                    break;
+                case 5:
+                    webView.loadUrl("https://0.facebook.com/events");
+                    break;
+                case 6:
+                    Intent settings = new Intent(this, SettingsActivity.class);
+                    startActivity(settings);
+                    break;
+                case 7:
+                    Intent about = new Intent(this, AboutActivity.class);
+                    startActivity(about);
+                    break;
+                default:
+                    // silence is golden
+                    break;
+            }
+        } else {
+            // standard application menu (it's default)
+            switch (position) {
+                case 0:
+                    webView.loadUrl("javascript:scroll(0,0)");
+                    break;
+                case 1:
+                    webView.loadUrl("https://m.facebook.com");
+                    break;
+                case 2:
+                    webView.loadUrl("https://m.facebook.com/messages");
+                    break;
+                case 3:
+                    webView.loadUrl("https://m.facebook.com/buddylist.php");
+                    break;
+                case 4:
+                    webView.loadUrl("https://m.facebook.com/groups/?category=membership");
+                    break;
+                case 5:
+                    webView.loadUrl("https://m.facebook.com/events");
+                    break;
+                case 6:
+                    Intent settings = new Intent(this, SettingsActivity.class);
+                    startActivity(settings);
+                    break;
+                case 7:
+                    Intent about = new Intent(this, AboutActivity.class);
+                    startActivity(about);
+                    break;
+                default:
+                    // silence is golden
+                    break;
+            }
         }
         // update selected item, then close the drawer
         mDrawerList.setItemChecked(position, true);
         mDrawerLayout.closeDrawer(mDrawerList);
+    }
+
+    // application start
+    @Override
+    protected void onStart() {
+        super.onStart();
+        GoogleAnalytics.getInstance(this).reportActivityStart(this);
+    }
+
+    // application stop
+    @Override
+    protected void onStop() {
+        super.onStop();
+        GoogleAnalytics.getInstance(this).reportActivityStop(this);
     }
 
     // survive screen orientation change
@@ -504,11 +553,8 @@ public class MainActivity extends Activity {
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
-        // get shared preferences
-        final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-
         // bug fix (1.4.1) for landscape mode
-        if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE && preferences.getBoolean("transparent_nav", false)) {
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE && preferences.getBoolean("transparent_nav", false)) {
             if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
                 LinearLayout contentMain = (LinearLayout) findViewById(R.id.content_main);
                 contentMain.setPadding(0, getStatusBarHeight(), getNavigationBarHeight(getApplicationContext(), 0), 0);
@@ -517,7 +563,7 @@ public class MainActivity extends Activity {
                 LinearLayout contentMain = (LinearLayout) findViewById(R.id.content_main);
                 contentMain.setPadding(0, 0, 0, getStatusBarHeight());
             }
-        } else if(newConfig.orientation == Configuration.ORIENTATION_PORTRAIT && preferences.getBoolean("transparent_nav", false)) {
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT && preferences.getBoolean("transparent_nav", false)) {
             if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
                 LinearLayout contentMain = (LinearLayout) findViewById(R.id.content_main);
                 contentMain.setPadding(0, getStatusBarHeight(), 0, 0);
@@ -537,11 +583,15 @@ public class MainActivity extends Activity {
         // grab an intent
         String webViewUrl = getIntent().getDataString();
 
-        // notify when there is no internet connection
-        checkInternetConnection(getApplicationContext());
-
         // load a grabbed intent instead of the current page
-        webView.loadUrl(webViewUrl);
+        if (preferences.getBoolean("facebook_zero", false) && Connectivity.isConnectedMobile(getApplicationContext()))
+            Toast.makeText(getApplicationContext(), getString(R.string.facebook_zero_active), Toast.LENGTH_SHORT).show();
+        else
+            webView.loadUrl(webViewUrl);
+
+        // notify when there is no internet connection
+        if (!Connectivity.isConnected(getApplicationContext()))
+            Toast.makeText(getApplicationContext(), getString(R.string.no_network), Toast.LENGTH_SHORT).show();
 
         // recreate activity when transparent_nav was just changed
         if (getIntent().getBooleanExtra("core_settings_changed", false)) {

@@ -33,6 +33,12 @@
         android:title="@string/preference_category3">
 
         <CheckBoxPreference
+            android:key="facebook_zero"
+            android:title="@string/facebook_zero"
+            android:summary="@string/facebook_zero_description"
+            android:defaultValue="false"/>
+
+        <CheckBoxPreference
             android:key="dark_theme"
             android:title="@string/dark_theme"
             android:summary="@string/dark_theme_description"

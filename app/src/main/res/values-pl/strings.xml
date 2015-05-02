@@ -40,5 +40,8 @@
     <string name="dark_theme_description">Dla fanów czerni. Znasz css? Pomóż mi go dopracować!\u0020 -\u0020 res/raw/black.css</string>
     <string name="fixed_nav">Przyklej niebieski pasek</string>
     <string name="fixed_nav_description">Przyciski nawigacyjne zawsze na górze.</string>
+    <string name="facebook_zero">Facebook Zero</string>
+    <string name="facebook_zero_description">Darmowy transfer. Zależne od operatora. Tylko podczas połączenia komórkowego. Ciemny motyw i przyklejony pasek ignorowane.</string>
+    <string name="facebook_zero_active">Facebook Zero aktywny</string>
 
 </resources>

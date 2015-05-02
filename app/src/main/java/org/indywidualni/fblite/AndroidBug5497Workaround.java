@@ -23,7 +23,7 @@ public class AndroidBug5497Workaround {
     private FrameLayout.LayoutParams frameLayoutParams;
 
     // get application context from MainActivity & get shared preferences
-    private static Context context = MainActivity.getContextOfApplication();
+    private static Context context = MyApplication.getContextOfApplication();
     final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
 
     private AndroidBug5497Workaround(Activity activity) {
