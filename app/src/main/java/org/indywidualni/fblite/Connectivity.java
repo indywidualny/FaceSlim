@@ -68,10 +68,10 @@ public class Connectivity {
      * @return boolean
      */
     public static boolean isConnectionFast(int type, int subType) {
-        if(type==ConnectivityManager.TYPE_WIFI) {
+        if (type == ConnectivityManager.TYPE_WIFI) {
             return true;
-        } else if(type==ConnectivityManager.TYPE_MOBILE){
-            switch(subType){
+        } else if (type == ConnectivityManager.TYPE_MOBILE) {
+            switch(subType) {
                 case TelephonyManager.NETWORK_TYPE_1xRTT:
                     return false; // ~ 50-100 kbps
                 case TelephonyManager.NETWORK_TYPE_CDMA:

@@ -43,5 +43,7 @@
     <string name="facebook_zero">Facebook Zero</string>
     <string name="facebook_zero_description">Darmowy transfer. Zależne od operatora. Tylko podczas połączenia komórkowego. Ciemny motyw i przyklejony pasek ignorowane.</string>
     <string name="facebook_zero_active">Facebook Zero aktywny</string>
+    <string name="preference_category4">Dodatkowe</string>
+    <string name="quick_guide">Szybkie wprowadzenie</string>
 
 </resources>

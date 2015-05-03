@@ -49,5 +49,7 @@
     <string name="facebook_zero">Facebook Zero</string>
     <string name="facebook_zero_description">No data charges. GSM provider dependent. Works during mobile network connection. Dark theme and fixed navbar are ignored.</string>
     <string name="facebook_zero_active">Facebook Zero is active</string>
+    <string name="preference_category4">Extras</string>
+    <string name="quick_guide">Quick Start Guide</string>
 
 </resources>

@@ -4,12 +4,14 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,6 +25,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
@@ -76,6 +79,14 @@ public class MainActivity extends Activity {
          */
         if (!preferences.getBoolean("facebook_zero", false) || !Connectivity.isConnectedMobile(getApplicationContext()))
             ((MyApplication) getApplication()).getTracker(MyApplication.TrackerName.APP_TRACKER);
+
+        // if the app is being launched for the first time
+        if (preferences.getBoolean("first_run", true)) {
+            // show quick start guide
+            onCoachMark();
+            // record the fact that the app has been started at least once
+            preferences.edit().putBoolean("first_run", false).apply();
+        }
 
         // KitKat layout fix
         if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
@@ -137,7 +148,7 @@ public class MainActivity extends Activity {
         //webView.getSettings().setLoadWithOverviewMode(true);
         webView.getSettings().setAllowFileAccess(true);
 
-        // when someone clicks a Facebook link start the app with that link  TODO: check it!
+        // when someone clicks a Facebook link start the app with that link
         if((getIntent() != null && getIntent().getDataString() != null) &&
                 (!preferences.getBoolean("facebook_zero", false) || !Connectivity.isConnectedMobile(getApplicationContext()))) {
             webViewUrl = getIntent().getDataString();
@@ -593,7 +604,7 @@ public class MainActivity extends Activity {
         if (!Connectivity.isConnected(getApplicationContext()))
             Toast.makeText(getApplicationContext(), getString(R.string.no_network), Toast.LENGTH_SHORT).show();
 
-        // recreate activity when transparent_nav was just changed
+        // recreate activity when something important was just changed
         if (getIntent().getBooleanExtra("core_settings_changed", false)) {
             finish(); // finish and create a new Instance
             Intent restart = new Intent(MainActivity.this, MainActivity.class);
@@ -609,6 +620,24 @@ public class MainActivity extends Activity {
         } else {
             super.onBackPressed();
         }
+    }
+
+    // first run dialog with introduction
+    public void onCoachMark() {
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.setContentView(R.layout.coach_mark);
+        dialog.setCanceledOnTouchOutside(true);
+        //for dismissing anywhere you touch
+        View masterView = dialog.findViewById(R.id.coach_mark_master_view);
+        masterView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 
 }
