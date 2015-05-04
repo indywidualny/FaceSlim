@@ -6,6 +6,14 @@ Releases | [pl] wydania: https://github.com/indywidualny/FacebookLite/releases
 
 Changelog & what makes the application awesome:
 
+1.6
+* Facebook Zero support (free mobile data transfer, GSM dependant)
+* Quick Start Guide on app first run (learn the gestures)
+* fixed Facebook navigation bar now works great for all devices
+* code optimization - the app should be faster and take less memory
+* possibility to donate - do you love the app? Buy me a beer! ;)
+* minor layout fixes
+
 1.5
 * new icon (more Facebook like)
 * long click on links and image links to share | copy url
@@ -71,6 +79,14 @@ Screenshots:
 * [KitKat] [7-inch tablet] https://www.dropbox.com/s/ztl1490p2mhbb5f/7_inch_tablet.png
 * [KitKat] [10-inch tablet] https://www.dropbox.com/s/g9be7kj1bp54pr5/10_inch_tablet.png
 
+<br />
+**Support future development!**<br />
+Buy me a beer or two :)<br />
+BTC:&nbsp;  1JUaZytkub2CP5jhRYQDDY6pibqrUUSp2y
+
+[![Donate with PayPal](https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif "Donate with PayPal")](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=koras%2eevil%40gmail%2ecom&lc=GB&item_name=Krzysztof%20Grabowski&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)
+
+<br />
 Copyright notice: Facebook is a trademark of Facebook Inc. This app is NOT connected to Facebook Inc. whatsoever. This app only helps using the official Facebook Mobile website.
 
 Important: It does NOT display notifications (I recommend Notiface) and has some limitations (eg. no access to your location so you cannot check-in automatically). Install using F-Droid client to get updates.

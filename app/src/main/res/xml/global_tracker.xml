@@ -9,7 +9,7 @@
     <integer name="ga_dispatchPeriod">300</integer>
 
     <!-- Treat events as test events and don't send to google -->
-    <bool name="ga_dryRun">true</bool>
+    <bool name="ga_dryRun">false</bool>
 
     <!-- The screen names that will appear in reports -->
     <screenName name="org.indywidualni.fblite.MainActivity">MainActivity</screenName>

@@ -51,12 +51,16 @@ public class AboutActivity extends ActionBarActivity {
                 startActivity(Intent.createChooser(emailIntent, getString(R.string.choose_email_client)));
                 return true;
             case R.id.me_google_play:
-                // author at google play
+                // author at Google Play
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/developer?id=Indywidualni")));
                 return true;
             case R.id.notifications:
                 // for notifications I recommend Notiface
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.aquasoup.notiface")));
+                return true;
+            case R.id.paypal:
+                // donate with PayPal
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=koras%2eevil%40gmail%2ecom&lc=GB&item_name=Krzysztof%20Grabowski&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted")));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
