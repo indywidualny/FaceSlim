@@ -36,7 +36,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-import com.google.android.gms.analytics.GoogleAnalytics;
 
 public class MainActivity extends Activity {
 
@@ -71,14 +70,6 @@ public class MainActivity extends Activity {
 
         // get shared preferences
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
-
-        /**
-         * get a Google Analytics Tracker (should auto-report)
-         * don't do it when Facebook zero is enabled and it's active
-         * otherwise someone could be charged and it's not ok
-         */
-        if (!preferences.getBoolean("facebook_zero", false) || !Connectivity.isConnectedMobile(getApplicationContext()))
-            ((MyApplication) getApplication()).getTracker(MyApplication.TrackerName.APP_TRACKER);
 
         // if the app is being launched for the first time
         if (preferences.getBoolean("first_run", true)) {
@@ -543,20 +534,6 @@ public class MainActivity extends Activity {
         // update selected item, then close the drawer
         mDrawerList.setItemChecked(position, true);
         mDrawerLayout.closeDrawer(mDrawerList);
-    }
-
-    // application start
-    @Override
-    protected void onStart() {
-        super.onStart();
-        GoogleAnalytics.getInstance(this).reportActivityStart(this);
-    }
-
-    // application stop
-    @Override
-    protected void onStop() {
-        super.onStop();
-        GoogleAnalytics.getInstance(this).reportActivityStop(this);
     }
 
     // survive screen orientation change

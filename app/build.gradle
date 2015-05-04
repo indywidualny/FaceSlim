@@ -8,8 +8,8 @@ android {
         applicationId "org.indywidualni.fblite"
         minSdkVersion 14
         targetSdkVersion 22
-        versionCode 7
-        versionName "1.6.0"
+        versionCode 8
+        versionName "1.6.1"
     }
     buildTypes {
         release {
@@ -23,5 +23,4 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:support-v4:22.1.1'
     compile 'com.android.support:appcompat-v7:22.1.1'
-    compile 'com.google.android.gms:play-services-analytics:7.3.0'
 }
