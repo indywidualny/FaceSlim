@@ -60,7 +60,7 @@ public class AboutActivity extends ActionBarActivity {
                 return true;
             case R.id.paypal:
                 // donate with PayPal
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=koras%2eevil%40gmail%2ecom&lc=GB&item_name=Krzysztof%20Grabowski&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted")));
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.paypal_url))));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

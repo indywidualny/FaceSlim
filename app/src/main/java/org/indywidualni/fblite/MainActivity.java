@@ -140,12 +140,13 @@ public class MainActivity extends Activity {
         webView.getSettings().setAllowFileAccess(true);
 
         // when someone clicks a Facebook link start the app with that link
-        if((getIntent() != null && getIntent().getDataString() != null) &&
+        if ((getIntent() != null && getIntent().getDataString() != null) &&
                 (!preferences.getBoolean("facebook_zero", false) || !Connectivity.isConnectedMobile(getApplicationContext()))) {
             webViewUrl = getIntent().getDataString();
-            // show information about loading an external link
-            Toast.makeText(getApplicationContext(), getString(R.string.loading_link), Toast.LENGTH_SHORT).show();
-        } else if(preferences.getBoolean("facebook_zero", false) && Connectivity.isConnectedMobile(getApplicationContext()))
+            // show information about loading an external link (if not opened by a shortcut)
+            if (!webViewUrl.equals("https://m.facebook.com/messages"))
+                Toast.makeText(getApplicationContext(), getString(R.string.loading_link), Toast.LENGTH_SHORT).show();
+        } else if (preferences.getBoolean("facebook_zero", false) && Connectivity.isConnectedMobile(getApplicationContext()))
             Toast.makeText(getApplicationContext(), getString(R.string.facebook_zero_active), Toast.LENGTH_SHORT).show();
 
         // notify when there is no internet connection

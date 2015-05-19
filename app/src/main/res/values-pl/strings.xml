@@ -45,6 +45,8 @@
     <string name="facebook_zero_active">Facebook Zero aktywny</string>
     <string name="preference_category4">Dodatkowe</string>
     <string name="quick_guide">Szybkie wprowadzenie</string>
+    <string name="messages">Wiadomości</string>
     <string name="donate_paypal">Wesprzyj\u0020 –\u0020 PayPal</string>
+    <string name="paypal_url" formatted="false">https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=koras.evil%40gmail.com&amp;lc=PL&amp;item_name=Krzysztof%20Grabowski&amp;currency_code=PLN&amp;bn=PP-DonationsBF%3Abtn_donateCC_LG.gif%3ANonHosted</string>
 
 </resources>
