@@ -54,10 +54,6 @@ public class AboutActivity extends ActionBarActivity {
                 // author at Google Play
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/developer?id=Indywidualni")));
                 return true;
-            case R.id.notifications:
-                // for notifications I recommend Notiface
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.aquasoup.notiface")));
-                return true;
             case R.id.paypal:
                 // donate with PayPal
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.paypal_url))));

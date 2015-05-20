@@ -9,7 +9,4 @@
 
     <item android:id="@+id/me_google_play"
         android:title="@string/me_google_play"/>
-
-    <item android:id="@+id/notifications"
-        android:title="@string/notifications"/>
 </menu>
