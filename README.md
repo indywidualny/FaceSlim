@@ -12,6 +12,7 @@ Changelog & what makes the application awesome:
 * fixed Facebook navigation bar now works great for all devices
 * code optimization - the app should be faster and take less memory
 * possibility to donate - do you love the app? Buy me a beer! ;)
+* shortcut to open messages directly (find it at launcher -> widgets/shortcuts)
 * minor layout fixes
 
 1.5
@@ -24,7 +25,6 @@ Changelog & what makes the application awesome:
 * possibility to disable hardware acceleration on low end devices (less memory)
 * black theme (refresh a page after changing it) - experimental!
 * my Google Play link at About & Dev - check out my other apps, one so far :)
-* shortcut to open messages directly (find it at launcher -> widgets/shortcuts)
 * bugfixes (opening links)
 
 1.4
