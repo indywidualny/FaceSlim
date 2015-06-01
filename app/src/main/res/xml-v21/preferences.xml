@@ -4,24 +4,24 @@
     <PreferenceCategory
         android:title="@string/preference_category1">
 
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="progress_bar"
             android:title="@string/progress_bar"
             android:defaultValue="true"/>
 
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="long_clicks"
             android:title="@string/long_clicks"
             android:summary="@string/long_clicks_description"
             android:defaultValue="false"/>
 
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="fixed_nav"
             android:title="@string/fixed_nav"
             android:summary="@string/fixed_nav_description"
             android:defaultValue="false"/>
 
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="transparent_nav"
             android:title="@string/transparent_nav"
             android:summary="@string/transparent_nav_description"
@@ -59,7 +59,7 @@
             android:entries="@array/intervalPrefTitles"
             android:entryValues="@array/intervalPrefValues"/>
 
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="notifications_activated"
             android:title="@string/activate_notifications"
             android:defaultValue="false"/>
@@ -70,7 +70,7 @@
     <PreferenceCategory
         android:title="@string/preference_category4">
 
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="facebook_zero"
             android:title="@string/facebook_zero"
             android:summary="@string/facebook_zero_description"
@@ -82,7 +82,7 @@
     <PreferenceCategory
         android:title="@string/preference_category3">
 
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="dark_theme"
             android:title="@string/dark_theme"
             android:summary="@string/dark_theme_description"
@@ -94,7 +94,7 @@
     <PreferenceCategory
         android:title="@string/preference_category2">
 
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="hardware_acceleration"
             android:title="@string/hardware_acceleration"
             android:summary="@string/hardware_acceleration_description"

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="drawerPosValues">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <string-array name="intervalPrefValues">
+        <item>300000</item>
+        <item>900000</item>
+    </string-array>
+
+</resources>

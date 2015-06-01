@@ -9,5 +9,6 @@
     <color name="titleColor">#ffffff</color>
     <color name="drawerItems">#ffffff</color>
     <color name="preferenceTitle">#000000</color>
+    <color name="editText">#000000</color>
     <color name="aboutText">#6d6d6d</color>
 </resources>

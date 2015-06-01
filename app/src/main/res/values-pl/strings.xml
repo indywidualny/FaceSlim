@@ -49,4 +49,24 @@
     <string name="donate_paypal">Wesprzyj\u0020 –\u0020 PayPal</string>
     <string name="paypal_url" formatted="false">https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=koras.evil%40gmail.com&amp;lc=PL&amp;item_name=Krzysztof%20Grabowski&amp;currency_code=PLN&amp;bn=PP-DonationsBF%3Abtn_donateCC_LG.gif%3ANonHosted</string>
 
+    <string-array name="drawerPosTitles">
+        <item>po lewej stronie</item>
+        <item>po prawej stronie</item>
+    </string-array>
+
+    <string name="drawer_pos">Pozycja wysuwanego menu &#8635;</string>
+    <string name="drawer_pos_description">Menu jest teraz %s ekranu.</string>
+    <string name="preference_category5">Powiadomienia</string>
+    <string name="notifications_feed_url">Kanał powiadomień</string>
+    <string name="interval_pref">Przedział czasu</string>
+    <string name="interval_pref_description">Kanał powiadomień jest sprawdzany co %s.</string>
+    <string name="activate_notifications">Aktywuj powiadomienia</string>
+    <string name="get_feed">Zdobądź swój kanał</string>
+    <string name="get_feed_description">Dotknij, znajdź swój kanał RSS dla powiadomień i wklej go powyżej.</string>
+
+    <string-array name="intervalPrefTitles">
+        <item>5 minut</item>
+        <item>15 minut</item>
+    </string-array>
+
 </resources>

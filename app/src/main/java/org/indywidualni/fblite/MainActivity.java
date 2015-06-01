@@ -1,8 +1,6 @@
 package org.indywidualni.fblite;
 
-import java.io.File;
-import java.io.IOException;
-import java.lang.ref.WeakReference;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -36,6 +34,9 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+import java.io.File;
+import java.io.IOException;
+import java.lang.ref.WeakReference;
 
 public class MainActivity extends Activity {
 
@@ -64,12 +65,19 @@ public class MainActivity extends Activity {
     private SharedPreferences preferences;
 
     @Override
+    @SuppressLint("setJavaScriptEnabled")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
         // get shared preferences
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        // set the main content view (for drawer position)
+        // noinspection ConstantConditions
+        if (preferences.getString("drawer_pos", "0").equals("0"))
+            setContentView(R.layout.activity_main);
+        else
+            setContentView(R.layout.activity_main_drawer_right);
 
         // if the app is being launched for the first time
         if (preferences.getBoolean("first_run", true)) {
@@ -116,7 +124,7 @@ public class MainActivity extends Activity {
         mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, itemList));
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
-        // disable hardware acceleration if
+        // disable hardware acceleration
         if (!preferences.getBoolean("hardware_acceleration", true)) {
             View root = mDrawerLayout.getRootView();
             root.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
@@ -334,6 +342,10 @@ public class MainActivity extends Activity {
                 String url = (String) msg.getData().get("url");
 
                 if (url != null) {
+                    // "clean" the url, remove Facebook tracking redirection while sharing
+                    url = url.replace("http://lm.facebook.com/l.php?u=", "").replace("%3A%2F%2F", "//")
+                            .replace("%2F", "/").replaceAll("&h=.*", "").replace("https://m.facebook.com/l.php?u=", "");
+
                     Log.v("Link long clicked", url);
                     // create share intent for long clicked url
                     Intent intent = new Intent(Intent.ACTION_SEND);
@@ -598,6 +610,20 @@ public class MainActivity extends Activity {
         } else {
             super.onBackPressed();
         }
+    }
+
+    // activity resumed
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MyApplication.activityResumed();
+    }
+
+    // activity paused
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MyApplication.activityPaused();
     }
 
     // first run dialog with introduction

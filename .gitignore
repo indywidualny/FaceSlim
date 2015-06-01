@@ -3,7 +3,8 @@
 .gradle
 .idea/
 /local.properties
-#/.idea/workspace.xml
-#/.idea/libraries
 .DS_Store
 /build
+/saxrssreader/build
+#/.idea/workspace.xml
+#/.idea/libraries

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="image_chooser">이미지 선택기</string>
+    <string name="loading_link">링크 여는 중</string>
+    <string name="applying_changes">변경 사항 적용 중</string>
+
+    <string-array name="item_array">
+        <item>맨 위로 가기\u0020 &#8593;</item>
+        <item>뉴스피드</item>
+        <item>메세지</item>
+        <item>대화 (접속중인 친구)</item>
+        <item>그룹</item>
+        <item>이벤트</item>
+        <item>앱 설정</item>
+        <item>개발자에 대해서</item>
+    </string-array>
+
+    <string name="title_activity_settings">설정</string>
+    <string name="title_activity_about">개발자에 대해서</string>
+    <string name="preference_category1">인터페이스</string>
+    <string name="preference_category2">고급 설정</string>
+    <string name="progress_bar">진행 표시줄</string>
+    <string name="transparent_nav">투명한 탐색 바</string>
+    <string name="transparent_nav_description">안드로이드 4.4 이상이 필요합니다. 적용 후 앱이 재시작됩니다.</string>
+    <string name="clear_cache">캐시 지우기</string>
+    <string name="clear_cache_description">앱 캐시를 지웁니다. 로그아웃됩니다.</string>
+    <string name="email_author">개발자 연락처</string>
+    <string name="choose_email_client">이메일 앱 선택</string>
+    <string name="notifications">알림</string>
+    <string name="no_network">오프라인 상태입니다 ;)</string>
+    <string name="hardware_acceleration">하드웨어 가속</string>
+    <string name="hardware_acceleration_description">메모리가 적은 기기에서만 해제하세요.</string>
+    <string name="share_link">링크 공유</string>
+    <string name="long_clicks">길게 누르기</string>
+    <string name="long_clicks_description">이미지 또는 링크를 공유하기 위해 길게 누르기를 사용합니다.</string>
+    <string name="me_google_play">Google Play</string>
+    <string name="preference_category3">실험적 기능</string>
+    <string name="dark_theme">어두운 테마</string>
+    <string name="dark_theme_description">페이스북을 검은색으로 만듭니다. CSS에 대해서 잘 아십니까? 기능 개선을 도와주세요!\u0020 -\u0020 res/raw/black.css</string>
+    <string name="fixed_nav">고정된 파란색 바</string>
+    <string name="fixed_nav_description">페이스북 탐색 바를 항상 위에 표시합니다.</string>
+    <string name="facebook_zero">Facebook Zero</string>
+    <string name="facebook_zero_description">일부 GSM 통신사에서만 제공하는, 데이터 사용 요금이 없는 Facebook Zero를 사용합니다. 모바일 네트워크 연결에서만 사용되며, 테마 및 고정된 페이스북 탐색 바는 무시됩니다.</string>
+    <string name="facebook_zero_active">Facebook Zero를 사용중입니다</string>
+    <string name="preference_category4">기타</string>
+    <string name="quick_guide">빠른 시작 안내</string>
+    <string name="messages">메세지</string>
+    <string name="donate_paypal">기부하기 \u0020 –\u0020 PayPal</string>
+
+</resources>

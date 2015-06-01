@@ -55,4 +55,25 @@
     <string name="donate_paypal">Donate\u0020 –\u0020 PayPal</string>
     <string name="paypal_url" formatted="false">https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=koras%2eevil%40gmail%2ecom&amp;lc=GB&amp;item_name=Krzysztof%20Grabowski&amp;currency_code=USD&amp;bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted</string>
 
+    <string-array name="drawerPosTitles">
+        <item>on the left</item>
+        <item>on the right</item>
+    </string-array>
+
+    <string name="drawer_pos">Sliding menu position &#8635;</string>
+    <string name="drawer_pos_description">Menu is %s side of the screen.</string>
+    <string name="preference_category5">Notifications</string>
+    <string name="notifications_feed_url">Notifications feed</string>
+    <string name="interval_pref">Time interval for checking</string>
+    <string name="interval_pref_description">Notifications feed will be checked every %s.</string>
+    <string name="activate_notifications">Activate notifications</string>
+    <string name="get_feed">Get your notifications feed</string>
+    <string name="get_feed_description">Click the field, find your unique notifications RSS, copy the address and paste it above.</string>
+    <string name="get_feed_link" translatable="false">https://goo.gl/t3vJ33</string>
+
+    <string-array name="intervalPrefTitles">
+        <item>5 minutes</item>
+        <item>15 minutes</item>
+    </string-array>
+
 </resources>
