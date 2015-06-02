@@ -1,11 +1,13 @@
 package org.indywidualni.fblite;
 
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Handler;
@@ -31,6 +33,7 @@ public class NotificationsService extends Service {
     private String feedUrl;
     private int timeInterval;
     private ArrayList<RssItem> rssItems;
+    private int unreadNotifications = 0;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -39,7 +42,7 @@ public class NotificationsService extends Service {
 
     @Override
     public void onCreate() {
-        Toast.makeText(this, "Service created!", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, getString(R.string.app_name) + ": " + getString(R.string.notifications_service_constructor), Toast.LENGTH_LONG).show();
         Log.i("NotificationsService", "********** Service created! **********");
 
         // get shared preferences
@@ -48,8 +51,8 @@ public class NotificationsService extends Service {
         handler = new Handler();
         runnable = new Runnable() {
             public void run() {
-                Toast.makeText(context, "Service is still running", Toast.LENGTH_LONG).show();
-                Log.i("NotificationsService", "********** Service is still running **********");
+                //Toast.makeText(context, "Service is still running", Toast.LENGTH_LONG).show();
+                //Log.i("NotificationsService", "********** Service is still running **********");
 
                 // get the url and time interval from shared prefs
                 feedUrl = preferences.getString("feed_url", "");
@@ -74,16 +77,8 @@ public class NotificationsService extends Service {
         //handler.removeCallbacks(runnable);
         handler.removeCallbacksAndMessages(null);
 
-        Toast.makeText(this, "Service stopped", Toast.LENGTH_LONG).show();
         Log.i("NotificationsService", "********** Service stopped **********");
     }
-
-    @Override
-    public void onStart(Intent intent, int startid) {
-        Toast.makeText(this, "Service started by user.", Toast.LENGTH_LONG).show();
-        Log.i("NotificationsService", "********** Service started by user **********");
-    }
-
 
     // AsyncTask to get feed, process it and do all the actions needed later
     private class RssReaderTask extends AsyncTask<String, Void, ArrayList<RssItem>> {
@@ -128,31 +123,37 @@ public class NotificationsService extends Service {
     }
 
     private void notifier(String title, String summary, String url) {
+        Log.i("Start", "notification");
+
+        Integer mId = 0;
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
                         .setSmallIcon(R.drawable.ic_launcher)
                         .setContentTitle(title)
                         .setContentText(summary);
-        // creates an explicit intent for an Activity in your app
-        Intent resultIntent = new Intent(this, MainActivity.class);
-        // adds url to the latest notification
-        resultIntent.setData(Uri.parse(url));
 
-        /** The stack builder object will contain an artificial back stack for the
-         *  started Activity.
-         *  This ensures that navigating backward from the Activity leads out of
-         *  your application to the Home screen.
-         */
+        // sound and vibration
+        Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        mBuilder.setSound(alarmSound);
+        mBuilder.setVibrate(new long[] { 500, 500});
+
+        Intent resultIntent = new Intent(this, MainActivity.class);
+
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
-        // adds the back stack for the Intent (but not the Intent itself)
         stackBuilder.addParentStack(MainActivity.class);
-        // adds the Intent that starts the Activity to the top of the stack
         stackBuilder.addNextIntent(resultIntent);
-        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent resultPendingIntent =
+                PendingIntent.getActivity(getApplicationContext(),
+                        0,
+                        resultIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT);
         mBuilder.setContentIntent(resultPendingIntent);
-        NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        // notify now (notification #0 will be displayed)
-        mNotificationManager.notify(0, mBuilder.build());
+        mBuilder.setOngoing(true);
+        Notification note = mBuilder.build();
+
+        NotificationManager mNotificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        mNotificationManager.notify(mId, note);
     }
 
 }

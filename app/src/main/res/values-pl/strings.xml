@@ -63,6 +63,7 @@
     <string name="activate_notifications">Aktywuj powiadomienia</string>
     <string name="get_feed">Zdobądź swój kanał</string>
     <string name="get_feed_description">Dotknij, znajdź swój kanał RSS dla powiadomień i wklej go powyżej.</string>
+    <string name="notifications_service_constructor">Powiadomienia aktywne</string>
 
     <string-array name="intervalPrefTitles">
         <item>5 minut</item>
