@@ -40,7 +40,7 @@ public class NotificationsService extends Service {
 
     @Override
     public void onCreate() {
-        Toast.makeText(this, getString(R.string.app_name) + ": " + getString(R.string.notifications_service_created), Toast.LENGTH_LONG).show();
+        Toast.makeText(this, getString(R.string.facebook) + ": " + getString(R.string.notifications_service_created), Toast.LENGTH_LONG).show();
         Log.i("NotificationsService", "********** Service created! **********");
 
         // get shared preferences

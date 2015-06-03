@@ -71,6 +71,7 @@
     <string name="get_feed_description">Click the field, find your unique notifications RSS, copy the address and paste it above.</string>
     <string name="get_feed_link" translatable="false">https://goo.gl/t3vJ33</string>
     <string name="notifications_service_created">Notifications active</string>
+    <string name="facebook" translatable="false">Facebook</string>
 
     <string-array name="intervalPrefTitles">
         <item>5 minutes</item>
