@@ -147,23 +147,31 @@ public class MainActivity extends Activity {
         //webView.getSettings().setLoadWithOverviewMode(true);
         webView.getSettings().setAllowFileAccess(true);
 
+        // code optimization
+        boolean isConnectedMobile = Connectivity.isConnectedMobile(getApplicationContext());
+        boolean isFacebookZero = preferences.getBoolean("facebook_zero", false);
+
         // when someone clicks a Facebook link start the app with that link
-        if ((getIntent() != null && getIntent().getDataString() != null) &&
-                (!preferences.getBoolean("facebook_zero", false) || !Connectivity.isConnectedMobile(getApplicationContext()))) {
+        if ((getIntent() != null && getIntent().getDataString() != null) && (!isFacebookZero || !isConnectedMobile)) {
             webViewUrl = getIntent().getDataString();
-            // show information about loading an external link (if not opened by a shortcut)
-            if (!webViewUrl.equals("https://m.facebook.com/messages"))
-                Toast.makeText(getApplicationContext(), getString(R.string.loading_link), Toast.LENGTH_SHORT).show();
-        } else if (preferences.getBoolean("facebook_zero", false) && Connectivity.isConnectedMobile(getApplicationContext()))
+            // show information about loading an external link
+            Toast.makeText(getApplicationContext(), getString(R.string.loading_link), Toast.LENGTH_SHORT).show();
+        } else if (isFacebookZero && isConnectedMobile) {
+            // facebook zero if activated and connected to a mobile network
+            webViewUrl = "https://0.facebook.com";
             Toast.makeText(getApplicationContext(), getString(R.string.facebook_zero_active), Toast.LENGTH_SHORT).show();
+        }
+
+        // if opened by a notification or a shortcut
+        try {
+            //noinspection ConstantConditions
+            if ((getIntent().getExtras().getString("start_url") != null) && (!isFacebookZero || !isConnectedMobile))
+                webViewUrl = getIntent().getExtras().getString("start_url");
+        } catch (Exception ex) {}
 
         // notify when there is no internet connection
         if (!Connectivity.isConnected(getApplicationContext()))
             Toast.makeText(getApplicationContext(), getString(R.string.no_network), Toast.LENGTH_SHORT).show();
-
-        // facebook zero if activated and connected to a mobile network
-        if (preferences.getBoolean("facebook_zero", false) && Connectivity.isConnectedMobile(getApplicationContext()))
-            webViewUrl = "https://0.facebook.com";
 
         // load url in webView
         webView.loadUrl(webViewUrl);
@@ -581,10 +589,15 @@ public class MainActivity extends Activity {
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         setIntent(intent);
-        // grab an intent
+
+        // grab an url if opened by clicking a link
         String webViewUrl = getIntent().getDataString();
 
-        // load a grabbed intent instead of the current page
+        // if opened by a notification or a shortcut
+        if (getIntent().getExtras().getString("start_url") != null)
+            webViewUrl = getIntent().getExtras().getString("start_url");
+
+        // load a grabbed url instead of the current page
         if (preferences.getBoolean("facebook_zero", false) && Connectivity.isConnectedMobile(getApplicationContext()))
             Toast.makeText(getApplicationContext(), getString(R.string.facebook_zero_active), Toast.LENGTH_SHORT).show();
         else

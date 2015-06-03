@@ -25,7 +25,6 @@ import nl.matshofman.saxrssreader.RssReader;
 
 public class NotificationsService extends Service {
 
-    public Context context = this;
     public Handler handler = null;
     public static Runnable runnable = null;
 
@@ -33,7 +32,6 @@ public class NotificationsService extends Service {
     private String feedUrl;
     private int timeInterval;
     private ArrayList<RssItem> rssItems;
-    private int unreadNotifications = 0;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -42,7 +40,7 @@ public class NotificationsService extends Service {
 
     @Override
     public void onCreate() {
-        Toast.makeText(this, getString(R.string.app_name) + ": " + getString(R.string.notifications_service_constructor), Toast.LENGTH_LONG).show();
+        Toast.makeText(this, getString(R.string.app_name) + ": " + getString(R.string.notifications_service_created), Toast.LENGTH_LONG).show();
         Log.i("NotificationsService", "********** Service created! **********");
 
         // get shared preferences
@@ -73,10 +71,7 @@ public class NotificationsService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-
-        //handler.removeCallbacks(runnable);
         handler.removeCallbacksAndMessages(null);
-
         Log.i("NotificationsService", "********** Service stopped **********");
     }
 
@@ -100,55 +95,45 @@ public class NotificationsService extends Service {
             if (rssItems == null)
                 rssItems = result;
 
-            // if last title is different than the new one it means there is new notification
-            // display it only when MainActivity is not active - if it's not it means we don't need a notification
+            // if the latest title is different than the new one it means there is new notification
+            // display it only when MainActivity is not active - if it is it means we don't need a notification
             try {
                 if (!MyApplication.isActivityVisible() && !rssItems.get(0).getTitle().equals(result.get(0).getTitle()))
-                    notifier(result.get(0).getTitle(), result.get(0).getDescription(), "");
+                    notifier(result.get(0).getTitle(), result.get(0).getDescription(), result.get(0).getLink());
             } catch (NullPointerException ex) {
                 Log.i("RssReaderTask", "********** onPostExecute: NullPointerException! ********** ");
             }
 
-            try {
-                // update rssItems with the result of feed processing
-                rssItems = result;
-
-                // debug line, display all the items
-                for (RssItem rssItem : result)
-                    Log.i("RssReader:onPostExecute", rssItem.getPubDate() + " # " + rssItem.getTitle() + " # " + rssItem.getLink());
-            } catch (NullPointerException ex) {
-                Log.i("RssReaderTask", "********** onPostExecute: NullPointerException! ********** ");
-            }
+            // update rssItems with the result of feed processing
+            rssItems = result;
         }
     }
 
     private void notifier(String title, String summary, String url) {
-        Log.i("Start", "notification");
-
+        Log.i("NotificationsService", "notifier: Start notification");
         Integer mId = 0;
+
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.drawable.ic_launcher)
-                        .setContentTitle(title)
-                        .setContentText(summary);
+                        .setSmallIcon(R.drawable.ic_stat_f)
+                        .setContentTitle(getString(R.string.app_name))
+                        .setContentText(title)
+                        .setAutoCancel(true);
 
-        // sound and vibration
         Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         mBuilder.setSound(alarmSound);
-        mBuilder.setVibrate(new long[] { 500, 500});
+        mBuilder.setVibrate(new long[]{500, 500});
 
-        Intent resultIntent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("start_url", url);
 
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
         stackBuilder.addParentStack(MainActivity.class);
-        stackBuilder.addNextIntent(resultIntent);
+        stackBuilder.addNextIntent(intent);
         PendingIntent resultPendingIntent =
-                PendingIntent.getActivity(getApplicationContext(),
-                        0,
-                        resultIntent,
-                        PendingIntent.FLAG_UPDATE_CURRENT);
+                PendingIntent.getActivity(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         mBuilder.setContentIntent(resultPendingIntent);
-        mBuilder.setOngoing(true);
+        mBuilder.setOngoing(false);
         Notification note = mBuilder.build();
 
         NotificationManager mNotificationManager =
