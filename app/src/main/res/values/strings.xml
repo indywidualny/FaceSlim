@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingTranslation">
 
     <string name="app_name" translatable="false">Facebook Lite</string>
     <string name="image_chooser">Image Chooser</string>

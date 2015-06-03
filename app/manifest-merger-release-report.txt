@@ -15,125 +15,168 @@ ADDED from AndroidManifest.xml:2:1
 		INJECTED from AndroidManifest.xml:0:0
 	xmlns:android
 		ADDED from AndroidManifest.xml:2:11
+	android:installLocation
+		ADDED from AndroidManifest.xml:6:5
 uses-sdk
-ADDED from AndroidManifest.xml:7:5
+ADDED from AndroidManifest.xml:8:5
 MERGED from com.android.support:support-v4:22.1.1:20:5
 MERGED from com.android.support:appcompat-v7:22.1.1:20:5
 MERGED from com.android.support:support-v4:22.1.1:20:5
+MERGED from FacebookLite:saxrssreader:unspecified:7:5
 	android:targetSdkVersion
-		ADDED from AndroidManifest.xml:9:9
+		ADDED from AndroidManifest.xml:10:9
 		INJECTED from AndroidManifest.xml:0:0
 		INJECTED from AndroidManifest.xml:0:0
 	android:minSdkVersion
-		ADDED from AndroidManifest.xml:8:9
+		ADDED from AndroidManifest.xml:9:9
 		INJECTED from AndroidManifest.xml:0:0
 		INJECTED from AndroidManifest.xml:0:0
 uses-permission#android.permission.INTERNET
-ADDED from AndroidManifest.xml:11:5
-	android:name
-		ADDED from AndroidManifest.xml:11:22
-uses-permission#android.permission.ACCESS_NETWORK_STATE
 ADDED from AndroidManifest.xml:12:5
+MERGED from FacebookLite:saxrssreader:unspecified:9:5
 	android:name
 		ADDED from AndroidManifest.xml:12:22
-uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+uses-permission#android.permission.ACCESS_NETWORK_STATE
 ADDED from AndroidManifest.xml:13:5
 	android:name
 		ADDED from AndroidManifest.xml:13:22
-application
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from AndroidManifest.xml:14:5
+	android:name
+		ADDED from AndroidManifest.xml:14:22
+uses-permission#android.permission.RECEIVE_BOOT_COMPLETED
 ADDED from AndroidManifest.xml:15:5
+	android:name
+		ADDED from AndroidManifest.xml:15:22
+uses-permission#android.permission.VIBRATE
+ADDED from AndroidManifest.xml:16:5
+	android:name
+		ADDED from AndroidManifest.xml:16:22
+application
+ADDED from AndroidManifest.xml:18:5
 MERGED from com.android.support:support-v4:22.1.1:22:5
 MERGED from com.android.support:appcompat-v7:22.1.1:22:5
 MERGED from com.android.support:support-v4:22.1.1:22:5
+MERGED from FacebookLite:saxrssreader:unspecified:11:5
 	android:label
-		ADDED from AndroidManifest.xml:20:9
+		ADDED from AndroidManifest.xml:23:9
 	android:hardwareAccelerated
-		ADDED from AndroidManifest.xml:18:9
-	android:allowBackup
-		ADDED from AndroidManifest.xml:17:9
-	android:icon
-		ADDED from AndroidManifest.xml:19:9
-	android:theme
 		ADDED from AndroidManifest.xml:21:9
+	android:allowBackup
+		ADDED from AndroidManifest.xml:20:9
+	android:icon
+		ADDED from AndroidManifest.xml:22:9
+	android:theme
+		ADDED from AndroidManifest.xml:24:9
 	android:name
-		ADDED from AndroidManifest.xml:16:9
-activity#org.indywidualni.fblite.MainActivity
-ADDED from AndroidManifest.xml:22:9
-	android:label
-		ADDED from AndroidManifest.xml:24:13
-	android:launchMode
+		ADDED from AndroidManifest.xml:19:9
+service#org.indywidualni.fblite.NotificationsService
+ADDED from AndroidManifest.xml:25:9
+	android:enabled
+		ADDED from AndroidManifest.xml:27:13
+	android:exported
+		ADDED from AndroidManifest.xml:28:13
+	android:stopWithTask
+		ADDED from AndroidManifest.xml:29:13
+	android:name
 		ADDED from AndroidManifest.xml:26:13
-	android:configChanges
-		ADDED from AndroidManifest.xml:25:13
+receiver#org.indywidualni.fblite.BootCompletedIntentReceiver
+ADDED from AndroidManifest.xml:31:9
+	android:enabled
+		ADDED from AndroidManifest.xml:33:13
+	android:permission
+		ADDED from AndroidManifest.xml:34:13
 	android:name
-		ADDED from AndroidManifest.xml:23:13
-intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from AndroidManifest.xml:27:13
-action#android.intent.action.MAIN
-ADDED from AndroidManifest.xml:28:17
+		ADDED from AndroidManifest.xml:32:13
+intent-filter#android.intent.action.BOOT_COMPLETED+android.intent.action.QUICKBOOT_POWERON
+ADDED from AndroidManifest.xml:35:13
+action#android.intent.action.BOOT_COMPLETED
+ADDED from AndroidManifest.xml:36:17
 	android:name
-		ADDED from AndroidManifest.xml:28:25
-category#android.intent.category.LAUNCHER
-ADDED from AndroidManifest.xml:29:17
+		ADDED from AndroidManifest.xml:36:25
+action#android.intent.action.QUICKBOOT_POWERON
+ADDED from AndroidManifest.xml:37:17
 	android:name
-		ADDED from AndroidManifest.xml:29:27
-intent-filter#android.intent.action.VIEW+android.intent.category.BROWSABLE+android.intent.category.DEFAULT
-ADDED from AndroidManifest.xml:31:13
-category#android.intent.category.DEFAULT
-ADDED from AndroidManifest.xml:32:17
-	android:name
-		ADDED from AndroidManifest.xml:32:27
-category#android.intent.category.BROWSABLE
-ADDED from AndroidManifest.xml:33:17
-	android:name
-		ADDED from AndroidManifest.xml:33:27
-action#android.intent.action.VIEW
-ADDED from AndroidManifest.xml:34:17
-	android:name
-		ADDED from AndroidManifest.xml:34:25
-data
-ADDED from AndroidManifest.xml:35:17
-	android:host
-		ADDED from AndroidManifest.xml:35:23
-	android:scheme
-		ADDED from AndroidManifest.xml:35:51
-activity#org.indywidualni.fblite.SettingsActivity
-ADDED from AndroidManifest.xml:43:9
+		ADDED from AndroidManifest.xml:37:25
+activity#org.indywidualni.fblite.MainActivity
+ADDED from AndroidManifest.xml:40:9
 	android:label
-		ADDED from AndroidManifest.xml:45:13
-	android:parentActivityName
-		ADDED from AndroidManifest.xml:46:13
-	android:theme
-		ADDED from AndroidManifest.xml:47:13
-	android:name
+		ADDED from AndroidManifest.xml:42:13
+	android:launchMode
 		ADDED from AndroidManifest.xml:44:13
-meta-data#android.support.PARENT_ACTIVITY
-ADDED from AndroidManifest.xml:48:13
-	android:value
-		ADDED from AndroidManifest.xml:50:17
+	android:configChanges
+		ADDED from AndroidManifest.xml:43:13
 	android:name
-		ADDED from AndroidManifest.xml:49:17
-activity#org.indywidualni.fblite.AboutActivity
-ADDED from AndroidManifest.xml:52:9
-	android:label
-		ADDED from AndroidManifest.xml:54:13
-	android:parentActivityName
-		ADDED from AndroidManifest.xml:55:13
-	android:theme
-		ADDED from AndroidManifest.xml:56:13
+		ADDED from AndroidManifest.xml:41:13
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from AndroidManifest.xml:45:13
+action#android.intent.action.MAIN
+ADDED from AndroidManifest.xml:46:17
 	android:name
-		ADDED from AndroidManifest.xml:53:13
-activity#org.indywidualni.fblite.MessagesShortcutActivity
+		ADDED from AndroidManifest.xml:46:25
+category#android.intent.category.LAUNCHER
+ADDED from AndroidManifest.xml:47:17
+	android:name
+		ADDED from AndroidManifest.xml:47:27
+intent-filter#android.intent.action.VIEW+android.intent.category.BROWSABLE+android.intent.category.DEFAULT
+ADDED from AndroidManifest.xml:49:13
+category#android.intent.category.DEFAULT
+ADDED from AndroidManifest.xml:50:17
+	android:name
+		ADDED from AndroidManifest.xml:50:27
+category#android.intent.category.BROWSABLE
+ADDED from AndroidManifest.xml:51:17
+	android:name
+		ADDED from AndroidManifest.xml:51:27
+action#android.intent.action.VIEW
+ADDED from AndroidManifest.xml:52:17
+	android:name
+		ADDED from AndroidManifest.xml:52:25
+data
+ADDED from AndroidManifest.xml:53:17
+	android:host
+		ADDED from AndroidManifest.xml:53:23
+	android:scheme
+		ADDED from AndroidManifest.xml:53:51
+activity#org.indywidualni.fblite.SettingsActivity
 ADDED from AndroidManifest.xml:61:9
 	android:label
 		ADDED from AndroidManifest.xml:63:13
-	android:icon
+	android:parentActivityName
 		ADDED from AndroidManifest.xml:64:13
+	android:theme
+		ADDED from AndroidManifest.xml:65:13
 	android:name
 		ADDED from AndroidManifest.xml:62:13
-intent-filter#android.intent.action.CREATE_SHORTCUT+android.intent.category.DEFAULT
-ADDED from AndroidManifest.xml:65:13
-action#android.intent.action.CREATE_SHORTCUT
-ADDED from AndroidManifest.xml:66:17
+meta-data#android.support.PARENT_ACTIVITY
+ADDED from AndroidManifest.xml:66:13
+	android:value
+		ADDED from AndroidManifest.xml:68:17
 	android:name
-		ADDED from AndroidManifest.xml:66:25
+		ADDED from AndroidManifest.xml:67:17
+activity#org.indywidualni.fblite.AboutActivity
+ADDED from AndroidManifest.xml:70:9
+	android:label
+		ADDED from AndroidManifest.xml:72:13
+	android:parentActivityName
+		ADDED from AndroidManifest.xml:73:13
+	android:theme
+		ADDED from AndroidManifest.xml:74:13
+	android:name
+		ADDED from AndroidManifest.xml:71:13
+activity#org.indywidualni.fblite.MessagesShortcutActivity
+ADDED from AndroidManifest.xml:79:9
+	android:label
+		ADDED from AndroidManifest.xml:81:13
+	android:icon
+		ADDED from AndroidManifest.xml:82:13
+	android:name
+		ADDED from AndroidManifest.xml:80:13
+intent-filter#android.intent.action.CREATE_SHORTCUT+android.intent.category.DEFAULT
+ADDED from AndroidManifest.xml:83:13
+action#android.intent.action.CREATE_SHORTCUT
+ADDED from AndroidManifest.xml:84:17
+	android:name
+		ADDED from AndroidManifest.xml:84:25
+android:uses-permission#android.permission.READ_PHONE_STATE
+IMPLIED from AndroidManifest.xml:2:1 reason: nl.matshofman.saxrssreader has a targetSdkVersion < 4

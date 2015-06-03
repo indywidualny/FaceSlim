@@ -45,7 +45,7 @@ public class MainActivity extends Activity {
     private ListView mDrawerList;
     private String[] itemList;
 
-    SwipeRefreshLayout swipeRefreshLayout;
+    private SwipeRefreshLayout swipeRefreshLayout;
     private WebView webView;
     private ProgressBar progressBar;
 
@@ -60,8 +60,6 @@ public class MainActivity extends Activity {
 
     // error handling
     private static final String TAG = MainActivity.class.getSimpleName();
-
-    // shared preferences
     private SharedPreferences preferences;
 
     @Override
@@ -73,7 +71,7 @@ public class MainActivity extends Activity {
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         // set the main content view (for drawer position)
-        // noinspection ConstantConditions
+        //noinspection ConstantConditions
         if (preferences.getString("drawer_pos", "0").equals("0"))
             setContentView(R.layout.activity_main);
         else
@@ -121,7 +119,7 @@ public class MainActivity extends Activity {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
         // set up the drawer's list view with items and click listener
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, itemList));
+        mDrawerList.setAdapter(new ArrayAdapter<>(this, R.layout.drawer_list_item, itemList));
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
         // disable hardware acceleration
@@ -167,7 +165,7 @@ public class MainActivity extends Activity {
             //noinspection ConstantConditions
             if ((getIntent().getExtras().getString("start_url") != null) && (!isFacebookZero || !isConnectedMobile))
                 webViewUrl = getIntent().getExtras().getString("start_url");
-        } catch (Exception ex) {}
+        } catch (Exception ignored) {}
 
         // notify when there is no internet connection
         if (!Connectivity.isConnected(getApplicationContext()))
@@ -257,6 +255,7 @@ public class MainActivity extends Activity {
                 File imageStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "FacebookLite");
 
                 if (!imageStorageDir.exists()) {
+                    //noinspection ResultOfMethodCallIgnored
                     imageStorageDir.mkdirs();
                 }
 
@@ -273,6 +272,7 @@ public class MainActivity extends Activity {
                     File imageStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "FacebookLite");
 
                     if (!imageStorageDir.exists()) {
+                        //noinspection ResultOfMethodCallIgnored
                         imageStorageDir.mkdirs();
                     }
 
@@ -338,7 +338,7 @@ public class MainActivity extends Activity {
         private final WeakReference<MainActivity> mActivity;
 
         public MyHandler(MainActivity activity) {
-            mActivity = new WeakReference<MainActivity>(activity);
+            mActivity = new WeakReference<>(activity);
         }
 
         @Override
@@ -594,8 +594,10 @@ public class MainActivity extends Activity {
         String webViewUrl = getIntent().getDataString();
 
         // if opened by a notification or a shortcut
-        if (getIntent().getExtras().getString("start_url") != null)
-            webViewUrl = getIntent().getExtras().getString("start_url");
+        try {
+            if (getIntent().getExtras().getString("start_url") != null)
+                webViewUrl = getIntent().getExtras().getString("start_url");
+        } catch (Exception ignored) {}
 
         // load a grabbed url instead of the current page
         if (preferences.getBoolean("facebook_zero", false) && Connectivity.isConnectedMobile(getApplicationContext()))
