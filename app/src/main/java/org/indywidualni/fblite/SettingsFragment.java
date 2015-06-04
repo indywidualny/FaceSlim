@@ -84,6 +84,17 @@ public class SettingsFragment extends PreferenceFragment {
             }
         });
 
+        // listener for notifications_settings preference // TODO: yay
+        findPreference("notifications_settings").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                Log.v("SettingsFragment", "notifications_settings");
+                getFragmentManager().beginTransaction().addToBackStack(null).replace(android.R.id.content,
+                        new NotificationsSettingsFragment()).commit();
+                return true;
+            }
+        });
+
         // listener for changing preferences (works after the value change)
         SharedPreferences.OnSharedPreferenceChangeListener myPrefListner = new SharedPreferences.OnSharedPreferenceChangeListener() {
             public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
@@ -97,11 +108,6 @@ public class SettingsFragment extends PreferenceFragment {
                     } else {
                         // stop a service
                         context.stopService(intent);
-
-                        // unregister a service from auto-start
-                        ComponentName component = new ComponentName(context, BootCompletedIntentReceiver.class);
-                        context.getPackageManager().setComponentEnabledSetting(component,
-                                PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
                     }
                 }
 

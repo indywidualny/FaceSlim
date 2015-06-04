@@ -17,11 +17,11 @@ public class BootCompletedIntentReceiver extends BroadcastReceiver {
         Intent startIntent = new Intent(context, NotificationsService.class);
 
         // get shared preferences
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(MyApplication.getContextOfApplication());
 
         // start notifications service when it's activated at Settings
         if (preferences.getBoolean("notifications_activated", false))
-            context.startService(startIntent);
+            MyApplication.getContextOfApplication().startService(startIntent);
     }
 
 }
