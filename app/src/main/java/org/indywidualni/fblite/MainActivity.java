@@ -71,8 +71,7 @@ public class MainActivity extends Activity {
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         // set the main content view (for drawer position)
-        //noinspection ConstantConditions
-        if (preferences.getString("drawer_pos", "0").equals("0"))
+        if ("0".equals(preferences.getString("drawer_pos", "0")))
             setContentView(R.layout.activity_main);
         else
             setContentView(R.layout.activity_main_drawer_right);

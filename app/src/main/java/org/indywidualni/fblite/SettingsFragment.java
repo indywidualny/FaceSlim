@@ -15,6 +15,7 @@ import java.io.File;
 public class SettingsFragment extends PreferenceFragment {
 
     private static Context context;
+    private SharedPreferences.OnSharedPreferenceChangeListener myPrefListner;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,27 @@ public class SettingsFragment extends PreferenceFragment {
 
         // get shared preferences
         final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+
+        // listener for changing preferences (works after the value change) // TODO: all listeners here
+        myPrefListner = new SharedPreferences.OnSharedPreferenceChangeListener() {
+            public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
+
+                switch (key) {
+                    case "notifications_activated":
+                        Log.v("SettingsFragment", "notifications_activated changed");
+                        Intent intent = new Intent(context, NotificationsService.class);
+                        if (prefs.getBoolean("notifications_activated", false))
+                            context.startService(intent);
+                        else
+                            context.stopService(intent);
+                        break;
+                }
+
+            }
+        };
+
+        // register the listener above
+        preferences.registerOnSharedPreferenceChangeListener(myPrefListner);
 
         // listener for clearing cache preference
         findPreference("clear_cache").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
@@ -82,35 +104,18 @@ public class SettingsFragment extends PreferenceFragment {
             }
         });
 
-        // listener for notifications_settings preference // TODO: yay
+        // listener for notifications_settings preference
         findPreference("notifications_settings").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 Log.v("SettingsFragment", "notifications_settings");
-                getFragmentManager().beginTransaction().addToBackStack(null).replace(android.R.id.content,
+                getFragmentManager().beginTransaction()
+                        .setCustomAnimations(R.anim.slide_in_right, 0)
+                        .addToBackStack(null).replace(android.R.id.content,
                         new NotificationsSettingsFragment()).commit();
                 return true;
             }
         });
-
-        // listener for changing preferences (works after the value change)
-        SharedPreferences.OnSharedPreferenceChangeListener myPrefListner = new SharedPreferences.OnSharedPreferenceChangeListener() {
-            public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
-
-                if (key.equals("notifications_activated")) {
-                    Log.v("SettingsFragment", "notifications_activated changed");
-                    Intent intent = new Intent(context, NotificationsService.class);
-                    if (prefs.getBoolean("notifications_activated", false))
-                        context.startService(intent);
-                    else
-                        context.stopService(intent);
-                }
-
-            }
-        };
-
-        // register the listener above
-        preferences.registerOnSharedPreferenceChangeListener(myPrefListner);
     }
 
     // relaunch the app

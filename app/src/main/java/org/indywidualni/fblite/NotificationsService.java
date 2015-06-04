@@ -7,6 +7,7 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -28,10 +29,10 @@ public class NotificationsService extends Service {
     public Handler handler = null;
     public static Runnable runnable = null;
 
-    private SharedPreferences preferences;
     private String feedUrl;
     private int timeInterval;
     private ArrayList<RssItem> rssItems;
+    private SharedPreferences preferences;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -98,7 +99,7 @@ public class NotificationsService extends Service {
             // if the latest title is different than the new one it means there is new notification
             // display it only when MainActivity is not active - if it is it means we don't need a notification
             try {
-                if (!MyApplication.isActivityVisible() && !rssItems.get(0).getTitle().equals(result.get(0).getTitle()))
+                if (!MyApplication.isActivityVisible() && rssItems.get(0).getTitle().equals(result.get(0).getTitle()))
                     notifier(result.get(0).getTitle(), result.get(0).getDescription(), result.get(0).getLink());
             } catch (NullPointerException ex) {
                 Log.i("RssReaderTask", "********** onPostExecute: NullPointerException! ********** ");
@@ -115,14 +116,34 @@ public class NotificationsService extends Service {
 
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
+                        .setStyle(new NotificationCompat.BigTextStyle().bigText(title))
                         .setSmallIcon(R.drawable.ic_stat_f)
                         .setContentTitle(getString(R.string.app_name))
                         .setContentText(title)
                         .setAutoCancel(true);
 
-        Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        // see all the notifications button // TODO: something wrong here!
+        Intent allNotificationsIntent = new Intent(this, MainActivity.class);
+        allNotificationsIntent.putExtra("start_url", "https://m.facebook.com/notifications");
+        PendingIntent piAllNotifications = PendingIntent.getActivity(getApplicationContext(), 0, allNotificationsIntent, 0);
+        mBuilder.addAction(0, getString(R.string.all_notifications), piAllNotifications);
+
+        // notification sound
+        Uri alarmSound;
+        String strRingtonePreference = preferences.getString("ringtone", "not_chosen_yet");
+        if ("not_chosen_yet".equals(strRingtonePreference))
+            alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        else
+            alarmSound = Uri.parse(strRingtonePreference);
         mBuilder.setSound(alarmSound);
-        mBuilder.setVibrate(new long[]{500, 500});
+
+        // vibration
+        if (preferences.getBoolean("vibrate", false))
+            mBuilder.setVibrate(new long[] {500, 500});
+
+        // LED light
+        if (preferences.getBoolean("led_light", false))
+            mBuilder.setLights(Color.BLUE, 1, 1);
 
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("start_url", url);
@@ -130,14 +151,12 @@ public class NotificationsService extends Service {
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
         stackBuilder.addParentStack(MainActivity.class);
         stackBuilder.addNextIntent(intent);
-        PendingIntent resultPendingIntent =
-                PendingIntent.getActivity(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent resultPendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         mBuilder.setContentIntent(resultPendingIntent);
         mBuilder.setOngoing(false);
         Notification note = mBuilder.build();
 
-        NotificationManager mNotificationManager =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         mNotificationManager.notify(mId, note);
     }
 

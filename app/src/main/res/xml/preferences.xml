@@ -53,8 +53,8 @@
 
         <Preference
             android:key="notifications_settings"
-            android:title="@string/notifications"
-            android:summary="@string/notifications"/>
+            android:title="@string/notifications_settings"
+            android:summary="@string/notifications_settings_description"/>
 
         <CheckBoxPreference
             android:key="notifications_activated"

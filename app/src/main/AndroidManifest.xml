@@ -63,6 +63,7 @@
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
             android:parentActivityName=".MainActivity"
+            android:configChanges="screenSize|orientation"
             android:theme="@style/Theme.AppCompat.WithActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

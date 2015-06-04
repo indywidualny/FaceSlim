@@ -62,12 +62,20 @@
     <string name="interval_pref_description">Kanał powiadomień jest sprawdzany co %s.</string>
     <string name="activate_notifications">Aktywuj powiadomienia</string>
     <string name="get_feed">Zdobądź swój kanał</string>
-    <string name="get_feed_description">Dotknij, znajdź swój kanał RSS dla powiadomień i wklej go powyżej.</string>
+    <string name="get_feed_description">Dotknij, znajdź swój kanał RSS dla powiadomień, skopiuj adres i wklej go powyżej.</string>
     <string name="notifications_service_created">Powiadomienia aktywne</string>
+    <string name="notifications_settings">Ustawienia powiadomień</string>
+    <string name="notifications_settings_description">Wybierz interwał czasu, ustaw dźwięk, diodę LED oraz wibracje.</string>
 
     <string-array name="intervalPrefTitles">
         <item>5 minut</item>
         <item>15 minut</item>
     </string-array>
+
+    <string name="all_notifications">Wszystkie powiadomienia</string>
+    <string name="notification_sound">Dźwięk powiadomienia</string>
+    <string name="notification_sound_description">Wybierz dzwonek. Możesz także wybrać bezgłośne powiadomienie.</string>
+    <string name="vibrate">Wibruj</string>
+    <string name="led_light">Dioda LED</string>
 
 </resources>

@@ -21,12 +21,12 @@
         android:showSilent="true"
         android:title="@string/notification_sound" />
 
-    <CheckBoxPreference
+    <SwitchPreference
         android:key="vibrate"
         android:title="@string/vibrate"
         android:defaultValue="false"/>
 
-    <CheckBoxPreference
+    <SwitchPreference
         android:key="led_light"
         android:title="@string/led_light"
         android:defaultValue="false"/>
