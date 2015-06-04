@@ -1,10 +1,8 @@
 package org.indywidualni.fblite;
 
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
@@ -102,13 +100,10 @@ public class SettingsFragment extends PreferenceFragment {
                 if (key.equals("notifications_activated")) {
                     Log.v("SettingsFragment", "notifications_activated changed");
                     Intent intent = new Intent(context, NotificationsService.class);
-                    if (prefs.getBoolean("notifications_activated", false)) {
-                        // start a service
+                    if (prefs.getBoolean("notifications_activated", false))
                         context.startService(intent);
-                    } else {
-                        // stop a service
+                    else
                         context.stopService(intent);
-                    }
                 }
 
             }

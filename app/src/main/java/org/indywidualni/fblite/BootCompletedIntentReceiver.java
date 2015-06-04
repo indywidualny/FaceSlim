@@ -13,15 +13,16 @@ public class BootCompletedIntentReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         Log.i("BroadcastReceiver", "********** Boot time! **********");
+        context = MyApplication.getContextOfApplication();
 
         Intent startIntent = new Intent(context, NotificationsService.class);
 
         // get shared preferences
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(MyApplication.getContextOfApplication());
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
 
         // start notifications service when it's activated at Settings
         if (preferences.getBoolean("notifications_activated", false))
-            MyApplication.getContextOfApplication().startService(startIntent);
+            context.startService(startIntent);
     }
 
 }
