@@ -45,11 +45,11 @@
     <string name="me_google_play">Google Play</string>
     <string name="preference_category3">Experimental</string>
     <string name="dark_theme">Dark theme</string>
-    <string name="dark_theme_description">Turn Facebook black. You know css? Help me improve!\u0020 -\u0020 res/raw/black.css</string>
+    <string name="dark_theme_description">Turn Facebook black. Your AMOLED screen will appreciate it.</string>
     <string name="fixed_nav">Fixed blue bar</string>
     <string name="fixed_nav_description">Facebook navigation bar always on top.</string>
     <string name="facebook_zero">Facebook Zero</string>
-    <string name="facebook_zero_description">No data charges. GSM provider dependent. Works during mobile network connection. Dark theme and fixed navbar are ignored.</string>
+    <string name="facebook_zero_description">No data charges. GSM provider dependent. Works during mobile network connection. Dark theme and fixed navbar are ignored while Facebook Zero is active.</string>
     <string name="facebook_zero_active">Facebook Zero is active</string>
     <string name="preference_category4">Additional</string>
     <string name="quick_guide">Quick Start Guide</string>
@@ -84,7 +84,7 @@
 
     <string name="all_notifications">All notifications</string>
     <string name="notification_sound">Notification sound</string>
-    <string name="notification_sound_description">Choose your ringtone. You can also choose silent.</string>
+    <string name="notification_sound_description">Choose your ringtone or make it silent.</string>
     <string name="vibrate">Vibrations</string>
     <string name="led_light">LED light</string>
 

@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Handler;
@@ -45,7 +44,7 @@ public class NotificationsService extends Service {
         Log.i("NotificationsService", "********** Service created! **********");
 
         // get shared preferences
-        preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        preferences = PreferenceManager.getDefaultSharedPreferences(MyApplication.getContextOfApplication());
 
         handler = new Handler();
         runnable = new Runnable() {
@@ -112,7 +111,6 @@ public class NotificationsService extends Service {
 
     private void notifier(String title, String summary, String url) {
         Log.i("NotificationsService", "notifier: Start notification");
-        Integer mId = 0;
 
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
@@ -128,14 +126,8 @@ public class NotificationsService extends Service {
         PendingIntent piAllNotifications = PendingIntent.getActivity(getApplicationContext(), 0, allNotificationsIntent, 0);
         mBuilder.addAction(0, getString(R.string.all_notifications), piAllNotifications);
 
-        // notification sound
-        Uri alarmSound;
-        String strRingtonePreference = preferences.getString("ringtone", "not_chosen_yet");
-        if ("not_chosen_yet".equals(strRingtonePreference))
-            alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        else
-            alarmSound = Uri.parse(strRingtonePreference);
-        mBuilder.setSound(alarmSound);
+        // notification sound // TODO: it doesn't refresh? wtf!
+        mBuilder.setSound(Uri.parse(preferences.getString("ringtone", "content://settings/system/notification_sound")));
 
         // vibration
         if (preferences.getBoolean("vibrate", false))
@@ -157,7 +149,7 @@ public class NotificationsService extends Service {
         Notification note = mBuilder.build();
 
         NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        mNotificationManager.notify(mId, note);
+        mNotificationManager.notify(0, note);
     }
 
 }

@@ -19,7 +19,9 @@
         android:ringtoneType="notification"
         android:showDefault="true"
         android:showSilent="true"
-        android:title="@string/notification_sound" />
+        android:defaultValue="content://settings/system/notification_sound"
+        android:title="@string/notification_sound"
+        android:summary="@string/notification_sound_description" />
 
     <CheckBoxPreference
         android:key="vibrate"

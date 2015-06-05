@@ -37,11 +37,11 @@
     <string name="me_google_play">Google Play</string>
     <string name="preference_category3">Eksperymentalne</string>
     <string name="dark_theme">Ciemny motyw</string>
-    <string name="dark_theme_description">Dla fanów czerni. Znasz css? Pomóż mi go dopracować!\u0020 -\u0020 res/raw/black.css</string>
+    <string name="dark_theme_description">Dla fanów czerni. Twój ekran AMOLED będzie zachwycony.</string>
     <string name="fixed_nav">Przyklej niebieski pasek</string>
     <string name="fixed_nav_description">Przyciski nawigacyjne zawsze na górze.</string>
     <string name="facebook_zero">Facebook Zero</string>
-    <string name="facebook_zero_description">Darmowy transfer. Zależne od operatora. Tylko podczas połączenia komórkowego. Ciemny motyw i przyklejony pasek ignorowane.</string>
+    <string name="facebook_zero_description">Darmowy transfer. Zależne od operatora. Tylko podczas połączenia komórkowego. Ciemny motyw i przyklejony pasek są ignorowane, gdy działa.</string>
     <string name="facebook_zero_active">Facebook Zero aktywny</string>
     <string name="preference_category4">Dodatkowe</string>
     <string name="quick_guide">Szybkie wprowadzenie</string>
@@ -74,7 +74,7 @@
 
     <string name="all_notifications">Wszystkie powiadomienia</string>
     <string name="notification_sound">Dźwięk powiadomienia</string>
-    <string name="notification_sound_description">Wybierz dzwonek. Możesz także wybrać bezgłośne powiadomienie.</string>
+    <string name="notification_sound_description">Wybierz dzwonek lub całkowicie wycisz.</string>
     <string name="vibrate">Wibruj</string>
     <string name="led_light">Dioda LED</string>
 

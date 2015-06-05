@@ -59,6 +59,7 @@
         <SwitchPreference
             android:key="notifications_activated"
             android:title="@string/activate_notifications"
+            android:dependency="feed_url"
             android:defaultValue="false"/>
 
     </PreferenceCategory>
@@ -73,12 +74,6 @@
             android:summary="@string/facebook_zero_description"
             android:defaultValue="false"/>
 
-    </PreferenceCategory>
-
-
-    <PreferenceCategory
-        android:title="@string/preference_category3">
-
         <SwitchPreference
             android:key="dark_theme"
             android:title="@string/dark_theme"
@@ -86,6 +81,11 @@
             android:defaultValue="false"/>
 
     </PreferenceCategory>
+
+
+    <!-- <PreferenceCategory
+        android:title="@string/preference_category3">
+    </PreferenceCategory> -->
 
 
     <PreferenceCategory
