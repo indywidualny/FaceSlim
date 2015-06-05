@@ -37,7 +37,7 @@
     <string name="me_google_play">Google Play</string>
     <string name="preference_category3">Eksperymentalne</string>
     <string name="dark_theme">Ciemny motyw</string>
-    <string name="dark_theme_description">Dla fanów czerni. Twój ekran AMOLED będzie zachwycony.</string>
+    <string name="dark_theme_description">Dla fanów czerni. Twój ekran AMOLED będzie zachwycony ;)</string>
     <string name="fixed_nav">Przyklej niebieski pasek</string>
     <string name="fixed_nav_description">Przyciski nawigacyjne zawsze na górze.</string>
     <string name="facebook_zero">Facebook Zero</string>
@@ -65,16 +65,21 @@
     <string name="get_feed_description">Dotknij, znajdź swój kanał RSS dla powiadomień, skopiuj adres i wklej go powyżej.</string>
     <string name="notifications_service_created">Powiadomienia aktywne</string>
     <string name="notifications_settings">Ustawienia powiadomień</string>
-    <string name="notifications_settings_description">Wybierz interwał czasu, ustaw dźwięk, diodę LED oraz wibracje.</string>
+    <string name="notifications_settings_description">Kompleksowe ustawienia. Wybierz interwał czasu, ustaw dźwięk, diodę LED oraz wibracje.</string>
 
     <string-array name="intervalPrefTitles">
         <item>5 minut</item>
         <item>15 minut</item>
+        <item>30 minutes</item>
+        <item>1 godzinę</item>
+        <item>3 godziny</item>
+        <item>6 godzin</item>
     </string-array>
 
     <string name="all_notifications">Wszystkie powiadomienia</string>
     <string name="notification_sound">Dźwięk powiadomienia</string>
-    <string name="notification_sound_description">Wybierz dzwonek lub całkowicie wycisz.</string>
+    <string name="notification_sound_description">Wybierz dzwonek lub wycisz: \u0020</string>
+    <string name="silent">Brak dźwięku</string>
     <string name="vibrate">Wibruj</string>
     <string name="led_light">Dioda LED</string>
 

@@ -45,7 +45,7 @@
     <string name="me_google_play">Google Play</string>
     <string name="preference_category3">Experimental</string>
     <string name="dark_theme">Dark theme</string>
-    <string name="dark_theme_description">Turn Facebook black. Your AMOLED screen will appreciate it.</string>
+    <string name="dark_theme_description">Turn Facebook black. Your AMOLED screen will appreciate it ;)</string>
     <string name="fixed_nav">Fixed blue bar</string>
     <string name="fixed_nav_description">Facebook navigation bar always on top.</string>
     <string name="facebook_zero">Facebook Zero</string>
@@ -75,16 +75,21 @@
     <string name="notifications_service_created">Notifications active</string>
     <string name="facebook" translatable="false">Facebook</string>
     <string name="notifications_settings">Notifications settings</string>
-    <string name="notifications_settings_description">Choose time interval, set up sounds, LED and vibration.</string>
+    <string name="notifications_settings_description">Additional settings. Choose time interval, set up sounds, LED and vibration.</string>
 
     <string-array name="intervalPrefTitles">
         <item>5 minutes</item>
         <item>15 minutes</item>
+        <item>30 minutes</item>
+        <item>1 hour</item>
+        <item>3 hours</item>
+        <item>6 hours</item>
     </string-array>
 
     <string name="all_notifications">All notifications</string>
     <string name="notification_sound">Notification sound</string>
-    <string name="notification_sound_description">Choose your ringtone or make it silent.</string>
+    <string name="notification_sound_description">Choose a ringtone or silence: \u0020</string>
+    <string name="silent">No sound</string>
     <string name="vibrate">Vibrations</string>
     <string name="led_light">LED light</string>
 

@@ -8,7 +8,7 @@
             android:title="@string/interval_pref"
             android:summary="@string/interval_pref_description"
             android:key="interval_pref"
-            android:defaultValue="0"
+            android:defaultValue="2"
             android:entries="@array/intervalPrefTitles"
             android:entryValues="@array/intervalPrefValues"/>
 

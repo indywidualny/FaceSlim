@@ -12,7 +12,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.IBinder;
-import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
@@ -43,8 +42,8 @@ public class NotificationsService extends Service {
         Toast.makeText(this, getString(R.string.facebook) + ": " + getString(R.string.notifications_service_created), Toast.LENGTH_LONG).show();
         Log.i("NotificationsService", "********** Service created! **********");
 
-        // get shared preferences
-        preferences = PreferenceManager.getDefaultSharedPreferences(MyApplication.getContextOfApplication());
+        // get shared preferences (for a multi process app)
+        preferences = getSharedPreferences(getApplicationContext().getPackageName() + "_preferences", Context.MODE_MULTI_PROCESS);
 
         handler = new Handler();
         runnable = new Runnable() {
@@ -126,8 +125,9 @@ public class NotificationsService extends Service {
         PendingIntent piAllNotifications = PendingIntent.getActivity(getApplicationContext(), 0, allNotificationsIntent, 0);
         mBuilder.addAction(0, getString(R.string.all_notifications), piAllNotifications);
 
-        // notification sound // TODO: it doesn't refresh? wtf!
-        mBuilder.setSound(Uri.parse(preferences.getString("ringtone", "content://settings/system/notification_sound")));
+        // notification sound
+        Uri ringtoneUri = Uri.parse(preferences.getString("ringtone", "content://settings/system/notification_sound"));
+        mBuilder.setSound(ringtoneUri);
 
         // vibration
         if (preferences.getBoolean("vibrate", false))
