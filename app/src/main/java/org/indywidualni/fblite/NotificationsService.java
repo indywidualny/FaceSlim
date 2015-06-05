@@ -53,7 +53,7 @@ public class NotificationsService extends Service {
 
                 // get the url and time interval from shared prefs
                 feedUrl = preferences.getString("feed_url", "");
-                timeInterval = Integer.parseInt(preferences.getString("interval_pref", "3600000"));
+                timeInterval = Integer.parseInt(preferences.getString("interval_pref", "1800000"));
 
                 // start AsyncTask
                 new RssReaderTask().execute(feedUrl);
