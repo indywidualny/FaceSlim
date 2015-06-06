@@ -1,6 +1,7 @@
 package org.indywidualni.fblite;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -9,11 +10,13 @@ import android.os.Bundle;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
+import android.util.Log;
 
 public class NotificationsSettingsFragment extends PreferenceFragment {
 
     private static Context context;
     private SharedPreferences preferences;
+    private SharedPreferences.OnSharedPreferenceChangeListener myPrefListner;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -24,6 +27,28 @@ public class NotificationsSettingsFragment extends PreferenceFragment {
 
         context = MyApplication.getContextOfApplication();
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
+
+        // listener for changing preferences (works after the value change)
+        myPrefListner = new SharedPreferences.OnSharedPreferenceChangeListener() {
+            public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
+
+                switch (key) {
+                    case "interval_pref":
+                        Log.v("SettingsFragment", "interval_pref changed");
+                        // restart service after time interval change
+                        if (NotificationsService.isRunning) {
+                            Intent intent = new Intent(context, NotificationsService.class);
+                            context.stopService(intent);
+                            context.startService(intent);
+                        }
+                        break;
+                }
+
+            }
+        };
+
+        // register the listener above
+        preferences.registerOnSharedPreferenceChangeListener(myPrefListner);
     }
 
     @Override

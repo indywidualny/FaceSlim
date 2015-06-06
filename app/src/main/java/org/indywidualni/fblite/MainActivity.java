@@ -516,6 +516,9 @@ public class MainActivity extends Activity {
                     Intent about = new Intent(this, AboutActivity.class);
                     startActivity(about);
                     break;
+                case 8:
+                    finish();
+                    break;
                 default:
                     // silence is golden
                     break;
@@ -548,6 +551,9 @@ public class MainActivity extends Activity {
                 case 7:
                     Intent about = new Intent(this, AboutActivity.class);
                     startActivity(about);
+                    break;
+                case 8:
+                    finish();
                     break;
                 default:
                     // silence is golden

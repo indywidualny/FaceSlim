@@ -25,6 +25,7 @@ import nl.matshofman.saxrssreader.RssReader;
 
 public class NotificationsService extends Service {
 
+    public static boolean isRunning;
     public Handler handler = null;
     public static Runnable runnable = null;
 
@@ -42,6 +43,7 @@ public class NotificationsService extends Service {
     public void onCreate() {
         Toast.makeText(this, getString(R.string.facebook) + ": " + getString(R.string.notifications_service_created), Toast.LENGTH_LONG).show();
         Log.i("NotificationsService", "********** Service created! **********");
+        isRunning = true;
 
         // get shared preferences (for a multi process app)
         preferences = getSharedPreferences(getApplicationContext().getPackageName() + "_preferences", Context.MODE_MULTI_PROCESS);
@@ -64,14 +66,15 @@ public class NotificationsService extends Service {
             }
         };
 
-        // first run delay (10 seconds)
-        handler.postDelayed(runnable, 10000);
+        // first run delay (5 seconds)
+        handler.postDelayed(runnable, 5000);
     }
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
+        isRunning = false;
         handler.removeCallbacksAndMessages(null);
+        super.onDestroy();
         Log.i("NotificationsService", "********** Service stopped **********");
     }
 
@@ -96,10 +99,11 @@ public class NotificationsService extends Service {
                 rssItems = result;
 
             // if the latest title is different than the new one it means there is new notification
-            // display it only when MainActivity is not active - if it is it means we don't need a notification
+            // display it only when MainActivity is not active or 'Always notify' is checked
             try {
-                if (!MyApplication.isActivityVisible() && !rssItems.get(0).getTitle().equals(result.get(0).getTitle()))
-                    notifier(result.get(0).getTitle(), result.get(0).getDescription(), result.get(0).getLink());
+                if (!rssItems.get(0).getTitle().equals(result.get(0).getTitle()))
+                    if (!MyApplication.isActivityVisible() || preferences.getBoolean("notifications_everywhere", true))
+                        notifier(result.get(0).getTitle(), result.get(0).getDescription(), result.get(0).getLink());
             } catch (NullPointerException ex) {
                 Log.i("RssReaderTask", "********** onPostExecute: NullPointerException! ********** ");
             }

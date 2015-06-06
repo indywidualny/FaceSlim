@@ -12,25 +12,37 @@
             android:entries="@array/intervalPrefTitles"
             android:entryValues="@array/intervalPrefValues"/>
 
+        <RingtonePreference
+            android:key="ringtone"
+            android:ringtoneType="notification"
+            android:showDefault="true"
+            android:showSilent="true"
+            android:defaultValue="content://settings/system/notification_sound"
+            android:title="@string/notification_sound"
+            android:summary="@string/notification_sound_description" />
+
+        <CheckBoxPreference
+            android:key="vibrate"
+            android:title="@string/vibrate"
+            android:defaultValue="false"/>
+
+        <CheckBoxPreference
+            android:key="led_light"
+            android:title="@string/led_light"
+            android:defaultValue="false"/>
+
     </PreferenceCategory>
 
-    <RingtonePreference
-        android:key="ringtone"
-        android:ringtoneType="notification"
-        android:showDefault="true"
-        android:showSilent="true"
-        android:defaultValue="content://settings/system/notification_sound"
-        android:title="@string/notification_sound"
-        android:summary="@string/notification_sound_description" />
 
-    <CheckBoxPreference
-        android:key="vibrate"
-        android:title="@string/vibrate"
-        android:defaultValue="false"/>
+    <PreferenceCategory
+        android:title="@string/notifications_extra">
 
-    <CheckBoxPreference
-        android:key="led_light"
-        android:title="@string/led_light"
-        android:defaultValue="false"/>
+        <CheckBoxPreference
+            android:key="notifications_everywhere"
+            android:title="@string/notifications_everywhere"
+            android:summary="@string/notifications_everywhere_description"
+            android:defaultValue="true"/>
+
+    </PreferenceCategory>
 
 </PreferenceScreen>

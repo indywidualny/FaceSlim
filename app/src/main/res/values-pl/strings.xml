@@ -14,6 +14,7 @@
         <item>Wydarzenia</item>
         <item>Ustawienia aplikacji</item>
         <item>Informacje &amp; autor</item>
+        <item>Wyłącz aplikację</item>
     </string-array>
 
     <string name="title_activity_settings">Ustawienia aplikacji</string>
@@ -82,5 +83,8 @@
     <string name="silent">Brak dźwięku</string>
     <string name="vibrate">Wibruj</string>
     <string name="led_light">Dioda LED</string>
+    <string name="notifications_extra">Dodatkowe</string>
+    <string name="notifications_everywhere">Zawsze powiadamiaj</string>
+    <string name="notifications_everywhere_description">Wyświetlaj powiadomienia także podczas korzystania z głównego ekranu tej aplikacji.</string>
 
 </resources>
