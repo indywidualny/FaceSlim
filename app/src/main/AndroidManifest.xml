@@ -35,7 +35,6 @@
             android:name=".NotificationsService"
             android:enabled="true"
             android:exported="false"
-            android:stopWithTask="false"
             android:process=":remote" >
         </service>
         <activity

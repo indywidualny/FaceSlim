@@ -33,15 +33,22 @@ public class SettingsFragment extends PreferenceFragment {
         // listener for changing preferences (works after the value change) // TODO: all listeners here
         myPrefListner = new SharedPreferences.OnSharedPreferenceChangeListener() {
             public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
+                // service intent (start, stop)
+                final Intent intent = new Intent(context, NotificationsService.class);
 
                 switch (key) {
                     case "notifications_activated":
-                        Log.v("SettingsFragment", "notifications_activated changed");
-                        Intent intent = new Intent(context, NotificationsService.class);
                         if (prefs.getBoolean("notifications_activated", false))
                             context.startService(intent);
                         else
                             context.stopService(intent);
+                        break;
+                    case "interval_pref":
+                        // restart service after time interval change
+                        if (prefs.getBoolean("notifications_activated", false)) {
+                            context.stopService(intent);
+                            context.startService(intent);
+                        }
                         break;
                 }
 

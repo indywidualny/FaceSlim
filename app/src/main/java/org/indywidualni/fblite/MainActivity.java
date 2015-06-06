@@ -84,6 +84,13 @@ public class MainActivity extends Activity {
             preferences.edit().putBoolean("first_run", false).apply();
         }
 
+        // start the service when it's activated but somehow it's not running (after app update for example)
+        // when it's already running nothing happens so it's ok
+        if (preferences.getBoolean("notifications_activated", false)) {
+            final Intent intent = new Intent(MyApplication.getContextOfApplication(), NotificationsService.class);
+            MyApplication.getContextOfApplication().startService(intent);
+        }
+
         // KitKat layout fix
         if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
             // apply top padding to avoid layout being hidden by the status bar
@@ -517,7 +524,8 @@ public class MainActivity extends Activity {
                     startActivity(about);
                     break;
                 case 8:
-                    finish();
+                    //finish();
+                    System.exit(0); // ugly, ugly, ugly!
                     break;
                 default:
                     // silence is golden
@@ -553,7 +561,8 @@ public class MainActivity extends Activity {
                     startActivity(about);
                     break;
                 case 8:
-                    finish();
+                    //finish();
+                    System.exit(0); // ugly, ugly, ugly!
                     break;
                 default:
                     // silence is golden

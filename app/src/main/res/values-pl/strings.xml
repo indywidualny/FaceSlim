@@ -14,7 +14,7 @@
         <item>Wydarzenia</item>
         <item>Ustawienia aplikacji</item>
         <item>Informacje &amp; autor</item>
-        <item>Wyłącz aplikację</item>
+        <item>Uśmierć aplikację</item>
     </string-array>
 
     <string name="title_activity_settings">Ustawienia aplikacji</string>
@@ -38,7 +38,7 @@
     <string name="me_google_play">Google Play</string>
     <string name="preference_category3">Eksperymentalne</string>
     <string name="dark_theme">Ciemny motyw</string>
-    <string name="dark_theme_description">Dla fanów czerni. Twój ekran AMOLED będzie zachwycony ;)</string>
+    <string name="dark_theme_description">Dla fanów czerni. Twój ekran AMOLED będzie zachwycony.</string>
     <string name="fixed_nav">Przyklej niebieski pasek</string>
     <string name="fixed_nav_description">Przyciski nawigacyjne zawsze na górze.</string>
     <string name="facebook_zero">Facebook Zero</string>
@@ -85,6 +85,6 @@
     <string name="led_light">Dioda LED</string>
     <string name="notifications_extra">Dodatkowe</string>
     <string name="notifications_everywhere">Zawsze powiadamiaj</string>
-    <string name="notifications_everywhere_description">Wyświetlaj powiadomienia także podczas korzystania z głównego ekranu tej aplikacji.</string>
+    <string name="notifications_everywhere_description">Także podczas korzystania z głównego ekranu tej aplikacji.</string>
 
 </resources>

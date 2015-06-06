@@ -25,7 +25,6 @@ import nl.matshofman.saxrssreader.RssReader;
 
 public class NotificationsService extends Service {
 
-    public static boolean isRunning;
     public Handler handler = null;
     public static Runnable runnable = null;
 
@@ -43,7 +42,6 @@ public class NotificationsService extends Service {
     public void onCreate() {
         Toast.makeText(this, getString(R.string.facebook) + ": " + getString(R.string.notifications_service_created), Toast.LENGTH_LONG).show();
         Log.i("NotificationsService", "********** Service created! **********");
-        isRunning = true;
 
         // get shared preferences (for a multi process app)
         preferences = getSharedPreferences(getApplicationContext().getPackageName() + "_preferences", Context.MODE_MULTI_PROCESS);
@@ -66,16 +64,20 @@ public class NotificationsService extends Service {
             }
         };
 
-        // first run delay (5 seconds)
-        handler.postDelayed(runnable, 5000);
+        // first run delay (1 second)
+        handler.postDelayed(runnable, 1000);
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        return START_STICKY;
     }
 
     @Override
     public void onDestroy() {
-        isRunning = false;
+        Log.i("NotificationsService", "********** Service stopped **********");
         handler.removeCallbacksAndMessages(null);
         super.onDestroy();
-        Log.i("NotificationsService", "********** Service stopped **********");
     }
 
     // AsyncTask to get feed, process it and do all the actions needed later

@@ -14,6 +14,7 @@
         <item>이벤트</item>
         <item>앱 설정</item>
         <item>개발자에 대해서</item>
+        <item>Terminate</item>
     </string-array>
 
     <string name="title_activity_settings">설정</string>

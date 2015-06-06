@@ -17,7 +17,7 @@
         <item>Events</item>
         <item>App Settings</item>
         <item>About &amp; Dev</item>
-        <item>Close the App</item>
+        <item>Terminate</item>
     </string-array>
 
     <string name="author" translatable="false">by Krzysztof \'Koras\' Grabowski</string>
@@ -46,7 +46,7 @@
     <string name="me_google_play">Google Play</string>
     <string name="preference_category3">Experimental</string>
     <string name="dark_theme">Dark theme</string>
-    <string name="dark_theme_description">Turn Facebook black. Your AMOLED screen will appreciate it ;)</string>
+    <string name="dark_theme_description">Turn Facebook black. Your AMOLED screen will appreciate it.</string>
     <string name="fixed_nav">Fixed blue bar</string>
     <string name="fixed_nav_description">Facebook navigation bar always on top.</string>
     <string name="facebook_zero">Facebook Zero</string>
@@ -95,6 +95,6 @@
     <string name="led_light">LED light</string>
     <string name="notifications_extra">Additional</string>
     <string name="notifications_everywhere">Always notify</string>
-    <string name="notifications_everywhere_description">Display notifications also when you are using the main screen of the application.</string>
+    <string name="notifications_everywhere_description">Also when you are on the main screen of the app.</string>
 
 </resources>
