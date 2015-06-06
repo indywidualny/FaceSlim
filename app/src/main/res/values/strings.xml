@@ -49,7 +49,7 @@
     <string name="fixed_nav">Fixed blue bar</string>
     <string name="fixed_nav_description">Facebook navigation bar always on top.</string>
     <string name="facebook_zero">Facebook Zero</string>
-    <string name="facebook_zero_description">No data charges. GSM provider dependent. Works during mobile network connection. Dark theme and fixed navbar are ignored while Facebook Zero is active.</string>
+    <string name="facebook_zero_description">No data charges. GSM provider dependent. Works during mobile network connection.</string>
     <string name="facebook_zero_active">Facebook Zero is active</string>
     <string name="preference_category4">Additional</string>
     <string name="quick_guide">Quick Start Guide</string>

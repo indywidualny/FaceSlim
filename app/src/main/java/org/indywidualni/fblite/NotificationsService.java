@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
@@ -97,7 +98,7 @@ public class NotificationsService extends Service {
             // if the latest title is different than the new one it means there is new notification
             // display it only when MainActivity is not active - if it is it means we don't need a notification
             try {
-                if (!MyApplication.isActivityVisible() && rssItems.get(0).getTitle().equals(result.get(0).getTitle()))
+                if (!MyApplication.isActivityVisible() && !rssItems.get(0).getTitle().equals(result.get(0).getTitle()))
                     notifier(result.get(0).getTitle(), result.get(0).getDescription(), result.get(0).getLink());
             } catch (NullPointerException ex) {
                 Log.i("RssReaderTask", "********** onPostExecute: NullPointerException! ********** ");
@@ -111,17 +112,21 @@ public class NotificationsService extends Service {
     private void notifier(String title, String summary, String url) {
         Log.i("NotificationsService", "notifier: Start notification");
 
+        // start building a notification
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
                         .setStyle(new NotificationCompat.BigTextStyle().bigText(title))
                         .setSmallIcon(R.drawable.ic_stat_f)
                         .setContentTitle(getString(R.string.app_name))
                         .setContentText(title)
+                        .setTicker(title)
+                        .setWhen(System.currentTimeMillis())
                         .setAutoCancel(true);
 
-        // see all the notifications button // TODO: something wrong here!
+        // see all the notifications button
         Intent allNotificationsIntent = new Intent(this, MainActivity.class);
         allNotificationsIntent.putExtra("start_url", "https://m.facebook.com/notifications");
+        allNotificationsIntent.setAction("ALL_NOTIFICATIONS_ACTION");
         PendingIntent piAllNotifications = PendingIntent.getActivity(getApplicationContext(), 0, allNotificationsIntent, 0);
         mBuilder.addAction(0, getString(R.string.all_notifications), piAllNotifications);
 
@@ -137,9 +142,16 @@ public class NotificationsService extends Service {
         if (preferences.getBoolean("led_light", false))
             mBuilder.setLights(Color.BLUE, 1, 1);
 
+        // priority for Heads-up
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN)
+            mBuilder.setPriority(Notification.PRIORITY_HIGH);
+
+        // intent with notification url in extra
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("start_url", url);
+        intent.setAction("NOTIFICATION_URL_ACTION");
 
+        // final notification building
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
         stackBuilder.addParentStack(MainActivity.class);
         stackBuilder.addNextIntent(intent);
@@ -148,8 +160,17 @@ public class NotificationsService extends Service {
         mBuilder.setOngoing(false);
         Notification note = mBuilder.build();
 
+        /** Display it - only one notification is needed for this app.
+         *  The most recent one. Update it every time it's changed.
+         *  It's ID is always 0. It may be done differently in the future */
         NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         mNotificationManager.notify(0, note);
+    }
+
+    public static void cancelAllNotifications() {
+        NotificationManager notificationManager = (NotificationManager)
+                MyApplication.getContextOfApplication().getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.cancelAll();
     }
 
 }

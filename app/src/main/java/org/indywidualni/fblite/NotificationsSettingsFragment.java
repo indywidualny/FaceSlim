@@ -13,7 +13,7 @@ import android.preference.RingtonePreference;
 public class NotificationsSettingsFragment extends PreferenceFragment {
 
     private static Context context;
-    SharedPreferences preferences;
+    private SharedPreferences preferences;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

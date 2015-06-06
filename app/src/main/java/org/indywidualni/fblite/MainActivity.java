@@ -80,7 +80,7 @@ public class MainActivity extends Activity {
         if (preferences.getBoolean("first_run", true)) {
             // show quick start guide
             onCoachMark();
-            // record the fact that the app has been started at least once
+            // save the fact that the app has been started at least once
             preferences.edit().putBoolean("first_run", false).apply();
         }
 
@@ -164,6 +164,9 @@ public class MainActivity extends Activity {
             //noinspection ConstantConditions
             if ((getIntent().getExtras().getString("start_url") != null) && (!isFacebookZero || !isConnectedMobile))
                 webViewUrl = getIntent().getExtras().getString("start_url");
+                // cancel all notifications if 'All notifications' button was clicked
+                if (webViewUrl.equals("https://m.facebook.com/notifications"))
+                    NotificationsService.cancelAllNotifications();
         } catch (Exception ignored) {}
 
         // notify when there is no internet connection
@@ -596,6 +599,9 @@ public class MainActivity extends Activity {
         try {
             if (getIntent().getExtras().getString("start_url") != null)
                 webViewUrl = getIntent().getExtras().getString("start_url");
+                // cancel all notifications if 'All notifications' button was clicked
+                if (webViewUrl.equals("https://m.facebook.com/notifications"))
+                    NotificationsService.cancelAllNotifications();
         } catch (Exception ignored) {}
 
         // load a grabbed url instead of the current page
@@ -641,7 +647,7 @@ public class MainActivity extends Activity {
     }
 
     // first run dialog with introduction
-    public void onCoachMark() {
+    private void onCoachMark() {
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));

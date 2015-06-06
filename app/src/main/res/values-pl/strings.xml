@@ -41,7 +41,7 @@
     <string name="fixed_nav">Przyklej niebieski pasek</string>
     <string name="fixed_nav_description">Przyciski nawigacyjne zawsze na górze.</string>
     <string name="facebook_zero">Facebook Zero</string>
-    <string name="facebook_zero_description">Darmowy transfer. Zależne od operatora. Tylko podczas połączenia komórkowego. Ciemny motyw i przyklejony pasek są ignorowane, gdy działa.</string>
+    <string name="facebook_zero_description">Darmowy transfer. Zależne od operatora. Tylko podczas połączenia komórkowego.</string>
     <string name="facebook_zero_active">Facebook Zero aktywny</string>
     <string name="preference_category4">Dodatkowe</string>
     <string name="quick_guide">Szybkie wprowadzenie</string>
@@ -70,8 +70,8 @@
     <string-array name="intervalPrefTitles">
         <item>5 minut</item>
         <item>15 minut</item>
-        <item>30 minutes</item>
-        <item>1 godzinę</item>
+        <item>30 minut</item>
+        <item>1 godzina</item>
         <item>3 godziny</item>
         <item>6 godzin</item>
     </string-array>
