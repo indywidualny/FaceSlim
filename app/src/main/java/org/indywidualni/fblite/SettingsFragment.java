@@ -30,7 +30,7 @@ public class SettingsFragment extends PreferenceFragment {
         // get shared preferences
         final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
 
-        // listener for changing preferences (works after the value change) // TODO: all listeners here
+        // listener for changing preferences (works after the value change)
         myPrefListner = new SharedPreferences.OnSharedPreferenceChangeListener() {
             public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
                 // service intent (start, stop)

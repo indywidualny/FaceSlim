@@ -19,14 +19,16 @@ import android.util.Log;
 import android.widget.Toast;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Random;
 import nl.matshofman.saxrssreader.RssFeed;
 import nl.matshofman.saxrssreader.RssItem;
 import nl.matshofman.saxrssreader.RssReader;
 
 public class NotificationsService extends Service {
 
-    public Handler handler = null;
-    public static Runnable runnable = null;
+    private Random rand = new Random();
+    private Handler handler = null;
+    private static Runnable runnable = null;
 
     private String feedUrl;
     private int timeInterval;
@@ -166,11 +168,9 @@ public class NotificationsService extends Service {
         mBuilder.setOngoing(false);
         Notification note = mBuilder.build();
 
-        /** Display it - only one notification is needed for this app.
-         *  The most recent one. Update it every time it's changed.
-         *  It's ID is always 0. It may be done differently in the future */
+        // display a notification with random ID (0 - 999)
         NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        mNotificationManager.notify(0, note);
+        mNotificationManager.notify(rand.nextInt(999), note);
     }
 
     public static void cancelAllNotifications() {

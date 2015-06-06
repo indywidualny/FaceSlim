@@ -14,7 +14,7 @@
         <item>Wydarzenia</item>
         <item>Ustawienia aplikacji</item>
         <item>Informacje &amp; autor</item>
-        <item>Uśmierć aplikację</item>
+        <item>Zabij aplikację</item>
     </string-array>
 
     <string name="title_activity_settings">Ustawienia aplikacji</string>
