@@ -36,7 +36,6 @@
             android:icon="@drawable/ic_launcher"
             android:enabled="true"
             android:exported="false" >
-            <!-- android:process=":remote" -->
         </service>
         <activity
             android:name=".MainActivity"

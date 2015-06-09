@@ -14,7 +14,6 @@ Changelog & what makes the application awesome:
 * possibility to kill the app (not recommended but it removes app from background)
 * Black theme improvements
 * code security and a lot of optimizations
-* reduced .apk size
 
 1.6
 * Facebook Zero support (free mobile data transfer, GSM dependant)
