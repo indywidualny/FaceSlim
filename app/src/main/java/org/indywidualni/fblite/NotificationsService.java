@@ -51,14 +51,18 @@ public class NotificationsService extends Service {
         runnable = new Runnable() {
             public void run() {
                 //Log.i("NotificationsService", "********** Service is still running **********");
-                Log.i("isActivityVisible", Boolean.toString(MyApplication.isActivityVisible()));
+                Log.i("NotificationsService", "isActivityVisible: " + Boolean.toString(MyApplication.isActivityVisible()));
 
                 // get the url and time interval from shared prefs
                 feedUrl = preferences.getString("feed_url", "");
                 timeInterval = Integer.parseInt(preferences.getString("interval_pref", "1800000"));
 
-                // start AsyncTask
-                new RssReaderTask().execute(feedUrl);
+                // start AsyncTask if there is internet connection
+                if (Connectivity.isConnected(getApplicationContext())) {
+                    Log.i("NotificationsService", "Internet connection active. Starting AsyncTask...");
+                    new RssReaderTask().execute(feedUrl);
+                } else
+                    Log.i("NotificationsService", "No internet connection. Skip checking.");
 
                 // set repeat time interval
                 handler.postDelayed(runnable, timeInterval);
@@ -113,10 +117,10 @@ public class NotificationsService extends Service {
             if (rssItems == null)
                 rssItems = result;
 
-            // if the latest title is different than the new one it means there is new notification
+            // if the latest PubDate is different than the new one it means there is new notification
             // display it only when MainActivity is not active or 'Always notify' is checked
             try {
-                if (!rssItems.get(0).getTitle().equals(result.get(0).getTitle()))
+                if (!rssItems.get(0).getPubDate().equals(result.get(0).getPubDate()))
                     if (!MyApplication.isActivityVisible() || preferences.getBoolean("notifications_everywhere", true))
                         notifier(result.get(0).getTitle(), result.get(0).getDescription(), result.get(0).getLink());
 
