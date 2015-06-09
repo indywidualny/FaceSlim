@@ -6,6 +6,16 @@ Releases | [pl] wydania: https://github.com/indywidualny/FacebookLite/releases
 
 Changelog & what makes the application awesome:
 
+1.7
+* NOTIFICATIONS SUPPORT (the app will notify you about the latest action on Facebook) - visit app settings for more info. It's awesome and works almost perfectly!
+* Choose menu position (menu on the left or on the right edge of the screen)
+* Links shared by long clicks are now "clean" (removed Facebook redirections)
+* UI improvements on Lollipop - Settings page has new, awesome switches now
+* possibility to kill the app (not recommended but it removes app from background)
+* Black theme improvements
+* code security and a lot of optimizations
+* reduced .apk size
+
 1.6
 * Facebook Zero support (free mobile data transfer, GSM dependant)
 * Quick Start Guide on app first run (learn the gestures)

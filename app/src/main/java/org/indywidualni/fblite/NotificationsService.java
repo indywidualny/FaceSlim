@@ -167,7 +167,7 @@ public class NotificationsService extends Service {
 
         // LED light
         if (preferences.getBoolean("led_light", false))
-            mBuilder.setLights(Color.BLUE, 1, 1);
+            mBuilder.setLights(Color.CYAN, 1, 1);
 
         // priority for Heads-up
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN)
