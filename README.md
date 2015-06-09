@@ -7,7 +7,7 @@ Releases | [pl] wydania: https://github.com/indywidualny/FacebookLite/releases
 Changelog & what makes the application awesome:
 
 1.7
-* NOTIFICATIONS SUPPORT (the app will notify you about the latest action on Facebook) - visit app settings for more info. It's awesome and works almost perfectly!
+* NOTIFICATIONS SUPPORT (the app will notify you about the latest action on Facebook - not about messages) - visit app settings for more info. It's awesome and works almost perfectly!
 * Choose menu position (menu on the left or on the right edge of the screen)
 * Links shared by long clicks are now "clean" (removed Facebook redirections)
 * UI improvements on Lollipop - Settings page has new, awesome switches now
