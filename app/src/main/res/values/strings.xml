@@ -31,7 +31,7 @@
     <string name="preference_category2">Advanced Settings</string>
     <string name="progress_bar">Progress bar</string>
     <string name="transparent_nav">Transparent navbar &#8635;</string>
-    <string name="transparent_nav_description">KitKat and Lollipop. After the change the app will be restarted to avoid layout issues.</string>
+    <string name="transparent_nav_description">KitKat and Lollipop. Transparent system navigation keys.</string>
     <string name="clear_cache">Clear cache</string>
     <string name="clear_cache_description">Clear app cache. It will also log you out.</string>
     <string name="email_author">Contact me</string>

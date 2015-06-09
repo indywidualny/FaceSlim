@@ -91,94 +91,94 @@ ADDED from AndroidManifest.xml:31:17
 service#org.indywidualni.fblite.NotificationsService
 ADDED from AndroidManifest.xml:34:9
 	android:enabled
-		ADDED from AndroidManifest.xml:36:13
-	android:process
-		ADDED from AndroidManifest.xml:38:13
-	android:exported
 		ADDED from AndroidManifest.xml:37:13
+	android:exported
+		ADDED from AndroidManifest.xml:38:13
+	android:icon
+		ADDED from AndroidManifest.xml:36:13
 	android:name
 		ADDED from AndroidManifest.xml:35:13
 activity#org.indywidualni.fblite.MainActivity
-ADDED from AndroidManifest.xml:40:9
+ADDED from AndroidManifest.xml:41:9
 	android:label
-		ADDED from AndroidManifest.xml:42:13
-	android:launchMode
-		ADDED from AndroidManifest.xml:44:13
-	android:configChanges
 		ADDED from AndroidManifest.xml:43:13
+	android:launchMode
+		ADDED from AndroidManifest.xml:45:13
+	android:configChanges
+		ADDED from AndroidManifest.xml:44:13
 	android:name
-		ADDED from AndroidManifest.xml:41:13
+		ADDED from AndroidManifest.xml:42:13
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from AndroidManifest.xml:45:13
+ADDED from AndroidManifest.xml:46:13
 action#android.intent.action.MAIN
-ADDED from AndroidManifest.xml:46:17
-	android:name
-		ADDED from AndroidManifest.xml:46:25
-category#android.intent.category.LAUNCHER
 ADDED from AndroidManifest.xml:47:17
 	android:name
-		ADDED from AndroidManifest.xml:47:27
-intent-filter#android.intent.action.VIEW+android.intent.category.BROWSABLE+android.intent.category.DEFAULT
-ADDED from AndroidManifest.xml:49:13
-category#android.intent.category.DEFAULT
-ADDED from AndroidManifest.xml:50:17
+		ADDED from AndroidManifest.xml:47:25
+category#android.intent.category.LAUNCHER
+ADDED from AndroidManifest.xml:48:17
 	android:name
-		ADDED from AndroidManifest.xml:50:27
-category#android.intent.category.BROWSABLE
+		ADDED from AndroidManifest.xml:48:27
+intent-filter#android.intent.action.VIEW+android.intent.category.BROWSABLE+android.intent.category.DEFAULT
+ADDED from AndroidManifest.xml:50:13
+category#android.intent.category.DEFAULT
 ADDED from AndroidManifest.xml:51:17
 	android:name
 		ADDED from AndroidManifest.xml:51:27
-action#android.intent.action.VIEW
+category#android.intent.category.BROWSABLE
 ADDED from AndroidManifest.xml:52:17
 	android:name
-		ADDED from AndroidManifest.xml:52:25
-data
+		ADDED from AndroidManifest.xml:52:27
+action#android.intent.action.VIEW
 ADDED from AndroidManifest.xml:53:17
+	android:name
+		ADDED from AndroidManifest.xml:53:25
+data
+ADDED from AndroidManifest.xml:54:17
 	android:host
-		ADDED from AndroidManifest.xml:53:23
+		ADDED from AndroidManifest.xml:54:23
 	android:scheme
-		ADDED from AndroidManifest.xml:53:51
+		ADDED from AndroidManifest.xml:54:51
 activity#org.indywidualni.fblite.SettingsActivity
-ADDED from AndroidManifest.xml:61:9
+ADDED from AndroidManifest.xml:62:9
 	android:label
-		ADDED from AndroidManifest.xml:63:13
-	android:parentActivityName
 		ADDED from AndroidManifest.xml:64:13
-	android:configChanges
-		ADDED from AndroidManifest.xml:65:13
-	android:theme
-		ADDED from AndroidManifest.xml:66:13
-	android:name
-		ADDED from AndroidManifest.xml:62:13
-meta-data#android.support.PARENT_ACTIVITY
-ADDED from AndroidManifest.xml:67:13
-	android:value
-		ADDED from AndroidManifest.xml:69:17
-	android:name
-		ADDED from AndroidManifest.xml:68:17
-activity#org.indywidualni.fblite.AboutActivity
-ADDED from AndroidManifest.xml:71:9
-	android:label
-		ADDED from AndroidManifest.xml:73:13
 	android:parentActivityName
-		ADDED from AndroidManifest.xml:74:13
+		ADDED from AndroidManifest.xml:65:13
+	android:configChanges
+		ADDED from AndroidManifest.xml:66:13
 	android:theme
-		ADDED from AndroidManifest.xml:75:13
+		ADDED from AndroidManifest.xml:67:13
 	android:name
-		ADDED from AndroidManifest.xml:72:13
-activity#org.indywidualni.fblite.MessagesShortcutActivity
-ADDED from AndroidManifest.xml:80:9
+		ADDED from AndroidManifest.xml:63:13
+meta-data#android.support.PARENT_ACTIVITY
+ADDED from AndroidManifest.xml:68:13
+	android:value
+		ADDED from AndroidManifest.xml:70:17
+	android:name
+		ADDED from AndroidManifest.xml:69:17
+activity#org.indywidualni.fblite.AboutActivity
+ADDED from AndroidManifest.xml:72:9
 	android:label
-		ADDED from AndroidManifest.xml:82:13
-	android:icon
+		ADDED from AndroidManifest.xml:74:13
+	android:parentActivityName
+		ADDED from AndroidManifest.xml:75:13
+	android:theme
+		ADDED from AndroidManifest.xml:76:13
+	android:name
+		ADDED from AndroidManifest.xml:73:13
+activity#org.indywidualni.fblite.MessagesShortcutActivity
+ADDED from AndroidManifest.xml:81:9
+	android:label
 		ADDED from AndroidManifest.xml:83:13
+	android:icon
+		ADDED from AndroidManifest.xml:84:13
 	android:name
-		ADDED from AndroidManifest.xml:81:13
+		ADDED from AndroidManifest.xml:82:13
 intent-filter#android.intent.action.CREATE_SHORTCUT+android.intent.category.DEFAULT
-ADDED from AndroidManifest.xml:84:13
+ADDED from AndroidManifest.xml:85:13
 action#android.intent.action.CREATE_SHORTCUT
-ADDED from AndroidManifest.xml:85:17
+ADDED from AndroidManifest.xml:86:17
 	android:name
-		ADDED from AndroidManifest.xml:85:25
+		ADDED from AndroidManifest.xml:86:25
 android:uses-permission#android.permission.READ_PHONE_STATE
 IMPLIED from AndroidManifest.xml:2:1 reason: nl.matshofman.saxrssreader has a targetSdkVersion < 4

@@ -169,11 +169,14 @@ public class MainActivity extends Activity {
         // if opened by a notification or a shortcut
         try {
             //noinspection ConstantConditions
-            if ((getIntent().getExtras().getString("start_url") != null) && (!isFacebookZero || !isConnectedMobile))
-                webViewUrl = getIntent().getExtras().getString("start_url");
+            if (getIntent().getExtras().getString("start_url") != null) {
+                String temp = getIntent().getExtras().getString("start_url");
+                if (!isFacebookZero || !isConnectedMobile)
+                    webViewUrl = temp;
                 // cancel all notifications if 'All notifications' button was clicked
-                if (webViewUrl.equals("https://m.facebook.com/notifications"))
+                if (temp.equals("https://m.facebook.com/notifications"))
                     NotificationsService.cancelAllNotifications();
+            }
         } catch (Exception ignored) {}
 
         // notify when there is no internet connection
@@ -647,18 +650,24 @@ public class MainActivity extends Activity {
         }
     }
 
-    // activity resumed
     @Override
     protected void onResume() {
         super.onResume();
         MyApplication.activityResumed();
     }
 
-    // activity paused
     @Override
     protected void onPause() {
         super.onPause();
         MyApplication.activityPaused();
+    }
+
+    @Override
+    public void onDestroy() {
+        Log.i("MainActivity", "onDestroy: Destroying...");
+        super.onDestroy();
+        webView.removeAllViews();
+        webView.destroy();
     }
 
     // first run dialog with introduction

@@ -19,14 +19,13 @@ import android.util.Log;
 import android.widget.Toast;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Random;
 import nl.matshofman.saxrssreader.RssFeed;
 import nl.matshofman.saxrssreader.RssItem;
 import nl.matshofman.saxrssreader.RssReader;
 
 public class NotificationsService extends Service {
 
-    private Random rand = new Random();
+    //private Random rand = new Random();
     private Handler handler = null;
     private static Runnable runnable = null;
 
@@ -51,8 +50,8 @@ public class NotificationsService extends Service {
         handler = new Handler();
         runnable = new Runnable() {
             public void run() {
-                //Toast.makeText(context, "Service is still running", Toast.LENGTH_LONG).show();
                 //Log.i("NotificationsService", "********** Service is still running **********");
+                Log.i("isActivityVisible", Boolean.toString(MyApplication.isActivityVisible()));
 
                 // get the url and time interval from shared prefs
                 feedUrl = preferences.getString("feed_url", "");
@@ -66,8 +65,8 @@ public class NotificationsService extends Service {
             }
         };
 
-        // first run delay (1 second)
-        handler.postDelayed(runnable, 1000);
+        // first run delay (3 seconds)
+        handler.postDelayed(runnable, 3000);
     }
 
     @Override
@@ -84,16 +83,28 @@ public class NotificationsService extends Service {
 
     // AsyncTask to get feed, process it and do all the actions needed later
     private class RssReaderTask extends AsyncTask<String, Void, ArrayList<RssItem>> {
+
+        // max number of tries when something is wrong
+        private static final int MAX_RETRY = 3;
+
         @Override
         protected ArrayList<RssItem> doInBackground(String... params) {
-            try {
-                URL url = new URL(params[0]);
-                RssFeed feed = RssReader.read(url);
-                return feed.getRssItems();
-            } catch (Exception ex) {
-                Log.i("RssReaderTask", "********** doInBackground: Feed error! ********** ");
-                return null;
+
+            ArrayList<RssItem> result = null;
+            int tries = 0;
+
+            while(tries++ < MAX_RETRY && result == null) {
+                try {
+                    Log.i("RssReaderTask", "********** doInBackground: Processing... Trial: " + tries);
+                    URL url = new URL(params[0]);
+                    RssFeed feed = RssReader.read(url);
+                    result = feed.getRssItems();
+                } catch (Exception ex) {
+                    Log.i("RssReaderTask", "********** doInBackground: Feed error!");
+                }
             }
+
+            return result;
         }
 
         @Override
@@ -108,13 +119,17 @@ public class NotificationsService extends Service {
                 if (!rssItems.get(0).getTitle().equals(result.get(0).getTitle()))
                     if (!MyApplication.isActivityVisible() || preferences.getBoolean("notifications_everywhere", true))
                         notifier(result.get(0).getTitle(), result.get(0).getDescription(), result.get(0).getLink());
-            } catch (NullPointerException ex) {
-                Log.i("RssReaderTask", "********** onPostExecute: NullPointerException! ********** ");
-            }
 
-            // update rssItems with the result of feed processing
-            rssItems = result;
+                // update rssItems with the result of feed processing
+                rssItems = result;
+
+                // log success
+                Log.i("RssReaderTask", "********** onPostExecute: Aight biatch ;)");
+            } catch (NullPointerException ex) {
+                Log.i("RssReaderTask", "********** onPostExecute: NullPointerException!");
+            }
         }
+
     }
 
     private void notifier(String title, String summary, String url) {
@@ -168,9 +183,10 @@ public class NotificationsService extends Service {
         mBuilder.setOngoing(false);
         Notification note = mBuilder.build();
 
-        // display a notification with random ID (0 - 999)
+        // display a notification
         NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        mNotificationManager.notify(rand.nextInt(999), note);
+        //mNotificationManager.notify(rand.nextInt(999), note);
+        mNotificationManager.notify(0, note);
     }
 
     public static void cancelAllNotifications() {
