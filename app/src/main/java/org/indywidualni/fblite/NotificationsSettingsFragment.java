@@ -6,6 +6,7 @@ import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.ListPreference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
@@ -39,6 +40,11 @@ public class NotificationsSettingsFragment extends PreferenceFragment {
             name = getString(R.string.silent);
         RingtonePreference rp = (RingtonePreference) findPreference("ringtone");
         rp.setSummary(getString(R.string.notification_sound_description) + name);
+
+        // update interval_pref preference summary
+        String timeInterval = preferences.getString("intervalPrefTitles", getResources().getStringArray(R.array.intervalPrefTitles)[2]);
+        ListPreference lp = (ListPreference) findPreference("interval_pref");
+        lp.setSummary(getString(R.string.interval_pref_description) + " " + timeInterval + ".");
     }
 
 }

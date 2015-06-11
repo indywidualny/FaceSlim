@@ -8,12 +8,16 @@ android {
         applicationId "org.indywidualni.fblite"
         minSdkVersion 14
         targetSdkVersion 22
-        versionCode 10
-        versionName "1.7.0"
+        versionCode 11
+        versionName "1.7.1"
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }

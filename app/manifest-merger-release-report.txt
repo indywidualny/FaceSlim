@@ -120,18 +120,18 @@ ADDED from AndroidManifest.xml:47:17
 		ADDED from AndroidManifest.xml:47:27
 intent-filter#android.intent.action.VIEW+android.intent.category.BROWSABLE+android.intent.category.DEFAULT
 ADDED from AndroidManifest.xml:49:13
-category#android.intent.category.DEFAULT
+action#android.intent.action.VIEW
 ADDED from AndroidManifest.xml:50:17
 	android:name
-		ADDED from AndroidManifest.xml:50:27
-category#android.intent.category.BROWSABLE
+		ADDED from AndroidManifest.xml:50:25
+category#android.intent.category.DEFAULT
 ADDED from AndroidManifest.xml:51:17
 	android:name
 		ADDED from AndroidManifest.xml:51:27
-action#android.intent.action.VIEW
+category#android.intent.category.BROWSABLE
 ADDED from AndroidManifest.xml:52:17
 	android:name
-		ADDED from AndroidManifest.xml:52:25
+		ADDED from AndroidManifest.xml:52:27
 data
 ADDED from AndroidManifest.xml:53:17
 	android:host
