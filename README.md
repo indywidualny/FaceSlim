@@ -99,7 +99,7 @@ BTC:&nbsp;  1JUaZytkub2CP5jhRYQDDY6pibqrUUSp2y
 <br />
 Copyright notice: Facebook is a trademark of Facebook Inc. This app is NOT connected to Facebook Inc. whatsoever. This app only helps using the official Facebook Mobile website.
 
-Important: It does NOT display notifications (I recommend Notiface) and has some limitations (eg. no access to your location so you cannot check-in automatically). Install using F-Droid client to get updates.
+Important: It does NOT display chat notifications and has some limitations (eg. no access to your location so you cannot check-in automatically). Install using F-Droid client to get updates.
 
 App suspended by Google Play.
 Now open source and available to everyone.
