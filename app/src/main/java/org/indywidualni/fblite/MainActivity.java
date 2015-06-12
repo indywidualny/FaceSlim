@@ -363,7 +363,7 @@ public class MainActivity extends Activity {
 
                 if (url != null) {
                     // "clean" the url, remove Facebook tracking redirection while sharing
-                    url = url.replace("http://lm.facebook.com/l.php?u=", "").replace("%3A%2F%2F", "//")
+                    url = url.replace("http://lm.facebook.com/l.php?u=", "").replace("%3A", ":").replace("%2C", ",")
                             .replace("%2F", "/").replaceAll("&h=.*", "").replace("https://m.facebook.com/l.php?u=", "");
 
                     Log.v("Link long clicked", url);
