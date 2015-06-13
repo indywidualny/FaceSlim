@@ -3,6 +3,13 @@
     public *;
 }
 
+# image upload
+-keepclassmembers class * {
+    public void openFileChooser(android.webkit.ValueCallback, java.lang.String);
+    public void openFileChooser(android.webkit.ValueCallback);
+    public void openFileChooser(android.webkit.ValueCallback, java.lang.String, java.lang.String);
+}
+
 # saxrssreader library
 -keep class nl.matshofman.saxrssreader.** {
     *;
