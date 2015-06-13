@@ -407,14 +407,14 @@ public class MainActivity extends Activity {
         // code for all versions except of Lollipop
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
 
-            if(requestCode==FILECHOOSER_RESULTCODE) {
+            if (requestCode==FILECHOOSER_RESULTCODE) {
                 if (null == this.mUploadMessage) {
                     return;
                 }
 
                 Uri result=null;
 
-                try{
+                try {
                     if (resultCode != RESULT_OK) {
                         result = null;
                     } else {
