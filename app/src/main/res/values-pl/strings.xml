@@ -60,7 +60,7 @@
     <string name="preference_category5">Powiadomienia</string>
     <string name="notifications_feed_url">Kanał powiadomień</string>
     <string name="interval_pref">Przedział czasu</string>
-    <string name="interval_pref_description">Kanał powiadomień jest sprawdzany co</string>
+    <string name="interval_pref_description">Kanał powiadomień jest sprawdzany co %s.</string>
     <string name="activate_notifications">Aktywuj powiadomienia</string>
     <string name="get_feed">Zdobądź swój kanał</string>
     <string name="get_feed_description">Dotknij, znajdź swój kanał RSS dla powiadomień, skopiuj adres i wklej go powyżej.</string>

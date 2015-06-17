@@ -68,7 +68,7 @@
     <string name="preference_category5">Notifications</string>
     <string name="notifications_feed_url">Notifications feed</string>
     <string name="interval_pref">Time interval for checking</string>
-    <string name="interval_pref_description">Notifications feed will be checked every</string>
+    <string name="interval_pref_description">Notifications feed will be checked every %s.</string>
     <string name="activate_notifications">Activate notifications</string>
     <string name="get_feed">Get your notifications feed</string>
     <string name="get_feed_description">Click the field, find your unique notifications RSS, copy the address and paste it above.</string>

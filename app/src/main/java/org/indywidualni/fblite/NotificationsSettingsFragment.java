@@ -25,10 +25,17 @@ public class NotificationsSettingsFragment extends PreferenceFragment {
 
         context = MyApplication.getContextOfApplication();
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
+
+        // default value for interval_pref preference summary
+        ListPreference lp = (ListPreference) findPreference("interval_pref");
+        String temp1 = getString(R.string.interval_pref_description).replace("%s", "");
+        String temp2 = lp.getSummary().toString();
+        if (temp1.equals(temp2))
+            lp.setValueIndex(2);
     }
 
     @Override
-    public void onResume () {
+    public void onResume() {
         super.onResume();
 
         // update ringtone preference summary
@@ -40,11 +47,6 @@ public class NotificationsSettingsFragment extends PreferenceFragment {
             name = getString(R.string.silent);
         RingtonePreference rp = (RingtonePreference) findPreference("ringtone");
         rp.setSummary(getString(R.string.notification_sound_description) + name);
-
-        // update interval_pref preference summary
-        String timeInterval = preferences.getString("intervalPrefTitles", getResources().getStringArray(R.array.intervalPrefTitles)[2]);
-        ListPreference lp = (ListPreference) findPreference("interval_pref");
-        lp.setSummary(getString(R.string.interval_pref_description) + " " + timeInterval + ".");
     }
 
 }
