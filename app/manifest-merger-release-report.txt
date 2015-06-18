@@ -93,13 +93,13 @@ ADDED from AndroidManifest.xml:31:17
 service#org.indywidualni.fblite.NotificationsService
 ADDED from AndroidManifest.xml:34:9
 	android:enabled
-		ADDED from AndroidManifest.xml:37:13
-	android:process
-		ADDED from AndroidManifest.xml:39:13
-	android:exported
-		ADDED from AndroidManifest.xml:38:13
-	android:icon
 		ADDED from AndroidManifest.xml:36:13
+	android:process
+		ADDED from AndroidManifest.xml:38:13
+	android:exported
+		ADDED from AndroidManifest.xml:37:13
+	android:icon
+		ADDED from AndroidManifest.xml:39:13
 	android:name
 		ADDED from AndroidManifest.xml:35:13
 activity#org.indywidualni.fblite.MainActivity

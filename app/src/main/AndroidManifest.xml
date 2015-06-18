@@ -33,10 +33,10 @@
         </receiver>
         <service
             android:name=".NotificationsService"
-            android:icon="@drawable/ic_launcher"
             android:enabled="true"
             android:exported="false"
-            android:process=":remote" >
+            android:process=":remote"
+            android:icon="@drawable/ic_launcher" >
         </service>
         <activity
             android:name=".MainActivity"

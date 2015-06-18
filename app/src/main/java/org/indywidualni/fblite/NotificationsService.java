@@ -16,7 +16,7 @@ import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
-import android.widget.Toast;
+//import android.widget.Toast;
 import net.grandcentrix.tray.TrayAppPreferences;
 import java.net.URL;
 import java.util.ArrayList;
