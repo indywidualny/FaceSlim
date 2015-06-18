@@ -6,7 +6,8 @@ android {
 
     defaultConfig {
         applicationId "org.indywidualni.fblite"
-        minSdkVersion 14
+        resValue "string", "tray__authority", "${applicationId}.tray"
+        minSdkVersion 15
         targetSdkVersion 22
         versionCode 14
         versionName "1.7.4"
@@ -27,5 +28,6 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:support-v4:22.1.1'
     compile 'com.android.support:appcompat-v7:22.1.1'
+    compile 'net.grandcentrix.tray:tray:0.9.2'
     compile project(':saxrssreader')
 }

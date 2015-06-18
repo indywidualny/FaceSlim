@@ -6,7 +6,7 @@
     android:installLocation="internalOnly" >
 
     <uses-sdk
-        android:minSdkVersion="14"
+        android:minSdkVersion="15"
         android:targetSdkVersion="22" />
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -35,7 +35,8 @@
             android:name=".NotificationsService"
             android:icon="@drawable/ic_launcher"
             android:enabled="true"
-            android:exported="false" >
+            android:exported="false"
+            android:process=":remote" >
         </service>
         <activity
             android:name=".MainActivity"

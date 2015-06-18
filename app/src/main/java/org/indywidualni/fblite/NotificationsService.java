@@ -17,6 +17,7 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
 import android.widget.Toast;
+import net.grandcentrix.tray.TrayAppPreferences;
 import java.net.URL;
 import java.util.ArrayList;
 import nl.matshofman.saxrssreader.RssFeed;
@@ -32,6 +33,7 @@ public class NotificationsService extends Service {
     private String feedUrl;
     private int timeInterval;
     private SharedPreferences preferences;
+    private TrayAppPreferences trayPreferences;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -40,17 +42,18 @@ public class NotificationsService extends Service {
 
     @Override
     public void onCreate() {
-        Toast.makeText(this, getString(R.string.facebook) + ": " + getString(R.string.notifications_service_created), Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, getString(R.string.facebook) + ": " + getString(R.string.notifications_service_created), Toast.LENGTH_LONG).show();
         Log.i("NotificationsService", "********** Service created! **********");
 
-        // get shared preferences (for a multi process app)
+        // get shared preferences (for a multi process app) and TrayPreferences
         preferences = getSharedPreferences(getApplicationContext().getPackageName() + "_preferences", Context.MODE_MULTI_PROCESS);
+        trayPreferences = new TrayAppPreferences(getApplicationContext());
 
         handler = new Handler();
         runnable = new Runnable() {
             public void run() {
                 //Log.i("NotificationsService", "********** Service is still running **********");
-                Log.i("NotificationsService", "isActivityVisible: " + Boolean.toString(MyApplication.isActivityVisible()));
+                Log.i("NotificationsService", "isActivityVisible: " + Boolean.toString(trayPreferences.getBoolean("activity_visible", false)));
 
                 // get the url and time interval from shared prefs
                 feedUrl = preferences.getString("feed_url", "");
@@ -118,18 +121,18 @@ public class NotificationsService extends Service {
              *  of avoiding it, it's a nice example how it will work in the future.
              */
 
-            // get the last PubDate (String) from shared prefs
-            String savedDate = preferences.getString("saved_date", "nothing");
+            // get the last PubDate (String) from TrayPreferences
+            final String savedDate = trayPreferences.getString("saved_date", "nothing");
 
             // if the saved PubDate is different than the new one it means there is new notification
             // display it only when MainActivity is not active or 'Always notify' is checked
             try {
                 if (!result.get(0).getPubDate().toString().equals(savedDate))
-                    if (!MyApplication.isActivityVisible() || preferences.getBoolean("notifications_everywhere", true))
+                    if (!trayPreferences.getBoolean("activity_visible", false) || preferences.getBoolean("notifications_everywhere", true))
                         notifier(result.get(0).getTitle(), result.get(0).getDescription(), result.get(0).getLink());
 
-                // save the latest PubDate (as a String) to shared prefs
-                preferences.edit().putString("saved_date", result.get(0).getPubDate().toString()).apply();
+                // save the latest PubDate (as a String) to TrayPreferences
+                trayPreferences.put("saved_date", result.get(0).getPubDate().toString());
 
                 // log success
                 Log.i("RssReaderTask", "********** onPostExecute: Aight biatch ;)");

@@ -34,6 +34,9 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import net.grandcentrix.tray.TrayAppPreferences;
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
@@ -58,17 +61,19 @@ public class MainActivity extends Activity {
     private ValueCallback<Uri[]> mFilePathCallback;
     private String mCameraPhotoPath;
 
-    // error handling
+    // error handling, shared prefs and TrayPreferences
     private static final String TAG = MainActivity.class.getSimpleName();
     private SharedPreferences preferences;
+    private TrayAppPreferences trayPreferences;
 
     @Override
     @SuppressLint("setJavaScriptEnabled")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // get shared preferences
+        // get shared preferences and TrayPreferences
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        trayPreferences = new TrayAppPreferences(getApplicationContext());
 
         // set the main content view (for drawer position)
         if ("0".equals(preferences.getString("drawer_pos", "0")))
@@ -527,6 +532,7 @@ public class MainActivity extends Activity {
                     startActivity(about);
                     break;
                 case 8:
+                    trayPreferences.put("activity_visible", false);
                     //finish();
                     System.exit(0); // ugly, ugly, ugly!
                     break;
@@ -564,6 +570,7 @@ public class MainActivity extends Activity {
                     startActivity(about);
                     break;
                 case 8:
+                    trayPreferences.put("activity_visible", false);
                     //finish();
                     System.exit(0); // ugly, ugly, ugly!
                     break;
@@ -653,13 +660,13 @@ public class MainActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        MyApplication.activityResumed();
+        trayPreferences.put("activity_visible", true);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        MyApplication.activityPaused();
+        trayPreferences.put("activity_visible", false);
     }
 
     @Override
