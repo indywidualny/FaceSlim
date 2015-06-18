@@ -31,7 +31,6 @@ public class NotificationsService extends Service {
 
     private String feedUrl;
     private int timeInterval;
-    private ArrayList<RssItem> rssItems;
     private SharedPreferences preferences;
 
     @Override
@@ -113,19 +112,24 @@ public class NotificationsService extends Service {
 
         @Override
         protected void onPostExecute(ArrayList<RssItem> result) {
-            // first run, try to get rid of that null
-            if (rssItems == null)
-                rssItems = result;
 
-            // if the latest PubDate is different than the new one it means there is new notification
+            /** The first service start ever will display a fake notification.
+             *  Not fake actually - the latest one. I've been thinking instead
+             *  of avoiding it, it's a nice example how it will work in the future.
+             */
+
+            // get the last PubDate (String) from shared prefs
+            String savedDate = preferences.getString("saved_date", "nothing");
+
+            // if the saved PubDate is different than the new one it means there is new notification
             // display it only when MainActivity is not active or 'Always notify' is checked
             try {
-                if (!rssItems.get(0).getPubDate().equals(result.get(0).getPubDate()))
+                if (!result.get(0).getPubDate().toString().equals(savedDate))
                     if (!MyApplication.isActivityVisible() || preferences.getBoolean("notifications_everywhere", true))
                         notifier(result.get(0).getTitle(), result.get(0).getDescription(), result.get(0).getLink());
 
-                // update rssItems with the result of feed processing
-                rssItems = result;
+                // save the latest PubDate (as a String) to shared prefs
+                preferences.edit().putString("saved_date", result.get(0).getPubDate().toString()).apply();
 
                 // log success
                 Log.i("RssReaderTask", "********** onPostExecute: Aight biatch ;)");
