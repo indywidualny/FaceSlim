@@ -11,6 +11,7 @@ public class SettingsActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
 
         // fix for loading fragment into ActionBarActivity
+        //noinspection ConstantConditions
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTheme(R.style.Theme_AppCompat_Preferences);
 

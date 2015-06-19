@@ -16,7 +16,6 @@ import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
-//import android.widget.Toast;
 import net.grandcentrix.tray.TrayAppPreferences;
 import java.net.URL;
 import java.util.ArrayList;
@@ -26,7 +25,6 @@ import nl.matshofman.saxrssreader.RssReader;
 
 public class NotificationsService extends Service {
 
-    //private Random rand = new Random();
     private Handler handler = null;
     private static Runnable runnable = null;
 
@@ -42,7 +40,6 @@ public class NotificationsService extends Service {
 
     @Override
     public void onCreate() {
-        //Toast.makeText(this, getString(R.string.facebook) + ": " + getString(R.string.notifications_service_created), Toast.LENGTH_LONG).show();
         Log.i("NotificationsService", "********** Service created! **********");
 
         // get shared preferences (for a multi process app) and TrayPreferences
@@ -196,7 +193,6 @@ public class NotificationsService extends Service {
 
         // display a notification
         NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        //mNotificationManager.notify(rand.nextInt(999), note);
         mNotificationManager.notify(0, note);
     }
 
