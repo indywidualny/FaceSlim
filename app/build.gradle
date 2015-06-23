@@ -9,8 +9,8 @@ android {
         resValue "string", "tray__authority", "${applicationId}.tray"
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 14
-        versionName "1.7.4"
+        versionCode 15
+        versionName "1.7.5"
     }
     buildTypes {
         release {
