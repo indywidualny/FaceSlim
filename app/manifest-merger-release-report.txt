@@ -19,9 +19,9 @@ ADDED from AndroidManifest.xml:2:1
 		ADDED from AndroidManifest.xml:6:5
 uses-sdk
 ADDED from AndroidManifest.xml:8:5
-MERGED from com.android.support:support-v4:22.2.0:20:5
-MERGED from com.android.support:appcompat-v7:22.2.0:20:5
-MERGED from com.android.support:support-v4:22.2.0:20:5
+MERGED from com.android.support:support-v4:23.0.1:20:5
+MERGED from com.android.support:appcompat-v7:23.0.1:20:5
+MERGED from com.android.support:support-v4:23.0.1:20:5
 MERGED from net.grandcentrix.tray:tray:0.9.2:7:5
 MERGED from FacebookLite:saxrssreader:unspecified:7:5
 	android:targetSdkVersion
@@ -55,9 +55,9 @@ ADDED from AndroidManifest.xml:16:5
 		ADDED from AndroidManifest.xml:16:22
 application
 ADDED from AndroidManifest.xml:18:5
-MERGED from com.android.support:support-v4:22.2.0:22:5
-MERGED from com.android.support:appcompat-v7:22.2.0:22:5
-MERGED from com.android.support:support-v4:22.2.0:22:5
+MERGED from com.android.support:support-v4:23.0.1:22:5
+MERGED from com.android.support:appcompat-v7:23.0.1:22:5
+MERGED from com.android.support:support-v4:23.0.1:22:5
 MERGED from net.grandcentrix.tray:tray:0.9.2:11:5
 MERGED from FacebookLite:saxrssreader:unspecified:11:5
 	android:label

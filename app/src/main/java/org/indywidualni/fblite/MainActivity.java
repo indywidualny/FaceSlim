@@ -267,7 +267,7 @@ public class MainActivity extends Activity {
             // creating image files (Lollipop only)
             private File createImageFile() throws IOException {
 
-                File imageStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "FacebookLite");
+                File imageStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "FaceSlim");
 
                 if (!imageStorageDir.exists()) {
                     //noinspection ResultOfMethodCallIgnored
@@ -284,7 +284,7 @@ public class MainActivity extends Activity {
                 mUploadMessage = uploadMsg;
 
                 try {
-                    File imageStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "FacebookLite");
+                    File imageStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "FaceSlim");
 
                     if (!imageStorageDir.exists()) {
                         //noinspection ResultOfMethodCallIgnored
