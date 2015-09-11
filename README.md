@@ -83,7 +83,7 @@ Changelog & what makes the application awesome:
 Refresh the page by pulling down with your finger. External links will open in your system browser as well as the full size images so you can zoom in, save, etc. The latest devices (KitKat and Lollipop) - blue status bar background. Minimum permissions needed. The application will always be free and without ads!
 
 [pl] Temat na polskim forum dotyczący aplikacji:
-* http://forum.android.com.pl/f389/facebook-lite-493859/
+* http://forum.android.com.pl/topic/211657-face-slim/
 
 Screenshots:
 
