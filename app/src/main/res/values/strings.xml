@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="MissingTranslation">
 
-    <string name="app_name" translatable="false">Face Slim</string>
+    <string name="app_name">Face Slim</string>
     <string name="image_chooser">Image Chooser</string>
     <string name="loading_link">Opening a link</string>
     <string name="applying_changes">Applying changes</string>
@@ -20,7 +20,7 @@
         <item>Terminate</item>
     </string-array>
 
-    <string name="author" translatable="false">by Krzysztof \'Koras\' Grabowski</string>
+    <string name="author">by Krzysztof \'Koras\' Grabowski</string>
     <string name="github_link" translatable="false"><a href="https://github.com/indywidualny/FaceSlim">github.com/indywidualny/FaceSlim</a></string>
     <string name="f_droid_link" translatable="false"><a href="https://f-droid.org/app/org.indywidualni.fblite">f-droid.org/app/org.indywidualni.fblite</a></string>
     <string name="indywidualni_link" translatable="false"><a href="http://indywidualni.org">indywidualni.org</a></string>

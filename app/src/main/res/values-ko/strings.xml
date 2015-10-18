@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="app_name">Face Slim</string>
     <string name="image_chooser">이미지 선택기</string>
     <string name="loading_link">링크 여는 중</string>
     <string name="applying_changes">변경 사항 적용 중</string>
@@ -16,6 +17,8 @@
         <item>개발자에 대해서</item>
         <item>Terminate</item>
     </string-array>
+
+    <string name="author">by Krzysztof \'Koras\' Grabowski</string>
 
     <string name="title_activity_settings">설정</string>
     <string name="title_activity_about">개발자에 대해서</string>

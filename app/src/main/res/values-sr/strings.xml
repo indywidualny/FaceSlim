@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="MissingTranslation">
 
-    <string name="app_name" translatable="false">Фејс слим</string>
+    <string name="app_name">Фејс слим</string>
     <string name="image_chooser">Бирач слика</string>
     <string name="loading_link">Отварам везу</string>
     <string name="applying_changes">Примењујем измене</string>
@@ -20,10 +20,7 @@
         <item>Напусти</item>
     </string-array>
 
-    <string name="author" translatable="false">од Krzysztof \'Koras\' Grabowski</string>
-    <string name="github_link" translatable="false"><a href="https://github.com/indywidualny/FaceSlim">github.com/indywidualny/FaceSlim</a></string>
-    <string name="f_droid_link" translatable="false"><a href="https://f-droid.org/app/org.indywidualni.fblite">f-droid.org/app/org.indywidualni.fblite</a></string>
-    <string name="indywidualni_link" translatable="false"><a href="http://indywidualni.org">indywidualni.org</a></string>
+    <string name="author">од Krzysztof \'Koras\' Grabowski</string>
 
     <string name="title_activity_settings">Поставке</string>
     <string name="title_activity_about">О програму</string>
@@ -72,9 +69,7 @@
     <string name="activate_notifications">Активирај обавештења</string>
     <string name="get_feed">Добавите ваш довод обавештења</string>
     <string name="get_feed_description">Кликните на поље, пронађите ваш јединствени РСС довод обавештења, копирајте адресу и унесите је изнад.</string>
-    <string name="get_feed_link" translatable="false">https://goo.gl/t3vJ33</string>
     <string name="notifications_service_created">Обавештења активна</string>
-    <string name="facebook" translatable="false">Facebook</string>
     <string name="notifications_settings">Поставке обавештења</string>
     <string name="notifications_settings_description">Додатне поставке. Одредите интервал провере, поставите звук, светло и вибрирање.</string>
 

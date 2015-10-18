@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="app_name">Face Slim</string>
     <string name="image_chooser">Wybierz źródło</string>
     <string name="loading_link">Otwieram link</string>
     <string name="applying_changes">Stosuję zmiany</string>
@@ -16,6 +17,8 @@
         <item>Informacje &amp; autor</item>
         <item>Zabij aplikację</item>
     </string-array>
+
+    <string name="author">by Krzysztof \'Koras\' Grabowski</string>
 
     <string name="title_activity_settings">Ustawienia aplikacji</string>
     <string name="title_activity_about">Informacje &amp; autor</string>
