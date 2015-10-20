@@ -90,4 +90,6 @@
     <string name="notifications_everywhere">Zawsze powiadamiaj</string>
     <string name="notifications_everywhere_description">Także podczas korzystania z głównego ekranu tej aplikacji.</string>
 
+    <string name="setup_notifications">W ustawieniach możesz aktywować powiadomienia</string>
+
 </resources>

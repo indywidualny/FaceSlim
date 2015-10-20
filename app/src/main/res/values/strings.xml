@@ -97,4 +97,6 @@
     <string name="notifications_everywhere">Always notify</string>
     <string name="notifications_everywhere_description">Also when you are on the main screen of the app.</string>
 
+    <string name="setup_notifications">Visit app settings to set up notifications</string>
+
 </resources>

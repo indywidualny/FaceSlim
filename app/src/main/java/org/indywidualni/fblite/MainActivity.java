@@ -177,7 +177,7 @@ public class MainActivity extends Activity {
                 if (!isFacebookZero || !isConnectedMobile)
                     webViewUrl = temp;
                 // cancel all notifications if 'All notifications' button was clicked
-                if (temp.equals("https://m.facebook.com/notifications"))
+                if ("https://m.facebook.com/notifications".equals(temp))
                     NotificationsService.cancelAllNotifications();
             }
         } catch (Exception ignored) {}
@@ -623,7 +623,7 @@ public class MainActivity extends Activity {
             if (getIntent().getExtras().getString("start_url") != null)
                 webViewUrl = getIntent().getExtras().getString("start_url");
                 // cancel all notifications if 'All notifications' button was clicked
-                if (webViewUrl.equals("https://m.facebook.com/notifications"))
+                if ("https://m.facebook.com/notifications".equals(webViewUrl))
                     NotificationsService.cancelAllNotifications();
         } catch (Exception ignored) {}
 
@@ -691,6 +691,8 @@ public class MainActivity extends Activity {
             }
         });
         dialog.show();
+        // notifications setup notice
+        Toast.makeText(getApplicationContext(), getString(R.string.setup_notifications), Toast.LENGTH_SHORT).show();
     }
 
 }
