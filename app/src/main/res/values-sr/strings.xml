@@ -92,4 +92,6 @@
     <string name="notifications_everywhere">Увек обавештевај</string>
     <string name="notifications_everywhere_description">Обавештавање и на главном екрану апликације.</string>
 
+    <string name="setup_notifications">Посетите подешавања да бисте активирали обавештења</string>
+
 </resources>
