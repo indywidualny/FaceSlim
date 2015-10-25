@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Face Slim</string>
+    <string name="activate_notifications">Benachrichtigungen aktivieren</string>
+    <string name="all_notifications">Alle Benachrichtigungen</string>
+    <string name="applying_changes">Änderungen werden angewendet</string>
+    <string name="author">von Krzysztof \'Koras\' Grabowski</string>
+    <string name="choose_email_client">E-Mail Anwendung auswählen</string>
+    <string name="clear_cache">Zwischenspeicher leeren</string>
+    <string name="clear_cache_description">Anwendungsspeicher leeren. Du wirst dabei ausgeloggt.</string>
+    <string name="dark_theme">Dunkles Thema</string>
+    <string name="dark_theme_description">Facebook schwärzen. Dein AMOLED Display wird das schätzen.</string>
+    <string name="donate_paypal">Spenden\u0020 –\u0020 PayPal</string>
+    <string name="drawer_pos">Gleitmenü Position &#8635;</string>
+    <string name="drawer_pos_description">Menü ist auf der %s Seite.</string>
+    <string name="email_author">Kontakt</string>
+    <string name="facebook_zero_active">Facebook Zero ist aktiv</string>
+    <string name="facebook_zero_description">Keine Kosten für Mobildaten. Provider abhängig. Funktioniert während mobiler Datenverbindung.</string>
+    <string name="fixed_nav">Fixierte Facebook Navigationsleiste</string>
+    <string name="fixed_nav_description">Facebook Navigationsleiste immer ganz oben.</string>
+    <string name="get_feed">Benachrichtigungs-Feed abrufen</string>
+    <string name="get_feed_description">Anklicken und deinen eigenen RSS-Feed auslesen. Die Adresse kopieren und oben einfügen.</string>
+    <string name="hardware_acceleration">Hardware Beschleunigung &#8635;</string>
+    <string name="hardware_acceleration_description">Nur auf Geräten mit wenig Arbeitsspeicher deaktivieren. (Bei Problemen)</string>
+    <string name="image_chooser">Bildwähler</string>
+    <string name="interval_pref">Überprüfungs-Intervall</string>
+    <string name="interval_pref_description">Benachrichtigungs-Feed wird alle %s überprüft.</string>
+    <string name="led_light">LED</string>
+    <string name="loading_link">Öffnen eines Links</string>
+    <string name="long_clicks">Lange Klicks</string>
+    <string name="long_clicks_description">Lange klicken auf einen Link oder ein Bild um es zu teilen.</string>
+    <string name="me_google_play">Google Play</string>
+    <string name="messages">Nachrichten</string>
+    <string name="no_network">Du bist offline ;)</string>
+    <string name="notification_sound">Benachrichtigungs Ton</string>
+    <string name="notification_sound_description" translatable="false">Ton oder Lautlos auswählen: \u0020</string>
+    <string name="notifications">Benachrichtigungen</string>
+    <string name="notifications_everywhere">Immer benachrichtigen</string>
+    <string name="notifications_everywhere_description">Auch wenn du in der App bist.</string>
+    <string name="notifications_extra">Zusätzlich</string>
+    <string name="notifications_feed_url">Benachrichtigungs-Feed</string>
+    <string name="notifications_service_created">Benachrichtigungen aktiv</string>
+    <string name="notifications_settings">Benachrichtungs Einstellungen</string>
+    <string name="notifications_settings_description">Zusätzliche Einstellungen. Einstellugen von Überprüfungs-Interval, Tönen, LED Farben und Vibration.</string>
+    <string name="preference_category1">Oberfläche</string>
+    <string name="preference_category2">Erweiterte Einstellungen</string>
+    <string name="preference_category3">Experimentell</string>
+    <string name="preference_category4">Zusätzlich</string>
+    <string name="preference_category5">Benachrichtigungen</string>
+    <string name="progress_bar">Fortschrittsanzeige</string>
+    <string name="quick_guide">Schnelleinstieg</string>
+    <string name="setup_notifications">In den Einstellungen kannst du Benachrichtigungen einstellen.</string>
+    <string name="share_link">Link teilen</string>
+    <string name="silent">Kein Ton</string>
+    <string name="title_activity_about">Über den &amp; Entwickler</string>
+    <string name="title_activity_settings">Einstellungen</string>
+    <string name="transparent_nav">Transparente Navigations-Leiste &#8635;</string>
+    <string name="transparent_nav_description">Für Android-Versionen ab KitKat (4.4). Transparente Navigationstasten.</string>
+    <string name="vibrate">Vibration</string>
+
+    <string-array name="intervalPrefTitles">
+        <item>5 Minuten</item>
+        <item>15 Minuten</item>
+        <item>30 Minuten</item>
+        <item>1 Stunde</item>
+        <item>3 Stunden</item>
+        <item>6 Stunden</item>
+    </string-array>
+
+    <string-array name="drawerPosTitles">
+        <item>linken</item>
+        <item>rechten</item>
+    </string-array>
+
+    <string-array name="item_array">
+        <item>Nach oben\u0020 &#8593;</item>
+        <item>Neuigkeiten</item>
+        <item>@string/messages</item>
+        <item>Chat (Online Freunde)</item>
+        <item>Gruppen</item>
+        <item>Veranstaltungen</item>
+        <item>App Einstellungen</item>
+        <item>@string/title_activity_about</item>
+        <item>Beenden</item>
+    </string-array>
+</resources>
