@@ -33,7 +33,7 @@
     <string name="messages">Nachrichten</string>
     <string name="no_network">Du bist offline ;)</string>
     <string name="notification_sound">Benachrichtigungs Ton</string>
-    <string name="notification_sound_description" translatable="false">Ton oder Lautlos auswählen: \u0020</string>
+    <string name="notification_sound_description">Ton oder Lautlos auswählen: \u0020</string>
     <string name="notifications">Benachrichtigungen</string>
     <string name="notifications_everywhere">Immer benachrichtigen</string>
     <string name="notifications_everywhere_description">Auch wenn du in der App bist.</string>

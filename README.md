@@ -8,6 +8,7 @@ Changelog & what makes the application awesome:
 
 1.8
 * new name to avoid being recognized as the official Facebook app
+* German translation (thanks [de-live-gdev](https://github.com/de-live-gdev))
 * Serbian translation (thanks [pejakm](https://github.com/pejakm))
 * Android Marshmallow support
 * new support libraries
