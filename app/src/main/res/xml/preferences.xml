@@ -13,7 +13,7 @@
             android:key="long_clicks"
             android:title="@string/long_clicks"
             android:summary="@string/long_clicks_description"
-            android:defaultValue="false"/>
+            android:defaultValue="true"/>
 
         <CheckBoxPreference
             android:key="fixed_nav"

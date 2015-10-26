@@ -7,7 +7,6 @@
     <string name="applying_changes">변경 사항 적용 중</string>
 
     <string-array name="item_array">
-        <item>맨 위로 가기\u0020 &#8593;</item>
         <item>뉴스피드</item>
         <item>메세지</item>
         <item>대화 (접속중인 친구)</item>
@@ -16,6 +15,7 @@
         <item>앱 설정</item>
         <item>개발자에 대해서</item>
         <item>Terminate</item>
+        <item>맨 위로 가기\u0020 &#8593;</item>
     </string-array>
 
     <string name="author">by Krzysztof \'Koras\' Grabowski</string>
