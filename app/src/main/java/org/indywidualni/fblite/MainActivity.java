@@ -542,35 +542,35 @@ public class MainActivity extends Activity {
             // standard application menu (it's default)
             switch (position) {
                 case 0:
-                    webView.loadUrl("javascript:scroll(0,0)");
-                    break;
-                case 1:
                     webView.loadUrl("https://m.facebook.com");
                     break;
-                case 2:
+                case 1:
                     webView.loadUrl("https://m.facebook.com/messages");
                     break;
-                case 3:
+                case 2:
                     webView.loadUrl("https://m.facebook.com/buddylist.php");
                     break;
-                case 4:
+                case 3:
                     webView.loadUrl("https://m.facebook.com/groups/?category=membership");
                     break;
-                case 5:
+                case 4:
                     webView.loadUrl("https://m.facebook.com/events");
                     break;
-                case 6:
+                case 5:
                     Intent settings = new Intent(this, SettingsActivity.class);
                     startActivity(settings);
                     break;
-                case 7:
+                case 6:
                     Intent about = new Intent(this, AboutActivity.class);
                     startActivity(about);
                     break;
-                case 8:
+                case 7:
                     trayPreferences.put("activity_visible", false);
                     //finish();
                     System.exit(0); // ugly, ugly, ugly!
+                    break;
+                case 8:
+                    webView.loadUrl("javascript:scroll(0,0)");
                     break;
                 default:
                     // silence is golden

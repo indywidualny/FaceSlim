@@ -12,7 +12,7 @@
     <string name="dark_theme_description">Facebook schwärzen. Dein AMOLED Display wird das schätzen.</string>
     <string name="donate_paypal">Spenden\u0020 –\u0020 PayPal</string>
     <string name="drawer_pos">Gleitmenü Position &#8635;</string>
-    <string name="drawer_pos_description">Menü ist auf der %s Seite.</string>
+    <string name="drawer_pos_description">Menü befindet sich derzeit %s.</string>
     <string name="email_author">Kontakt</string>
     <string name="facebook_zero_active">Facebook Zero ist aktiv</string>
     <string name="facebook_zero_description">Keine Kosten für Mobildaten. Provider abhängig. Funktioniert während mobiler Datenverbindung.</string>
@@ -28,7 +28,7 @@
     <string name="led_light">LED</string>
     <string name="loading_link">Öffnen eines Links</string>
     <string name="long_clicks">Lange Klicks</string>
-    <string name="long_clicks_description">Lange klicken auf einen Link oder ein Bild um es zu teilen.</string>
+    <string name="long_clicks_description">Link oder Bild lange klicken um zu teilen.</string>
     <string name="me_google_play">Google Play</string>
     <string name="messages">Nachrichten</string>
     <string name="no_network">Du bist offline ;)</string>
@@ -49,10 +49,10 @@
     <string name="preference_category5">Benachrichtigungen</string>
     <string name="progress_bar">Fortschrittsanzeige</string>
     <string name="quick_guide">Schnelleinstieg</string>
-    <string name="setup_notifications">In den Einstellungen kannst du Benachrichtigungen einstellen.</string>
+    <string name="setup_notifications">In den Einstellungen kannst du Benachrichtigungen konfigurieren.</string>
     <string name="share_link">Link teilen</string>
-    <string name="silent">Kein Ton</string>
-    <string name="title_activity_about">Über den &amp; Entwickler</string>
+    <string name="silent">Lautlos</string>
+    <string name="title_activity_about">Über</string>
     <string name="title_activity_settings">Einstellungen</string>
     <string name="transparent_nav">Transparente Navigations-Leiste &#8635;</string>
     <string name="transparent_nav_description">Für Android-Versionen ab KitKat (4.4). Transparente Navigationstasten.</string>
@@ -68,12 +68,11 @@
     </string-array>
 
     <string-array name="drawerPosTitles">
-        <item>linken</item>
-        <item>rechten</item>
+        <item>links</item>
+        <item>rechts</item>
     </string-array>
 
     <string-array name="item_array">
-        <item>Nach oben\u0020 &#8593;</item>
         <item>Neuigkeiten</item>
         <item>@string/messages</item>
         <item>Chat (Online Freunde)</item>
@@ -82,5 +81,6 @@
         <item>App Einstellungen</item>
         <item>@string/title_activity_about</item>
         <item>Beenden</item>
+        <item>Nach oben\u0020 &#8593;</item>
     </string-array>
 </resources>
