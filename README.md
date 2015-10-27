@@ -7,11 +7,12 @@ Releases | [pl] wydania: https://github.com/indywidualny/FaceSlim/releases
 Changelog & what makes the application awesome:
 
 1.8
-* new name to avoid being recognized as the official Facebook app
+* new name and icon to avoid being recognized as the official Facebook app
 * German translation (thanks [de-live-gdev](https://github.com/de-live-gdev))
 * Serbian translation (thanks [pejakm](https://github.com/pejakm))
 * Android Marshmallow support
 * new support libraries
+* minor improvements
 
 1.7
 * NOTIFICATIONS SUPPORT (the app will notify you about the latest action on Facebook - not about messages) - visit app settings for more info. It's awesome and works almost perfectly!
