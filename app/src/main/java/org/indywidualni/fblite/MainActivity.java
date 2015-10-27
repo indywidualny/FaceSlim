@@ -334,7 +334,7 @@ public class MainActivity extends Activity {
             @Override
             public boolean onLongClick(View v) {
                 // activate long clicks on links and image links according to settings
-                if (preferences.getBoolean("long_clicks", false)) {
+                if (preferences.getBoolean("long_clicks", true)) {
                     WebView.HitTestResult result = webView.getHitTestResult();
                     if (result.getType() == WebView.HitTestResult.SRC_ANCHOR_TYPE || result.getType() == WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE) {
                         Message msg = linkHandler.obtainMessage();
@@ -504,35 +504,35 @@ public class MainActivity extends Activity {
         if (preferences.getBoolean("facebook_zero", false) && Connectivity.isConnectedMobile(getApplicationContext())) {
             switch (position) {
                 case 0:
-                    webView.loadUrl("javascript:scroll(0,0)");
-                    break;
-                case 1:
                     webView.loadUrl("https://0.facebook.com");
                     break;
-                case 2:
+                case 1:
                     webView.loadUrl("https://0.facebook.com/messages");
                     break;
-                case 3:
+                case 2:
                     webView.loadUrl("https://0.facebook.com/buddylist.php");
                     break;
-                case 4:
+                case 3:
                     webView.loadUrl("https://0.facebook.com/groups/?category=membership");
                     break;
-                case 5:
+                case 4:
                     webView.loadUrl("https://0.facebook.com/events");
                     break;
-                case 6:
+                case 5:
                     Intent settings = new Intent(this, SettingsActivity.class);
                     startActivity(settings);
                     break;
-                case 7:
+                case 6:
                     Intent about = new Intent(this, AboutActivity.class);
                     startActivity(about);
                     break;
-                case 8:
+                case 7:
                     trayPreferences.put("activity_visible", false);
                     //finish();
                     System.exit(0); // ugly, ugly, ugly!
+                    break;
+                case 8:
+                    webView.loadUrl("javascript:scroll(0,0)");
                     break;
                 default:
                     // silence is golden

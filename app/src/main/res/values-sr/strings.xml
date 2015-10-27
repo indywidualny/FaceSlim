@@ -47,15 +47,13 @@
     <string name="fixed_nav">Фиксирана плава трака</string>
     <string name="fixed_nav_description">Фејсбук навигација увек на врху.</string>
     <string name="facebook_zero">Фејсбук Зиро</string>
-    <string name="facebook_zero_description">Без надокнаде за пренесене податке. Зависи од вашег оператера. Ради при вези мобилних 
-података.</string>
+    <string name="facebook_zero_description">Без надокнаде за пренесене податке. Зависи од вашег оператера. Ради при вези мобилних података.</string>
     <string name="facebook_zero_active">Фејсбук Зиро је активан</string>
     <string name="preference_category4">Додатно</string>
     <string name="quick_guide">Водич за брзи почетак</string>
     <string name="messages">Поруке</string>
     <string name="donate_paypal">Донирај\u0020 –\u0020 PayPal</string>
-    <string name="paypal_url" 
-formatted="false">https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=koras%2eevil%40gmail%2ecom&amp;lc=GB&amp;item_name=Krzysztof%20Grabowski&amp;currency_code=USD&amp;bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted</string>
+    <string name="paypal_url" formatted="false">https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=koras%2eevil%40gmail%2ecom&amp;lc=GB&amp;item_name=Krzysztof%20Grabowski&amp;currency_code=USD&amp;bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted</string>
 
     <string-array name="drawerPosTitles">
         <item>лево</item>
@@ -70,12 +68,10 @@ formatted="false">https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;busin
     <string name="interval_pref_description">Довод обавештења се проверава сваких %s.</string>
     <string name="activate_notifications">Активирај обавештења</string>
     <string name="get_feed">Добавите ваш довод обавештења</string>
-    <string name="get_feed_description">Кликните на поље, пронађите ваш јединствени РСС довод обавештења, копирајте адресу и унесите је 
-изнад.</string>
+    <string name="get_feed_description">Кликните на поље, пронађите ваш јединствени РСС довод обавештења, копирајте адресу и унесите је изнад.</string>
     <string name="notifications_service_created">Обавештења активна</string>
     <string name="notifications_settings">Поставке обавештења</string>
-    <string name="notifications_settings_description">Додатне поставке. Одредите интервал провере, поставите звук, светло и 
-вибрирање.</string>
+    <string name="notifications_settings_description">Додатне поставке. Одредите интервал провере, поставите звук, светло и вибрирање.</string>
 
     <string-array name="intervalPrefTitles">
         <item>5 минута</item>
