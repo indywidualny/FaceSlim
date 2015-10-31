@@ -4,20 +4,20 @@
     tools:ignore="MissingTranslation">
 
     <string name="app_name">Face Slim</string>
-    <string name="image_chooser">Image Chooser</string>
-    <string name="loading_link">Opening a link</string>
-    <string name="applying_changes">Applying changes</string>
+    <string name="image_chooser">Výběr obrázku</string>
+    <string name="loading_link">Otevírání odkazu</string>
+    <string name="applying_changes">Aplikování změn</string>
 
     <string-array name="item_array">
-        <item>News Feed</item>
-        <item>Messages</item>
-        <item>Chat (Friends Online)</item>
-        <item>Groups</item>
-        <item>Events</item>
-        <item>App Settings</item>
-        <item>About &amp; Dev</item>
-        <item>Terminate</item>
-        <item>Jump to Top\u0020 &#8593;</item>
+        <item>Kanál novinek</item>
+        <item>Zprávy</item>
+        <item>Chat (Přátelé Online)</item>
+        <item>Skupiny</item>
+        <item>Události</item>
+        <item>Nastavení aplikace</item>
+        <item>O aplikaci a vývojáři</item>
+        <item>Ukončit</item>
+        <item>Na začátek\u0020 &#8593;</item>
     </string-array>
 
     <string name="author">by Krzysztof \'Koras\' Grabowski</string>
@@ -25,78 +25,78 @@
     <string name="f_droid_link" translatable="false"><a href="https://f-droid.org/app/org.indywidualni.fblite">f-droid.org/app/org.indywidualni.fblite</a></string>
     <string name="indywidualni_link" translatable="false"><a href="http://indywidualni.org">indywidualni.org</a></string>
 
-    <string name="title_activity_settings">Settings</string>
-    <string name="title_activity_about">About &amp; Dev</string>
-    <string name="preference_category1">Interface</string>
-    <string name="preference_category2">Advanced Settings</string>
-    <string name="progress_bar">Progress bar</string>
-    <string name="transparent_nav">Transparent navbar &#8635;</string>
-    <string name="transparent_nav_description">KitKat and Lollipop. Transparent system navigation keys.</string>
-    <string name="clear_cache">Clear cache</string>
-    <string name="clear_cache_description">Clear app cache. It will also log you out.</string>
-    <string name="email_author">Contact me</string>
-    <string name="choose_email_client">Choose e-mail client</string>
-    <string name="notifications">Notifications</string>
-    <string name="no_network">You are offline ;)</string>
-    <string name="hardware_acceleration">Hardware Acceleration &#8635;</string>
-    <string name="hardware_acceleration_description">Disable it only on low memory devices (in case of problems).</string>
-    <string name="share_link">Share the link</string>
-    <string name="long_clicks">Long clicks</string>
-    <string name="long_clicks_description">Long click a link or an image link to share.</string>
+    <string name="title_activity_settings">Nastavení</string>
+    <string name="title_activity_about">O aplikaci a vývojáři</string>
+    <string name="preference_category1">Vzhled</string>
+    <string name="preference_category2">Pokročilé nastavení</string>
+    <string name="progress_bar">Lišta průběhu</string>
+    <string name="transparent_nav">Průhledná lišta &#8635;</string>
+    <string name="transparent_nav_description">KitKat a Lollipop. Průhledná systémová navigační tlačítka.</string>
+    <string name="clear_cache">Smazat dočasnou paměť</string>
+    <string name="clear_cache_description">Smazat dočasnou paměť aplikace. Způsobí to i odhlášení.</string>
+    <string name="email_author">Kontaktujte mne</string>
+    <string name="choose_email_client">Vyberte emailového klienta</string>
+    <string name="notifications">Upozornění</string>
+    <string name="no_network">jste offline ;)</string>
+    <string name="hardware_acceleration">Hardwarová akcelerace &#8635;</string>
+    <string name="hardware_acceleration_description">Vypněte ji pouze na zařízeních s malou pamětí (při problémech).</string>
+    <string name="share_link">Sdílet odkaz</string>
+    <string name="long_clicks">Dlouhé podržení</string>
+    <string name="long_clicks_description">Dlouhým podržením odkazu či obrázku sdílejte.</string>
     <string name="me_google_play">Google Play</string>
-    <string name="preference_category3">Experimental</string>
-    <string name="dark_theme">Dark theme</string>
-    <string name="dark_theme_description">Turn Facebook black. Your AMOLED screen will appreciate it.</string>
-    <string name="fixed_nav">Fixed blue bar</string>
-    <string name="fixed_nav_description">Facebook navigation bar always on top.</string>
+    <string name="preference_category3">Experimentální</string>
+    <string name="dark_theme">Tmavé téma</string>
+    <string name="dark_theme_description">Přepněte Facebook do černé. Váš displej typu AMOLED to ocení.</string>
+    <string name="fixed_nav">Trvalá modrá lišta</string>
+    <string name="fixed_nav_description">Navigační lišta Facebooku vždy nahoře.</string>
     <string name="facebook_zero">Facebook Zero</string>
-    <string name="facebook_zero_description">No data charges. GSM provider dependent. Works during mobile network connection.</string>
-    <string name="facebook_zero_active">Facebook Zero is active</string>
-    <string name="preference_category4">Additional</string>
-    <string name="quick_guide">Quick Start Guide</string>
-    <string name="messages">Messages</string>
-    <string name="donate_paypal">Donate\u0020 –\u0020 PayPal</string>
+    <string name="facebook_zero_description">Bez placení dat. Musí podporovat poskytovatel GSM. Pouze během datového připojení.</string>
+    <string name="facebook_zero_active">Facebook Zero je aktivní</string>
+    <string name="preference_category4">Další</string>
+    <string name="quick_guide">Průvodce rychlým začátkem</string>
+    <string name="messages">Zprávy</string>
+    <string name="donate_paypal">Darovat\u0020 –\u0020 PayPal</string>
     <string name="paypal_url" formatted="false">https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=koras%2eevil%40gmail%2ecom&amp;lc=GB&amp;item_name=Krzysztof%20Grabowski&amp;currency_code=USD&amp;bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted</string>
 
     <string-array name="drawerPosTitles">
-        <item>on the left</item>
-        <item>on the right</item>
+        <item>vlevo</item>
+        <item>vpravo</item>
     </string-array>
 
-    <string name="drawer_pos">Sliding menu position &#8635;</string>
-    <string name="drawer_pos_description">Menu is %s side of the screen.</string>
-    <string name="preference_category5">Notifications</string>
-    <string name="notifications_feed_url">Notifications feed</string>
-    <string name="interval_pref">Time interval for checking</string>
-    <string name="interval_pref_description">Notifications feed will be checked every %s.</string>
-    <string name="activate_notifications">Activate notifications</string>
-    <string name="get_feed">Get your notifications feed</string>
-    <string name="get_feed_description">Click the field, find your unique notifications RSS, copy the address and paste it above.</string>
+    <string name="drawer_pos">Pozice výsuvného menu &#8635;</string>
+    <string name="drawer_pos_description">Menu je na obrazovce %s.</string>
+    <string name="preference_category5">Upozornění</string>
+    <string name="notifications_feed_url">Kanál upozornění</string>
+    <string name="interval_pref">Časová prodleva kontroly</string>
+    <string name="interval_pref_description">Upozornění budou zjišťovány každých %s.</string>
+    <string name="activate_notifications">Aktivní upozornění</string>
+    <string name="get_feed">Získejte svůj kanál upozornění</string>
+    <string name="get_feed_description">Klepněte sem, najděte svůj unikátní kanál upozornění RSS, zkopírujte adresu a vložte ji o pole výš.</string>
     <string name="get_feed_link" translatable="false">https://goo.gl/t3vJ33</string>
-    <string name="notifications_service_created">Notifications active</string>
+    <string name="notifications_service_created">Upozornění jsou aktivní</string>
     <string name="facebook" translatable="false">Facebook</string>
-    <string name="notifications_settings">Notifications settings</string>
-    <string name="notifications_settings_description">Additional settings. Choose time interval, set up sounds, LED and vibration.</string>
+    <string name="notifications_settings">Nastavení upozornění</string>
+    <string name="notifications_settings_description">Další nastavení. Nastavte časovou prodlevu, zvuky, LED a vibrace.</string>
 
     <string-array name="intervalPrefTitles">
-        <item>5 minutes</item>
-        <item>15 minutes</item>
-        <item>30 minutes</item>
-        <item>1 hour</item>
-        <item>3 hours</item>
-        <item>6 hours</item>
+        <item>5 minut</item>
+        <item>15 minut</item>
+        <item>30 minut</item>
+        <item>1 hodina</item>
+        <item>3 hodiny</item>
+        <item>6 hodin</item>
     </string-array>
 
-    <string name="all_notifications">All notifications</string>
-    <string name="notification_sound">Notification sound</string>
-    <string name="notification_sound_description">Choose a ringtone or silence: \u0020</string>
-    <string name="silent">No sound</string>
-    <string name="vibrate">Vibrations</string>
-    <string name="led_light">LED light</string>
-    <string name="notifications_extra">Additional</string>
-    <string name="notifications_everywhere">Always notify</string>
-    <string name="notifications_everywhere_description">Also when you are on the main screen of the app.</string>
+    <string name="all_notifications">Všechna upozornění</string>
+    <string name="notification_sound">Zvuk upozornění</string>
+    <string name="notification_sound_description">Vyberte zvuk či ticho: \u0020</string>
+    <string name="silent">Ticho</string>
+    <string name="vibrate">Vibrace</string>
+    <string name="led_light">LED světlo</string>
+    <string name="notifications_extra">Další</string>
+    <string name="notifications_everywhere">Upozorňovat vždy</string>
+    <string name="notifications_everywhere_description">I pokud je otevřeno hlavní okno aplikace.</string>
 
-    <string name="setup_notifications">Visit app settings to set up notifications</string>
+    <string name="setup_notifications">Nastavte upozornění v Nastavení aplikace</string>
 
 </resources>
