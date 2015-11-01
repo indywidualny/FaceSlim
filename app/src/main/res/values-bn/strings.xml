@@ -23,9 +23,9 @@
     <string name="author">by Krzysztof \'Koras\' Grabowski</string>
   
     <string name="title_activity_settings">সেটিংস</string>
-    <string name="title_activity_about">অ্যাবাউট &amp; author</string>
+    <string name="title_activity_about"> অ্যাবাউট &amp; author</string>
     <string name="preference_category1">ইন্টারফেস</string>
-    <string name="preference_category2">উন্নত সেটিংস</string>
+    <string name="preference_category2"> উন্নত সেটিংস </string>
     <string name="progress_bar">প্রোগ্রেস বার </string>
     <string name="transparent_nav">ট্রান্সপারেন্ট নাভবার  &#8635;</string>
     <string name="transparent_nav_description"> কিট ক্যাট এবং ললিপপ . ট্রান্সপারেন্ট সিস্টেম নেভিগেসান কিস .</string>
@@ -72,8 +72,8 @@
     
     <string name="notifications_service_created"> নটিফিকেসন্স অ্যাক্টিভ আছে   </string>
    
-    <string name="notifications_settings">Notifications settings</string>
-    <string name="notifications_settings_description">Additional settings. Choose time interval, set up sounds, LED and vibration.</string>
+    <string name="notifications_settings">নটিফিকেসান সেটিংস্‌ </string>
+    <string name="notifications_settings_description"> অতিরিক্ত সেটিংস্‌ . সময় বিরতি , সাউন্ড সেট আপ , লেড ও ভাইব্রেসন চুজ করুন .</string>
 
     <string-array name="intervalPrefTitles">
         <item>5 মিনিট </item>
