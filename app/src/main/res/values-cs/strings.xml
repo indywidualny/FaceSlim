@@ -21,9 +21,6 @@
     </string-array>
 
     <string name="author">by Krzysztof \'Koras\' Grabowski</string>
-    <string name="github_link" translatable="false"><a href="https://github.com/indywidualny/FaceSlim">github.com/indywidualny/FaceSlim</a></string>
-    <string name="f_droid_link" translatable="false"><a href="https://f-droid.org/app/org.indywidualni.fblite">f-droid.org/app/org.indywidualni.fblite</a></string>
-    <string name="indywidualni_link" translatable="false"><a href="http://indywidualni.org">indywidualni.org</a></string>
 
     <string name="title_activity_settings">Nastavení</string>
     <string name="title_activity_about">O aplikaci a vývojáři</string>
@@ -72,9 +69,7 @@
     <string name="activate_notifications">Aktivní upozornění</string>
     <string name="get_feed">Získejte svůj kanál upozornění</string>
     <string name="get_feed_description">Klepněte sem, najděte svůj unikátní kanál upozornění RSS, zkopírujte adresu a vložte ji o pole výš.</string>
-    <string name="get_feed_link" translatable="false">https://goo.gl/t3vJ33</string>
     <string name="notifications_service_created">Upozornění jsou aktivní</string>
-    <string name="facebook" translatable="false">Facebook</string>
     <string name="notifications_settings">Nastavení upozornění</string>
     <string name="notifications_settings_description">Další nastavení. Nastavte časovou prodlevu, zvuky, LED a vibrace.</string>
 

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingTranslation">
+
+    <string name="app_name">Face Slim</string>
+    <string name="image_chooser">ইমেজ চুজার </string>
+    <string name="loading_link">লিঙ্ক ওপেন করা হছে </string>
+    <string name="applying_changes">পরিবর্তনগুলির প্রয়োগ</string>
+
+    <string-array name="item_array">
+        <item>নিউজ ফিড</item>
+        <item>মেসেজেস </item>
+        <item>চ্যাট (ফ্রেন্ডস অনলাইন )</item>
+        <item> গ্রুপ্স </item>
+        <item>ইভেন্টস </item>
+        <item>অ্যাপ সেটিংস </item>
+        <item>অ্যাবাউট &amp; author</item>
+        <item>টারমিনেট</item>
+        <item>জাম্প টু টপ \u0020 &#8593;</item>
+    </string-array>
+
+    <string name="author">by Krzysztof \'Koras\' Grabowski</string>
+  
+    <string name="title_activity_settings">সেটিংস</string>
+    <string name="title_activity_about">অ্যাবাউট &amp; author</string>
+    <string name="preference_category1">ইন্টারফেস</string>
+    <string name="preference_category2">উন্নত সেটিংস</string>
+    <string name="progress_bar">প্রোগ্রেস বার </string>
+    <string name="transparent_nav">ট্রান্সপারেন্ট নাভবার  &#8635;</string>
+    <string name="transparent_nav_description"> কিট ক্যাট এবং ললিপপ . ট্রান্সপারেন্ট সিস্টেম নেভিগেসান কিস .</string>
+    <string name="clear_cache">ক্লিয়ার ক্যাচে </string>
+    <string name="clear_cache_description">ক্লিয়ার অ্যাপ ক্যাচে. এটা লগ আউট করে দেবে .</string>
+    <string name="email_author">কন্টাক্ট মি </string>
+    <string name="choose_email_client">চুজ  ইমেইল  ক্লাইএন্ত  </string>
+    <string name="notifications">নটিফিকেসন্স </string>
+    <string name="no_network"> আপনি এখন অফলাইনে ;)</string>
+    <string name="hardware_acceleration"> হার্ডওয়্যার আক্সিলারেসন  &#8635;</string>
+    <string name="hardware_acceleration_description">ডিসএবল ইট অনলি অন  লো মেমরি  ডিভাইসেস  ( ইন কেস  অফ  প্রব্লেমস).</string>
+    <string name="share_link">শেয়ার  দা  লিঙ্ক </string>
+    <string name="long_clicks">লঙ  ক্লিক্স </string>
+    <string name="long_clicks_description"> কোন লিঙ্ক বা ইমেজ কে শেয়ার করতে লম্বা ক্লিক করুন  </string>
+    <string name="me_google_play">গুগুল  প্লে </string>
+    <string name="preference_category3">এক্সপেরিমেন্টাল </string>
+    <string name="dark_theme">ডার্ক থিম </string>
+    <string name="dark_theme_description">টার্ন  ফেসবুক  ব্ল্যাক . AMOLED পর্দা কৃতজ্ঞ হবে.</string>
+    <string name="fixed_nav">ফিক্সড  ব্লু  বার </string>
+    <string name="fixed_nav_description">ফেসবুক  নেভিগেসান  বার  অলয়েস  অন  টপ .</string>
+    <string name="facebook_zero">ফেসবুক জিরো </string>
+    <string name="facebook_zero_description">নো ডাটা চেঞ্জেস . জি এস এম  ডিপেনডেন্ত .  ওয়ার্কস  ডিউরিং  মোবাইল  নেটওয়ার্ক  কানেকশন .</string>
+    <string name="facebook_zero_active">ফেসবুক  জিরো  ইজ  একটিভ </string> 
+    <string name="preference_category4">এডিশোনাল </string>
+    <string name="quick_guide">কুইক স্টার্ট  গাইড </string>
+    <string name="messages">মেসেজেস </string>
+    <string name="donate_paypal">ডোনেট  \u0020 –\u0020 পেপাল </string>
+    <string name="paypal_url" formatted="false">https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=koras%2eevil%40gmail%2ecom&amp;lc=GB&amp;item_name=Krzysztof%20Grabowski&amp;currency_code=USD&amp;bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted</string>
+
+    <string-array name="drawerPosTitles">
+        <item> বা দিকে </item>
+        <item> ডান দিকে </item>
+    </string-array>
+
+    <string name="drawer_pos">স্লাইডিঙ মেনু পজিশন  &#8635;</string>
+    <string name="drawer_pos_description">মেনু স্ক্রীন এর সাইডে .</string>
+    <string name="preference_category5"> নটিফিকেসন্স   </string>
+    <string name="notifications_feed_url"> নটিফিকেসন্স ফিড </string>
+    <string name="interval_pref">চেকিং এর জন্যে বিরতি </string>
+    <string name="interval_pref_description"> নটিফিকেসন্স ফিড সব চেক করবে .</string>
+    <string name="activate_notifications"> অ্যাক্টিভ  নটিফিকেসন্স </string>
+    <string name="get_feed">গেট  ইয়র  নটিফিকেসন্স ফিড </string>
+    <string name="get_feed_description"> নিজের  উনিক নটিফিকেসান  খুঁজে পেতে ফিল্ড এ ক্লিক করুন  অ্যাড্রেস কপি করুন  ও পেস্ট করুন .</string>
+    
+    <string name="notifications_service_created"> নটিফিকেসন্স অ্যাক্টিভ আছে   </string>
+   
+    <string name="notifications_settings">Notifications settings</string>
+    <string name="notifications_settings_description">Additional settings. Choose time interval, set up sounds, LED and vibration.</string>
+
+    <string-array name="intervalPrefTitles">
+        <item>5 মিনিট </item>
+        <item>15 মিনিট</item>
+        <item>30 মিনিট</item>
+        <item>1 ঘণ্টা </item>
+        <item>3 ঘণ্টা</item>
+        <item>6 ঘণ্টা</item>
+    </string-array>
+
+    <string name="all_notifications">অল  নটিফিকেসন্স</string>
+    <string name="notification_sound">নটিফিকেসন্  সাউন্ড </string>
+    <string name="notification_sound_description"> রিংটোন চুজ করুন বা সাইলেন্ট করুন : \u0020</string>
+    <string name="silent"> সাউন্ড নেই </string>
+    <string name="vibrate"> ভাইব্রেসন্স </string>
+    <string name="led_light">লেড লাইট </string>
+    <string name="notifications_extra">অ্যাডিশোনাল </string>
+    <string name="notifications_everywhere"> অলয়েস নটিফাই </string>
+    <string name="notifications_everywhere_description"> আপনি যখন অ্যাপ এর মেইন স্ক্রীন এ আছেন .</string>
+
+    <string name="setup_notifications"> নটিফিকেসন্স সেট করতে অ্যাপ সেটিং দেখুন </string>
+
+</resources>
