@@ -10,6 +10,8 @@ Changelog & what makes the application awesome:
 * new name and icon to avoid being recognized as the official Facebook app
 * German translation (thanks [de-live-gdev](https://github.com/de-live-gdev))
 * Serbian translation (thanks [pejakm](https://github.com/pejakm))
+* Czech translation (thanks [panenka](https://github.com/panenka))
+* Bengali translation (thanks [G33KS44n](https://github.com/G33KS44n))
 * Android Marshmallow support
 * new support libraries
 * minor improvements
