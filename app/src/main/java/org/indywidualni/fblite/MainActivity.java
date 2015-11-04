@@ -49,6 +49,7 @@ public class MainActivity extends Activity {
     private SwipeRefreshLayout swipeRefreshLayout;
     private WebView webView;
     private ProgressBar progressBar;
+    private Dialog splashScreen;
 
     // variables for camera and choosing files methods
     private static final int FILECHOOSER_RESULTCODE = 1;
@@ -85,6 +86,9 @@ public class MainActivity extends Activity {
             onCoachMark();
             // save the fact that the app has been started at least once
             preferences.edit().putBoolean("first_run", false).apply();
+        } else {
+            // show the splash screen when the app is starting
+            showSplashScreen();
         }
 
         // start the service when it's activated but somehow it's not running (after app update for example)
@@ -209,6 +213,9 @@ public class MainActivity extends Activity {
                     // if progress bar is disabled hide it immediately
                     progressBar.setVisibility(ProgressBar.GONE);
                 }
+                // hide the splash screen showed when the app is starting
+                if (progress == 100) // in case of null during the very first run
+                    try { splashScreen.hide(); } catch (Exception ignore) {}
             }
 
             // for Lollipop, all in one
@@ -688,11 +695,20 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
+                // notifications setup notice
+                Toast.makeText(getApplicationContext(), getString(R.string.setup_notifications), Toast.LENGTH_SHORT).show();
             }
         });
         dialog.show();
-        // notifications setup notice
-        Toast.makeText(getApplicationContext(), getString(R.string.setup_notifications), Toast.LENGTH_SHORT).show();
+    }
+
+    // show the splash screen when the app is starting
+    private void showSplashScreen() {
+        splashScreen = new Dialog(this);
+        splashScreen.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        splashScreen.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        splashScreen.setContentView(R.layout.splash_screen);
+        splashScreen.show();
     }
 
 }
