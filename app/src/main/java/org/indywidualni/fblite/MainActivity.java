@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -88,6 +89,7 @@ public class MainActivity extends Activity {
             preferences.edit().putBoolean("first_run", false).apply();
         } else {
             // show the splash screen when the app is starting
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
             showSplashScreen();
         }
 
@@ -215,7 +217,10 @@ public class MainActivity extends Activity {
                 }
                 // hide the splash screen showed when the app is starting
                 if (progress == 100) // in case of null during the very first run
-                    try { splashScreen.hide(); } catch (Exception ignore) {}
+                    try {
+                        splashScreen.hide();
+                        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+                    } catch (Exception ignore) {}
             }
 
             // for Lollipop, all in one
@@ -704,7 +709,7 @@ public class MainActivity extends Activity {
 
     // show the splash screen when the app is starting
     private void showSplashScreen() {
-        splashScreen = new Dialog(this);
+        splashScreen = new Dialog(this, R.style.Theme_AppCompat_Light_NoActionBar);
         splashScreen.requestWindowFeature(Window.FEATURE_NO_TITLE);
         splashScreen.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         splashScreen.setContentView(R.layout.splash_screen);
