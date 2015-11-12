@@ -1,95 +1,67 @@
-body, #root, .storyStream, ._2v9s,
-._4g34, ._5pxb, ._55wq, ._53_-, ._52x1, ._55ws, ._u42, .jx-result,
-.jx-typeahead-results, ._56bt,
-._52x7, ._vqv, ._4g33, ._5rgt, .popover_flyout, .flyout,
-#m_newsfeed_stream,
-._55wo, ._3iln, .mentions-suggest,
-#header, ._xy, ._bgx,
-.acb, .acg, .aclb, textarea,
-._59e9, .nontouch ._5ui0,
-input[type=text],
-.acw, ._5up8, ._5kgn,
-.tlLinkContainer, .aps,
-.jewel .flyout .header, .appCenterCategorySelectorButton,
-.tlBody, #timelineBody, .timelineX, .timeline .feed, .timeline .tlPrelude, .timeline .tlFeedPlaceholder,
-.touch ._5c9u, .touch ._5ca9, .innerLink,
-._55wm, .timelinePublisher, ._5dy4, ._52x3, #m_group_stories_container, .albums, .subpage,
-._uwu, ._uww, .scrollAreaBody, .al, .apl, .structuredPublisher, .groupChromeView
-{
-  background : rgb(0, 0, 0) !important;
+body, #root, .storyStream, ._2v9s, ._4g34, ._5pxb, ._55wq, ._53_-, ._52x1, ._55ws, ._u42, .jx-result,
+.jx-typeahead-results, ._56bt, ._52x7, ._vqv, ._4g33, ._5rgt, .popover_flyout, .flyout, #m_newsfeed_stream,
+._55wo, ._3iln, .mentions-suggest, #header, ._xy, ._bgx, .acb, .acg, .aclb, textarea, ._59e9, .nontouch ._5ui0,
+input[type=text], .acw, ._5up8, .tlLinkContainer, .aps, .jewel .flyout .header, .tlBody, #timelineBody,
+.timelineX, .timeline .feed, .timeline .tlPrelude, .timeline .tlFeedPlaceholder, .touch ._5c9u,
+.touch ._5ca9, ._55wm, .timelinePublisher, ._uwu, ._uww, .scrollAreaBody, .al, ._djv, ._bjg, ._tn0, ._5kgn {
+  background: #000000 !important;
 }
-
-._50cg._2ss
-{
-  background-color: rgb(0, 0, 0) !important;
-}
-
-.composerLinkText, .fcg
-{
-  color: rgb(210, 210, 210) !important;
+.composerLinkText, .fcg {
+  color: #d2d2d2 !important;
 }
 
 /* white text */
-body,textarea,
-.composerTextSelected,
-.composerInput, .mentions-input,
-input[type=text], ._5001,
-.timeline .cover .profileName, .appListTitle, ._52jd, ._52jb, ._52jg, ._5qc3,
-.tlActorText, .tlLinkTitle, ._5379, ._5cqn, ._592p, ._3c9l, ._4yrh, .name, .btn, .upText,
-.tlLinkTitleOnly, ._5rgt, ._52x2, ._52jh, ._52ja, ._56bz, ._2tbu, ._1mwn, ._55sr, ._5t6r
-{
-color: rgb(210,210,210) !important;
+
+body, textarea, .composerTextSelected, .composerInput, .mentions-input, input[type=text],
+._5001, .timeline .cover .profileName, .tlActorText, .tlLinkTitle, ._5379, ._5cqn, ._592p, .tlLinkTitleOnly, ._5rgt,
+._52x2, ._52jh, ._52ja, ._56bz, ._1_oe, ._52lz {
+  color: #d2d2d2 !important;
 }
 
 /* blue link text */
-a, .actor, .mfsl, .fcw, .title, .blueName, ._5aw4, ._vqv, ._5yll, ._5qc3, ._52lz
-{
+
+a, .actor, .mfsl, .fcw, .title, .blueName, ._5aw4, ._vqv, ._5yll {
   color: #DFEFF0 !important;
 }
 
 /* dark important */
-.acy,
-.nontouch ._55mb .actor-link,
-.nontouch a.btnD,
-.inlineMedia.storyAttachment
-{
+
+.acy, .nontouch ._55mb .actor-link, .nontouch a.btnD, .inlineMedia.storyAttachment {
   background-color: #304702 !important;
 }
-
-.statusBox, ._5whq, ._56bt, ._5c5h,
-.composerInput, .mentions-input, ._1svy
-{
-  background: rgb(50, 50, 50) !important;
+.statusBox, ._5whq, ._56bt, .composerInput, .mentions-input, ._bji {
+  background: #323232 !important;
 }
-
-.ufiBorder
-{
+.ufiBorder {
   border-color: #555 !important;
 }
 
 /* buttons */
-.button>a.touchable, .btn, .touch ._5c9u
-{
-  background-color: rgb(50, 50, 50) !important;
-}
 
-.flyout
-{
-  border: 1px solid rgb(40, 40, 40) !important;
+.button>a.touchable, .btn, .touch ._5c9u {
+  background-color: #323232 !important;
+}
+.flyout {
+  border: 1px solid #000 !important;
 }
 
 /* context menu */
-._5c0e
-{
-  background: rgb(150,150,150) !important;
-}
 
-article, ._4o50, .acw
-{
-  border: 1px solid rgb(40, 40, 40) !important;
+._5c0e {
+  background: #969696 !important;
 }
-
-article h3
-{
+article, ._4o50, .acw, ._53_-, ._3wjp, ._usq, ._55wq, ._400s, ._15ny, ._4g33 {
+  border: 1px dotted #383838 !important;
+}
+._1_oa, ._bmx, ._52x1 {
+  border-bottom: 1px dotted #383838 !important;
+}
+article h3 {
   color: #999 !important;
+}
+
+/* no border */
+.aclb {
+  border-top: 0px;
+  border-bottom: 0px;
 }
