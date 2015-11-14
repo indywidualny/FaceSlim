@@ -145,7 +145,7 @@ public class MainActivity extends Activity {
         }
 
         // define url that will open in webView
-        String webViewUrl = "http://m.facebook.com";
+        String webViewUrl = "https://m.facebook.com";
 
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
         swipeRefreshLayout.setOnRefreshListener(onRefreshListener);
@@ -164,7 +164,30 @@ public class MainActivity extends Activity {
         boolean isConnectedMobile = Connectivity.isConnectedMobile(getApplicationContext());
         boolean isFacebookZero = preferences.getBoolean("facebook_zero", false);
 
-        // when someone clicks a Facebook link start the app with that link
+        /** get a subject and text and check if this is a link trying to be shared */
+        String sharedSubject = getIntent().getStringExtra(Intent.EXTRA_SUBJECT);
+        String sharedUrl = getIntent().getStringExtra(Intent.EXTRA_TEXT);
+
+        // if we have a valid URL that was shared by us, open the sharer
+        if (sharedUrl != null) {
+            if (!sharedUrl.equals("")) {
+                // check if the URL being shared is a proper web URL
+                if (!sharedUrl.startsWith("http://") || !sharedUrl.startsWith("https://")) {
+                    // if it's not, let's see if it includes an URL in it (prefixed with a message)
+                    int startUrlIndex = sharedUrl.indexOf("http:");
+                    if (startUrlIndex > 0) {
+                        // seems like it's prefixed with a message, let's trim the start and get the URL only
+                        sharedUrl = sharedUrl.substring(startUrlIndex);
+                    }
+                }
+                // final step, set the proper Sharer...
+                webViewUrl = String.format("https://m.facebook.com/sharer.php?u=%s&t=%s", sharedUrl, sharedSubject);
+                // ... and parse it just in case
+                webViewUrl = Uri.parse(webViewUrl).toString();
+            }
+        }
+
+        /** when someone clicks a Facebook link start the app with this link */
         if ((getIntent() != null && getIntent().getDataString() != null) && (!isFacebookZero || !isConnectedMobile)) {
             webViewUrl = getIntent().getDataString();
             // show information about loading an external link
@@ -175,7 +198,7 @@ public class MainActivity extends Activity {
             Toast.makeText(getApplicationContext(), getString(R.string.facebook_zero_active), Toast.LENGTH_SHORT).show();
         }
 
-        // if opened by a notification or a shortcut
+        /** if opened by a notification or a shortcut */
         try {
             //noinspection ConstantConditions
             if (getIntent().getExtras().getString("start_url") != null) {
@@ -377,9 +400,14 @@ public class MainActivity extends Activity {
                 String url = (String) msg.getData().get("url");
 
                 if (url != null) {
-                    // "clean" the url, remove Facebook tracking redirection while sharing
-                    url = url.replace("http://lm.facebook.com/l.php?u=", "").replace("%3A", ":").replace("%2C", ",")
-                            .replace("%2F", "/").replaceAll("&h=.*", "").replace("https://m.facebook.com/l.php?u=", "");
+                    // "clean" the url and remove Facebook tracking redirection while sharing
+                    url = url.replace("http://lm.facebook.com/l.php?u=", "")
+                            .replace("https://m.facebook.com/l.php?u=", "")
+                            .replace("http://0.facebook.com/l.php?u=", "")
+                            .replaceAll("&h=.*", "").replaceAll("\\?acontext=.*", "");
+
+                    // ultimate decoding, recreate all the special characters
+                    url = urlDecode(url);
 
                     Log.v("Link long clicked", url);
                     // create share intent for long clicked url
@@ -390,6 +418,17 @@ public class MainActivity extends Activity {
                 }
             }
         }
+    }
+
+    // url decoder, recreate all the special characters
+    private static String urlDecode(String url) {
+        return url.replace("%3C", "<").replace("%3E", ">").replace("%23", "#").replace("%25", "%")
+                .replace("%7B", "{").replace("%7D", "}").replace("%7C", "|").replace("%5C", "\\")
+                .replace("%5E", "^").replace("%7E", "~").replace("%5B", "[").replace("%5D", "]")
+                .replace("%60", "`").replace("%3B", ";").replace("%2F", "/").replace("%3F", "?")
+                .replace("%3A", ":").replace("%40", "@").replace("%3D", "=").replace("%26", "&")
+                .replace("%24", "$").replace("%2B", "+").replace("%22", "\"").replace("%2C", ",")
+                .replace("%20", " ");
     }
 
     // create linkHandler, OnLongClickListener wants it bad
@@ -422,17 +461,16 @@ public class MainActivity extends Activity {
         // code for all versions except of Lollipop
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
 
-            if (requestCode==FILECHOOSER_RESULTCODE) {
-                if (null == this.mUploadMessage) {
+            if (requestCode == FILECHOOSER_RESULTCODE) {
+                if (null == this.mUploadMessage)
                     return;
-                }
 
-                Uri result=null;
+                Uri result = null;
 
                 try {
-                    if (resultCode != RESULT_OK) {
+                    if (resultCode != RESULT_OK)
                         result = null;
-                    } else {
+                    else {
                         // retrieve from the private variable if the intent is null
                         result = data == null ? mCapturedImageURI : data.getData();
                     }
@@ -630,7 +668,34 @@ public class MainActivity extends Activity {
         // grab an url if opened by clicking a link
         String webViewUrl = getIntent().getDataString();
 
-        // if opened by a notification or a shortcut
+        // code optimization
+        boolean isConnectedMobile = Connectivity.isConnectedMobile(getApplicationContext());
+        boolean isFacebookZero = preferences.getBoolean("facebook_zero", false);
+
+        /** get a subject and text and check if this is a link trying to be shared */
+        String sharedSubject = getIntent().getStringExtra(Intent.EXTRA_SUBJECT);
+        String sharedUrl = getIntent().getStringExtra(Intent.EXTRA_TEXT);
+
+        // if we have a valid URL that was shared by us, open the sharer
+        if (sharedUrl != null) {
+            if (!sharedUrl.equals("")) {
+                // check if the URL being shared is a proper web URL
+                if (!sharedUrl.startsWith("http://") || !sharedUrl.startsWith("https://")) {
+                    // if it's not, let's see if it includes an URL in it (prefixed with a message)
+                    int startUrlIndex = sharedUrl.indexOf("http:");
+                    if (startUrlIndex > 0) {
+                        // seems like it's prefixed with a message, let's trim the start and get the URL only
+                        sharedUrl = sharedUrl.substring(startUrlIndex);
+                    }
+                }
+                // final step, set the proper Sharer...
+                webViewUrl = String.format("https://m.facebook.com/sharer.php?u=%s&t=%s", sharedUrl, sharedSubject);
+                // ... and parse it just in case
+                webViewUrl = Uri.parse(webViewUrl).toString();
+            }
+        }
+
+        /** if opened by a notification or a shortcut */
         try {
             if (getIntent().getExtras().getString("start_url") != null)
                 webViewUrl = getIntent().getExtras().getString("start_url");
@@ -639,8 +704,8 @@ public class MainActivity extends Activity {
                     NotificationsService.cancelAllNotifications();
         } catch (Exception ignored) {}
 
-        // load a grabbed url instead of the current page
-        if (preferences.getBoolean("facebook_zero", false) && Connectivity.isConnectedMobile(getApplicationContext()))
+        /** load a grabbed url instead of the current page */
+        if (isFacebookZero && isConnectedMobile)
             Toast.makeText(getApplicationContext(), getString(R.string.facebook_zero_active), Toast.LENGTH_SHORT).show();
         else
             webView.loadUrl(webViewUrl);
