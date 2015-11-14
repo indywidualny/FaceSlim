@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingTranslation">
+
+    <string name="app_name">Face Slim</string>
+    <string name="image_chooser">Escolher imagem</string>
+    <string name="loading_link">Abrindo um link</string>
+    <string name="applying_changes">Aplicando altereções</string>
+
+    <string-array name="item_array">
+        <item>Feed de notícias</item>
+        <item>Messagens</item>
+        <item>Chat (Friends Online)</item>
+        <item>Grupos</item>
+        <item>Eventos</item>
+        <item>Configuarções do App</item>
+        <item>Sobre &amp; Desenv.</item>
+        <item>Encerrar</item>
+        <item>Ir ao topo\u0020 &#8593;</item>
+    </string-array>
+
+    <string name="author">por Krzysztof \'Koras\' Grabowski</string>
+    <string name="github_link" translatable="false"><a href="https://github.com/indywidualny/FaceSlim">github.com/indywidualny/FaceSlim</a></string>
+    <string name="f_droid_link" translatable="false"><a href="https://f-droid.org/app/org.indywidualni.fblite">f-droid.org/app/org.indywidualni.fblite</a></string>
+    <string name="indywidualni_link" translatable="false"><a href="http://indywidualni.org">indywidualni.org</a></string>
+
+    <string name="title_activity_settings">Configurações</string>
+    <string name="title_activity_about">Sobre &amp; Desenv.</string>
+    <string name="preference_category1">Interface</string>
+    <string name="preference_category2">Configurações Avançadas</string>
+    <string name="progress_bar">Barra de progresso</string>
+    <string name="transparent_nav">Barra de navegação transparente &#8635;</string>
+    <string name="transparent_nav_description">KitKat ed Lollipop. Teclas de navegação transparente.</string>
+    <string name="clear_cache">Limpar cache</string>
+    <string name="clear_cache_description">Limpar cache do aplicativo. Ele também irá desconectá-lo.</string>
+    <string name="email_author">Contato</string>
+    <string name="choose_email_client">Escolher cliente de e-mail</string>
+    <string name="notifications">Notificações</string>
+    <string name="no_network">Você está offline ;)</string>
+    <string name="hardware_acceleration">Aceleração por Hardware &#8635;</string>
+    <string name="hardware_acceleration_description">Desativá-lo apenas em dispositivos de memória de baixo (em caso de problemas).</string>
+    <string name="share_link">Compartilhar o link</string>
+    <string name="long_clicks">Clicks longo</string>
+    <string name="long_clicks_description">Click long sobre um link ou uma imagem para compartilhar.</string>
+    <string name="me_google_play">Google Play</string>
+    <string name="preference_category3">Experimental</string>
+    <string name="dark_theme">Tema Escuro</string>
+    <string name="dark_theme_description">Torne o Facebook preto. Sua tela AMOLED irá apreciar.</string>
+    <string name="fixed_nav">Fixar a barra azul</string>
+    <string name="fixed_nav_description">A barra de navegação do Facebook ficará sempre no topo.</string>
+    <string name="facebook_zero">Facebook Zero</string>
+    <string name="facebook_zero_description">Não há taxas de dados. Depende do provedor GSM dependente. Funciona durante a conexões de rede móvel.</string>
+    <string name="facebook_zero_active">Facebook Zero está ativado</string>
+    <string name="preference_category4">Adicional</string>
+    <string name="quick_guide">Guia de Início Rápido</string>
+    <string name="messages">Mensagens</string>
+    <string name="donate_paypal">Doar\u0020 –\u0020 PayPal</string>
+    <string name="paypal_url" formatted="false">https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=koras%2eevil%40gmail%2ecom&amp;lc=GB&amp;item_name=Krzysztof%20Grabowski&amp;currency_code=USD&amp;bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted</string>
+
+    <string-array name="drawerPosTitles">
+        <item>na esquerda</item>
+        <item>na direita</item>
+    </string-array>
+
+    <string name="drawer_pos">Sliding menu position &#8635;</string>
+    <string name="drawer_pos_description">Menu is %s side of the screen.</string>
+    <string name="preference_category5">Notifications</string>
+    <string name="notifications_feed_url">Notifications feed</string>
+    <string name="interval_pref">Time interval for checking</string>
+    <string name="interval_pref_description">Notifications feed will be checked every %s.</string>
+    <string name="activate_notifications">Activate notifications</string>
+    <string name="get_feed">Get your notifications feed</string>
+    <string name="get_feed_description">Click the field, find your unique notifications RSS, copy the address and paste it above.</string>
+    <string name="get_feed_link" translatable="false">https://goo.gl/t3vJ33</string>
+    <string name="notifications_service_created">Notifications active</string>
+    <string name="facebook" translatable="false">Facebook</string>
+    <string name="notifications_settings">Notifications settings</string>
+    <string name="notifications_settings_description">Additional settings. Choose time interval, set up sounds, LED and vibration.</string>
+
+    <string-array name="intervalPrefTitles">
+        <item>5 minutes</item>
+        <item>15 minutes</item>
+        <item>30 minutes</item>
+        <item>1 hour</item>
+        <item>3 hours</item>
+        <item>6 hours</item>
+    </string-array>
+
+    <string name="all_notifications">All notifications</string>
+    <string name="notification_sound">Notification sound</string>
+    <string name="notification_sound_description">Choose a ringtone or silence: \u0020</string>
+    <string name="silent">No sound</string>
+    <string name="vibrate">Vibrations</string>
+    <string name="led_light">LED light</string>
+    <string name="notifications_extra">Additional</string>
+    <string name="notifications_everywhere">Always notify</string>
+    <string name="notifications_everywhere_description">Also when you are on the main screen of the app.</string>
+
+    <string name="setup_notifications">Visit app settings to set up notifications</string>
+
+</resources>
