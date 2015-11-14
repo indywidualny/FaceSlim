@@ -142,48 +142,54 @@ ADDED from AndroidManifest.xml:54:17
 		ADDED from AndroidManifest.xml:54:23
 	android:scheme
 		ADDED from AndroidManifest.xml:54:51
+intent-filter#android.intent.action.SEND+android.intent.category.DEFAULT
+ADDED from AndroidManifest.xml:61:13
+action#android.intent.action.SEND
+ADDED from AndroidManifest.xml:62:17
+	android:name
+		ADDED from AndroidManifest.xml:62:25
 activity#org.indywidualni.fblite.SettingsActivity
-ADDED from AndroidManifest.xml:62:9
+ADDED from AndroidManifest.xml:67:9
 	android:label
-		ADDED from AndroidManifest.xml:64:13
+		ADDED from AndroidManifest.xml:69:13
 	android:parentActivityName
-		ADDED from AndroidManifest.xml:65:13
+		ADDED from AndroidManifest.xml:70:13
 	android:configChanges
-		ADDED from AndroidManifest.xml:66:13
+		ADDED from AndroidManifest.xml:71:13
 	android:theme
-		ADDED from AndroidManifest.xml:67:13
+		ADDED from AndroidManifest.xml:72:13
 	android:name
-		ADDED from AndroidManifest.xml:63:13
+		ADDED from AndroidManifest.xml:68:13
 meta-data#android.support.PARENT_ACTIVITY
-ADDED from AndroidManifest.xml:68:13
+ADDED from AndroidManifest.xml:73:13
 	android:value
-		ADDED from AndroidManifest.xml:70:17
+		ADDED from AndroidManifest.xml:75:17
 	android:name
-		ADDED from AndroidManifest.xml:69:17
+		ADDED from AndroidManifest.xml:74:17
 activity#org.indywidualni.fblite.AboutActivity
-ADDED from AndroidManifest.xml:72:9
+ADDED from AndroidManifest.xml:77:9
 	android:label
-		ADDED from AndroidManifest.xml:74:13
+		ADDED from AndroidManifest.xml:79:13
 	android:parentActivityName
-		ADDED from AndroidManifest.xml:75:13
+		ADDED from AndroidManifest.xml:80:13
 	android:theme
-		ADDED from AndroidManifest.xml:76:13
+		ADDED from AndroidManifest.xml:81:13
 	android:name
-		ADDED from AndroidManifest.xml:73:13
+		ADDED from AndroidManifest.xml:78:13
 activity#org.indywidualni.fblite.MessagesShortcutActivity
-ADDED from AndroidManifest.xml:81:9
+ADDED from AndroidManifest.xml:86:9
 	android:label
-		ADDED from AndroidManifest.xml:83:13
+		ADDED from AndroidManifest.xml:88:13
 	android:icon
-		ADDED from AndroidManifest.xml:84:13
+		ADDED from AndroidManifest.xml:89:13
 	android:name
-		ADDED from AndroidManifest.xml:82:13
+		ADDED from AndroidManifest.xml:87:13
 intent-filter#android.intent.action.CREATE_SHORTCUT+android.intent.category.DEFAULT
-ADDED from AndroidManifest.xml:85:13
+ADDED from AndroidManifest.xml:90:13
 action#android.intent.action.CREATE_SHORTCUT
-ADDED from AndroidManifest.xml:86:17
+ADDED from AndroidManifest.xml:91:17
 	android:name
-		ADDED from AndroidManifest.xml:86:25
+		ADDED from AndroidManifest.xml:91:25
 provider#net.grandcentrix.tray.provider.TrayProvider
 ADDED from net.grandcentrix.tray:tray:0.9.2:12:9
 	android:authorities
