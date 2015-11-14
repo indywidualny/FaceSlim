@@ -11,10 +11,10 @@
     <string-array name="item_array">
         <item>Feed de notícias</item>
         <item>Messagens</item>
-        <item>Chat (Friends Online)</item>
+        <item>Chat (Amigos Online)</item>
         <item>Grupos</item>
         <item>Eventos</item>
-        <item>Configuarções do App</item>
+        <item>Configurações do App</item>
         <item>Sobre &amp; Desenv.</item>
         <item>Encerrar</item>
         <item>Ir ao topo\u0020 &#8593;</item>
@@ -31,9 +31,9 @@
     <string name="preference_category2">Configurações Avançadas</string>
     <string name="progress_bar">Barra de progresso</string>
     <string name="transparent_nav">Barra de navegação transparente &#8635;</string>
-    <string name="transparent_nav_description">KitKat ed Lollipop. Teclas de navegação transparente.</string>
+    <string name="transparent_nav_description">KitKat e Lollipop. Teclas de navegação transparente.</string>
     <string name="clear_cache">Limpar cache</string>
-    <string name="clear_cache_description">Limpar cache do aplicativo. Ele também irá desconectá-lo.</string>
+    <string name="clear_cache_description">Limpar cache do aplicativo. Ele também irá desconectar você.</string>
     <string name="email_author">Contato</string>
     <string name="choose_email_client">Escolher cliente de e-mail</string>
     <string name="notifications">Notificações</string>
@@ -82,21 +82,21 @@
         <item>5 minutos</item>
         <item>15 minutos</item>
         <item>30 minutos</item>
-        <item>1 houra</item>
-        <item>3 houras</item>
-        <item>6 houras</item>
+        <item>1 hora</item>
+        <item>3 horas</item>
+        <item>6 horas</item>
     </string-array>
 
-    <string name="all_notifications">Todas motificações</string>
-    <string name="notification_sound">Som de Notification</string>
-    <string name="notification_sound_description">Choose a ringtone or silence: \u0020</string>
-    <string name="silent">No sound</string>
-    <string name="vibrate">Vibrations</string>
-    <string name="led_light">LED light</string>
-    <string name="notifications_extra">Additional</string>
-    <string name="notifications_everywhere">Always notify</string>
-    <string name="notifications_everywhere_description">Also when you are on the main screen of the app.</string>
+    <string name="all_notifications">Todas notificações</string>
+    <string name="notification_sound">Som de notificação</string>
+    <string name="notification_sound_description">Escolhar um toque ou silêncio: \u0020</string>
+    <string name="silent">Sem som</string>
+    <string name="vibrate">Vibração</string>
+    <string name="led_light">Luz LED</string>
+    <string name="notifications_extra">Adicional</string>
+    <string name="notifications_everywhere">Sempre notificar</string>
+    <string name="notifications_everywhere_description">Além disso, quando você está na tela principal do aplicativo.</string>
 
-    <string name="setup_notifications">Visit app settings to set up notifications</string>
+    <string name="setup_notifications">Visite configurações do aplicativo para configurar as notificações</string>
 
 </resources>
