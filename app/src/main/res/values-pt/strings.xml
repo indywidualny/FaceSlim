@@ -59,36 +59,36 @@
     <string name="paypal_url" formatted="false">https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=koras%2eevil%40gmail%2ecom&amp;lc=GB&amp;item_name=Krzysztof%20Grabowski&amp;currency_code=USD&amp;bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted</string>
 
     <string-array name="drawerPosTitles">
-        <item>na esquerda</item>
-        <item>na direita</item>
+        <item>esquerdo</item>
+        <item>direito</item>
     </string-array>
 
-    <string name="drawer_pos">Sliding menu position &#8635;</string>
-    <string name="drawer_pos_description">Menu is %s side of the screen.</string>
-    <string name="preference_category5">Notifications</string>
-    <string name="notifications_feed_url">Notifications feed</string>
-    <string name="interval_pref">Time interval for checking</string>
-    <string name="interval_pref_description">Notifications feed will be checked every %s.</string>
-    <string name="activate_notifications">Activate notifications</string>
-    <string name="get_feed">Get your notifications feed</string>
-    <string name="get_feed_description">Click the field, find your unique notifications RSS, copy the address and paste it above.</string>
+    <string name="drawer_pos">Posição para deslizar o menu &#8635;</string>
+    <string name="drawer_pos_description">O menu está na lado %s da tela.</string>
+    <string name="preference_category5">Notificações</string>
+    <string name="notifications_feed_url">Feed de notificações</string>
+    <string name="interval_pref">Intervalo de tempo para verificação</string>
+    <string name="interval_pref_description">O feed de notificações será checado a cada %s.</string>
+    <string name="activate_notifications">Notificações estão ativadas</string>
+    <string name="get_feed">Obter suas notificações</string>
+    <string name="get_feed_description">Clique no campo, encontre o seu RSS de notificações exclusivo, copie o endereço e cole-o acima.</string>
     <string name="get_feed_link" translatable="false">https://goo.gl/t3vJ33</string>
-    <string name="notifications_service_created">Notifications active</string>
+    <string name="notifications_service_created">Notificações ativadas</string>
     <string name="facebook" translatable="false">Facebook</string>
-    <string name="notifications_settings">Notifications settings</string>
-    <string name="notifications_settings_description">Additional settings. Choose time interval, set up sounds, LED and vibration.</string>
+    <string name="notifications_settings">Configurações de notificações</string>
+    <string name="notifications_settings_description">Configurações adicionais. Escolha intervalo de tempo, sons, LED e vibração.</string>
 
     <string-array name="intervalPrefTitles">
-        <item>5 minutes</item>
-        <item>15 minutes</item>
-        <item>30 minutes</item>
-        <item>1 hour</item>
-        <item>3 hours</item>
-        <item>6 hours</item>
+        <item>5 minutos</item>
+        <item>15 minutos</item>
+        <item>30 minutos</item>
+        <item>1 houra</item>
+        <item>3 houras</item>
+        <item>6 houras</item>
     </string-array>
 
-    <string name="all_notifications">All notifications</string>
-    <string name="notification_sound">Notification sound</string>
+    <string name="all_notifications">Todas motificações</string>
+    <string name="notification_sound">Som de Notification</string>
     <string name="notification_sound_description">Choose a ringtone or silence: \u0020</string>
     <string name="silent">No sound</string>
     <string name="vibrate">Vibrations</string>
