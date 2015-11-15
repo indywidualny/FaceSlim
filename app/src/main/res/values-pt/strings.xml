@@ -21,6 +21,9 @@
     </string-array>
 
     <string name="author">por Krzysztof \'Koras\' Grabowski</string>
+    <string name="github_link" translatable="false"><a href="https://github.com/indywidualny/FaceSlim">github.com/indywidualny/FaceSlim</a></string>
+    <string name="f_droid_link" translatable="false"><a href="https://f-droid.org/app/org.indywidualni.fblite">f-droid.org/app/org.indywidualni.fblite</a></string>
+    <string name="indywidualni_link" translatable="false"><a href="http://indywidualni.org">indywidualni.org</a></string>
 
     <string name="title_activity_settings">Configurações</string>
     <string name="title_activity_about">Sobre &amp; Desenv.</string>
@@ -69,7 +72,9 @@
     <string name="activate_notifications">Notificações estão ativadas</string>
     <string name="get_feed">Obter suas notificações</string>
     <string name="get_feed_description">Clique no campo, encontre o seu RSS de notificações exclusivo, copie o endereço e cole-o acima.</string>
+    <string name="get_feed_link" translatable="false">https://goo.gl/t3vJ33</string>
     <string name="notifications_service_created">Notificações ativadas</string>
+    <string name="facebook" translatable="false">Facebook</string>
     <string name="notifications_settings">Configurações de notificações</string>
     <string name="notifications_settings_description">Configurações adicionais. Escolha intervalo de tempo, sons, LED e vibração.</string>
 
