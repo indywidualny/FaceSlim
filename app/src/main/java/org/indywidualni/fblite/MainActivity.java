@@ -777,11 +777,10 @@ public class MainActivity extends Activity {
     private void showSplashScreen() {
         splashScreen = new Dialog(this, R.style.Theme_AppCompat_Light_NoActionBar);
         splashScreen.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        if (preferences.getBoolean("dark_theme", true)) {
+        if (preferences.getBoolean("dark_theme", false))
             splashScreen.getWindow().setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.splash_dark));
-        } else {
+        else
             splashScreen.getWindow().setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.splash));
-        }
         splashScreen.setContentView(R.layout.splash_screen);
         splashScreen.show();
     }
