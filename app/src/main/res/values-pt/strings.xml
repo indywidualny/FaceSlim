@@ -10,7 +10,7 @@
 
     <string-array name="item_array">
         <item>Feed de notícias</item>
-        <item>Messagens</item>
+        <item>Mensagens</item>
         <item>Chat (Amigos Online)</item>
         <item>Grupos</item>
         <item>Eventos</item>
@@ -39,10 +39,10 @@
     <string name="notifications">Notificações</string>
     <string name="no_network">Você está offline ;)</string>
     <string name="hardware_acceleration">Aceleração por Hardware &#8635;</string>
-    <string name="hardware_acceleration_description">Desativá-lo apenas em dispositivos de memória de baixo (em caso de problemas).</string>
+    <string name="hardware_acceleration_description">Desative apenas em dispositivos de memória de baixo (em caso de problemas).</string>
     <string name="share_link">Compartilhar o link</string>
-    <string name="long_clicks">Clicks longo</string>
-    <string name="long_clicks_description">Click long sobre um link ou uma imagem para compartilhar.</string>
+    <string name="long_clicks">Click longo</string>
+    <string name="long_clicks_description">Click longo sobre um link ou uma imagem para compartilhar.</string>
     <string name="me_google_play">Google Play</string>
     <string name="preference_category3">Experimental</string>
     <string name="dark_theme">Tema Escuro</string>
@@ -50,7 +50,7 @@
     <string name="fixed_nav">Fixar a barra azul</string>
     <string name="fixed_nav_description">A barra de navegação do Facebook ficará sempre no topo.</string>
     <string name="facebook_zero">Facebook Zero</string>
-    <string name="facebook_zero_description">Não há taxas de dados. Depende do provedor GSM dependente. Funciona durante a conexões de rede móvel.</string>
+    <string name="facebook_zero_description">Não há taxas de dados. Depende do provedor GSM. Funciona durante a conexões de rede móvel.</string>
     <string name="facebook_zero_active">Facebook Zero está ativado</string>
     <string name="preference_category4">Adicional</string>
     <string name="quick_guide">Guia de Início Rápido</string>
@@ -64,14 +64,14 @@
     </string-array>
 
     <string name="drawer_pos">Posição para deslizar o menu &#8635;</string>
-    <string name="drawer_pos_description">O menu está na lado %s da tela.</string>
+    <string name="drawer_pos_description">O menu está do lado %s da tela.</string>
     <string name="preference_category5">Notificações</string>
     <string name="notifications_feed_url">Feed de notificações</string>
     <string name="interval_pref">Intervalo de tempo para verificação</string>
     <string name="interval_pref_description">O feed de notificações será checado a cada %s.</string>
     <string name="activate_notifications">Notificações estão ativadas</string>
     <string name="get_feed">Obter suas notificações</string>
-    <string name="get_feed_description">Clique no campo, encontre o seu RSS de notificações exclusivo, copie o endereço e cole-o acima.</string>
+    <string name="get_feed_description">Clique aqui, encontre o seu RSS de notificações exclusivo, copie o endereço e cole-o acima.</string>
     <string name="get_feed_link" translatable="false">https://goo.gl/t3vJ33</string>
     <string name="notifications_service_created">Notificações ativadas</string>
     <string name="facebook" translatable="false">Facebook</string>
