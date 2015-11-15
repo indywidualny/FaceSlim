@@ -20,6 +20,7 @@ import android.os.Message;
 import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
@@ -776,7 +777,11 @@ public class MainActivity extends Activity {
     private void showSplashScreen() {
         splashScreen = new Dialog(this, R.style.Theme_AppCompat_Light_NoActionBar);
         splashScreen.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        splashScreen.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        if (preferences.getBoolean("dark_theme", true)) {
+            splashScreen.getWindow().setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.splash_dark));
+        } else {
+            splashScreen.getWindow().setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.splash));
+        }
         splashScreen.setContentView(R.layout.splash_screen);
         splashScreen.show();
     }
