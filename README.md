@@ -6,6 +6,14 @@ Releases | [pl] wydania: https://github.com/indywidualny/FaceSlim/releases
 
 Changelog & what makes the application awesome:
 
+1.9
+* share links from different apps (it also extracts urls from a plain text)
+* nice splash screen while starting the app
+* links shared by long clicks are perfectly "clean" now
+* Portuguese translation (thanks [antun3s](https://github.com/antun3s))
+* black theme improvements (thanks [drbeat](https://github.com/drbeat))
+* minor improvements
+
 1.8
 * new name and icon to avoid being recognized as the official Facebook app
 * German translation (thanks [de-live-gdev](https://github.com/de-live-gdev))
