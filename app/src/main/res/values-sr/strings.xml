@@ -30,7 +30,7 @@
     <string name="transparent_nav">Прозирна трака навигације &#8635;</string>
     <string name="transparent_nav_description">Киткет и Лолипоп. Прозирни системски навигациони тастери.</string>
     <string name="clear_cache">Очисти кеш</string>
-    <string name="clear_cache_description">Шишћење кеша апликације ће да вас одјави.</string>
+    <string name="clear_cache_description">Чишћење кеша апликације ће да вас одјави.</string>
     <string name="email_author">Контактирајте ме</string>
     <string name="choose_email_client">Одредите клијента за е-пошту</string>
     <string name="notifications">Обавештења</string>
