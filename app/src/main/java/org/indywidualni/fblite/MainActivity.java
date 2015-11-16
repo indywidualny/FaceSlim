@@ -243,7 +243,7 @@ public class MainActivity extends Activity {
                 if (progress == 100) // in case of null during the very first run
                     try {
                         splashScreen.hide();
-                        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+                        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
                     } catch (Exception ignore) {}
             }
 
