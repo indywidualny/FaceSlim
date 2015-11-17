@@ -147,7 +147,7 @@ public class NotificationsService extends Service {
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
                         .setStyle(new NotificationCompat.BigTextStyle().bigText(title))
-                        .setSmallIcon(R.drawable.ic_stat_f)
+                        .setSmallIcon(R.drawable.ic_stat_fs)
                         .setContentTitle(getString(R.string.app_name))
                         .setContentText(title)
                         .setTicker(title)
