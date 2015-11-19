@@ -93,6 +93,6 @@
     <string name="setup_notifications">W ustawieniach możesz aktywować powiadomienia</string>
 
     <string name="no_images">Ignoruj obrazki &#8635;</string>
-    <string name="no_images_description">Nie ładuj żadnych obrazów. Drastycznie oszczędza transfer</string>
+    <string name="no_images_description">Nie ładuj żadnych obrazów. Drastycznie oszczędza transfer.</string>
 
 </resources>

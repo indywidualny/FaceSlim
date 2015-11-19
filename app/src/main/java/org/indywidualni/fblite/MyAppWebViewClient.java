@@ -70,7 +70,7 @@ public class MyAppWebViewClient extends WebViewClient {
 
         // don't display images when they are disabled, we don't need empty placeholders
         if (preferences.getBoolean("no_images", false))
-            view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); node.innerHTML = str; document.body.appendChild(node); } addStyleString('.img{ display: none; }');");
+            view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); node.innerHTML = str; document.body.appendChild(node); } addStyleString('.img, ._5s61, ._5sgg{ display: none; }');");
     }
 
     // read raw files to string (for css files)

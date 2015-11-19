@@ -81,9 +81,6 @@ public class MainActivity extends Activity {
         else
             setContentView(R.layout.activity_main_drawer_right);
 
-        // bind progress bar
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
-
         // if the app is being launched for the first time
         if (preferences.getBoolean("first_run", true)) {
             // show quick start guide
@@ -153,6 +150,9 @@ public class MainActivity extends Activity {
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
         swipeRefreshLayout.setOnRefreshListener(onRefreshListener);
         swipeRefreshLayout.setColorSchemeColors(Color.BLUE);
+
+        // bind progress bar
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         // webView code without handling external links
         webView = (WebView) findViewById(R.id.webView1);

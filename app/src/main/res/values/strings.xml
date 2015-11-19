@@ -3,6 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="MissingTranslation">
 
+    <!-- DON'T translate these strings, don't even copy them to a new file -->
+    <string name="github_link" translatable="false"><a href="https://github.com/indywidualny/FaceSlim">github.com/indywidualny/FaceSlim</a></string>
+    <string name="f_droid_link" translatable="false"><a href="https://f-droid.org/app/org.indywidualni.fblite">f-droid.org/app/org.indywidualni.fblite</a></string>
+    <string name="indywidualni_link" translatable="false"><a href="http://indywidualni.org">indywidualni.org</a></string>
+    <string name="get_feed_link" translatable="false">https://goo.gl/t3vJ33</string>
+    <string name="facebook" translatable="false">Facebook</string>
+
+    <!-- Strings to translate during creation of a new translation -->
     <string name="app_name">Face Slim</string>
     <string name="image_chooser">Image Chooser</string>
     <string name="loading_link">Opening a link</string>
@@ -21,10 +29,6 @@
     </string-array>
 
     <string name="author">by Krzysztof \'Koras\' Grabowski</string>
-    <string name="github_link" translatable="false"><a href="https://github.com/indywidualny/FaceSlim">github.com/indywidualny/FaceSlim</a></string>
-    <string name="f_droid_link" translatable="false"><a href="https://f-droid.org/app/org.indywidualni.fblite">f-droid.org/app/org.indywidualni.fblite</a></string>
-    <string name="indywidualni_link" translatable="false"><a href="http://indywidualni.org">indywidualni.org</a></string>
-
     <string name="title_activity_settings">Settings</string>
     <string name="title_activity_about">About &amp; Dev</string>
     <string name="preference_category1">Interface</string>
@@ -72,9 +76,7 @@
     <string name="activate_notifications">Activate notifications</string>
     <string name="get_feed">Get your notifications feed</string>
     <string name="get_feed_description">Click the field, find your unique notifications RSS, copy the address and paste it above.</string>
-    <string name="get_feed_link" translatable="false">https://goo.gl/t3vJ33</string>
     <string name="notifications_service_created">Notifications active</string>
-    <string name="facebook" translatable="false">Facebook</string>
     <string name="notifications_settings">Notifications settings</string>
     <string name="notifications_settings_description">Additional settings. Choose time interval, set up sounds, LED and vibration.</string>
 
@@ -96,10 +98,8 @@
     <string name="notifications_extra">Additional</string>
     <string name="notifications_everywhere">Always notify</string>
     <string name="notifications_everywhere_description">Also when you are on the main screen of the app.</string>
-
     <string name="setup_notifications">Visit app settings to set up notifications</string>
-
     <string name="no_images">Disable images &#8635;</string>
-    <string name="no_images_description">Don\'t load any images. Reduces data usage drastically</string>
+    <string name="no_images_description">Don\'t load any images. Reduces data usage drastically.</string>
 
 </resources>
