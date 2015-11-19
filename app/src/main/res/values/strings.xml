@@ -99,4 +99,7 @@
 
     <string name="setup_notifications">Visit app settings to set up notifications</string>
 
+    <string name="no_images">Disable images &#8635;</string>
+    <string name="no_images_description">Don\'t load any images. Reduces data usage drastically</string>
+
 </resources>

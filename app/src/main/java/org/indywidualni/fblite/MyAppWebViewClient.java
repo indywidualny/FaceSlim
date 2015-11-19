@@ -65,9 +65,12 @@ public class MyAppWebViewClient extends WebViewClient {
             }
         }
         // apply extra bottom padding for transparent navigation
-        if (preferences.getBoolean("transparent_nav", false)) {
+        if (preferences.getBoolean("transparent_nav", false))
             view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); node.innerHTML = str; document.body.appendChild(node); } addStyleString('body{ padding-bottom: 48px; }');");
-        }
+
+        // don't display images when they are disabled, we don't need empty placeholders
+        if (preferences.getBoolean("no_images", false))
+            view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); node.innerHTML = str; document.body.appendChild(node); } addStyleString('.img{ display: none; }');");
     }
 
     // read raw files to string (for css files)

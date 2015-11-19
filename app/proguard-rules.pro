@@ -8,6 +8,7 @@
     public void openFileChooser(android.webkit.ValueCallback, java.lang.String);
     public void openFileChooser(android.webkit.ValueCallback);
     public void openFileChooser(android.webkit.ValueCallback, java.lang.String, java.lang.String);
+    public boolean onShowFileChooser(android.webkit.WebView, android.webkit.ValueCallback, android.webkit.WebChromeClient.FileChooserParams);
 }
 
 # saxrssreader library

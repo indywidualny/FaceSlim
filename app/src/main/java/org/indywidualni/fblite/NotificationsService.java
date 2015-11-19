@@ -43,6 +43,7 @@ public class NotificationsService extends Service {
         Log.i("NotificationsService", "********** Service created! **********");
 
         // get shared preferences (for a multi process app) and TrayPreferences
+        // TODO: Context.MODE_MULTI_PROCESS is deprecated for Marshmallow. Do something about it.
         preferences = getSharedPreferences(getApplicationContext().getPackageName() + "_preferences", Context.MODE_MULTI_PROCESS);
         trayPreferences = new TrayAppPreferences(getApplicationContext());
 
