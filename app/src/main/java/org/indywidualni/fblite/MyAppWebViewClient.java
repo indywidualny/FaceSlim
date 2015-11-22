@@ -16,6 +16,7 @@ public class MyAppWebViewClient extends WebViewClient {
 
     // variable for onReceivedError
     private boolean refreshed;
+    public static int errorChecker;
 
     // get application context from MainActivity
     private static Context context = MyApplication.getContextOfApplication();
@@ -45,6 +46,8 @@ public class MyAppWebViewClient extends WebViewClient {
             // when network error is real do not reload url again
             refreshed = true;
         }
+        // increment first run error checker
+        errorChecker++;
     }
 
     @Override
@@ -71,6 +74,8 @@ public class MyAppWebViewClient extends WebViewClient {
         // don't display images when they are disabled, we don't need empty placeholders
         if (preferences.getBoolean("no_images", false))
             view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); node.innerHTML = str; document.body.appendChild(node); } addStyleString('.img, ._5s61, ._5sgg{ display: none; }');");
+        // increment first run error checker
+        errorChecker++;
     }
 
     // read raw files to string (for css files)
