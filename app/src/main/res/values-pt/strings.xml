@@ -91,7 +91,8 @@
     <string name="notifications_extra">Adicional</string>
     <string name="notifications_everywhere">Sempre notificar</string>
     <string name="notifications_everywhere_description">Além disso, quando você está na tela principal do aplicativo.</string>
-
     <string name="setup_notifications">Visite configurações do aplicativo para configurar as notificações</string>
+    <string name="no_images">Desativar imagens &#8635;</string>
+    <string name="no_images_description">Não carregará nenhuma imagem. Reduz drasticamente o uso de dados.</string>
 
 </resources>
