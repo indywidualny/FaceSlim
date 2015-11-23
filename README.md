@@ -5,7 +5,7 @@ With Face Slim you can keep in touch with your friends even if you are not using
 Releases | [pl] wydania: https://github.com/indywidualny/FaceSlim/releases
 
 ## Changelog
-& what makes the application awesome
+& what makes the application awesome:
 
 **1.9**
 * share links from different apps (it also extracts urls from a plain text)
