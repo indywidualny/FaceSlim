@@ -16,7 +16,7 @@
     <string name="email_author">Kontakt</string>
     <string name="facebook_zero_active">Facebook Zero ist aktiv</string>
     <string name="facebook_zero_description">Keine Kosten für Mobildaten. Provider abhängig. Funktioniert während mobiler Datenverbindung.</string>
-    <string name="fixed_nav">Fixierte Facebook Navigationsleiste</string>
+    <string name="fixed_nav">Fixierte Facebook Leiste</string>
     <string name="fixed_nav_description">Facebook Navigationsleiste immer ganz oben.</string>
     <string name="get_feed">Benachrichtigungs-Feed abrufen</string>
     <string name="get_feed_description">Anklicken und deinen eigenen RSS-Feed auslesen. Die Adresse kopieren und oben einfügen.</string>
@@ -57,6 +57,8 @@
     <string name="transparent_nav">Transparente Navigations-Leiste &#8635;</string>
     <string name="transparent_nav_description">Für Android-Versionen ab KitKat (4.4). Transparente Navigationstasten.</string>
     <string name="vibrate">Vibration</string>
+    <string name="no_images">Grafiken deaktivieren &#8635;</string>
+    <string name="no_images_description">Keine Bilder laden. Senkt den Datenverbrauch enorm.</string>
 
     <string-array name="intervalPrefTitles">
         <item>5 Minuten</item>
