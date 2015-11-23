@@ -3,6 +3,7 @@ package org.indywidualni.fblite;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.webkit.WebView;
@@ -51,6 +52,12 @@ public class MyAppWebViewClient extends WebViewClient {
     }
 
     @Override
+    public void onPageStarted(WebView view, String url, Bitmap favicon) {
+        // increment first run error checker
+        errorChecker++;
+    }
+
+    @Override
     public void onPageFinished(WebView view, String url) {
         // when Zero is activated and there is a mobile network connection ignore extra customizations
         if (!preferences.getBoolean("facebook_zero", false) || !Connectivity.isConnectedMobile(context)) {
@@ -74,8 +81,6 @@ public class MyAppWebViewClient extends WebViewClient {
         // don't display images when they are disabled, we don't need empty placeholders
         if (preferences.getBoolean("no_images", false))
             view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); node.innerHTML = str; document.body.appendChild(node); } addStyleString('.img, ._5s61, ._5sgg{ display: none; }');");
-        // increment first run error checker
-        errorChecker++;
     }
 
     // read raw files to string (for css files)

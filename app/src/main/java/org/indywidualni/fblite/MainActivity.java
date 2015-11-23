@@ -735,6 +735,9 @@ public class MainActivity extends Activity {
             Intent restart = new Intent(MainActivity.this, MainActivity.class);
             startActivity(restart);
         }
+
+        // first run error checker + 2
+        MyAppWebViewClient.errorChecker += 2;
     }
 
     // handling back button
