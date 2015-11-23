@@ -123,6 +123,16 @@ public class SettingsFragment extends PreferenceFragment {
                 return true;
             }
         });
+
+        // listener for changing no_images preference
+        findPreference("no_images").setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                Log.v("SettingsFragment", "no_images changed");
+                relaunch();
+                return true;
+            }
+        });
     }
 
     // relaunch the app

@@ -33,14 +33,8 @@
 
             </android.support.v4.widget.SwipeRefreshLayout>
 
-            <ProgressBar
-                style="?android:attr/progressBarStyleHorizontal"
-                android:id="@+id/progressBar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:maxHeight="4dip"
-                android:minHeight="4dip"
-                android:progressDrawable="@drawable/progress_bar"/>
+            <include
+                layout="@layout/progress_bar"/>
 
         </LinearLayout>
 

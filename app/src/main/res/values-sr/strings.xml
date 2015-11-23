@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="MissingTranslation">
 
+    <!-- Strings to translate during creation of a new translation -->
     <string name="app_name">Фејс слим</string>
     <string name="image_chooser">Бирач слика</string>
     <string name="loading_link">Отварам везу</string>
@@ -20,8 +21,7 @@
         <item>Иди на врх\u0020 &#8593;</item>
     </string-array>
 
-    <string name="author">од Krzysztof \'Koras\' Grabowski</string>
-
+    <string name="author">од Krzysztof „Koras“ Grabowski</string>
     <string name="title_activity_settings">Поставке</string>
     <string name="title_activity_about">О програму</string>
     <string name="preference_category1">Сучеље</string>
@@ -30,7 +30,7 @@
     <string name="transparent_nav">Прозирна трака навигације &#8635;</string>
     <string name="transparent_nav_description">Киткет и Лолипоп. Прозирни системски навигациони тастери.</string>
     <string name="clear_cache">Очисти кеш</string>
-    <string name="clear_cache_description">Шишћење кеша апликације ће да вас одјави.</string>
+    <string name="clear_cache_description">Чишћење кеша апликације ће да вас одјави.</string>
     <string name="email_author">Контактирајте ме</string>
     <string name="choose_email_client">Одредите клијента за е-пошту</string>
     <string name="notifications">Обавештења</string>
@@ -91,7 +91,8 @@
     <string name="notifications_extra">Додатно</string>
     <string name="notifications_everywhere">Увек обавештевај</string>
     <string name="notifications_everywhere_description">Обавештавање и на главном екрану апликације.</string>
-
     <string name="setup_notifications">Посетите поставке да бисте активирали обавештења</string>
+    <string name="no_images">Онемогући слике &#8635;</string>
+    <string name="no_images_description">Без учитавања слика. Драстично смањује проток података.</string>
 
 </resources>

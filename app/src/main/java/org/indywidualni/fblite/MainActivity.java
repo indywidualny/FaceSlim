@@ -151,14 +151,17 @@ public class MainActivity extends Activity {
         swipeRefreshLayout.setOnRefreshListener(onRefreshListener);
         swipeRefreshLayout.setColorSchemeColors(Color.BLUE);
 
+        // bind progress bar
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+
         // webView code without handling external links
         webView = (WebView) findViewById(R.id.webView1);
         webView.getSettings().setJavaScriptEnabled(true);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
-
-        //webView.getSettings().setUseWideViewPort(true);
-        //webView.getSettings().setLoadWithOverviewMode(true);
         webView.getSettings().setAllowFileAccess(true);
+
+        // disable images to reduce data usage
+        if (preferences.getBoolean("no_images", false))
+            webView.getSettings().setLoadsImagesAutomatically(false);
 
         // code optimization
         boolean isConnectedMobile = Connectivity.isConnectedMobile(getApplicationContext());
@@ -227,23 +230,35 @@ public class MainActivity extends Activity {
             public void onProgressChanged(WebView view, int progress) {
                 // display it only when it's enabled (default true)
                 if (preferences.getBoolean("progress_bar", true)) {
-                    if (progress < 100 && progressBar.getVisibility() == ProgressBar.GONE) {
+                    if (progress < 100 && progressBar.getVisibility() == ProgressBar.GONE)
                         progressBar.setVisibility(ProgressBar.VISIBLE);
-                    }
+                    // set progress, it changes
                     progressBar.setProgress(progress);
-                    if (progress == 100) {
+                    if (progress == 100)
                         progressBar.setVisibility(ProgressBar.GONE);
-                    }
                 } else {
                     // if progress bar is disabled hide it immediately
                     progressBar.setVisibility(ProgressBar.GONE);
                 }
-                // hide the splash screen showed when the app is starting
-                if (progress == 100) // in case of null during the very first run
-                    try {
-                        splashScreen.hide();
-                        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+                // set progress again in case of having this option disabled, it's needed below
+                progressBar.setProgress(progress);  // probably useless anyway
+                /* hide the splash screen showed when the app is starting
+                   50% should be enough for a light layout, the page is almost loaded then */
+                if (progress >= 50 && !preferences.getBoolean("dark_theme", false)) {
+                    try {  // in case of null during the very first run
+                        if (MyAppWebViewClient.errorChecker != 2) {
+                            splashScreen.hide();
+                            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+                        }
                     } catch (Exception ignore) {}
+                } else if (progress == 100 && preferences.getBoolean("dark_theme", false)) {
+                    try {  // in case of null during the very first run
+                        if (MyAppWebViewClient.errorChecker != 2) {
+                            splashScreen.hide();
+                            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+                        }
+                    } catch (Exception ignore) {}
+                }
             }
 
             // for Lollipop, all in one
@@ -720,6 +735,9 @@ public class MainActivity extends Activity {
             Intent restart = new Intent(MainActivity.this, MainActivity.class);
             startActivity(restart);
         }
+
+        // first run error checker + 2
+        MyAppWebViewClient.errorChecker += 2;
     }
 
     // handling back button
@@ -776,8 +794,10 @@ public class MainActivity extends Activity {
     private void showSplashScreen() {
         splashScreen = new Dialog(this, R.style.Theme_AppCompat_Light_NoActionBar);
         splashScreen.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        splashScreen.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        splashScreen.setContentView(R.layout.splash_screen);
+        if (preferences.getBoolean("dark_theme", false))
+            splashScreen.setContentView(R.layout.splash_screen_dark);
+        else
+            splashScreen.setContentView(R.layout.splash_screen);
         splashScreen.show();
     }
 

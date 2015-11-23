@@ -80,6 +80,12 @@
             android:summary="@string/dark_theme_description"
             android:defaultValue="false"/>
 
+        <SwitchPreference
+            android:key="no_images"
+            android:title="@string/no_images"
+            android:summary="@string/no_images_description"
+            android:defaultValue="false"/>
+
     </PreferenceCategory>
 
 

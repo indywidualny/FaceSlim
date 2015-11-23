@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingTranslation">
+
+    <string name="app_name">Face Slim</string>
+    <string name="image_chooser">Selector de imagen</string>
+    <string name="loading_link">Abriendo enlace</string>
+    <string name="applying_changes">Aplicando cambios</string>
+
+    <string-array name="item_array">
+        <item>Noticias</item>
+        <item>Mensajes</item>
+        <item>Chat (Amigos conectados)</item>
+        <item>Grupos</item>
+        <item>Eventos</item>
+        <item>Preferencias (App)</item>
+        <item>Acerca de</item>
+        <item>Salir</item>
+        <item>Ir al inicio\u0020 &#8593;</item>
+    </string-array>
+
+    <string name="author">by Krzysztof \'Koras\' Grabowski</string>
+    <string name="title_activity_settings">Preferencias</string>
+    <string name="title_activity_about">Acerca de</string>
+    <string name="preference_category1">Interfaz</string>
+    <string name="preference_category2">Preferencias avanzadas</string>
+    <string name="progress_bar">Barra de progreso</string>
+    <string name="transparent_nav">Barra de sistema trasparente &#8635;</string>
+    <string name="transparent_nav_description">Para Android KitKat (4.4) o superior. Teclas de navegación del sistema transparentes.</string>
+    <string name="clear_cache">Borrar cache</string>
+    <string name="clear_cache_description">Borrar cache. También cerrará la sesión.</string>
+    <string name="email_author">Contacto</string>
+    <string name="choose_email_client">Elegir cliente de correo</string>
+    <string name="notifications">Notificaciones</string>
+    <string name="no_network">Estás desconectado ;)</string>
+    <string name="hardware_acceleration">Aceleración por hardware &#8635;</string>
+    <string name="hardware_acceleration_description">Deshabilitar solo en dispositivos con poca memoria (en caso de problemas).</string>
+    <string name="share_link">Compartir enlace</string>
+    <string name="long_clicks">Clicks prolongados</string>
+    <string name="long_clicks_description">Hacer click prolongado sobre un enlace o imagen para compartirlos.</string>
+    <string name="me_google_play">Google Play</string>
+    <string name="preference_category3">Experimental</string>
+    <string name="dark_theme">Tema oscuro</string>
+    <string name="dark_theme_description">Vestir Facebook de negro. Su pantalla AMOLED lo agradecerá.</string>
+    <string name="fixed_nav">Corregir barra azul</string>
+    <string name="fixed_nav_description">Barra de navegación de Facebook siempre arriba.</string>
+    <string name="facebook_zero">Facebook Zero</string>
+    <string name="facebook_zero_description">Sin cargos por datos. Depende del proveedor GSM. Funciona utilizando datos móviles.</string>
+    <string name="facebook_zero_active">Facebook Zero está activado</string>
+    <string name="preference_category4">Otros</string>
+    <string name="quick_guide">Guía de inicio rápida</string>
+    <string name="messages">Mensajes</string>
+    <string name="donate_paypal">Donar\u0020 –\u0020 PayPal</string>
+    <string name="paypal_url" formatted="false">https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=koras%2eevil%40gmail%2ecom&amp;lc=GB&amp;item_name=Krzysztof%20Grabowski&amp;currency_code=USD&amp;bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted</string>
+
+    <string-array name="drawerPosTitles">
+        <item>lado izquierdo</item>
+        <item>lado derecho</item>
+    </string-array>
+
+    <string name="drawer_pos">Posición del menú deslizable &#8635;</string>
+    <string name="drawer_pos_description">El menú está en el %s de la pantalla.</string>
+    <string name="preference_category5">Notificaciones</string>
+    <string name="notifications_feed_url">Fuente de notificaciones</string>
+    <string name="interval_pref">Intervalo de comprobación</string>
+    <string name="interval_pref_description">La fuente de notificaciones será comprobada cada %s.</string>
+    <string name="activate_notifications">Activar notificaciones</string>
+    <string name="get_feed">Obtener su fuente de notificaciones</string>
+    <string name="get_feed_description">Pulse este ítem, obtenga su fuente web RSS única, copie la dirección URL y peguela en el campo superior.</string>
+    <string name="notifications_service_created">Notificaciones activas</string>
+    <string name="notifications_settings">Preferencias de notificación</string>
+    <string name="notifications_settings_description">Preferencias adicionales. Configure el intervalo, tonos, LED y vibración.</string>
+
+    <string-array name="intervalPrefTitles">
+        <item>5 minutos</item>
+        <item>15 minutos</item>
+        <item>30 minutos</item>
+        <item>1 hora</item>
+        <item>3 horas</item>
+        <item>6 horas</item>
+    </string-array>
+
+    <string name="all_notifications">Todas las notificaciones</string>
+    <string name="notification_sound">Tono de notificación</string>
+    <string name="notification_sound_description">Elija un sonido o silencio: \u0020</string>
+    <string name="silent">Sin sonido</string>
+    <string name="vibrate">Vibración</string>
+    <string name="led_light">Luz LED</string>
+    <string name="notifications_extra">Otros</string>
+    <string name="notifications_everywhere">Notificar siempre</string>
+    <string name="notifications_everywhere_description">Incluso cuando se encuentre en la pantalla principal de la aplicación.</string>
+    <string name="setup_notifications">Puede configurar las notificaciones desde Preferencias</string>
+    <string name="no_images">Deshabilitar imágenes &#8635;</string>
+    <string name="no_images_description">No cargar imágenes. Reduce drásticamente el uso de datos.</string>
+
+</resources>

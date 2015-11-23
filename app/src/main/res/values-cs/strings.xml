@@ -94,4 +94,8 @@
 
     <string name="setup_notifications">Nastavte upozornění v Nastavení aplikace</string>
 
+
+<string name="no_images">Nezobrazovat obrázky &#8635;</string>
+<string name="no_images_description">Nesta hovado žádné obrázky. Velmi sníží množství stahovaných dát.</string>
+
 </resources>

@@ -3,6 +3,7 @@ package org.indywidualni.fblite;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.webkit.WebView;
@@ -16,6 +17,7 @@ public class MyAppWebViewClient extends WebViewClient {
 
     // variable for onReceivedError
     private boolean refreshed;
+    public static int errorChecker;
 
     // get application context from MainActivity
     private static Context context = MyApplication.getContextOfApplication();
@@ -45,6 +47,14 @@ public class MyAppWebViewClient extends WebViewClient {
             // when network error is real do not reload url again
             refreshed = true;
         }
+        // increment first run error checker
+        errorChecker++;
+    }
+
+    @Override
+    public void onPageStarted(WebView view, String url, Bitmap favicon) {
+        // increment first run error checker
+        errorChecker++;
     }
 
     @Override
@@ -65,9 +75,12 @@ public class MyAppWebViewClient extends WebViewClient {
             }
         }
         // apply extra bottom padding for transparent navigation
-        if (preferences.getBoolean("transparent_nav", false)) {
+        if (preferences.getBoolean("transparent_nav", false))
             view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); node.innerHTML = str; document.body.appendChild(node); } addStyleString('body{ padding-bottom: 48px; }');");
-        }
+
+        // don't display images when they are disabled, we don't need empty placeholders
+        if (preferences.getBoolean("no_images", false))
+            view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); node.innerHTML = str; document.body.appendChild(node); } addStyleString('.img, ._5s61, ._5sgg{ display: none; }');");
     }
 
     // read raw files to string (for css files)
