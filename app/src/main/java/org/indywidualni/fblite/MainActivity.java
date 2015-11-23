@@ -248,6 +248,7 @@ public class MainActivity extends Activity {
                     try {  // in case of null during the very first run
                         if (MyAppWebViewClient.errorChecker != 2) {
                             splashScreen.hide();
+                            splashScreen = null;
                             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
                         }
                     } catch (Exception ignore) {}
@@ -255,6 +256,7 @@ public class MainActivity extends Activity {
                     try {  // in case of null during the very first run
                         if (MyAppWebViewClient.errorChecker != 2) {
                             splashScreen.hide();
+                            splashScreen = null;
                             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
                         }
                     } catch (Exception ignore) {}
