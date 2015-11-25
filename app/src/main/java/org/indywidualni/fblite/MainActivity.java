@@ -89,7 +89,6 @@ public class MainActivity extends Activity {
             preferences.edit().putBoolean("first_run", false).apply();
         } else {
             // show the splash screen when the app is starting
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
             showSplashScreen();
         }
 
@@ -240,26 +239,19 @@ public class MainActivity extends Activity {
                     // if progress bar is disabled hide it immediately
                     progressBar.setVisibility(ProgressBar.GONE);
                 }
-                // set progress again in case of having this option disabled, it's needed below
-                progressBar.setProgress(progress);  // probably useless anyway
-                /* hide the splash screen showed when the app is starting
-                   50% should be enough for a light layout, the page is almost loaded then */
-                if (progress >= 50 && !preferences.getBoolean("dark_theme", false)) {
-                    try {  // in case of null during the very first run
-                        if (MyAppWebViewClient.errorChecker != 2) {
-                            splashScreen.hide();
-                            splashScreen = null;
-                            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
-                        }
-                    } catch (Exception ignore) {}
-                } else if (progress == 100 && preferences.getBoolean("dark_theme", false)) {
-                    try {  // in case of null during the very first run
-                        if (MyAppWebViewClient.errorChecker != 2) {
-                            splashScreen.hide();
-                            splashScreen = null;
-                            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
-                        }
-                    } catch (Exception ignore) {}
+                // if splashScreen is not null we need to hide it
+                if (splashScreen != null) {
+                    // set progress again in case of having this option disabled, it's needed below
+                    progressBar.setProgress(progress);  // probably useless anyway
+                    /* hide the splash screen showed when the app is starting
+                       50% should be enough for a light layout, the page is almost loaded then */
+                    if (progress >= 50 && !preferences.getBoolean("dark_theme", false)) {
+                        if (MyAppWebViewClient.errorChecker != 2)
+                            hideSplashScreen();
+                    } else if (progress == 100 && preferences.getBoolean("dark_theme", false)) {
+                        if (MyAppWebViewClient.errorChecker != 2)
+                            hideSplashScreen();
+                    }
                 }
             }
 
@@ -800,7 +792,15 @@ public class MainActivity extends Activity {
             splashScreen.setContentView(R.layout.splash_screen_dark);
         else
             splashScreen.setContentView(R.layout.splash_screen);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         splashScreen.show();
+    }
+
+    // hide the splash screen
+    private void hideSplashScreen() {
+        splashScreen.hide();
+        splashScreen = null;
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
     }
 
 }
