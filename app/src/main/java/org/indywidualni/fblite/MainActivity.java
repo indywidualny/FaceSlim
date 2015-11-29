@@ -244,8 +244,8 @@ public class MainActivity extends Activity {
                     // set progress again in case of having this option disabled, it's needed below
                     progressBar.setProgress(progress);  // probably useless anyway
                     /* hide the splash screen showed when the app is starting
-                       50% should be enough for a light layout, the page is almost loaded then */
-                    if (progress >= 50 && !preferences.getBoolean("dark_theme", false)) {
+                       30% should be enough for a light layout, the page is almost loaded then */
+                    if (progress >= 30 && !preferences.getBoolean("dark_theme", false)) {
                         if (MyAppWebViewClient.errorChecker != 2)
                             hideSplashScreen();
                     } else if (progress == 100 && preferences.getBoolean("dark_theme", false)) {
@@ -737,11 +737,12 @@ public class MainActivity extends Activity {
     // handling back button
     @Override
     public void onBackPressed() {
-        if(webView.canGoBack()) {
+        if (splashScreen != null)
+            hideSplashScreen();
+        else if (webView.canGoBack())
             webView.goBack();
-        } else {
+        else
             super.onBackPressed();
-        }
     }
 
     @Override

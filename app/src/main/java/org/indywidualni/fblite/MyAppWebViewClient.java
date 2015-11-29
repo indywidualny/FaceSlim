@@ -55,6 +55,9 @@ public class MyAppWebViewClient extends WebViewClient {
     public void onPageStarted(WebView view, String url, Bitmap favicon) {
         // increment first run error checker
         errorChecker++;
+        // make sure splash screen will disappear while sharing
+        if (url.matches("(.*)sharer(.*)"))
+            errorChecker += 2;
     }
 
     @Override
