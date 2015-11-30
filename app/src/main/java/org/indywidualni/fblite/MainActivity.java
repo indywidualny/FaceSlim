@@ -242,7 +242,7 @@ public class MainActivity extends Activity {
                 // if splashScreen is not null we need to hide it
                 if (splashScreen != null) {
                     // set progress again in case of having this option disabled, it's needed below
-                    progressBar.setProgress(progress);  // probably useless anyway
+                    progressBar.setProgress(progress);
                     /* hide the splash screen showed when the app is starting
                        30% should be enough for a light layout, the page is almost loaded then */
                     if (progress >= 30 && !preferences.getBoolean("dark_theme", false)) {
@@ -729,9 +729,6 @@ public class MainActivity extends Activity {
             Intent restart = new Intent(MainActivity.this, MainActivity.class);
             startActivity(restart);
         }
-
-        // first run error checker + 2
-        MyAppWebViewClient.errorChecker += 2;
     }
 
     // handling back button
