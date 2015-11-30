@@ -7,6 +7,13 @@ Releases | [pl] wydania: https://github.com/indywidualny/FaceSlim/releases
 ## Changelog
 & what makes the application awesome:
 
+**2.0**
+* don't load images (reduce data usage)
+* quicker app start
+* Spanish translation (thanks [ThecaTTony](https://github.com/ThecaTTony))
+* black theme improvements
+* new notification icon
+
 **1.9**
 * share links from different apps (it also extracts urls from a plain text)
 * nice splash screen while starting the app
