@@ -1,11 +1,14 @@
 package org.indywidualni.fblite;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.preference.PreferenceManager;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import java.io.BufferedReader;
@@ -39,6 +42,7 @@ public class MyAppWebViewClient extends WebViewClient {
         return true;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
         // refresh on connection error (sometimes there is an error even when there is a network connection)
@@ -49,6 +53,13 @@ public class MyAppWebViewClient extends WebViewClient {
         }
         // increment first run error checker
         errorChecker++;
+    }
+
+    @TargetApi(android.os.Build.VERSION_CODES.M)
+    @Override
+    public void onReceivedError(WebView view, WebResourceRequest req, WebResourceError err) {
+        // redirect to deprecated method, so we can use it in all SDK versions
+        onReceivedError(view, err.getErrorCode(), err.getDescription().toString(), req.getUrl().toString());
     }
 
     @Override

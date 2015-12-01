@@ -6,7 +6,6 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -30,7 +29,6 @@ public class NotificationsService extends Service {
 
     private String feedUrl;
     private int timeInterval;
-    private SharedPreferences preferences;
     private TrayAppPreferences trayPreferences;
 
     @Override
@@ -42,9 +40,7 @@ public class NotificationsService extends Service {
     public void onCreate() {
         Log.i("NotificationsService", "********** Service created! **********");
 
-        // get shared preferences (for a multi process app) and TrayPreferences
-        // TODO: Context.MODE_MULTI_PROCESS is deprecated for Marshmallow. Do something about it.
-        preferences = getSharedPreferences(getApplicationContext().getPackageName() + "_preferences", Context.MODE_MULTI_PROCESS);
+        // get TrayPreferences
         trayPreferences = new TrayAppPreferences(getApplicationContext());
 
         handler = new Handler();
@@ -54,8 +50,8 @@ public class NotificationsService extends Service {
                 Log.i("NotificationsService", "isActivityVisible: " + Boolean.toString(trayPreferences.getBoolean("activity_visible", false)));
 
                 // get the url and time interval from shared prefs
-                feedUrl = preferences.getString("feed_url", "");
-                timeInterval = Integer.parseInt(preferences.getString("interval_pref", "1800000"));
+                feedUrl = trayPreferences.getString("feed_url", "");
+                timeInterval = trayPreferences.getInt("interval_pref", 1800000);
 
                 // start AsyncTask if there is internet connection
                 if (Connectivity.isConnected(getApplicationContext())) {
@@ -126,7 +122,7 @@ public class NotificationsService extends Service {
             // display it only when MainActivity is not active or 'Always notify' is checked
             try {
                 if (!result.get(0).getPubDate().toString().equals(savedDate))
-                    if (!trayPreferences.getBoolean("activity_visible", false) || preferences.getBoolean("notifications_everywhere", true))
+                    if (!trayPreferences.getBoolean("activity_visible", false) || trayPreferences.getBoolean("notifications_everywhere", true))
                         notifier(result.get(0).getTitle(), result.get(0).getDescription(), result.get(0).getLink());
 
                 // save the latest PubDate (as a String) to TrayPreferences
@@ -163,15 +159,15 @@ public class NotificationsService extends Service {
         mBuilder.addAction(0, getString(R.string.all_notifications), piAllNotifications);
 
         // notification sound
-        Uri ringtoneUri = Uri.parse(preferences.getString("ringtone", "content://settings/system/notification_sound"));
+        Uri ringtoneUri = Uri.parse(trayPreferences.getString("ringtone", "content://settings/system/notification_sound"));
         mBuilder.setSound(ringtoneUri);
 
         // vibration
-        if (preferences.getBoolean("vibrate", false))
-            mBuilder.setVibrate(new long[] {500, 500});
+        if (trayPreferences.getBoolean("vibrate", false))
+            mBuilder.setVibrate(new long[]{500, 500});
 
         // LED light
-        if (preferences.getBoolean("led_light", false))
+        if (trayPreferences.getBoolean("led_light", false))
             mBuilder.setLights(Color.CYAN, 1, 1);
 
         // priority for Heads-up

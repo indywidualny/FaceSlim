@@ -10,12 +10,16 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
+
+import net.grandcentrix.tray.TrayAppPreferences;
+
 import java.io.File;
 
 public class SettingsFragment extends PreferenceFragment {
 
     private static Context context;
     private SharedPreferences.OnSharedPreferenceChangeListener myPrefListner;
+    private TrayAppPreferences trayPreferences;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -24,10 +28,11 @@ public class SettingsFragment extends PreferenceFragment {
         // load the preferences from an XML resource
         addPreferencesFromResource(R.xml.preferences);
 
-        // set context
+        // get context
         context = MyApplication.getContextOfApplication();
 
-        // get shared preferences
+        // get Tray Preferences and Shared Preferences
+        trayPreferences = new TrayAppPreferences(context);
         final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
 
         // listener for changing preferences (works after the value change)
@@ -52,6 +57,17 @@ public class SettingsFragment extends PreferenceFragment {
                         break;
                 }
 
+                /** rewrite all the Shared Preferences used in NotificationsService into Tray Preferences
+                 *  multi-process Shared Preferences are deprecated since API 23 */
+                trayPreferences.put("feed_url", preferences.getString("feed_url", ""));
+                trayPreferences.put("interval_pref", Integer.parseInt(preferences.getString("interval_pref", "1800000")));
+                trayPreferences.put("ringtone", preferences.getString("ringtone", "content://settings/system/notification_sound"));
+                trayPreferences.put("vibrate", preferences.getBoolean("vibrate", false));
+                trayPreferences.put("led_light", preferences.getBoolean("led_light", false));
+                trayPreferences.put("notifications_everywhere", preferences.getBoolean("notifications_everywhere", true));
+
+                // is it working as expected? // TODO: why is it invoked 3 times? LOL
+                Log.v("SharedPreferenceChange", "Shared Preferences converted to Tray Preferences");
             }
         };
 
