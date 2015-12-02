@@ -107,7 +107,7 @@ public class MyAppWebViewClient extends WebViewClient {
         try {
             while ((line = buffreader.readLine()) != null) {
                 text.append(line);
-                text.append('\n');
+                //text.append('\n');
             }
         } catch (IOException e) {
             return " ";
