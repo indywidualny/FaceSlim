@@ -164,7 +164,7 @@ public class NotificationsService extends Service {
 
         // vibration
         if (trayPreferences.getBoolean("vibrate", false))
-            mBuilder.setVibrate(new long[]{500, 500});
+            mBuilder.setVibrate(new long[] {500, 500});
 
         // LED light
         if (trayPreferences.getBoolean("led_light", false))

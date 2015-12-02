@@ -92,7 +92,7 @@ public class MainActivity extends Activity {
             showSplashScreen();
         }
 
-        // start the service when it's activated but somehow it's not running (after app update for example)
+        // start the service when it's activated but somehow it's not running
         // when it's already running nothing happens so it's ok
         if (preferences.getBoolean("notifications_activated", false)) {
             final Intent intent = new Intent(MyApplication.getContextOfApplication(), NotificationsService.class);
@@ -244,8 +244,8 @@ public class MainActivity extends Activity {
                     // set progress again in case of having this option disabled, it's needed below
                     progressBar.setProgress(progress);
                     /* hide the splash screen showed when the app is starting
-                       30% should be enough for a light layout, the page is almost loaded then */
-                    if (progress >= 30 && !preferences.getBoolean("dark_theme", false)) {
+                       20% should be enough for a light layout, the page is almost loaded then */
+                    if (progress >= 20 && !preferences.getBoolean("dark_theme", false)) {
                         if (MyAppWebViewClient.errorChecker != 2)
                             hideSplashScreen();
                     } else if (progress == 100 && preferences.getBoolean("dark_theme", false)) {

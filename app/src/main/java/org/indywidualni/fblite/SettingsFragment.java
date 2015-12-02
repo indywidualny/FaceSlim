@@ -10,16 +10,15 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
-
 import net.grandcentrix.tray.TrayAppPreferences;
-
 import java.io.File;
 
-public class SettingsFragment extends PreferenceFragment {
+public class SettingsFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener {
 
     private static Context context;
-    private SharedPreferences.OnSharedPreferenceChangeListener myPrefListner;
+    private SharedPreferences.OnSharedPreferenceChangeListener prefChangeListener;
     private TrayAppPreferences trayPreferences;
+    private SharedPreferences preferences;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,10 +32,19 @@ public class SettingsFragment extends PreferenceFragment {
 
         // get Tray Preferences and Shared Preferences
         trayPreferences = new TrayAppPreferences(context);
-        final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        preferences = PreferenceManager.getDefaultSharedPreferences(context);
+
+        // set onPreferenceClickListener for a few preferences
+        Preference getFeedPref = findPreference("get_feed");
+        Preference notificationsSettingsPref = findPreference("notifications_settings");
+        Preference clearCachePref = findPreference("clear_cache");
+        getFeedPref.setOnPreferenceClickListener(this);
+        notificationsSettingsPref.setOnPreferenceClickListener(this);
+        clearCachePref.setOnPreferenceClickListener(this);
+
 
         // listener for changing preferences (works after the value change)
-        myPrefListner = new SharedPreferences.OnSharedPreferenceChangeListener() {
+        prefChangeListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
             public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
                 // service intent (start, stop)
                 final Intent intent = new Intent(context, NotificationsService.class);
@@ -48,107 +56,62 @@ public class SettingsFragment extends PreferenceFragment {
                         else
                             context.stopService(intent);
                         break;
-                    case "interval_pref":
-                        // restart service after time interval change
-                        if (prefs.getBoolean("notifications_activated", false)) {
-                            context.stopService(intent);
-                            context.startService(intent);
-                        }
+                    case "feed_url":
+                        trayPreferences.put("feed_url", preferences.getString("feed_url", ""));
+                        break;
+                    case "transparent_nav":
+                    case "drawer_pos":
+                    case "no_images":
+                    case "hardware_acceleration":
+                        relaunch();
                         break;
                 }
 
-                /** rewrite all the Shared Preferences used in NotificationsService into Tray Preferences
-                 *  multi-process Shared Preferences are deprecated since API 23 */
-                trayPreferences.put("feed_url", preferences.getString("feed_url", ""));
-                trayPreferences.put("interval_pref", Integer.parseInt(preferences.getString("interval_pref", "1800000")));
-                trayPreferences.put("ringtone", preferences.getString("ringtone", "content://settings/system/notification_sound"));
-                trayPreferences.put("vibrate", preferences.getBoolean("vibrate", false));
-                trayPreferences.put("led_light", preferences.getBoolean("led_light", false));
-                trayPreferences.put("notifications_everywhere", preferences.getBoolean("notifications_everywhere", true));
-
-                // is it working as expected? // TODO: why is it invoked 3 times? LOL
-                Log.v("SharedPreferenceChange", "Shared Preferences converted to Tray Preferences");
+                // what's going on, dude?
+                Log.v("SharedPreferenceChange", key + " changed in SettingsFragment");
             }
         };
+    }
 
-        // register the listener above
-        preferences.registerOnSharedPreferenceChangeListener(myPrefListner);
+    // a few preferences are just buttons to click on, let's make them work
+    @Override
+    public boolean onPreferenceClick(Preference preference) {
+        String key = preference.getKey();
+        Log.v("OnPreferenceClick", key + " clicked in SettingsFragment");
 
-        // listener for clearing cache preference
-        findPreference("clear_cache").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                Log.v("SettingsFragment", "clearing cache...");
-                // clear cache dirs
-                deleteCache(getActivity().getApplicationContext());
-                // restart the app (really ugly way of doing it but...)
-                android.os.Process.killProcess(android.os.Process.myPid());
-                return true;
-            }
-        });
-
-        // listener for changing transparent_nav preference
-        findPreference("transparent_nav").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                Log.v("SettingsFragment", "transparent_nav changed");
-                relaunch();
-                return true;
-            }
-        });
-
-        // listener for changing hardware_acceleration preference
-        findPreference("hardware_acceleration").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                Log.v("SettingsFragment", "hardware_acceleration changed");
-                relaunch();
-                return true;
-            }
-        });
-
-        // listener for changing drawer_pos preference
-        findPreference("drawer_pos").setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                Log.v("SettingsFragment", "drawer_pos changed");
-                relaunch();
-                return true;
-            }
-        });
-
-        // listener for get_feed preference
-        findPreference("get_feed").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                Log.v("SettingsFragment", "get_feed clicked");
+        switch (key) {
+            case "get_feed":
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.get_feed_link))));
                 return true;
-            }
-        });
-
-        // listener for notifications_settings preference
-        findPreference("notifications_settings").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                Log.v("SettingsFragment", "notifications_settings");
+            case "notifications_settings":
                 getFragmentManager().beginTransaction()
                         .setCustomAnimations(R.anim.slide_in_right, 0)
                         .addToBackStack(null).replace(android.R.id.content,
                         new NotificationsSettingsFragment()).commit();
                 return true;
-            }
-        });
-
-        // listener for changing no_images preference
-        findPreference("no_images").setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                Log.v("SettingsFragment", "no_images changed");
-                relaunch();
+            case "clear_cache":
+                // clear cache dirs
+                deleteCache(getActivity().getApplicationContext());
+                // restart the app (really ugly way of doing it but...)
+                android.os.Process.killProcess(android.os.Process.myPid());
                 return true;
-            }
-        });
+        }
+
+        return false;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // register the listener
+        preferences.registerOnSharedPreferenceChangeListener(prefChangeListener);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        // unregister the listener
+        preferences.unregisterOnSharedPreferenceChangeListener(prefChangeListener);
     }
 
     // relaunch the app
@@ -169,7 +132,7 @@ public class SettingsFragment extends PreferenceFragment {
         if (appDir.exists()) {
             String[] children = appDir.list();
             for (String s : children) {
-                if (!s.equals("lib") && !s.equals("shared_prefs")) {
+                if (!s.equals("lib") && !s.equals("shared_prefs") && !s.equals("databases")) {
                     deleteDir(new File(appDir, s));
                     Log.i("TAG", "**************** File /data/data/APP_PACKAGE/" + s + " DELETED *******************");
                 }
@@ -180,13 +143,13 @@ public class SettingsFragment extends PreferenceFragment {
     private static boolean deleteDir(File dir) {
         if (dir != null && dir.isDirectory()) {
             String[] children = dir.list();
-            for (int i = 0; i < children.length; i++) {
-                boolean success = deleteDir(new File(dir, children[i]));
-                if (!success) {
+            for (String child : children) {
+                boolean success = deleteDir(new File(dir, child));
+                if (!success)
                     return false;
-                }
             }
         }
+        assert dir != null;
         return dir.delete();
     }
 

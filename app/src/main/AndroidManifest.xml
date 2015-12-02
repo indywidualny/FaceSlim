@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.indywidualni.fblite"
-    android:versionCode="24"
-    android:versionName="2.0.0"
+    android:versionCode="25"
+    android:versionName="2.1.0"
     android:installLocation="internalOnly" >
 
     <uses-sdk
@@ -29,6 +29,14 @@
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".PackageReplacedIntentReceiver"
+            android:enabled="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_REPLACED" />
+                <data android:scheme="package" android:path="org.indywidualni.fblite" />
             </intent-filter>
         </receiver>
         <service

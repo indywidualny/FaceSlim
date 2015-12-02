@@ -119,7 +119,7 @@ public class MyAppWebViewClient extends WebViewClient {
     private static int heightForFixedFacebookNavbar() {
         final int navbar = MainActivity.getNavigationBarHeight(context, context.getResources().getConfiguration().orientation);
         final float density = context.getResources().getDisplayMetrics().density;
-        return (int)((context.getResources().getDisplayMetrics().heightPixels - navbar - 44) / density);
+        return (int) ((context.getResources().getDisplayMetrics().heightPixels - navbar - 44) / density);
     }
 
 }
