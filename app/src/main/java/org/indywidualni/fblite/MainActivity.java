@@ -45,7 +45,6 @@ public class MainActivity extends Activity {
     // variables for drawer layout
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
-    private String[] itemList;
 
     private SwipeRefreshLayout swipeRefreshLayout;
     private WebView webView;
@@ -129,10 +128,10 @@ public class MainActivity extends Activity {
         }
 
         // piece of code for drawer layout
-        itemList = getResources().getStringArray(R.array.item_array);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
-        // set up the drawer's list view with items and click listener
+        // set up the drawer's list view with items and onClick listener
+        String[] itemList = getResources().getStringArray(R.array.item_array);
         mDrawerList.setAdapter(new ArrayAdapter<>(this, R.layout.drawer_list_item, itemList));
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
@@ -259,6 +258,9 @@ public class MainActivity extends Activity {
             public boolean onShowFileChooser(
                     WebView webView, ValueCallback<Uri[]> filePathCallback,
                     WebChromeClient.FileChooserParams fileChooserParams) {
+
+                Log.e(TAG, "LOLLIPOP FILE CHOOSER");
+
                 if (mFilePathCallback != null) {
                     mFilePathCallback.onReceiveValue(null);
                 }
@@ -310,6 +312,8 @@ public class MainActivity extends Activity {
 
             // creating image files (Lollipop only)
             private File createImageFile() throws IOException {
+
+                Log.e(TAG, "LOLLIPOP FILE CHOOSER: CREATE IMAGE");
 
                 File imageStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "FaceSlim");
 
@@ -506,15 +510,15 @@ public class MainActivity extends Activity {
 
             // check that the response is a good one
             if (resultCode == Activity.RESULT_OK) {
-                if (data == null) {
+                if (data == null || data.getData() == null) {
                     // if there is not data, then we may have taken a photo
                     if (mCameraPhotoPath != null) {
-                        results = new Uri[]{Uri.parse(mCameraPhotoPath)};
+                        results = new Uri[] {Uri.parse(mCameraPhotoPath)};
                     }
                 } else {
                     String dataString = data.getDataString();
                     if (dataString != null) {
-                        results = new Uri[]{Uri.parse(dataString)};
+                        results = new Uri[] {Uri.parse(dataString)};
                     }
                 }
             }
