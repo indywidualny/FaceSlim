@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/status_bar_background"
+        android:drawable="@color/colorPrimaryDark"/>
+
+    <item android:id="@+id/content_window_background"
+        android:drawable="@color/white"
+        android:top="25dp"/>
+
+</layer-list>
