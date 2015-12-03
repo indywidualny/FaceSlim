@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-    <style name="Theme.AppCompat.Light.NoActionBar" parent="@style/Theme.AppCompat.Light">
+    <style name="AppTheme" parent="@style/Theme.AppCompat.Light">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -10,10 +10,10 @@
 
         <!-- Translucent status bar with background color (for KitKat only) -->
         <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:background">@color/colorPrimaryDark</item>
+        <item name="android:windowBackground">@drawable/window_background</item>
     </style>
 
-    <style name="Theme.AppCompat.WithActionBar" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppWithToolbar" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -21,10 +21,14 @@
         <!-- Not needed but let's leave it here just in case -->
         <item name="android:textColorPrimary">@color/titleColor</item>
 
-        <!-- Screw the KitKat translucent status bar - it's so problematic -->
+        <!-- Translucent status bar with background color (for KitKat only) -->
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="android:windowBackground">@drawable/window_background</item>
+
     </style>
 
-    <style name="Theme.AppCompat.Preferences" parent="@style/Theme.AppCompat.WithActionBar">
+    <style name="AppPreferences" parent="@style/AppWithToolbar">
         <item name="android:textColor">@color/preferenceTitle</item>
         <item name="android:editTextColor">@color/editText</item>
         <item name="android:alertDialogTheme">@style/CustomDialogTheme</item>

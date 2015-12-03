@@ -784,7 +784,7 @@ public class MainActivity extends Activity {
 
     // show the splash screen when the app is starting
     private void showSplashScreen() {
-        splashScreen = new Dialog(this, R.style.Theme_AppCompat_Light_NoActionBar);
+        splashScreen = new Dialog(this, R.style.AppTheme);
         splashScreen.requestWindowFeature(Window.FEATURE_NO_TITLE);
         if (preferences.getBoolean("dark_theme", false))
             splashScreen.setContentView(R.layout.splash_screen_dark);

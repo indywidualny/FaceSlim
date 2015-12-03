@@ -86,7 +86,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
             case "notifications_settings":
                 getFragmentManager().beginTransaction()
                         .setCustomAnimations(R.anim.slide_in_right, 0)
-                        .addToBackStack(null).replace(android.R.id.content,
+                        .addToBackStack(null).replace(R.id.content_frame,
                         new NotificationsSettingsFragment()).commit();
                 return true;
             case "clear_cache":
@@ -141,7 +141,9 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     }
 
     private static boolean deleteDir(File dir) {
-        if (dir != null && dir.isDirectory()) {
+        if (dir == null)
+            return false;
+        if (dir.isDirectory()) {
             String[] children = dir.list();
             for (String child : children) {
                 boolean success = deleteDir(new File(dir, child));
@@ -149,7 +151,6 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
                     return false;
             }
         }
-        assert dir != null;
         return dir.delete();
     }
 
