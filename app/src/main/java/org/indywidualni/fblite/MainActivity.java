@@ -843,7 +843,7 @@ public class MainActivity extends Activity {
     private void hideSplashScreen() {
         splashScreen.hide();
         splashScreen = null;
-        MyAppWebViewClient.errorChecker = 3;  // actually not necessary
+        MyAppWebViewClient.errorChecker = 3;
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
     }
 

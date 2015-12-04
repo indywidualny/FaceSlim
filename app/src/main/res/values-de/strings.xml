@@ -59,6 +59,7 @@
     <string name="vibrate">Vibration</string>
     <string name="no_images">Grafiken deaktivieren &#8635;</string>
     <string name="no_images_description">Keine Bilder laden. Senkt den Datenverbrauch enorm.</string>
+    <string name="no_storage_permission">Die Speicher-Berechtigung muss gewährt werden, um dieses Feature nutzen zu können.</string>
 
     <string-array name="intervalPrefTitles">
         <item>5 Minuten</item>
