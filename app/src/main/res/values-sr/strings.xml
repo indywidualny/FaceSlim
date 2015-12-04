@@ -94,5 +94,6 @@
     <string name="setup_notifications">Посетите поставке да бисте активирали обавештења</string>
     <string name="no_images">Онемогући слике &#8635;</string>
     <string name="no_images_description">Без учитавања слика. Драстично смањује проток података.</string>
+    <string name="no_storage_permission">Одобрите дозволе за складиште да бисте користили ову функцију.</string>
 
 </resources>
