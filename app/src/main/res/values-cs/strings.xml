@@ -96,5 +96,7 @@
 
     <string name="no_images">Nezobrazovat obrázky &#8635;</string>
     <string name="no_images_description">Nestahovat žádné obrázky. Velmi sníží množství stahovaných dat.</string>
+    
+    <string name="no_storage_permission">K využití této vlastnosti povolte aplikaci práva přístupu k úložišti (storage permissions).</string>
 
 </resources>
