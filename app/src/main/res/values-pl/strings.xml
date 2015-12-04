@@ -94,5 +94,6 @@
 
     <string name="no_images">Ignoruj obrazki &#8635;</string>
     <string name="no_images_description">Nie ładuj żadnych obrazów. Drastycznie oszczędza transfer.</string>
+    <string name="no_storage_permission">Zezwól na dostęp do plików, by użyć tej funkcji.</string>
 
 </resources>

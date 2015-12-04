@@ -1,5 +1,6 @@
 package org.indywidualni.fblite;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
@@ -7,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -20,6 +22,9 @@ import android.os.Message;
 import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
@@ -60,10 +65,11 @@ public class MainActivity extends Activity {
     private ValueCallback<Uri[]> mFilePathCallback;
     private String mCameraPhotoPath;
 
-    // error handling, shared prefs and TrayPreferences
+    // log tag, preferences, runtime permissions
     private static final String TAG = MainActivity.class.getSimpleName();
     private SharedPreferences preferences;
     private TrayAppPreferences trayPreferences;
+    private static final int REQUEST_STORAGE = 1;
 
     @Override
     @SuppressLint("setJavaScriptEnabled")
@@ -254,12 +260,17 @@ public class MainActivity extends Activity {
                 }
             }
 
-            // for Lollipop, all in one
+            // for >= Lollipop, all in one
             public boolean onShowFileChooser(
                     WebView webView, ValueCallback<Uri[]> filePathCallback,
                     WebChromeClient.FileChooserParams fileChooserParams) {
 
-                Log.e(TAG, "LOLLIPOP FILE CHOOSER");
+                /** Request permission for external storage access.
+                 *  If granted it's awesome and go on,
+                 *  otherwise just stop here and leave the method.
+                 */
+                if (!requestStoragePermission())
+                    return false;
 
                 if (mFilePathCallback != null) {
                     mFilePathCallback.onReceiveValue(null);
@@ -312,9 +323,6 @@ public class MainActivity extends Activity {
 
             // creating image files (Lollipop only)
             private File createImageFile() throws IOException {
-
-                Log.e(TAG, "LOLLIPOP FILE CHOOSER: CREATE IMAGE");
-
                 File imageStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "FaceSlim");
 
                 if (!imageStorageDir.exists()) {
@@ -323,7 +331,7 @@ public class MainActivity extends Activity {
                 }
 
                 // create an image file name
-                imageStorageDir  = new File(imageStorageDir + File.separator + "IMG_" + String.valueOf(System.currentTimeMillis()) + ".jpg");
+                imageStorageDir = new File(imageStorageDir + File.separator + "IMG_" + String.valueOf(System.currentTimeMillis()) + ".jpg");
                 return imageStorageDir;
             }
 
@@ -345,7 +353,7 @@ public class MainActivity extends Activity {
 
                     final Intent captureIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                     captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, mCapturedImageURI);
-                    // captureIntent.putExtra(MediaStore.EXTRA_SCREEN_ORIENTATION, ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                    //captureIntent.putExtra(MediaStore.EXTRA_SCREEN_ORIENTATION, ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
                     Intent i = new Intent(Intent.ACTION_GET_CONTENT);
                     i.addCategory(Intent.CATEGORY_OPENABLE);
@@ -394,6 +402,38 @@ public class MainActivity extends Activity {
             }
         });
 
+    }
+
+    // request storage permission, if granted file upload continues
+    private boolean requestStoragePermission() {
+        String storagePermission = Manifest.permission.WRITE_EXTERNAL_STORAGE;
+        int hasPermission = ContextCompat.checkSelfPermission(this, storagePermission);
+        String[] permissions = new String[] { storagePermission };
+        if (hasPermission != PackageManager.PERMISSION_GRANTED) {
+            Log.e(TAG, "No storage permission at the moment. Requesting...");
+            ActivityCompat.requestPermissions(this, permissions, REQUEST_STORAGE);
+            return false;
+        } else {
+            Log.e(TAG, "We already have storage permission. Yay!");
+            return true;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_STORAGE:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Log.e(TAG, "Storage permission granted");
+                    // It's awesome, dude!
+                } else {
+                    Log.e(TAG, "Storage permission denied");
+                    Toast.makeText(getApplicationContext(), getString(R.string.no_storage_permission), Toast.LENGTH_SHORT).show();
+                }
+                break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
     }
 
     // handle long clicks on links, an awesome way to avoid memory leaks
@@ -460,7 +500,8 @@ public class MainActivity extends Activity {
     // get navigation bar height
     public static int getNavigationBarHeight(Context context, int orientation) {
         Resources resources = context.getResources();
-        int resourceId = resources.getIdentifier(orientation == Configuration.ORIENTATION_PORTRAIT ? "navigation_bar_height" : "navigation_bar_height_landscape", "dimen", "android");
+        int resourceId = resources.getIdentifier(orientation == Configuration.ORIENTATION_PORTRAIT ?
+                "navigation_bar_height" : "navigation_bar_height_landscape", "dimen", "android");
         if (resourceId > 0) {
             return resources.getDimensionPixelSize(resourceId);
         }
