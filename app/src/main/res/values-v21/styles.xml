@@ -28,7 +28,7 @@
         <item name="android:windowSharedElementExitTransition">@android:transition/move</item>
     </style>
 
-    <style name="CustomDialogTheme" parent="Base.Theme.AppCompat.Light.Dialog.FixedSize">
+    <style name="CustomDialogTheme" parent="@style/Base.Theme.AppCompat.Light.Dialog.FixedSize">
         <item name="android:windowMinWidthMajor">@android:dimen/dialog_min_width_major</item>
         <item name="android:windowMinWidthMinor">@android:dimen/dialog_min_width_minor</item>
         <item name="colorPrimary">@color/colorPrimary</item>
