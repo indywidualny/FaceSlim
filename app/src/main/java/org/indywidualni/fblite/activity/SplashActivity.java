@@ -9,8 +9,8 @@ import java.util.TimerTask;
 
 public class SplashActivity extends Activity {
 
-    // 300 milliseconds is less than a blink of an eye
-    private static final int TIME = 300;
+    // 220 milliseconds is less than a blink of an eye
+    private static final int TIME = 220;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
