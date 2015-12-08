@@ -7,6 +7,20 @@ Releases | [pl] wydania: https://github.com/indywidualny/FaceSlim/releases
 ## Changelog
 & what makes the application awesome:
 
+**2.1**
+* camera upload for Lollipop is finally fixed
+* black theme is working on every device now (issue #31)
+* runtime permissions - file access (Marshmallow)
+* splash screen is redesigned and shown only during a transition (like Google apps)
+* Korean translation (thanks [halcyonest](https://github.com/halcyonest))
+* Toolbars instead of deprecated Action Bars (code)
+* Tray Preferences instead of deprecated multi-process Shared Preferences (code)
+* general refactoring & code cleanup (less lines, more valuable code, no deprecated methods)
+* pretty animations for >= Lollipop
+* visual improvements for KitKat (statusbar, backgrounds)
+
+App is ready for Android Marshmallow. I said it before but it was premature. Versions 1.8.0 - 2.0.0 have a broken file upload on Marshmallow due to lack of runtime permissions support.
+
 **2.0**
 * don't load images (reduce data usage)
 * quicker app start
