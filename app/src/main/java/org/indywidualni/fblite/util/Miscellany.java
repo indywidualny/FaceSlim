@@ -45,7 +45,7 @@ public class Miscellany {
         DisplayMetrics metrics = new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
-        sb.append("\nScreen: ").append(metrics.heightPixels).append(" &#215; ").append(metrics.widthPixels);
+        sb.append("\nScreen: ").append(metrics.heightPixels).append(" x ").append(metrics.widthPixels);
         sb.append("\nLocale: ").append(Locale.getDefault().toString());
 
         return sb.toString();
