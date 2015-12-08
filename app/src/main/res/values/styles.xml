@@ -22,12 +22,16 @@
         <item name="android:alertDialogTheme">@style/CustomDialogTheme</item>
     </style>
 
-    <style name="CustomDialogTheme" parent="Base.Theme.AppCompat.Light.Dialog.FixedSize">
+    <style name="CustomDialogTheme" parent="@style/Base.Theme.AppCompat.Light.Dialog.FixedSize">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowMinWidthMajor">@android:dimen/dialog_min_width_major</item>
         <item name="android:windowMinWidthMinor">@android:dimen/dialog_min_width_minor</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="SplashTheme" parent="@style/AppTheme">
+        <item name="android:windowBackground">@drawable/background_splash</item>
     </style>
 </resources>

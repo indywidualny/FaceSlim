@@ -10,59 +10,11 @@
         android:id="@+id/toolbar"
         layout="@layout/toolbar"/>
 
-    <RelativeLayout
+    <fragment
+        android:name="org.indywidualni.fblite.fragment.AboutFragment"
+        android:id="@+id/fragment_about"
         android:layout_below="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:id="@+id/textFirst"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:padding="20dp"
-            android:textColor="@color/aboutText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <TextView
-            android:id="@+id/textSecond"
-            android:text="@string/github_link"
-            android:textColorLink="@color/colorPrimary"
-            android:layout_below="@+id/textFirst"
-            android:padding="0dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <TextView
-            android:id="@+id/textThird"
-            android:text="@string/f_droid_link"
-            android:textColorLink="@color/colorPrimary"
-            android:layout_below="@+id/textSecond"
-            android:padding="0dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <TextView
-            android:id="@+id/textFourth"
-            android:text="@string/indywidualni_link"
-            android:textColorLink="@color/colorPrimary"
-            android:layout_below="@+id/textThird"
-            android:padding="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:id="@+id/textVersion"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:padding="20dp"
-            android:textColor="@color/aboutText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-    </RelativeLayout>
+        android:layout_height="match_parent"/>
 
 </RelativeLayout>

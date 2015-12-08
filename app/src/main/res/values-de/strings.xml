@@ -14,6 +14,7 @@
     <string name="drawer_pos">Gleitmenü Position &#8635;</string>
     <string name="drawer_pos_description">Menü befindet sich derzeit %s.</string>
     <string name="email_author">Kontakt</string>
+    <string name="facebook_zero">Facebook Zero</string>
     <string name="facebook_zero_active">Facebook Zero ist aktiv</string>
     <string name="facebook_zero_description">Keine Kosten für Mobildaten. Provider abhängig. Funktioniert während mobiler Datenverbindung.</string>
     <string name="fixed_nav">Fixierte Facebook Leiste</string>
@@ -60,6 +61,7 @@
     <string name="no_images">Grafiken deaktivieren &#8635;</string>
     <string name="no_images_description">Keine Bilder laden. Senkt den Datenverbrauch enorm.</string>
     <string name="no_storage_permission">Die Speicher-Berechtigung muss gewährt werden, um dieses Feature nutzen zu können.</string>
+    <string name="paypal_url" formatted="false">https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=koras%2eevil%40gmail%2ecom&amp;lc=DE&amp;item_name=Krzysztof%20Grabowski&amp;currency_code=EUR&amp;bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted</string>
 
     <string-array name="intervalPrefTitles">
         <item>5 Minuten</item>

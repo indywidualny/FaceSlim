@@ -28,12 +28,6 @@
         <item name="android:windowSharedElementExitTransition">@android:transition/move</item>
     </style>
 
-    <style name="AppPreferences" parent="@style/AppWithToolbar">
-        <item name="android:textColor">@color/preferenceTitle</item>
-        <item name="android:editTextColor">@color/editText</item>
-        <item name="android:alertDialogTheme">@style/CustomDialogTheme</item>
-    </style>
-
     <style name="CustomDialogTheme" parent="Base.Theme.AppCompat.Light.Dialog.FixedSize">
         <item name="android:windowMinWidthMajor">@android:dimen/dialog_min_width_major</item>
         <item name="android:windowMinWidthMinor">@android:dimen/dialog_min_width_minor</item>
