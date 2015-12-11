@@ -101,10 +101,19 @@ public class NotificationsSettingsFragment extends PreferenceFragment {
         // update ringtone preference summary
         String ringtoneString = preferences.getString("ringtone", "content://settings/system/notification_sound");
         Uri ringtoneUri = Uri.parse(ringtoneString);
-        Ringtone ringtone = RingtoneManager.getRingtone(context, ringtoneUri);
-        String name = ringtone.getTitle(context);
+        String name;
+
+        try {
+            Ringtone ringtone = RingtoneManager.getRingtone(context, ringtoneUri);
+            name = ringtone.getTitle(context);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            name = "Default";
+        }
+
         if ("".equals(ringtoneString))
             name = getString(R.string.silent);
+
         RingtonePreference rp = (RingtonePreference) findPreference("ringtone");
         rp.setSummary(getString(R.string.notification_sound_description) + name);
     }

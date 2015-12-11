@@ -64,6 +64,13 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
                         break;
                     case "feed_url":
                         trayPreferences.put("feed_url", preferences.getString("feed_url", ""));
+                        // remove saved date for fresh check
+                        trayPreferences.put("saved_date", "");
+                        // restart service
+                        if (prefs.getBoolean("notifications_activated", false)) {
+                            context.stopService(intent);
+                            context.startService(intent);
+                        }
                         break;
                     case "transparent_nav":
                     case "drawer_pos":
