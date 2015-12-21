@@ -48,6 +48,11 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         notificationsSettingsPref.setOnPreferenceClickListener(this);
         clearCachePref.setOnPreferenceClickListener(this);
 
+        // dependencies (dark_theme cannot be enabled when basic_mode is enabled)
+        Preference preference_dark = findPreference("dark_theme");
+        preference_dark.setEnabled(!preferences.getBoolean("basic_mode", false));
+        Preference preference_basic = findPreference("basic_mode");
+        preference_basic.setEnabled(!preferences.getBoolean("dark_theme", false));
 
         // listener for changing preferences (works after the value change)
         prefChangeListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
@@ -71,6 +76,14 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
                             context.stopService(intent);
                             context.startService(intent);
                         }
+                        break;
+                    case "basic_mode":
+                        Preference preference_dark = findPreference("dark_theme");
+                        preference_dark.setEnabled(!prefs.getBoolean("basic_mode", false));
+                        break;
+                    case "dark_theme":
+                        Preference preference_basic = findPreference("basic_mode");
+                        preference_basic.setEnabled(!prefs.getBoolean("dark_theme", false));
                         break;
                     case "transparent_nav":
                     case "drawer_pos":

@@ -78,12 +78,14 @@
             android:key="basic_mode"
             android:title="@string/basic_mode"
             android:summary="@string/basic_mode_description"
+            android:enabled="false"
             android:defaultValue="false"/>
 
         <CheckBoxPreference
             android:key="dark_theme"
             android:title="@string/dark_theme"
             android:summary="@string/dark_theme_description"
+            android:enabled="false"
             android:defaultValue="false"/>
 
         <CheckBoxPreference

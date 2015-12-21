@@ -103,6 +103,6 @@
     <string name="no_images_description">Don\'t load any images. Reduces data usage drastically.</string>
     <string name="no_storage_permission">Grant storage permission to use this feature.</string>
     <string name="basic_mode">Basic mode</string>
-    <string name="basic_mode_description">Use mbasic.facebook.com instead of a standard mobile website.</string>
+    <string name="basic_mode_description">Use a basic website instead of a standard one. Dark theme has to be disabled. May not work during a fast connection.</string>
 
 </resources>

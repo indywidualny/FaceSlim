@@ -197,6 +197,8 @@ public class MainActivity extends Activity {
                 }
                 // final step, set the proper Sharer...
                 webViewUrl = String.format("https://m.facebook.com/sharer.php?u=%s&t=%s", sharedUrl, sharedSubject);
+                if (preferences.getBoolean("basic_mode", false))
+                    webViewUrl = String.format("https://mbasic.facebook.com/sharer.php?u=%s&t=%s", sharedUrl, sharedSubject);
                 // ... and parse it just in case
                 webViewUrl = Uri.parse(webViewUrl).toString();
             }
@@ -672,6 +674,8 @@ public class MainActivity extends Activity {
                 }
                 // final step, set the proper Sharer...
                 webViewUrl = String.format("https://m.facebook.com/sharer.php?u=%s&t=%s", sharedUrl, sharedSubject);
+                if (preferences.getBoolean("basic_mode", false))
+                    webViewUrl = String.format("https://mbasic.facebook.com/sharer.php?u=%s&t=%s", sharedUrl, sharedSubject);
                 // ... and parse it just in case
                 webViewUrl = Uri.parse(webViewUrl).toString();
             }
