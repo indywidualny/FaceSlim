@@ -65,7 +65,7 @@ public class MyAppWebViewClient extends WebViewClient {
         // when Zero is activated and there is a mobile network connection ignore extra customizations
         if (!preferences.getBoolean("facebook_zero", false) || !Connectivity.isConnectedMobile(context)) {
             // turn facebook black (experimental)
-            if (preferences.getBoolean("dark_theme", false)) {
+            if (preferences.getBoolean("dark_theme", false) && !preferences.getBoolean("basic_mode", false)) {
                 // fill it with data only one time
                 if (cssFile == null)
                     cssFile = FileOperation.readRawTextFile(context, R.raw.black);
@@ -74,6 +74,8 @@ public class MyAppWebViewClient extends WebViewClient {
             // blue navigation bar always on top
             if (preferences.getBoolean("fixed_nav", false)) {
                 String cssFixed = "#header{ position: fixed; z-index: 11; top: 0px; } #root{ padding-top: 44px; } .flyout{ max-height: " + Dimension.heightForFixedFacebookNavbar(context) + "px; overflow-y: scroll; }";
+                if (preferences.getBoolean("basic_mode", false) && !(preferences.getBoolean("facebook_zero", false) && Connectivity.isConnectedMobile(context)))
+                    cssFixed = "#header{ position: fixed; z-index: 11; top: 0px; } #objects_container{ padding-top: 74px; }";
                 view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); node.innerHTML = str; document.body.appendChild(node); } addStyleString('" + cssFixed + "');");
             }
         }

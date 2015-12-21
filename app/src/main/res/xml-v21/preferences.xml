@@ -75,6 +75,12 @@
             android:defaultValue="false"/>
 
         <SwitchPreference
+            android:key="basic_mode"
+            android:title="@string/basic_mode"
+            android:summary="@string/basic_mode_description"
+            android:defaultValue="false"/>
+
+        <SwitchPreference
             android:key="dark_theme"
             android:title="@string/dark_theme"
             android:summary="@string/dark_theme_description"

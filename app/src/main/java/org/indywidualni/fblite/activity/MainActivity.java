@@ -155,6 +155,10 @@ public class MainActivity extends Activity {
         // define url that will open in webView
         String webViewUrl = "https://m.facebook.com";
 
+        // use basic mode
+        if (preferences.getBoolean("basic_mode", false))
+            webViewUrl = "https://mbasic.facebook.com";
+
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
         swipeRefreshLayout.setOnRefreshListener(onRefreshListener);
         swipeRefreshLayout.setColorSchemeColors(Color.BLUE);
@@ -556,88 +560,54 @@ public class MainActivity extends Activity {
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            selectItem(position);
+            String baseAddress = "https://m.facebook.com/";
+
+            if (preferences.getBoolean("basic_mode", false))
+                baseAddress = "https://mbasic.facebook.com/";
+            if (preferences.getBoolean("facebook_zero", false) && Connectivity.isConnectedMobile(getApplicationContext()))
+                baseAddress = "https://0.facebook.com/";
+
+            selectItem(position, baseAddress);
         }
     }
 
     // when a drawer item is clicked do instructions from below
-    private void selectItem(int position) {
-        // if someone is using Facebook Zero the menu is different
-        if (preferences.getBoolean("facebook_zero", false) && Connectivity.isConnectedMobile(getApplicationContext())) {
-            switch (position) {
-                case 0:
-                    webView.loadUrl("https://0.facebook.com");
-                    break;
-                case 1:
-                    webView.loadUrl("https://0.facebook.com/messages");
-                    break;
-                case 2:
-                    webView.loadUrl("https://0.facebook.com/buddylist.php");
-                    break;
-                case 3:
-                    webView.loadUrl("https://0.facebook.com/groups/?category=membership");
-                    break;
-                case 4:
-                    webView.loadUrl("https://0.facebook.com/events");
-                    break;
-                case 5:
-                    Intent settings = new Intent(this, SettingsActivity.class);
-                    startActivity(settings);
-                    break;
-                case 6:
-                    Intent about = new Intent(this, AboutActivity.class);
-                    startActivity(about);
-                    break;
-                case 7:
-                    trayPreferences.put("activity_visible", false);
-                    //finish();
-                    System.exit(0); // ugly, ugly, ugly!
-                    break;
-                case 8:
-                    webView.loadUrl("javascript:scroll(0,0)");
-                    break;
-                default:
-                    // silence is golden
-                    break;
-            }
-        } else {
-            // standard application menu (it's default)
-            switch (position) {
-                case 0:
-                    webView.loadUrl("https://m.facebook.com");
-                    break;
-                case 1:
-                    webView.loadUrl("https://m.facebook.com/messages");
-                    break;
-                case 2:
-                    webView.loadUrl("https://m.facebook.com/buddylist.php");
-                    break;
-                case 3:
-                    webView.loadUrl("https://m.facebook.com/groups/?category=membership");
-                    break;
-                case 4:
-                    webView.loadUrl("https://m.facebook.com/events");
-                    break;
-                case 5:
-                    Intent settings = new Intent(this, SettingsActivity.class);
-                    startActivity(settings);
-                    break;
-                case 6:
-                    Intent about = new Intent(this, AboutActivity.class);
-                    startActivity(about);
-                    break;
-                case 7:
-                    trayPreferences.put("activity_visible", false);
-                    //finish();
-                    System.exit(0); // ugly, ugly, ugly!
-                    break;
-                case 8:
-                    webView.loadUrl("javascript:scroll(0,0)");
-                    break;
-                default:
-                    // silence is golden
-                    break;
-            }
+    private void selectItem(int position, String baseAddress) {
+        switch (position) {
+            case 0:
+                webView.loadUrl(baseAddress);
+                break;
+            case 1:
+                webView.loadUrl(baseAddress + "messages");
+                break;
+            case 2:
+                webView.loadUrl(baseAddress + "buddylist.php");
+                break;
+            case 3:
+                webView.loadUrl(baseAddress + "groups/?category=membership");
+                break;
+            case 4:
+                webView.loadUrl(baseAddress + "events");
+                break;
+            case 5:
+                Intent settings = new Intent(this, SettingsActivity.class);
+                startActivity(settings);
+                break;
+            case 6:
+                Intent about = new Intent(this, AboutActivity.class);
+                startActivity(about);
+                break;
+            case 7:
+                trayPreferences.put("activity_visible", false);
+                //finish();
+                System.exit(0); // ugly, ugly, ugly!
+                break;
+            case 8:
+                webView.loadUrl("javascript:scroll(0,0)");
+                break;
+            default:
+                // silence is golden
+                break;
         }
         // update selected item, then close the drawer
         mDrawerList.setItemChecked(position, true);
