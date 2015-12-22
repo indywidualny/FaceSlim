@@ -89,6 +89,12 @@
             android:defaultValue="false"/>
 
         <CheckBoxPreference
+            android:key="hide_news_feed"
+            android:title="@string/hide_news_feed"
+            android:summary="@string/hide_news_feed_description"
+            android:defaultValue="false"/>
+
+        <CheckBoxPreference
             android:key="no_images"
             android:title="@string/no_images"
             android:summary="@string/no_images_description"
