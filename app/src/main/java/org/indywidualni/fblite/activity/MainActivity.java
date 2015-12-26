@@ -449,14 +449,9 @@ public class MainActivity extends Activity {
                 String url = (String) msg.getData().get("url");
 
                 if (url != null) {
-                    // "clean" the url and remove Facebook tracking redirection while sharing
-                    url = url.replace("http://lm.facebook.com/l.php?u=", "")
-                            .replace("https://m.facebook.com/l.php?u=", "")
-                            .replace("http://0.facebook.com/l.php?u=", "")
-                            .replaceAll("&h=.*", "").replaceAll("\\?acontext=.*", "");
-
-                    // ultimate decoding, recreate all the special characters
-                    url = Miscellany.urlDecode(url);
+                    /* "clean" an url to remove Facebook tracking redirection while sharing
+                    and recreate all the special characters */
+                    url = Miscellany.cleanAndDecodeUrl(url);
 
                     Log.v("Link long clicked", url);
                     // create share intent for long clicked url

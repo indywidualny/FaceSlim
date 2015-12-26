@@ -22,7 +22,7 @@ public class MyAppWebViewClient extends WebViewClient {
     // variable for onReceivedError
     private boolean refreshed;
 
-    // get application context from MainActivity
+    // get application context
     private static Context context = MyApplication.getContextOfApplication();
 
     // get shared preferences
@@ -34,7 +34,13 @@ public class MyAppWebViewClient extends WebViewClient {
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
         // handling external links as intents
-        if (Uri.parse(url).getHost().endsWith("facebook.com") || Uri.parse(url).getHost().endsWith("m.facebook.com") || Uri.parse(url).getHost().endsWith("h.facebook.com") || Uri.parse(url).getHost().endsWith("l.facebook.com") || Uri.parse(url).getHost().endsWith("0.facebook.com") || Uri.parse(url).getHost().endsWith("zero.facebook.com") || Uri.parse(url).getHost().endsWith("fb.me")) {
+        if (Uri.parse(url).getHost().endsWith("facebook.com")
+                || Uri.parse(url).getHost().endsWith("m.facebook.com")
+                || Uri.parse(url).getHost().endsWith("h.facebook.com")
+                || Uri.parse(url).getHost().endsWith("l.facebook.com")
+                || Uri.parse(url).getHost().endsWith("0.facebook.com")
+                || Uri.parse(url).getHost().endsWith("zero.facebook.com")
+                || Uri.parse(url).getHost().endsWith("fb.me")) {
             return false;
         }
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
