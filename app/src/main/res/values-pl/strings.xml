@@ -23,7 +23,7 @@
     <string name="title_activity_settings">Ustawienia aplikacji</string>
     <string name="title_activity_about">Informacje &amp; autor</string>
     <string name="clear_cache">Wyczyść cache</string>
-    <string name="clear_cache_description">Wyczyść pamięć podręczną aplikacji. Zostaniesz też wylogowany/wylogowana ;)</string>
+    <string name="clear_cache_description">Wyczyść pamięć podręczną aplikacji. Zostaniesz też wylogowany / wylogowana ;)</string>
     <string name="email_author">Napisz do mnie</string>
     <string name="preference_category1">Interfejs</string>
     <string name="preference_category2">Zaawansowane</string>
