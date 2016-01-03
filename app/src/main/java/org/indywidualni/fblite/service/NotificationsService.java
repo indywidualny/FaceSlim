@@ -129,6 +129,7 @@ public class NotificationsService extends Service {
 
                 try {
                     Log.i("RssReaderTask", "********** doInBackground: Processing... Trial: " + tries);
+                    //noinspection ConstantConditions
                     URL url = new URL(feedUrl);
                     RssFeed feed = RssReader.read(url);
                     result = feed.getRssItems();
@@ -212,6 +213,9 @@ public class NotificationsService extends Service {
                         notifier(String.format(getString(R.string.you_have_n_messages), newMessages), null, MESSAGE_URL, true);
                 }
 
+                // save the latest message count
+                trayPreferences.put("last_message_count", newMessages);
+
                 // log success
                 Log.i("CheckMessagesTask", "********** onPostExecute: Aight biatch ;)");
             } catch (NumberFormatException ex) {
@@ -229,6 +233,9 @@ public class NotificationsService extends Service {
         if (Build.VERSION.SDK_INT < 21) {
             CookieSyncManager.createInstance(getApplicationContext());
             CookieSyncManager.getInstance().sync();
+        } else {
+            // flush to force sync cookies (needed for the first run)
+            CookieManager.getInstance().flush();
         }
     }
 
@@ -292,6 +299,16 @@ public class NotificationsService extends Service {
         mBuilder.setContentIntent(resultPendingIntent);
         mBuilder.setOngoing(false);
         Notification note = mBuilder.build();
+
+        // don't vibrate or play a sound for duplicated message notifications
+        if (isMessage) {
+            int lastMessageCount = trayPreferences.getInt("last_message_count", 0);
+            int currentCount = 1;
+            if (title.matches("[\\d]+[A-Za-z]?"))
+                currentCount = Integer.parseInt(title.replaceAll("[\\D]", ""));
+            if (currentCount == lastMessageCount)
+                note.flags |= Notification.FLAG_ONLY_ALERT_ONCE;
+        }
 
         // display a notification
         NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
