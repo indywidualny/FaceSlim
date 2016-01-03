@@ -98,4 +98,10 @@
     <string name="hide_news_feed">Ukryj aktualności</string>
     <string name="hide_news_feed_description">[…] by uniknąć ślęczenia / prokrastynacji.</string>
 
+    <string name="message_notifications">Powiadamiaj o wiadomościach</string>
+    <string name="message_notifications_description">Gdy powiadomienia są aktywne, powiadamiaj także o wiadomościach.</string>
+    <string name="you_have_one_message">Masz nową wiadomość.</string>
+    <string name="you_have_n_messages">Masz %d nowych wiadomości.</string>
+    <string name="special_thanks_notifications">Podziękowania z pomoc z powiadomieniami:</string>
+
 </resources>

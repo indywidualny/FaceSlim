@@ -233,7 +233,7 @@ public class NotificationsService extends Service {
     }
 
     private void notifier(String title, String summary, String url, boolean isMessage) {
-        // let's display a notification, dude
+        // let's display a notification, dude!
         final String contentTitle;
         if (isMessage)
             contentTitle = getString(R.string.app_name) + ": " + getString(R.string.messages);
@@ -241,7 +241,7 @@ public class NotificationsService extends Service {
             contentTitle = getString(R.string.app_name) + ": " + getString(R.string.notifications);
 
         // log line (show what type of notification is about to be displayed)
-        Log.i("NotificationsService", "notifier: Start notification ********** " + contentTitle);
+        Log.i("NotificationsService", "notifier: Start notification ********** isMessage: " + isMessage);
 
         // start building a notification
         NotificationCompat.Builder mBuilder =
