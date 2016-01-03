@@ -15,6 +15,8 @@ import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
 
 import net.grandcentrix.tray.TrayAppPreferences;
 
@@ -22,7 +24,12 @@ import org.indywidualni.fblite.MyApplication;
 import org.indywidualni.fblite.R;
 import org.indywidualni.fblite.activity.MainActivity;
 import org.indywidualni.fblite.util.Connectivity;
+import org.jsoup.Jsoup;
+import org.jsoup.select.Elements;
+import org.xml.sax.SAXException;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -32,12 +39,15 @@ import nl.matshofman.saxrssreader.RssReader;
 
 public class NotificationsService extends Service {
 
+    // max number of trials when something is wrong
+    private static final int MAX_RETRY = 3;
+    private static final String MESSAGE_URL = "https://m.facebook.com/messages";
+
     private Handler handler = null;
     private static Runnable runnable = null;
 
-    private String feedUrl;
-    private int timeInterval;
     private TrayAppPreferences trayPreferences;
+    private int timeInterval;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -57,14 +67,18 @@ public class NotificationsService extends Service {
                 //Log.i("NotificationsService", "********** Service is still running **********");
                 Log.i("NotificationsService", "isActivityVisible: " + Boolean.toString(trayPreferences.getBoolean("activity_visible", false)));
 
-                // get the url and time interval from shared prefs
-                feedUrl = trayPreferences.getString("feed_url", "");
+                // sync cookies to get the right data
+                syncCookies();
+
+                // get time interval from shared prefs
                 timeInterval = trayPreferences.getInt("interval_pref", 1800000);
 
-                // start AsyncTask if there is internet connection
+                // start AsyncTasks if there is internet connection
                 if (Connectivity.isConnected(getApplicationContext())) {
-                    Log.i("NotificationsService", "Internet connection active. Starting AsyncTask...");
-                    new RssReaderTask().execute(feedUrl);
+                    Log.i("NotificationsService", "Internet connection active. Starting AsyncTasks...");
+                    new RssReaderTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+                    if (trayPreferences.getBoolean("message_notifications", false))
+                        new CheckMessagesTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
                 } else
                     Log.i("NotificationsService", "No internet connection. Skip checking.");
 
@@ -90,24 +104,37 @@ public class NotificationsService extends Service {
     }
 
     // AsyncTask to get feed, process it and do all the actions needed later
-    private class RssReaderTask extends AsyncTask<String, Void, ArrayList<RssItem>> {
-
-        // max number of tries when something is wrong
-        private static final int MAX_RETRY = 3;
+    private class RssReaderTask extends AsyncTask<Void, Void, ArrayList<RssItem>> {
 
         @Override
-        protected ArrayList<RssItem> doInBackground(String... params) {
-
+        protected ArrayList<RssItem> doInBackground(Void... params) {
             ArrayList<RssItem> result = null;
+            String feedUrl = null;
             int tries = 0;
 
-            while(tries++ < MAX_RETRY && result == null) {
+            while (tries++ < MAX_RETRY && result == null) {
+                // get cookie needed to generate feed url
+                String cookie = CookieManager.getInstance().getCookie("https://m.facebook.com");
+
+                try {
+                    Elements elements = Jsoup.connect("https://facebook.com/notifications")
+                            .cookie("https://m.facebook.com", cookie).get().select("div._li")
+                            .select("div#globalContainer").select("div.fwn").select("a:matches(RSS)");
+                    String pattern = elements.attr("href");
+                    // generate feed url needed by RssReader
+                    feedUrl = "https://www.facebook.com" + pattern;
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+
                 try {
                     Log.i("RssReaderTask", "********** doInBackground: Processing... Trial: " + tries);
-                    URL url = new URL(params[0]);
+                    URL url = new URL(feedUrl);
                     RssFeed feed = RssReader.read(url);
                     result = feed.getRssItems();
-                } catch (Exception ex) {
+                } catch (MalformedURLException ex) {
+                    Log.i("RssReaderTask", "********** doInBackground: URL error!");
+                } catch (SAXException | IOException ex) {
                     Log.i("RssReaderTask", "********** doInBackground: Feed error!");
                 }
             }
@@ -131,7 +158,7 @@ public class NotificationsService extends Service {
             try {
                 if (!result.get(0).getPubDate().toString().equals(savedDate))
                     if (!trayPreferences.getBoolean("activity_visible", false) || trayPreferences.getBoolean("notifications_everywhere", true))
-                        notifier(result.get(0).getTitle(), result.get(0).getDescription(), result.get(0).getLink());
+                        notifier(result.get(0).getTitle(), result.get(0).getDescription(), result.get(0).getLink(), false);
 
                 // save the latest PubDate (as a String) to TrayPreferences
                 trayPreferences.put("saved_date", result.get(0).getPubDate().toString());
@@ -145,26 +172,96 @@ public class NotificationsService extends Service {
 
     }
 
-    private void notifier(String title, String summary, String url) {
-        Log.i("NotificationsService", "notifier: Start notification");
+    // AsyncTask to get message notifications
+    private class CheckMessagesTask extends AsyncTask<Void, Void, String> {
+
+        @Override
+        protected String doInBackground(Void... params) {
+            String result = null;
+            int tries = 0;
+
+            while (tries++ < MAX_RETRY && result == null) {
+                try {
+                    Log.i("CheckMessagesTask", "********** doInBackground: Processing... Trial: " + tries);
+
+                    Elements message = Jsoup.connect("https://m.facebook.com").cookie("https://m.facebook.com",
+                            CookieManager.getInstance().getCookie("https://m.facebook.com")).get()
+                            .select("div#viewport").select("div#page").select("div._129-")
+                            .select("#messages_jewel").select("span._59tg");
+
+                    result = message.html();
+                } catch (IOException ex) {
+                    Log.i("CheckMessagesTask", "********** doInBackground: Shit!");
+                    ex.printStackTrace();
+                }
+            }
+
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            try {
+                // parse a number of unread messages
+                int newMessages = Integer.parseInt(result);
+
+                if (!trayPreferences.getBoolean("activity_visible", false) || trayPreferences.getBoolean("notifications_everywhere", true)) {
+                    if (newMessages == 1)
+                        notifier(getString(R.string.you_have_one_message), null, MESSAGE_URL, true);
+                    else if (newMessages > 1)
+                        notifier(String.format(getString(R.string.you_have_n_messages), newMessages), null, MESSAGE_URL, true);
+                }
+
+                // log success
+                Log.i("CheckMessagesTask", "********** onPostExecute: Aight biatch ;)");
+            } catch (NumberFormatException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+    }
+
+    /** CookieSyncManager was deprecated in API level 21.
+     *  We need it for API level lower than 21 though.
+     */
+    @SuppressWarnings("deprecation")
+    private void syncCookies() {
+        if (Build.VERSION.SDK_INT < 21) {
+            CookieSyncManager.createInstance(getApplicationContext());
+            CookieSyncManager.getInstance().sync();
+        }
+    }
+
+    private void notifier(String title, String summary, String url, boolean isMessage) {
+        // let's display a notification, dude
+        final String contentTitle;
+        if (isMessage)
+            contentTitle = getString(R.string.app_name) + ": " + getString(R.string.messages);
+        else
+            contentTitle = getString(R.string.app_name) + ": " + getString(R.string.notifications);
+
+        // log line (show what type of notification is about to be displayed)
+        Log.i("NotificationsService", "notifier: Start notification ********** " + contentTitle);
 
         // start building a notification
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
                         .setStyle(new NotificationCompat.BigTextStyle().bigText(title))
                         .setSmallIcon(R.mipmap.ic_stat_fs)
-                        .setContentTitle(getString(R.string.app_name))
+                        .setContentTitle(contentTitle)
                         .setContentText(title)
                         .setTicker(title)
                         .setWhen(System.currentTimeMillis())
                         .setAutoCancel(true);
 
-        // see all the notifications button
-        Intent allNotificationsIntent = new Intent(this, MainActivity.class);
-        allNotificationsIntent.putExtra("start_url", "https://m.facebook.com/notifications");
-        allNotificationsIntent.setAction("ALL_NOTIFICATIONS_ACTION");
-        PendingIntent piAllNotifications = PendingIntent.getActivity(getApplicationContext(), 0, allNotificationsIntent, 0);
-        mBuilder.addAction(0, getString(R.string.all_notifications), piAllNotifications);
+        // see all the notifications button (if it's not a message)
+        if (!isMessage) {
+            Intent allNotificationsIntent = new Intent(this, MainActivity.class);
+            allNotificationsIntent.putExtra("start_url", "https://m.facebook.com/notifications");
+            allNotificationsIntent.setAction("ALL_NOTIFICATIONS_ACTION");
+            PendingIntent piAllNotifications = PendingIntent.getActivity(getApplicationContext(), 0, allNotificationsIntent, 0);
+            mBuilder.addAction(0, getString(R.string.all_notifications), piAllNotifications);
+        }
 
         // notification sound
         Uri ringtoneUri = Uri.parse(trayPreferences.getString("ringtone", "content://settings/system/notification_sound"));
@@ -198,7 +295,12 @@ public class NotificationsService extends Service {
 
         // display a notification
         NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        mNotificationManager.notify(0, note);
+
+        // because message notifications are displayed separately
+        if (isMessage)
+            mNotificationManager.notify(1, note);
+        else
+            mNotificationManager.notify(0, note);
     }
 
     public static void cancelAllNotifications() {

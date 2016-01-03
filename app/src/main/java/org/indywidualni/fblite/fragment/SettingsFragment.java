@@ -41,10 +41,8 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
 
         // set onPreferenceClickListener for a few preferences
-        Preference getFeedPref = findPreference("get_feed");
         Preference notificationsSettingsPref = findPreference("notifications_settings");
         Preference clearCachePref = findPreference("clear_cache");
-        getFeedPref.setOnPreferenceClickListener(this);
         notificationsSettingsPref.setOnPreferenceClickListener(this);
         clearCachePref.setOnPreferenceClickListener(this);
 
@@ -67,10 +65,8 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
                         else
                             context.stopService(intent);
                         break;
-                    case "feed_url":
-                        trayPreferences.put("feed_url", preferences.getString("feed_url", ""));
-                        // remove saved date for fresh check
-                        trayPreferences.put("saved_date", "");
+                    case "message_notifications":
+                        trayPreferences.put("message_notifications", preferences.getBoolean("message_notifications", false));
                         // restart service
                         if (prefs.getBoolean("notifications_activated", false)) {
                             context.stopService(intent);
@@ -106,9 +102,6 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         Log.v("OnPreferenceClick", key + " clicked in SettingsFragment");
 
         switch (key) {
-            case "get_feed":
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.get_feed_link))));
-                return true;
             case "notifications_settings":
                 getFragmentManager().beginTransaction()
                         .setCustomAnimations(R.anim.slide_in_right, 0)

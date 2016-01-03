@@ -16,6 +16,9 @@
     *;
 }
 
+# jsoup library
+-keeppackagenames org.jsoup.nodes
+
 # remove logs (disabled for now)
 # works only with proguard-android-optimize.txt
 -assumenosideeffects class android.util.Log {

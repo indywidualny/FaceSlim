@@ -9,6 +9,7 @@
     <string name="indywidualni_link" translatable="false"><a href="http://indywidualni.org">indywidualni.org</a></string>
     <string name="get_feed_link" translatable="false">https://goo.gl/t3vJ33</string>
     <string name="facebook" translatable="false">Facebook</string>
+    <string name="special_thanks_notifications_link" translatable="false"><a href="https://github.com/creativetrendsapps">creativetrendsapps</a></string>
 
     <!-- Strings to translate during creation of a new translation -->
     <string name="app_name">Face Slim</string>
@@ -106,5 +107,11 @@
     <string name="basic_mode_description">Use a basic website instead of a standard one. Dark theme has to be disabled. May not work during a fast connection.</string>
     <string name="hide_news_feed">Hide News Feed</string>
     <string name="hide_news_feed_description">[…] to avoid sidetracking / procrastination.</string>
+
+    <string name="message_notifications">Message notifications</string>
+    <string name="message_notifications_description">When notifications are active, display also message notifications.</string>
+    <string name="you_have_one_message">You have one message.</string>
+    <string name="you_have_n_messages">You have %d messages.</string>
+    <string name="special_thanks_notifications">Special thanks for help with notifications</string>
 
 </resources>

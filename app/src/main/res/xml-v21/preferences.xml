@@ -41,25 +41,20 @@
     <PreferenceCategory
         android:title="@string/preference_category5">
 
-        <EditTextPreference
-            android:key="feed_url"
-            android:title="@string/notifications_feed_url"
-            android:inputType="textNoSuggestions"/>
-
-        <Preference
-            android:key="get_feed"
-            android:title="@string/get_feed"
-            android:summary="@string/get_feed_description"/>
-
         <Preference
             android:key="notifications_settings"
             android:title="@string/notifications_settings"
             android:summary="@string/notifications_settings_description"/>
 
         <SwitchPreference
+            android:key="message_notifications"
+            android:title="@string/message_notifications"
+            android:summary="@string/message_notifications_description"
+            android:defaultValue="false"/>
+
+        <SwitchPreference
             android:key="notifications_activated"
             android:title="@string/activate_notifications"
-            android:dependency="feed_url"
             android:defaultValue="false"/>
 
     </PreferenceCategory>

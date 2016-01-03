@@ -27,7 +27,6 @@ public class PackageReplacedIntentReceiver extends BroadcastReceiver {
         /** App upgrade, the important part:
          *  Rewrite all the Shared Preferences used in NotificationsService into Tray Preferences
          *  Multi-process Shared Preferences are deprecated since API 23 */
-        trayPreferences.put("feed_url", preferences.getString("feed_url", ""));
         trayPreferences.put("interval_pref", Integer.parseInt(preferences.getString("interval_pref", "1800000")));
         trayPreferences.put("ringtone", preferences.getString("ringtone", "content://settings/system/notification_sound"));
         trayPreferences.put("vibrate", preferences.getBoolean("vibrate", false));

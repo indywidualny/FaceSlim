@@ -25,16 +25,18 @@ public class AboutFragment extends Fragment {
         String authorInfo = getString(R.string.app_name) + " " + getString(R.string.author);
 
         //noinspection ConstantConditions
-        TextView textFirst = (TextView) getView().findViewById(R.id.textFirst);
-        TextView textSecond = (TextView) getView().findViewById(R.id.textSecond);
-        TextView textThird = (TextView) getView().findViewById(R.id.textThird);
-        TextView textFourth = (TextView) getView().findViewById(R.id.textFourth);
+        TextView textAuthor = (TextView) getView().findViewById(R.id.textAuthor);
+        TextView textSpecialThanksLink = (TextView) getView().findViewById(R.id.textSpecialThanksLink);
+        TextView textGithub = (TextView) getView().findViewById(R.id.textGithub);
+        TextView textFdroid = (TextView) getView().findViewById(R.id.textFdroid);
+        TextView textIndywidualni = (TextView) getView().findViewById(R.id.textIndywidualni);
         TextView textVersion = (TextView) getView().findViewById(R.id.textVersion);
 
-        textFirst.setText(authorInfo);
-        textSecond.setMovementMethod(LinkMovementMethod.getInstance());
-        textThird.setMovementMethod(LinkMovementMethod.getInstance());
-        textFourth.setMovementMethod(LinkMovementMethod.getInstance());
+        textAuthor.setText(authorInfo);
+        textSpecialThanksLink.setMovementMethod(LinkMovementMethod.getInstance());
+        textGithub.setMovementMethod(LinkMovementMethod.getInstance());
+        textFdroid.setMovementMethod(LinkMovementMethod.getInstance());
+        textIndywidualni.setMovementMethod(LinkMovementMethod.getInstance());
         textVersion.setText(versionName);
     }
 
