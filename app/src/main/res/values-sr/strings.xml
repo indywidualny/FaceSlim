@@ -43,7 +43,7 @@
     <string name="me_google_play">Гуглов Плеј</string>
     <string name="preference_category3">Експериментално</string>
     <string name="dark_theme">Тамна тема</string>
-    <string name="dark_theme_description">Тамна позадина Фејсбука. Ваш АМОЛЕД екрану ће да поштеди батерију.</string>
+    <string name="dark_theme_description">Тамна позадина Фејсбука. Вашем АМОЛЕД екрану ово ће да поштеди батерију.</string>
     <string name="fixed_nav">Фиксирана плава трака</string>
     <string name="fixed_nav_description">Фејсбук навигација увек на врху.</string>
     <string name="facebook_zero">Фејсбук Зиро</string>
@@ -71,7 +71,7 @@
     <string name="get_feed_description">Кликните на поље, пронађите ваш јединствени РСС довод обавештења, копирајте адресу и унесите је изнад.</string>
     <string name="notifications_service_created">Обавештења активна</string>
     <string name="notifications_settings">Поставке обавештења</string>
-    <string name="notifications_settings_description">Додатне поставке. Одредите интервал провере, поставите звук, светло и вибрирање.</string>
+    <string name="notifications_settings_description">Додатне поставке. Одређивање интервала провере, поставке звука, светла и вибрирања.</string>
 
     <string-array name="intervalPrefTitles">
         <item>5 минута</item>
@@ -96,14 +96,17 @@
     <string name="no_images_description">Без учитавања слика. Драстично смањује проток података.</string>
     <string name="no_storage_permission">Одобрите дозволе за складиште да бисте користили ову функцију.</string>
     <string name="basic_mode">Основни режим</string>
-    <string name="basic_mode_description">Користи основни вебсајт уместо стандардног. Тамна тема мора бити искључена. Можда неће радити при брзој вези.</string>
+    <string name="basic_mode_description">Коришћење основног вебсајта уместо стандардног. Тамна тема мора бити искључена. Можда неће радити при брзој вези.</string>
     <string name="hide_news_feed">Сакриј новости</string>
-    <string name="hide_news_feed_description">[…] да би се избегло скретање пажње/одлагање обавеза.</string>
+    <string name="hide_news_feed_description">Избегните скретање пажње/одлагање обавеза.</string>
 
     <string name="message_notifications">Обавештења о порукама</string>
     <string name="message_notifications_description">Приказ обавештења о порукама, ако су обавештења активирана.</string>
     <string name="you_have_one_message">Имате једну поруку.</string>
     <string name="you_have_n_messages">Имате %d порука.</string>
     <string name="special_thanks_notifications">Посебна захвалница за помоћ са обавештењима:</string>
+    <string name="sync_problem">Не могу да синхронизујем колачиће. Прво покретање, је л\' да? Само покрените поново апликацију. :)</string>
+    <string name="hide_sponsored">Сакриј спонзорисане објаве</string>
+    <string name="hide_sponsored_description">Скривање спонзорисаних објава и реклама.</string>
 
 </resources>
