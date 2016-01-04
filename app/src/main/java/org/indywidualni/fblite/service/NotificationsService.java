@@ -112,6 +112,7 @@ public class NotificationsService extends Service {
         protected ArrayList<RssItem> doInBackground(Void... params) {
             ArrayList<RssItem> result = null;
             String feedUrl = null;
+            boolean syncProblemOccurred = false;
             int tries = 0;
 
             while (tries++ < MAX_RETRY && result == null) {
@@ -126,7 +127,10 @@ public class NotificationsService extends Service {
                     // generate feed url needed by RssReader
                     feedUrl = "https://www.facebook.com" + pattern;
                 } catch (IllegalArgumentException ex) {
-                    syncProblemToast();
+                    if (!syncProblemOccurred) {
+						syncProblemToast();
+						syncProblemOccurred = true;
+					}
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
@@ -183,6 +187,7 @@ public class NotificationsService extends Service {
         @Override
         protected String doInBackground(Void... params) {
             String result = null;
+            boolean syncProblemOccurred = false;
             int tries = 0;
 
             while (tries++ < MAX_RETRY && result == null) {
@@ -197,7 +202,10 @@ public class NotificationsService extends Service {
                     result = message.html();
 
                 } catch (IllegalArgumentException ex) {
-                    syncProblemToast();
+                    if (!syncProblemOccurred) {
+						syncProblemToast();
+						syncProblemOccurred = true;
+					}
                 } catch (IOException ex) {
                     Log.i("CheckMessagesTask", "********** doInBackground: Shit!");
                     ex.printStackTrace();
