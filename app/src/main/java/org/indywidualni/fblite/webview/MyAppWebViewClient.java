@@ -89,6 +89,13 @@ public class MyAppWebViewClient extends WebViewClient {
         if (preferences.getBoolean("transparent_nav", false))
             view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); node.innerHTML = str; document.body.appendChild(node); } addStyleString('body{ padding-bottom: 48px; }');");
 
+        // hide sponsored posts and ads
+        if (preferences.getBoolean("hide_sponsored", false)) {
+			// TODO: Add style below
+            final String cssHideSponsored = " ";
+            view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); node.innerHTML = str; document.body.appendChild(node); } addStyleString('" + cssHideSponsored + "');");
+        }
+
         // hide news feed (a feature requested by drjedd)
         if (preferences.getBoolean("hide_news_feed", false))
             view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); node.innerHTML = str; document.body.appendChild(node); } addStyleString('#m_newsfeed_stream{ display: none; }');");

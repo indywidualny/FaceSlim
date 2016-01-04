@@ -84,6 +84,12 @@
             android:defaultValue="false"/>
 
         <SwitchPreference
+            android:key="hide_sponsored"
+            android:title="@string/hide_sponsored"
+            android:summary="@string/hide_sponsored_description"
+            android:defaultValue="false"/>
+
+        <SwitchPreference
             android:key="hide_news_feed"
             android:title="@string/hide_news_feed"
             android:summary="@string/hide_news_feed_description"

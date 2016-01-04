@@ -114,5 +114,7 @@
     <string name="you_have_n_messages">You have %d messages.</string>
     <string name="special_thanks_notifications">Special thanks for help with notifications:</string>
     <string name="sync_problem">Cookies cannot be synced. First run, yeah? Please just restart the app :)</string>
+    <string name="hide_sponsored">Hide sponsored posts</string>
+    <string name="hide_sponsored_description">We don\'t like sponsored posts and ads.</string>
 
 </resources>
