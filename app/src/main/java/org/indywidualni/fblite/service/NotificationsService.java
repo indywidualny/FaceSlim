@@ -12,11 +12,13 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
+import android.os.Looper;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
+import android.widget.Toast;
 
 import net.grandcentrix.tray.TrayAppPreferences;
 
@@ -123,6 +125,8 @@ public class NotificationsService extends Service {
                     String pattern = elements.attr("href");
                     // generate feed url needed by RssReader
                     feedUrl = "https://www.facebook.com" + pattern;
+                } catch (IllegalArgumentException ex) {
+                    syncProblemToast();
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
@@ -191,6 +195,9 @@ public class NotificationsService extends Service {
                             .select("#messages_jewel").select("span._59tg");
 
                     result = message.html();
+
+                } catch (IllegalArgumentException ex) {
+                    syncProblemToast();
                 } catch (IOException ex) {
                     Log.i("CheckMessagesTask", "********** doInBackground: Shit!");
                     ex.printStackTrace();
@@ -227,16 +234,26 @@ public class NotificationsService extends Service {
 
     /** CookieSyncManager was deprecated in API level 21.
      *  We need it for API level lower than 21 though.
+     *  In API level >= 21 it's done automatically.
      */
     @SuppressWarnings("deprecation")
     private void syncCookies() {
         if (Build.VERSION.SDK_INT < 21) {
             CookieSyncManager.createInstance(getApplicationContext());
             CookieSyncManager.getInstance().sync();
-        } else {
-            // flush to force sync cookies (needed for the first run)
-            CookieManager.getInstance().flush();
         }
+    }
+
+    // show a Sync Problem Toast while not being on UI Thread
+    private void syncProblemToast() {
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(getApplicationContext(), getString(R.string.sync_problem),
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void notifier(String title, String summary, String url, boolean isMessage) {
