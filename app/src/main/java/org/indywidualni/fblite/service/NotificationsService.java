@@ -128,9 +128,9 @@ public class NotificationsService extends Service {
                     feedUrl = "https://www.facebook.com" + pattern;
                 } catch (IllegalArgumentException ex) {
                     if (!syncProblemOccurred) {
-						syncProblemToast();
-						syncProblemOccurred = true;
-					}
+                        syncProblemToast();
+                        syncProblemOccurred = true;
+                    }
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
@@ -203,9 +203,9 @@ public class NotificationsService extends Service {
 
                 } catch (IllegalArgumentException ex) {
                     if (!syncProblemOccurred) {
-						syncProblemToast();
-						syncProblemOccurred = true;
-					}
+                        syncProblemToast();
+                        syncProblemOccurred = true;
+                    }
                 } catch (IOException ex) {
                     Log.i("CheckMessagesTask", "********** doInBackground: Shit!");
                     ex.printStackTrace();
