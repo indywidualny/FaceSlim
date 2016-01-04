@@ -304,7 +304,7 @@ public class NotificationsService extends Service {
         if (isMessage) {
             int lastMessageCount = trayPreferences.getInt("last_message_count", 0);
             int currentCount = 1;
-            if (title.matches("[\\d]+[A-Za-z]?"))
+            if (title.matches(".*\\d+.*"))
                 currentCount = Integer.parseInt(title.replaceAll("[\\D]", ""));
             if (currentCount == lastMessageCount)
                 note.flags |= Notification.FLAG_ONLY_ALERT_ONCE;
