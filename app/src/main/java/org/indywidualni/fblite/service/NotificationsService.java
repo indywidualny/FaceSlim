@@ -43,11 +43,12 @@ public class NotificationsService extends Service {
 
     // max number of trials when something is wrong
     private static final int MAX_RETRY = 3;
+    private static final String USER_AGENT = System.getProperty("http.agent");
     private static final String MESSAGE_URL = "https://m.facebook.com/messages";
+    private static final int JSOUP_TIMEOUT = 10000;
 
-    private Handler handler = null;
-    private static Runnable runnable = null;
-
+    private Handler handler;
+    private static Runnable runnable;
     private TrayAppPreferences trayPreferences;
     private int timeInterval;
 
@@ -66,7 +67,6 @@ public class NotificationsService extends Service {
         handler = new Handler();
         runnable = new Runnable() {
             public void run() {
-                //Log.i("NotificationsService", "********** Service is still running **********");
                 Log.i("NotificationsService", "isActivityVisible: " + Boolean.toString(trayPreferences.getBoolean("activity_visible", false)));
 
                 // sync cookies to get the right data
@@ -78,7 +78,8 @@ public class NotificationsService extends Service {
                 // start AsyncTasks if there is internet connection
                 if (Connectivity.isConnected(getApplicationContext())) {
                     Log.i("NotificationsService", "Internet connection active. Starting AsyncTasks...");
-                    new RssReaderTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+                    if (trayPreferences.getBoolean("notifications_activated", false))
+                        new RssReaderTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
                     if (trayPreferences.getBoolean("message_notifications", false))
                         new CheckMessagesTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
                 } else
@@ -116,17 +117,21 @@ public class NotificationsService extends Service {
             int tries = 0;
 
             while (tries++ < MAX_RETRY && result == null) {
-                // get cookie needed to generate feed url
-                String cookie = CookieManager.getInstance().getCookie("https://m.facebook.com");
+                // mobile connection can be switched, get the fresh data every time
+                String connectUrl = "https://www.facebook.com/notifications";  // for Wi-Fi
+                if (Connectivity.isConnectedMobile(getApplicationContext()))
+                    connectUrl = "https://web.facebook.com/notifications";     // for cellular
 
                 try {
-                    Elements elements = Jsoup.connect("https://facebook.com/notifications")
-                            .cookie("https://m.facebook.com", cookie).get().select("div._li")
-                            .select("div#globalContainer").select("div.fwn").select("a:matches(RSS)");
-                    String pattern = elements.attr("href");
+                    Elements element = Jsoup.connect(connectUrl).userAgent(USER_AGENT).timeout(JSOUP_TIMEOUT)
+                            .cookie("https://m.facebook.com", CookieManager.getInstance().getCookie("https://m.facebook.com")).get()
+                            .select("div._li").select("div#globalContainer").select("div.fwn").select("a:matches(RSS)");
+
+                    String pattern = element.attr("href");
                     // generate feed url needed by RssReader
                     feedUrl = "https://www.facebook.com" + pattern;
                 } catch (IllegalArgumentException ex) {
+                    Log.i("CheckMessagesTask", "********** Cookie sync problem occurred");
                     if (!syncProblemOccurred) {
                         syncProblemToast();
                         syncProblemOccurred = true;
@@ -142,9 +147,9 @@ public class NotificationsService extends Service {
                     RssFeed feed = RssReader.read(url);
                     result = feed.getRssItems();
                 } catch (MalformedURLException ex) {
-                    Log.i("RssReaderTask", "********** doInBackground: URL error!");
+                    Log.i("RssReaderTask", "********** doInBackground: URL error");
                 } catch (SAXException | IOException ex) {
-                    Log.i("RssReaderTask", "********** doInBackground: Feed error!");
+                    Log.i("RssReaderTask", "********** doInBackground: Feed error");
                 }
             }
 
@@ -175,7 +180,7 @@ public class NotificationsService extends Service {
                 // log success
                 Log.i("RssReaderTask", "********** onPostExecute: Aight biatch ;)");
             } catch (NullPointerException ex) {
-                Log.i("RssReaderTask", "********** onPostExecute: NullPointerException!");
+                Log.i("RssReaderTask", "********** onPostExecute: NullPointerException");
             }
         }
 
@@ -194,20 +199,19 @@ public class NotificationsService extends Service {
                 try {
                     Log.i("CheckMessagesTask", "********** doInBackground: Processing... Trial: " + tries);
 
-                    Elements message = Jsoup.connect("https://m.facebook.com").cookie("https://m.facebook.com",
-                            CookieManager.getInstance().getCookie("https://m.facebook.com")).get()
+                    Elements message = Jsoup.connect("https://m.facebook.com/messages").userAgent(USER_AGENT).timeout(JSOUP_TIMEOUT)
+                            .cookie("https://m.facebook.com", CookieManager.getInstance().getCookie("https://m.facebook.com")).get()
                             .select("div#viewport").select("div#page").select("div._129-")
                             .select("#messages_jewel").select("span._59tg");
 
                     result = message.html();
-
                 } catch (IllegalArgumentException ex) {
+                    Log.i("CheckMessagesTask", "********** Cookie sync problem occurred");
                     if (!syncProblemOccurred) {
                         syncProblemToast();
                         syncProblemOccurred = true;
                     }
                 } catch (IOException ex) {
-                    Log.i("CheckMessagesTask", "********** doInBackground: Shit!");
                     ex.printStackTrace();
                 }
             }

@@ -60,18 +60,20 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
                 switch (key) {
                     case "notifications_activated":
-                        if (prefs.getBoolean("notifications_activated", false))
+                        trayPreferences.put("notifications_activated", preferences.getBoolean("notifications_activated", false));
+                        if (prefs.getBoolean("notifications_activated", false) || preferences.getBoolean("message_notifications", false)) {
+                            context.stopService(intent);
                             context.startService(intent);
-                        else
+                        } else
                             context.stopService(intent);
                         break;
                     case "message_notifications":
                         trayPreferences.put("message_notifications", preferences.getBoolean("message_notifications", false));
-                        // restart service
-                        if (prefs.getBoolean("notifications_activated", false)) {
+                        if (prefs.getBoolean("message_notifications", false) || preferences.getBoolean("notifications_activated", false)) {
                             context.stopService(intent);
                             context.startService(intent);
-                        }
+                        } else
+                            context.stopService(intent);
                         break;
                     case "basic_mode":
                         Preference preference_dark = findPreference("dark_theme");

@@ -32,12 +32,13 @@ public class PackageReplacedIntentReceiver extends BroadcastReceiver {
         trayPreferences.put("vibrate", preferences.getBoolean("vibrate", false));
         trayPreferences.put("led_light", preferences.getBoolean("led_light", false));
         trayPreferences.put("notifications_everywhere", preferences.getBoolean("notifications_everywhere", true));
+        trayPreferences.put("notifications_activated", preferences.getBoolean("notifications_activated", false));
 
         // create service start intent
         Intent startIntent = new Intent(context, NotificationsService.class);
 
         // start notifications service when it's activated at Settings
-        if (preferences.getBoolean("notifications_activated", false))
+        if (preferences.getBoolean("notifications_activated", false) || preferences.getBoolean("message_notifications", false))
             context.startService(startIntent);
     }
 

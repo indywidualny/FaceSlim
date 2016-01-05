@@ -6,7 +6,7 @@
 
         <ListPreference
             android:title="@string/interval_pref"
-            android:summary="@string/interval_pref_description"
+            android:summary="@string/interval_pref_description_new"
             android:key="interval_pref"
             android:entries="@array/intervalPrefTitles"
             android:entryValues="@array/intervalPrefValues"

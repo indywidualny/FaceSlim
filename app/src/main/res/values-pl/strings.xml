@@ -99,12 +99,13 @@
     <string name="hide_news_feed_description">[…] by uniknąć ślęczenia / prokrastynacji.</string>
 
     <string name="message_notifications">Powiadamiaj o wiadomościach</string>
-    <string name="message_notifications_description">Gdy powiadomienia są aktywne, powiadamiaj także o wiadomościach.</string>
     <string name="you_have_one_message">Masz nową wiadomość.</string>
     <string name="you_have_n_messages">Masz %d nowych wiadomości.</string>
     <string name="special_thanks_notifications">Podziękowania z pomoc z powiadomieniami:</string>
     <string name="sync_problem">Nie mogę zsynchronizować cookies. Pierwszy start? Zrestartuj aplikację :)</string>
     <string name="hide_sponsored">Ukryj posty sponsorowane</string>
-    <string name="hide_sponsored_description">Nie lubimy wpisów sponsorowanych i reklam.</string>
+    <string name="hide_sponsored_description">Nie lubimy sponsorowanych postów i reklam.</string>
+    <string name="interval_pref_description_new">Powiadomienia są sprawdzane co %s.</string>
+    <string name="facebook_notifications">Powiadomienia z Facebook</string>
 
 </resources>

@@ -101,7 +101,6 @@
     <string name="hide_news_feed_description">[…] да би се избегло скретање пажње/одлагање обавеза.</string>
 
     <string name="message_notifications">Обавештења о порукама</string>
-    <string name="message_notifications_description">Приказ обавештења о порукама, ако су обавештења активирана.</string>
     <string name="you_have_one_message">Имате једну поруку.</string>
     <string name="you_have_n_messages">Имате %d порука.</string>
     <string name="special_thanks_notifications">Посебна захвалница за помоћ са обавештењима:</string>

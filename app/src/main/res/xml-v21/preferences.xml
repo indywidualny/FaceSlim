@@ -49,12 +49,11 @@
         <SwitchPreference
             android:key="message_notifications"
             android:title="@string/message_notifications"
-            android:summary="@string/message_notifications_description"
             android:defaultValue="false"/>
 
         <SwitchPreference
             android:key="notifications_activated"
-            android:title="@string/activate_notifications"
+            android:title="@string/facebook_notifications"
             android:defaultValue="false"/>
 
     </PreferenceCategory>

@@ -39,7 +39,7 @@ public class NotificationsSettingsFragment extends PreferenceFragment {
 
         // default value for interval_pref preference summary
         ListPreference lp = (ListPreference) findPreference("interval_pref");
-        String temp1 = getString(R.string.interval_pref_description).replace("%s", "");
+        String temp1 = getString(R.string.interval_pref_description_new).replace("%s", "");
         String temp2 = lp.getSummary().toString();
         if (temp1.equals(temp2))
             lp.setValueIndex(2);
