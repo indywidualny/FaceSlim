@@ -63,6 +63,9 @@ public class NotificationsSettingsFragment extends PreferenceFragment {
                     case "ringtone":
                         trayPreferences.put("ringtone", preferences.getString("ringtone", "content://settings/system/notification_sound"));
                         break;
+                    case "ringtone_msg":
+                        trayPreferences.put("ringtone_msg", preferences.getString("ringtone_msg", "content://settings/system/notification_sound"));
+                        break;
                     case "vibrate":
                         trayPreferences.put("vibrate", preferences.getBoolean("vibrate", false));
                         break;
@@ -98,7 +101,7 @@ public class NotificationsSettingsFragment extends PreferenceFragment {
     public void onResume() {
         super.onResume();
 
-        // update ringtone preference summary
+        // update notification ringtone preference summary
         String ringtoneString = preferences.getString("ringtone", "content://settings/system/notification_sound");
         Uri ringtoneUri = Uri.parse(ringtoneString);
         String name;
@@ -114,8 +117,26 @@ public class NotificationsSettingsFragment extends PreferenceFragment {
         if ("".equals(ringtoneString))
             name = getString(R.string.silent);
 
-        RingtonePreference rp = (RingtonePreference) findPreference("ringtone");
-        rp.setSummary(getString(R.string.notification_sound_description) + name);
+        RingtonePreference rpn = (RingtonePreference) findPreference("ringtone");
+        rpn.setSummary(getString(R.string.notification_sound_description) + name);
+
+        // update message ringtone preference summary
+        ringtoneString = preferences.getString("ringtone_msg", "content://settings/system/notification_sound");
+        ringtoneUri = Uri.parse(ringtoneString);
+
+        try {
+            Ringtone ringtone = RingtoneManager.getRingtone(context, ringtoneUri);
+            name = ringtone.getTitle(context);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            name = "Default";
+        }
+
+        if ("".equals(ringtoneString))
+            name = getString(R.string.silent);
+
+        RingtonePreference rpm = (RingtonePreference) findPreference("ringtone_msg");
+        rpm.setSummary(getString(R.string.notification_sound_description) + name);
     }
 
 }
