@@ -67,26 +67,52 @@ public class NotificationsService extends Service {
         handler = new Handler();
         runnable = new Runnable() {
             public void run() {
-                Log.i("NotificationsService", "isActivityVisible: " + Boolean.toString(trayPreferences.getBoolean("activity_visible", false)));
-
-                // sync cookies to get the right data
-                syncCookies();
-
                 // get time interval from shared prefs
                 timeInterval = trayPreferences.getInt("interval_pref", 1800000);
+                Log.i("NotificationsService", "Time interval: " + (timeInterval / 1000) + " seconds");
 
-                // start AsyncTasks if there is internet connection
-                if (Connectivity.isConnected(getApplicationContext())) {
-                    Log.i("NotificationsService", "Internet connection active. Starting AsyncTasks...");
-                    if (trayPreferences.getBoolean("notifications_activated", false))
-                        new RssReaderTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
-                    if (trayPreferences.getBoolean("message_notifications", false))
-                        new CheckMessagesTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
-                } else
-                    Log.i("NotificationsService", "No internet connection. Skip checking.");
+                // time since last check = now - last check
+                final long now = System.currentTimeMillis();
+                final long sinceLastCheck = now - trayPreferences.getLong("last_check", now);
+                final boolean ntfLastStatus = trayPreferences.getBoolean("ntf_last_status", false);
+                final boolean msgLastStatus = trayPreferences.getBoolean("msg_last_status", false);
 
-                // set repeat time interval
-                handler.postDelayed(runnable, timeInterval);
+                new Thread() {
+                    public void run() {
+                        if ((sinceLastCheck < timeInterval) && ntfLastStatus && msgLastStatus) {
+                            final long waitTime = timeInterval - sinceLastCheck;
+                            if (waitTime >= 1000) {  // waiting less than a second is just stupid
+                                Log.i("NotificationsService", "I'm going to wait. Resuming in: " + (waitTime / 1000) + " seconds");
+                                try {
+                                    sleep(waitTime);
+                                } catch (InterruptedException e) {
+                                    Log.i("NotificationsService", "Thread interrupted");
+                                }
+                            }
+                        }
+
+                        // sync cookies to get the right data
+                        syncCookies();
+
+                        // start AsyncTasks if there is internet connection
+                        if (Connectivity.isConnected(getApplicationContext())) {
+                            Log.i("NotificationsService", "Internet connection active. Starting AsyncTasks...");
+
+                            if (trayPreferences.getBoolean("notifications_activated", false))
+                                new RssReaderTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+                            if (trayPreferences.getBoolean("message_notifications", false))
+                                new CheckMessagesTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+
+                            // save current time (last potentially successful checking)
+                            trayPreferences.put("last_check", System.currentTimeMillis());
+                        } else
+                            Log.i("NotificationsService", "No internet connection. Skip checking.");
+
+                        // set repeat time interval
+                        handler.postDelayed(runnable, timeInterval);
+                    }
+                }.start();
+
             }
         };
 
@@ -117,7 +143,7 @@ public class NotificationsService extends Service {
             int tries = 0;
 
             while (tries++ < MAX_RETRY && result == null) {
-                // mobile connection can be switched, get the fresh data every time
+                // mobile connection can be switched, get the right URL every time
                 String connectUrl = "https://www.facebook.com/notifications";  // for Wi-Fi
                 if (Connectivity.isConnectedMobile(getApplicationContext()))
                     connectUrl = "https://web.facebook.com/notifications";     // for cellular
@@ -131,7 +157,7 @@ public class NotificationsService extends Service {
                     // generate feed url needed by RssReader
                     feedUrl = "https://www.facebook.com" + pattern;
                 } catch (IllegalArgumentException ex) {
-                    Log.i("CheckMessagesTask", "********** Cookie sync problem occurred");
+                    Log.i("CheckMessagesTask", "Cookie sync problem occurred");
                     if (!syncProblemOccurred) {
                         syncProblemToast();
                         syncProblemOccurred = true;
@@ -141,15 +167,15 @@ public class NotificationsService extends Service {
                 }
 
                 try {
-                    Log.i("RssReaderTask", "********** doInBackground: Processing... Trial: " + tries);
+                    Log.i("RssReaderTask", "doInBackground: Processing... Trial: " + tries);
                     //noinspection ConstantConditions
                     URL url = new URL(feedUrl);
                     RssFeed feed = RssReader.read(url);
                     result = feed.getRssItems();
                 } catch (MalformedURLException ex) {
-                    Log.i("RssReaderTask", "********** doInBackground: URL error");
+                    Log.i("RssReaderTask", "doInBackground: URL error");
                 } catch (SAXException | IOException ex) {
-                    Log.i("RssReaderTask", "********** doInBackground: Feed error");
+                    Log.i("RssReaderTask", "doInBackground: Feed error");
                 }
             }
 
@@ -177,10 +203,13 @@ public class NotificationsService extends Service {
                 // save the latest PubDate (as a String) to TrayPreferences
                 trayPreferences.put("saved_date", result.get(0).getPubDate().toString());
 
-                // log success
-                Log.i("RssReaderTask", "********** onPostExecute: Aight biatch ;)");
+                // save this check status
+                trayPreferences.put("ntf_last_status", true);
+                Log.i("RssReaderTask", "onPostExecute: Aight biatch ;)");
             } catch (NullPointerException ex) {
-                Log.i("RssReaderTask", "********** onPostExecute: NullPointerException");
+                // save this check status
+                trayPreferences.put("ntf_last_status", false);
+                Log.i("RssReaderTask", "onPostExecute: Failure");
             }
         }
 
@@ -197,16 +226,21 @@ public class NotificationsService extends Service {
 
             while (tries++ < MAX_RETRY && result == null) {
                 try {
-                    Log.i("CheckMessagesTask", "********** doInBackground: Processing... Trial: " + tries);
+                    Log.i("CheckMessagesTask", "doInBackground: Processing... Trial: " + tries);
 
-                    Elements message = Jsoup.connect("https://m.facebook.com/messages").userAgent(USER_AGENT).timeout(JSOUP_TIMEOUT)
+                    // mobile connection can be switched, get the right URL every time
+                    String connectUrl = "https://m.facebook.com/messages";   // for Wi-Fi
+                    if (Connectivity.isConnectedMobile(getApplicationContext()))
+                        connectUrl = "https://mobile.facebook.com/messages"; // for cellular
+
+                    Elements message = Jsoup.connect(connectUrl).userAgent(USER_AGENT).timeout(JSOUP_TIMEOUT)
                             .cookie("https://m.facebook.com", CookieManager.getInstance().getCookie("https://m.facebook.com")).get()
                             .select("div#viewport").select("div#page").select("div._129-")
                             .select("#messages_jewel").select("span._59tg");
 
                     result = message.html();
                 } catch (IllegalArgumentException ex) {
-                    Log.i("CheckMessagesTask", "********** Cookie sync problem occurred");
+                    Log.i("CheckMessagesTask", "Cookie sync problem occurred");
                     if (!syncProblemOccurred) {
                         syncProblemToast();
                         syncProblemOccurred = true;
@@ -233,12 +267,15 @@ public class NotificationsService extends Service {
                 }
 
                 // save the latest message count
-                trayPreferences.put("last_message_count", newMessages);
+                //trayPreferences.put("last_message_count", newMessages);
 
-                // log success
-                Log.i("CheckMessagesTask", "********** onPostExecute: Aight biatch ;)");
+                // save this check status
+                trayPreferences.put("msg_last_status", true);
+                Log.i("CheckMessagesTask", "onPostExecute: Aight biatch ;)");
             } catch (NumberFormatException ex) {
-                ex.printStackTrace();
+                // save this check status
+                trayPreferences.put("msg_last_status", false);
+                Log.i("CheckMessagesTask", "onPostExecute: Failure");
             }
         }
 
@@ -277,7 +314,7 @@ public class NotificationsService extends Service {
             contentTitle = getString(R.string.app_name) + ": " + getString(R.string.notifications);
 
         // log line (show what type of notification is about to be displayed)
-        Log.i("NotificationsService", "notifier: Start notification ********** isMessage: " + isMessage);
+        Log.i("NotificationsService", "Start notification. isMessage: " + isMessage);
 
         // start building a notification
         NotificationCompat.Builder mBuilder =
@@ -329,7 +366,7 @@ public class NotificationsService extends Service {
         mBuilder.setOngoing(false);
         Notification note = mBuilder.build();
 
-        // don't vibrate or play a sound for duplicated message notifications
+/*        // don't vibrate or play a sound for duplicated message notifications
         if (isMessage) {
             int lastMessageCount = trayPreferences.getInt("last_message_count", 0);
             int currentCount = 1;
@@ -337,7 +374,7 @@ public class NotificationsService extends Service {
                 currentCount = Integer.parseInt(title.replaceAll("[\\D]", ""));
             if (currentCount == lastMessageCount)
                 note.flags |= Notification.FLAG_ONLY_ALERT_ONCE;
-        }
+        }*/
 
         // display a notification
         NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
