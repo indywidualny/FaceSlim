@@ -741,7 +741,8 @@ public class MainActivity extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
-        webView.onPause();
+        if (webView != null)
+            webView.onPause();
         trayPreferences.put("activity_visible", false);
     }
 
@@ -749,10 +750,11 @@ public class MainActivity extends Activity {
     public void onDestroy() {
         Log.i(TAG, "onDestroy: Destroying...");
         super.onDestroy();
-        webView.removeAllViews();
-        webView.destroy();
-        webView = null;
-
+        if (webView != null) {
+            webView.removeAllViews();
+            webView.destroy();
+            webView = null;
+        }
     }
 
     // first run dialog with introduction

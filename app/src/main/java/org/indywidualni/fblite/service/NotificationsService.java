@@ -140,7 +140,8 @@ public class NotificationsService extends Service {
         Log.i("NotificationsService", "********** Service stopped **********");
         super.onDestroy();
         shouldContinue = false;
-        thread.interrupt();
+        if (thread != null)
+            thread.interrupt();
         handler.removeCallbacksAndMessages(null);
     }
 
