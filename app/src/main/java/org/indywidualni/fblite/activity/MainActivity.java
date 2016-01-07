@@ -735,14 +735,17 @@ public class MainActivity extends Activity {
     protected void onResume() {
         super.onResume();
         webView.onResume();
+        webView.resumeTimers();
         trayPreferences.put("activity_visible", true);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        if (webView != null)
+        if (webView != null) {
             webView.onPause();
+            webView.pauseTimers();
+        }
         trayPreferences.put("activity_visible", false);
     }
 

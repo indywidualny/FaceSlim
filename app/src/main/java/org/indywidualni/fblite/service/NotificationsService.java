@@ -99,9 +99,6 @@ public class NotificationsService extends Service {
                         }
 
                         if (shouldContinue) {
-                            // sync cookies to get the right data
-                            syncCookies();
-
                             // start AsyncTasks if there is internet connection
                             if (Connectivity.isConnected(getApplicationContext())) {
                                 Log.i("NotificationsService", "Internet connection active. Starting AsyncTasks...");
@@ -174,6 +171,9 @@ public class NotificationsService extends Service {
             ArrayList<RssItem> result = null;
             String feedUrl;
             int tries = 0;
+
+            // sync cookies to get the right data
+            syncCookies();
 
             while (tries++ < MAX_RETRY && result == null) {
                 // try to generate rss feed address
@@ -266,6 +266,9 @@ public class NotificationsService extends Service {
         protected String doInBackground(Void... params) {
             String result = null;
             int tries = 0;
+
+            // sync cookies to get the right data
+            syncCookies();
 
             while (tries++ < MAX_RETRY && result == null) {
                 Log.i("CheckMessagesTask", "doInBackground: Processing... Trial: " + tries);

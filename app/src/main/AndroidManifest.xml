@@ -108,7 +108,7 @@
         </activity>
         <activity
             android:name="org.acra.CrashReportDialog"
-            android:theme="@style/CustomDialogTheme"
+            android:theme="@style/CrashDialog"
             android:process=":error_report"
             android:launchMode="singleInstance"
             android:excludeFromRecents="true"

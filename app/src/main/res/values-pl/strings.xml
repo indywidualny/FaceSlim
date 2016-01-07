@@ -111,7 +111,7 @@
 
     <string name="crash_toast_text">Face Slim: Nie jest dobrze. Przygotowuję raport awarii</string>
     <string name="crash_dialog_title">Face Slim uległ awarii</string>
-    <string name="crash_dialog_text">Jeden z chomików, które kręcąc kołowrotkiem, napędzają działanie tej aplikacji, zachorował i musiał zostać wysłany do weterynarza. Ostatkiem sił, w swoim kajecie, wygenerował listę błędów. Jeśli chcesz pomóc, wyslij mi tę listę przez e-mail naciskając OK oraz zatwierdzając wiadomość.</string>
-    <string name="crash_dialog_comment_prompt">Możesz dopisać jaka akcja doprowadziła do awarii:</string>
+    <string name="crash_dialog_text">Jeden z chomików, które kręcąc kołowrotkiem, napędzają działanie tej aplikacji, zdechł. Jeśli chcesz pomóc, wyślij mi przez e-mail automatycznie wygenerowaną listę błędów. Naciśnij OK oraz zatwierdź wiadomość.</string>
+    <string name="crash_dialog_comment_prompt">Możesz także dopisać jaka akcja doprowadziła do awarii:</string>
 
 </resources>
