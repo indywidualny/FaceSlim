@@ -107,5 +107,11 @@
     <string name="hide_sponsored_description">Nie lubimy sponsorowanych postów i reklam.</string>
     <string name="interval_pref_description_new">Powiadomienia są sprawdzane co %s.</string>
     <string name="facebook_notifications">Powiadomienia z Facebook</string>
+    <string name="notification_sound_msg">Dźwięk wiadomości</string>
+
+    <string name="crash_toast_text">Face Slim: Nie jest dobrze. Przygotowuję raport awarii</string>
+    <string name="crash_dialog_title">Face Slim uległ awarii</string>
+    <string name="crash_dialog_text">Jeden z chomików, które kręcąc kołowrotkiem, napędzają działanie tej aplikacji, zachorował i musiał zostać wysłany do weterynarza. Ostatkiem sił, w swoim kajecie, wygenerował listę błędów. Jeśli chcesz pomóc, wyslij mi tę listę przez e-mail naciskając OK oraz zatwierdzając wiadomość.</string>
+    <string name="crash_dialog_comment_prompt">Możesz dopisać jaka akcja doprowadziła do awarii:</string>
 
 </resources>

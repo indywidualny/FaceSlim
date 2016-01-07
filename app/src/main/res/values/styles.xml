@@ -34,4 +34,9 @@
     <style name="SplashTheme" parent="@style/AppTheme">
         <item name="android:windowBackground">@drawable/background_splash</item>
     </style>
+
+    <style name="CrashDialog" parent="@style/CustomDialogTheme">
+        <!-- TODO: not working -->
+        <item name="android:textColor">@color/editText</item>
+    </style>
 </resources>

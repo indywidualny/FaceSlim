@@ -78,6 +78,11 @@ public class MainActivity extends Activity {
     private TrayAppPreferences trayPreferences;
     private static final int REQUEST_STORAGE = 1;
 
+    // user agents
+    private static String USER_AGENT_DEFAULT;
+    private static final String USER_AGENT_BASIC = "Mozilla/5.0 (Linux; U; Android 2.3.3; en-gb; " +
+            "Nexus S Build/GRI20) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
+
     @Override
     @SuppressLint("setJavaScriptEnabled")
     protected void onCreate(Bundle savedInstanceState) {
@@ -170,6 +175,14 @@ public class MainActivity extends Activity {
         webView = (WebView) findViewById(R.id.webView);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setAllowFileAccess(true);
+
+        // get user agent
+        USER_AGENT_DEFAULT = webView.getSettings().getUserAgentString();
+        Log.v("DefaultUserAgent", USER_AGENT_DEFAULT);
+
+        // set user agent for basic mode
+        if (preferences.getBoolean("basic_mode", false))
+            webView.getSettings().setUserAgentString(USER_AGENT_BASIC);
 
         // disable images to reduce data usage
         if (preferences.getBoolean("no_images", false))
@@ -651,6 +664,12 @@ public class MainActivity extends Activity {
         boolean isConnectedMobile = Connectivity.isConnectedMobile(getApplicationContext());
         boolean isFacebookZero = preferences.getBoolean("facebook_zero", false);
 
+        // set the right user agent
+        if (preferences.getBoolean("basic_mode", false))
+            webView.getSettings().setUserAgentString(USER_AGENT_BASIC);
+        else
+            webView.getSettings().setUserAgentString(USER_AGENT_DEFAULT);
+
         /** get a subject and text and check if this is a link trying to be shared */
         String sharedSubject = getIntent().getStringExtra(Intent.EXTRA_SUBJECT);
         String sharedUrl = getIntent().getStringExtra(Intent.EXTRA_TEXT);
@@ -715,21 +734,25 @@ public class MainActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+        webView.onResume();
         trayPreferences.put("activity_visible", true);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+        webView.onPause();
         trayPreferences.put("activity_visible", false);
     }
 
     @Override
     public void onDestroy() {
-        Log.i("MainActivity", "onDestroy: Destroying...");
+        Log.i(TAG, "onDestroy: Destroying...");
         super.onDestroy();
         webView.removeAllViews();
         webView.destroy();
+        webView = null;
+
     }
 
     // first run dialog with introduction

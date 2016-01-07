@@ -117,5 +117,11 @@
     <string name="hide_sponsored_description">We don\'t like sponsored posts and ads.</string>
     <string name="interval_pref_description_new">Notifications will be checked every %s.</string>
     <string name="facebook_notifications">Facebook notifications</string>
+    <string name="notification_sound_msg">Message sound</string>
+
+    <string name="crash_toast_text">Face Slim: Something is very wrong. Preparing crash report</string>
+    <string name="crash_dialog_title">Face Slim has crashed</string>
+    <string name="crash_dialog_text">An unexpected error occurred forcing the application to stop. Please help me fix this by sending me error data, all you have to do is click OK and send an automatically generated e-mail.</string>
+    <string name="crash_dialog_comment_prompt">You might add your comments about the problem below:</string>
 
 </resources>
