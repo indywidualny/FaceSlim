@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
+import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.Looper;
 import android.support.v4.app.NotificationCompat;
@@ -41,23 +42,41 @@ import nl.matshofman.saxrssreader.RssReader;
 
 public class NotificationsService extends Service {
 
-    // max number of trials when something is wrong
-    private static final int MAX_RETRY = 3;
+    // Facebook URL constants
     private static final String BASE_URL = "https://www.facebook.com";
     private static final String NOTIFICATIONS_URL = "https://www.facebook.com/notifications";
     private static final String NOTIFICATIONS_URL_BACKUP = "https://web.facebook.com/notifications";
     private static final String MESSAGES_URL = "https://m.facebook.com/messages";
     private static final String MESSAGES_URL_BACKUP = "https://mobile.facebook.com/messages";
-    private static final String USER_AGENT = System.getProperty("http.agent");
     private static final String NOTIFICATION_MESSAGE_URL = "https://m.facebook.com/messages";
-    private static final int JSOUP_TIMEOUT = 10000;
 
-    private volatile boolean shouldContinue = true;
-    private Handler handler;
+    // number of trials during notifications or messages checking
+    private static final int MAX_RETRY = 3;
+    private static final int JSOUP_TIMEOUT = 10000;
+    private static final String USER_AGENT;
+    private static final String TAG;
+
+    // HandlerThread, Handler (final to allow synchronization) and its runnable
+    private final HandlerThread handlerThread;
+    private final Handler handler;
     private static Runnable runnable;
-    private Thread thread;
+
+    // volatile boolean to safely skip checking while service is being stopped
+    private volatile boolean shouldContinue = true;
     private TrayAppPreferences trayPreferences;
-    private int timeInterval;
+
+    // static initializer
+    static {
+        USER_AGENT = System.getProperty("http.agent");
+        TAG = NotificationsService.class.getSimpleName();
+    }
+
+    // class constructor, starts a new thread in which checkers are being run
+    public NotificationsService() {
+        handlerThread = new HandlerThread("Handler Thread");
+        handlerThread.start();
+        handler = new Handler(handlerThread.getLooper());
+    }
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -66,64 +85,16 @@ public class NotificationsService extends Service {
 
     @Override
     public void onCreate() {
-        Log.i("NotificationsService", "********** Service created! **********");
+        Log.i(TAG, "********** Service created! **********");
+        super.onCreate();
 
         // get TrayPreferences
         trayPreferences = new TrayAppPreferences(getApplicationContext());
 
-        handler = new Handler();
-        runnable = new Runnable() {
-            public void run() {
-                // get time interval from shared prefs
-                timeInterval = trayPreferences.getInt("interval_pref", 1800000);
-                Log.i("NotificationsService", "Time interval: " + (timeInterval / 1000) + " seconds");
+        // create a runnable needed by a Handler
+        runnable = new HandlerRunnable();
 
-                // time since last check = now - last check
-                final long now = System.currentTimeMillis();
-                final long sinceLastCheck = now - trayPreferences.getLong("last_check", now);
-                final boolean ntfLastStatus = trayPreferences.getBoolean("ntf_last_status", false);
-                final boolean msgLastStatus = trayPreferences.getBoolean("msg_last_status", false);
-
-                thread = new Thread() {
-                    public void run() {
-                        if ((sinceLastCheck < timeInterval) && ntfLastStatus && msgLastStatus) {
-                            final long waitTime = timeInterval - sinceLastCheck;
-                            if (waitTime >= 1000) {  // waiting less than a second is just stupid
-                                Log.i("NotificationsService", "I'm going to wait. Resuming in: " + (waitTime / 1000) + " seconds");
-                                try {
-                                    sleep(waitTime);
-                                } catch (InterruptedException ex) {
-                                    Log.i("NotificationsService", "Thread interrupted");
-                                }
-                            }
-                        }
-
-                        if (shouldContinue) {
-                            // start AsyncTasks if there is internet connection
-                            if (Connectivity.isConnected(getApplicationContext())) {
-                                Log.i("NotificationsService", "Internet connection active. Starting AsyncTasks...");
-
-                                if (trayPreferences.getBoolean("notifications_activated", false))
-                                    new RssReaderTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
-                                if (trayPreferences.getBoolean("message_notifications", false))
-                                    new CheckMessagesTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
-
-                                // save current time (last potentially successful checking)
-                                trayPreferences.put("last_check", System.currentTimeMillis());
-                            } else
-                                Log.i("NotificationsService", "No internet connection. Skip checking.");
-
-                            // set repeat time interval
-                            handler.postDelayed(runnable, timeInterval);
-                        }
-                    }
-                };
-                thread.start();
-
-            }
-        };
-
-        // first run delay (3 seconds)
+        // start the repeating checking, first run delay (3 seconds)
         handler.postDelayed(runnable, 3000);
     }
 
@@ -134,15 +105,75 @@ public class NotificationsService extends Service {
 
     @Override
     public void onDestroy() {
-        Log.i("NotificationsService", "********** Service stopped **********");
         super.onDestroy();
-        shouldContinue = false;
-        if (thread != null)
-            thread.interrupt();
+
+        synchronized (handler) {
+            shouldContinue = false;
+            handler.notify();
+        }
+
         handler.removeCallbacksAndMessages(null);
+        handlerThread.quit();
+        Log.i(TAG, "onDestroy: Service is being stopped...");
     }
 
-    // AsyncTask to get feed, process it and do all the actions needed later
+    /** A runnable used by the Handler to schedule checking. */
+    private class HandlerRunnable implements Runnable {
+
+        public void run() {
+            // get time interval from tray preferences
+            final int timeInterval = trayPreferences.getInt("interval_pref", 1800000);
+            Log.i(TAG, "Time interval: " + (timeInterval / 1000) + " seconds");
+
+            // time since last check = now - last check
+            final long now = System.currentTimeMillis();
+            final long sinceLastCheck = now - trayPreferences.getLong("last_check", now);
+            final boolean ntfLastStatus = trayPreferences.getBoolean("ntf_last_status", false);
+            final boolean msgLastStatus = trayPreferences.getBoolean("msg_last_status", false);
+
+            if ((sinceLastCheck < timeInterval) && ntfLastStatus && msgLastStatus) {
+                final long waitTime = timeInterval - sinceLastCheck;
+                if (waitTime >= 1000) {  // waiting less than a second is just stupid
+                    Log.i(TAG, "I'm going to wait. Resuming in: " + (waitTime / 1000) + " seconds");
+                    // synchronization to handler
+                    synchronized (handler) {
+                        try {
+                            handler.wait(waitTime);
+                        } catch (InterruptedException ex) {
+                            Log.i(TAG, "Thread interrupted");
+                        } finally {
+                            Log.i(TAG, "Lock is now released");
+                        }
+                    }
+                }
+            }
+
+            // when onDestroy() is run and lock is released, don't go on
+            if (shouldContinue) {
+                // start AsyncTasks if there is internet connection
+                if (Connectivity.isConnected(getApplicationContext())) {
+                    Log.i(TAG, "Internet connection active. Starting AsyncTasks...");
+
+                    if (trayPreferences.getBoolean("notifications_activated", false))
+                        new RssReaderTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+                    if (trayPreferences.getBoolean("message_notifications", false))
+                        new CheckMessagesTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+
+                    // save current time (last potentially successful checking)
+                    trayPreferences.put("last_check", System.currentTimeMillis());
+                } else
+                    Log.i(TAG, "No internet connection. Skip checking.");
+
+                // set repeat time interval
+                handler.postDelayed(runnable, timeInterval);
+            } else {
+                Log.i(TAG, "Notified to stop running. Exiting...");
+            }
+        }
+
+    }
+
+    /** Notifications checker task: it checks Facebook notifications only. */
     private class RssReaderTask extends AsyncTask<Void, Void, ArrayList<RssItem>> {
 
         private boolean syncProblemOccurred = false;
@@ -237,7 +268,7 @@ public class NotificationsService extends Service {
 
     }
 
-    // AsyncTask to get message notifications
+    /** Messages checker task: it checks new messages only. */
     private class CheckMessagesTask extends AsyncTask<Void, Void, String> {
 
         boolean syncProblemOccurred = false;
@@ -312,6 +343,7 @@ public class NotificationsService extends Service {
 
     }
 
+
     /** CookieSyncManager was deprecated in API level 21.
      *  We need it for API level lower than 21 though.
      *  In API level >= 21 it's done automatically.
@@ -336,6 +368,7 @@ public class NotificationsService extends Service {
         });
     }
 
+    // create a notification and display it
     private void notifier(String title, String summary, String url, boolean isMessage) {
         // let's display a notification, dude!
         final String contentTitle;
@@ -345,7 +378,7 @@ public class NotificationsService extends Service {
             contentTitle = getString(R.string.app_name) + ": " + getString(R.string.notifications);
 
         // log line (show what type of notification is about to be displayed)
-        Log.i("NotificationsService", "Start notification. isMessage: " + isMessage);
+        Log.i(TAG, "Start notification. isMessage: " + isMessage);
 
         // start building a notification
         NotificationCompat.Builder mBuilder =
@@ -411,6 +444,7 @@ public class NotificationsService extends Service {
             mNotificationManager.notify(0, note);
     }
 
+    // cancel all the notifications which are visible at the moment
     public static void cancelAllNotifications() {
         NotificationManager notificationManager = (NotificationManager)
                 MyApplication.getContextOfApplication().getSystemService(Context.NOTIFICATION_SERVICE);
