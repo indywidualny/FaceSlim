@@ -1,14 +1,21 @@
 package org.indywidualni.fblite.activity;
 
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import org.indywidualni.fblite.R;
 import org.indywidualni.fblite.fragment.SettingsFragment;
 
 public class SettingsActivity extends AppCompatActivity {
+
+    private static final String TAG = SettingsActivity.class.getSimpleName();
+    private static final int REQUEST_STORAGE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +52,23 @@ public class SettingsActivity extends AppCompatActivity {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_STORAGE:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Log.e(TAG, "Storage permission granted");
+                    // It's awesome, dude!
+                } else {
+                    Log.e(TAG, "Storage permission denied");
+                    Toast.makeText(this, getString(R.string.no_storage_permission), Toast.LENGTH_SHORT).show();
+                }
+                break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
     }
 
 }

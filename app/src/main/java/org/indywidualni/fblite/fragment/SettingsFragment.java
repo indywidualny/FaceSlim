@@ -1,13 +1,16 @@
 package org.indywidualni.fblite.fragment;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -21,6 +24,8 @@ import org.indywidualni.fblite.util.FileOperation;
 
 public class SettingsFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener {
 
+    private static final String TAG = SettingsFragment.class.getSimpleName();
+    private static final int REQUEST_STORAGE = 1;
     private static Context context;
     private SharedPreferences.OnSharedPreferenceChangeListener prefChangeListener;
     private TrayAppPreferences trayPreferences;
@@ -61,16 +66,26 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
                 switch (key) {
                     case "notifications_activated":
                         trayPreferences.put("notifications_activated", preferences.getBoolean("notifications_activated", false));
-                        if (prefs.getBoolean("notifications_activated", false) || preferences.getBoolean("message_notifications", false)) {
+                        if (prefs.getBoolean("notifications_activated", false) && preferences.getBoolean("message_notifications", false)) {
                             context.stopService(intent);
+                            context.startService(intent);
+                        } else //noinspection StatementWithEmptyBody
+                            if (!prefs.getBoolean("notifications_activated", false) && preferences.getBoolean("message_notifications", false)) {
+                            // ignore this case
+                        } else if (prefs.getBoolean("notifications_activated", false) && !preferences.getBoolean("message_notifications", false)) {
                             context.startService(intent);
                         } else
                             context.stopService(intent);
                         break;
                     case "message_notifications":
                         trayPreferences.put("message_notifications", preferences.getBoolean("message_notifications", false));
-                        if (prefs.getBoolean("message_notifications", false) || preferences.getBoolean("notifications_activated", false)) {
+                        if (prefs.getBoolean("message_notifications", false) && preferences.getBoolean("notifications_activated", false)) {
                             context.stopService(intent);
+                            context.startService(intent);
+                        } else //noinspection StatementWithEmptyBody
+                            if (!prefs.getBoolean("message_notifications", false) && preferences.getBoolean("notifications_activated", false)) {
+                            // ignore this case
+                        } else if (prefs.getBoolean("message_notifications", false) && !preferences.getBoolean("notifications_activated", false)) {
                             context.startService(intent);
                         } else
                             context.stopService(intent);
@@ -82,6 +97,11 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
                     case "dark_theme":
                         Preference preference_basic = findPreference("basic_mode");
                         preference_basic.setEnabled(!prefs.getBoolean("dark_theme", false));
+                        break;
+                    case "file_logging":
+                        trayPreferences.put("file_logging", preferences.getBoolean("file_logging", false));
+                        if (prefs.getBoolean("file_logging", false))
+                            requestStoragePermission();
                         break;
                     case "transparent_nav":
                     case "drawer_pos":
@@ -144,6 +164,18 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         intent.putExtra("core_settings_changed", true);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+    }
+
+    // request storage permission
+    private void requestStoragePermission() {
+        String storagePermission = Manifest.permission.WRITE_EXTERNAL_STORAGE;
+        int hasPermission = ContextCompat.checkSelfPermission(context, storagePermission);
+        String[] permissions = new String[] { storagePermission };
+        if (hasPermission != PackageManager.PERMISSION_GRANTED) {
+            Log.e(TAG, "No storage permission at the moment. Requesting...");
+            ActivityCompat.requestPermissions(getActivity(), permissions, REQUEST_STORAGE);
+        } else
+            Log.e(TAG, "We already have storage permission. Yay!");
     }
 
 }
