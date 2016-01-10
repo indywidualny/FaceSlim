@@ -102,7 +102,7 @@ public class MyAppWebViewClient extends WebViewClient {
 
         // hide people you may know
         if (preferences.getBoolean("hide_people", false))
-            view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); node.innerHTML = str; document.body.appendChild(node); } addStyleString('#pagelet_netego{ display: none; }');");
+            view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); node.innerHTML = str; document.body.appendChild(node); } addStyleString('article._55wo._5rgr._5gh8._35au{ display: none; }');");
 
         // don't display images when they are disabled, we don't need empty placeholders
         if (preferences.getBoolean("no_images", false))
