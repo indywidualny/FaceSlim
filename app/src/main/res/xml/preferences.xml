@@ -82,6 +82,12 @@
             android:enabled="false"
             android:defaultValue="false"/>
 
+    </PreferenceCategory>
+
+
+    <PreferenceCategory
+        android:title="@string/preference_category6">
+        
         <CheckBoxPreference
             android:key="hide_sponsored"
             android:title="@string/hide_sponsored"
@@ -93,21 +99,20 @@
             android:title="@string/hide_people"
             android:summary="@string/hide_people_description"
             android:defaultValue="false"/>
-
-        <CheckBoxPreference
-            android:key="hide_news_feed"
-            android:title="@string/hide_news_feed"
-            android:summary="@string/hide_news_feed_description"
-            android:defaultValue="false"/>
-
+            
         <CheckBoxPreference
             android:key="no_images"
             android:title="@string/no_images"
             android:summary="@string/no_images_description"
             android:defaultValue="false"/>
-
-    </PreferenceCategory>
-
+            
+        <CheckBoxPreference
+            android:key="hide_news_feed"
+            android:title="@string/hide_news_feed"
+            android:summary="@string/hide_news_feed_description"
+            android:defaultValue="false"/>
+        
+        </PreferenceCategory>
 
     <!-- <PreferenceCategory
         android:title="@string/preference_category3">
