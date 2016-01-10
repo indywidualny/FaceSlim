@@ -100,6 +100,10 @@ public class MyAppWebViewClient extends WebViewClient {
         if (preferences.getBoolean("hide_news_feed", false))
             view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); node.innerHTML = str; document.body.appendChild(node); } addStyleString('#m_newsfeed_stream{ display: none; }');");
 
+        // hide people you may know
+        if (preferences.getBoolean("hide_people", false))
+            view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); node.innerHTML = str; document.body.appendChild(node); } addStyleString('._55wo, ._5rgr, ._5gh8, ._35au{ display: none; }');");
+
         // don't display images when they are disabled, we don't need empty placeholders
         if (preferences.getBoolean("no_images", false))
             view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); node.innerHTML = str; document.body.appendChild(node); } addStyleString('.img, ._5s61, ._5sgg{ display: none; }');");
