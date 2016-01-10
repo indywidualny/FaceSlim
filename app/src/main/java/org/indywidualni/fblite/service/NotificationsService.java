@@ -16,7 +16,6 @@ import android.os.IBinder;
 import android.os.Looper;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
-import android.util.Log;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
 import android.widget.Toast;
@@ -27,6 +26,7 @@ import org.indywidualni.fblite.MyApplication;
 import org.indywidualni.fblite.R;
 import org.indywidualni.fblite.activity.MainActivity;
 import org.indywidualni.fblite.util.Connectivity;
+import org.indywidualni.fblite.util.logger.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.select.Elements;
 import org.xml.sax.SAXException;
@@ -65,6 +65,11 @@ public class NotificationsService extends Service {
     private volatile boolean shouldContinue = true;
     private TrayAppPreferences trayPreferences;
 
+    /* Well, bad practice. Object name starting with a capital, but it's convenient.
+    In order to use my custom logger I just removed Log import and I'm getting an
+    instance of my Logger here. Its usage is exactly the same as the usage of Log */
+    private final Logger Log;
+
     // static initializer
     static {
         USER_AGENT = System.getProperty("http.agent");
@@ -76,6 +81,7 @@ public class NotificationsService extends Service {
         handlerThread = new HandlerThread("Handler Thread");
         handlerThread.start();
         handler = new Handler(handlerThread.getLooper());
+        Log = Logger.getInstance();
     }
 
     @Override
@@ -94,7 +100,7 @@ public class NotificationsService extends Service {
         // create a runnable needed by a Handler
         runnable = new HandlerRunnable();
 
-        // start the repeating checking, first run delay (3 seconds)
+        // start a repeating checking, first run delay (3 seconds)
         handler.postDelayed(runnable, 3000);
     }
 
@@ -105,6 +111,7 @@ public class NotificationsService extends Service {
 
     @Override
     public void onDestroy() {
+        Log.i(TAG, "onDestroy: Service stopping...");
         super.onDestroy();
 
         synchronized (handler) {
@@ -114,7 +121,6 @@ public class NotificationsService extends Service {
 
         handler.removeCallbacksAndMessages(null);
         handlerThread.quit();
-        Log.i(TAG, "onDestroy: Service is being stopped...");
     }
 
     /** A runnable used by the Handler to schedule checking. */
@@ -135,7 +141,7 @@ public class NotificationsService extends Service {
                 final long waitTime = timeInterval - sinceLastCheck;
                 if (waitTime >= 1000) {  // waiting less than a second is just stupid
                     Log.i(TAG, "I'm going to wait. Resuming in: " + (waitTime / 1000) + " seconds");
-                    // synchronization to handler
+
                     synchronized (handler) {
                         try {
                             handler.wait(waitTime);
@@ -145,6 +151,7 @@ public class NotificationsService extends Service {
                             Log.i(TAG, "Lock is now released");
                         }
                     }
+
                 }
             }
 
@@ -166,9 +173,8 @@ public class NotificationsService extends Service {
 
                 // set repeat time interval
                 handler.postDelayed(runnable, timeInterval);
-            } else {
+            } else
                 Log.i(TAG, "Notified to stop running. Exiting...");
-            }
         }
 
     }

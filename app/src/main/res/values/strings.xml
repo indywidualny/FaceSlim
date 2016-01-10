@@ -121,10 +121,12 @@
     <string name="interval_pref_description_new">Notifications will be checked every %s.</string>
     <string name="facebook_notifications">Facebook notifications</string>
     <string name="notification_sound_msg">Message sound</string>
-
     <string name="crash_toast_text">Face Slim: Something is very wrong. Preparing crash report</string>
     <string name="crash_dialog_title">Face Slim has crashed</string>
     <string name="crash_dialog_text">An unexpected error occurred forcing the application to stop. Please help me fix this by sending me error data. All you have to do is to click OK and send an e-mail.</string>
     <string name="crash_dialog_comment_prompt">You might add your comments about the problem below:</string>
+    <string name="file_logger">Save logs to a file</string>
+    <string name="file_logger_description">Save Notification Service logs to an external memory. It needs a storage permission.</string>
+    <string name="file_logger_needs_permission">No access to external storage. Log cannot be saved.</string>
 
 </resources>
