@@ -115,6 +115,8 @@
     <string name="sync_problem">Cookies cannot be synced. First run, yeah? Please just restart the app :)</string>
     <string name="hide_sponsored">Hide sponsored posts</string>
     <string name="hide_sponsored_description">We don\'t like sponsored posts and ads.</string>
+    <string name="hide_people">Hide people you may know</string>
+    <string name="hide_people_description">Cleaner feed, more room.</string>
     <string name="interval_pref_description_new">Notifications will be checked every %s.</string>
     <string name="facebook_notifications">Facebook notifications</string>
     <string name="notification_sound_msg">Message sound</string>
