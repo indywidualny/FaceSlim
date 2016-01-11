@@ -159,6 +159,10 @@ public class NotificationsService extends Service {
                 // start AsyncTasks if there is internet connection
                 if (Connectivity.isConnected(getApplicationContext())) {
                     Log.i(TAG, "Internet connection active. Starting AsyncTasks...");
+                    String connectionType = "Wi-Fi";
+                    if (Connectivity.isConnectedMobile(getApplicationContext()))
+                        connectionType = "Mobile";
+                    Log.i(TAG, "Connection Type: " + connectionType);
                     USER_AGENT = trayPreferences.getString("webview_user_agent", System.getProperty("http.agent"));
                     Log.i(TAG, "User Agent: " + USER_AGENT);
 
