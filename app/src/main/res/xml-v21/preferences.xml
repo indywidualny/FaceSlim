@@ -84,6 +84,7 @@
 
     </PreferenceCategory>
 
+
     <PreferenceCategory
         android:title="@string/preference_category6">
         
@@ -112,6 +113,7 @@
             android:defaultValue="false"/>
         
     </PreferenceCategory>
+
 
     <!-- <PreferenceCategory
         android:title="@string/preference_category3">

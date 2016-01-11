@@ -102,10 +102,10 @@
     <string name="setup_notifications">Visit app settings to set up notifications</string>
     <string name="no_images">Disable images &#8635;</string>
     <string name="no_images_description">Don\'t load any images. Reduces data usage drastically.</string>
-    <string name="no_storage_permission">Grant storage permission to use this feature.</string>
+    <string name="no_storage_permission">Grant storage permission to use this feature</string>
     <string name="basic_mode">Basic mode</string>
     <string name="basic_mode_description">Use a basic website instead of a standard one. Dark theme has to be disabled. May not work during a fast connection.</string>
-    <string name="preference_category6">Feed Settings</string>
+    <string name="preference_category6">News Feed</string>
     <string name="hide_sponsored">Hide sponsored posts</string>
     <string name="hide_sponsored_description">We don\'t like sponsored posts and ads.</string>
     <string name="hide_people">Hide people you may know</string>

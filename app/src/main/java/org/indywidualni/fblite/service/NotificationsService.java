@@ -53,8 +53,8 @@ public class NotificationsService extends Service {
     // number of trials during notifications or messages checking
     private static final int MAX_RETRY = 3;
     private static final int JSOUP_TIMEOUT = 10000;
-    private static final String USER_AGENT;
     private static final String TAG;
+    private static String USER_AGENT;
 
     // HandlerThread, Handler (final to allow synchronization) and its runnable
     private final HandlerThread handlerThread;
@@ -72,7 +72,6 @@ public class NotificationsService extends Service {
 
     // static initializer
     static {
-        USER_AGENT = System.getProperty("http.agent");
         TAG = NotificationsService.class.getSimpleName();
     }
 
@@ -160,6 +159,8 @@ public class NotificationsService extends Service {
                 // start AsyncTasks if there is internet connection
                 if (Connectivity.isConnected(getApplicationContext())) {
                     Log.i(TAG, "Internet connection active. Starting AsyncTasks...");
+                    USER_AGENT = trayPreferences.getString("webview_user_agent", System.getProperty("http.agent"));
+                    Log.i(TAG, "User Agent: " + USER_AGENT);
 
                     if (trayPreferences.getBoolean("notifications_activated", false))
                         new RssReaderTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
@@ -384,7 +385,7 @@ public class NotificationsService extends Service {
             contentTitle = getString(R.string.app_name) + ": " + getString(R.string.notifications);
 
         // log line (show what type of notification is about to be displayed)
-        Log.i(TAG, "Start notification. isMessage: " + isMessage);
+        Log.i(TAG, "Start notification - isMessage: " + isMessage);
 
         // start building a notification
         NotificationCompat.Builder mBuilder =

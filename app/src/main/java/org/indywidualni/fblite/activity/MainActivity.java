@@ -178,7 +178,8 @@ public class MainActivity extends Activity {
 
         // get user agent
         USER_AGENT_DEFAULT = webView.getSettings().getUserAgentString();
-        Log.v("DefaultUserAgent", USER_AGENT_DEFAULT);
+        trayPreferences.put("webview_user_agent", USER_AGENT_DEFAULT);
+        Log.v("Default User Agent", USER_AGENT_DEFAULT);
 
         // set user agent for basic mode
         if (preferences.getBoolean("basic_mode", false))
