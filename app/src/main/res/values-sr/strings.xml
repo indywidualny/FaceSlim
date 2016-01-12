@@ -97,6 +97,11 @@
     <string name="no_storage_permission">Одобрите дозволе за складиште да бисте користили ову функцију.</string>
     <string name="basic_mode">Основни режим</string>
     <string name="basic_mode_description">Коришћење основног вебсајта уместо стандардног. Тамна тема мора бити искључена. Можда неће радити при брзој вези.</string>
+    <string name="preference_category6">Довод новости</string>
+    <string name="hide_sponsored">Сакриј спонзорисане објаве</string>
+    <string name="hide_sponsored_description">Скривање спонзорисаних објава и реклама.</string>
+    <string name="hide_people">Сакриј људе које можда познајем</string>
+    <string name="hide_people_description">Чистији довод, више простора.</string>
     <string name="hide_news_feed">Сакриј новости</string>
     <string name="hide_news_feed_description">Избегните скретање пажње/одлагање обавеза.</string>
 
@@ -105,7 +110,15 @@
     <string name="you_have_n_messages">Имате %d порука.</string>
     <string name="special_thanks_notifications">Посебна захвалница за помоћ са обавештењима:</string>
     <string name="sync_problem">Не могу да синхронизујем колачиће. Прво покретање, је л\' да? Само покрените поново апликацију. :)</string>
-    <string name="hide_sponsored">Сакриј спонзорисане објаве</string>
-    <string name="hide_sponsored_description">Скривање спонзорисаних објава и реклама.</string>
+    <string name="interval_pref_description_new">Освежавање обавештења сваких %s.</string>
+    <string name="facebook_notifications">Обавештења са Фејсбука</string>
+    <string name="notification_sound_msg">Звук за поруку</string>
+    <string name="crash_toast_text">Фејс слим: нешто је пошло наопако. Припремам извештај о краху</string>
+    <string name="crash_dialog_title">Фејс слим се срушио</string>
+    <string name="crash_dialog_text">Десила се неочекивана грешка приморавши апликацију да се заустави. Помозите ми да ово поправим тако што ћете да ми пошаљете податке о грешки, само тапните на У реду и пошаљите е-пошту.</string>
+    <string name="crash_dialog_comment_prompt">Ваш коментар о проблему можете да додате испод:</string>
+    <string name="file_logger">Сачувај запис у фајл</string>
+    <string name="file_logger_description">Упис записа сервиса обавештавања у спољашње складиште. Захтева дозволе за складиште.</string>
+    <string name="file_logger_needs_permission">Немам приступ спољашњем складишту. Не могу да сачувам записе.</string>
 
 </resources>
