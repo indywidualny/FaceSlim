@@ -127,6 +127,6 @@
     <string name="crash_dialog_comment_prompt">You might add your comments about the problem below:</string>
     <string name="file_logger">Save logs to a file</string>
     <string name="file_logger_description">Save Notification Service logs to an external memory. It needs a storage permission.</string>
-    <string name="file_logger_needs_permission">No access to external storage. Log cannot be saved.</string>
+    <string name="file_logger_needs_permission">No access to external storage. Log cannot be saved</string>
 
 </resources>

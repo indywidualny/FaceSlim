@@ -54,7 +54,6 @@ public class NotificationsService extends Service {
     private static final int MAX_RETRY = 3;
     private static final int JSOUP_TIMEOUT = 10000;
     private static final String TAG;
-    private static String USER_AGENT;
 
     // HandlerThread, Handler (final to allow synchronization) and its runnable
     private final HandlerThread handlerThread;
@@ -63,6 +62,7 @@ public class NotificationsService extends Service {
 
     // volatile boolean to safely skip checking while service is being stopped
     private volatile boolean shouldContinue = true;
+    private static String userAgent;
     private TrayAppPreferences trayPreferences;
 
     /* Well, bad practice. Object name starting with a capital, but it's convenient.
@@ -126,60 +126,74 @@ public class NotificationsService extends Service {
     private class HandlerRunnable implements Runnable {
 
         public void run() {
-            // get time interval from tray preferences
-            final int timeInterval = trayPreferences.getInt("interval_pref", 1800000);
-            Log.i(TAG, "Time interval: " + (timeInterval / 1000) + " seconds");
+            /** I'm getting (ACRA) reports that (very rarely) there is a problem with Tray Preferences.
+             *  Apparently an IllegalStateException is thrown when there is a problem in accessing the
+             *  database, where preferences are stored. Since I got two reports of an error that is
+             *  less likely to appear than a frozen hell, let's catch these exceptions until the
+             *  library is fixed:  https://github.com/grandcentrix/tray/issues/50
+             *  When this rare exception occurred just restart the service.
+             */
+            try {
 
-            // time since last check = now - last check
-            final long now = System.currentTimeMillis();
-            final long sinceLastCheck = now - trayPreferences.getLong("last_check", now);
-            final boolean ntfLastStatus = trayPreferences.getBoolean("ntf_last_status", false);
-            final boolean msgLastStatus = trayPreferences.getBoolean("msg_last_status", false);
+                // get time interval from tray preferences
+                final int timeInterval = trayPreferences.getInt("interval_pref", 1800000);
+                Log.i(TAG, "Time interval: " + (timeInterval / 1000) + " seconds");
 
-            if ((sinceLastCheck < timeInterval) && ntfLastStatus && msgLastStatus) {
-                final long waitTime = timeInterval - sinceLastCheck;
-                if (waitTime >= 1000) {  // waiting less than a second is just stupid
-                    Log.i(TAG, "I'm going to wait. Resuming in: " + (waitTime / 1000) + " seconds");
+                // time since last check = now - last check
+                final long now = System.currentTimeMillis();
+                final long sinceLastCheck = now - trayPreferences.getLong("last_check", now);
+                final boolean ntfLastStatus = trayPreferences.getBoolean("ntf_last_status", false);
+                final boolean msgLastStatus = trayPreferences.getBoolean("msg_last_status", false);
 
-                    synchronized (handler) {
-                        try {
-                            handler.wait(waitTime);
-                        } catch (InterruptedException ex) {
-                            Log.i(TAG, "Thread interrupted");
-                        } finally {
-                            Log.i(TAG, "Lock is now released");
+                if ((sinceLastCheck < timeInterval) && ntfLastStatus && msgLastStatus) {
+                    final long waitTime = timeInterval - sinceLastCheck;
+                    if (waitTime >= 1000) {  // waiting less than a second is just stupid
+                        Log.i(TAG, "I'm going to wait. Resuming in: " + (waitTime / 1000) + " seconds");
+
+                        synchronized (handler) {
+                            try {
+                                handler.wait(waitTime);
+                            } catch (InterruptedException ex) {
+                                Log.i(TAG, "Thread interrupted");
+                            } finally {
+                                Log.i(TAG, "Lock is now released");
+                            }
                         }
+
                     }
-
                 }
-            }
 
-            // when onDestroy() is run and lock is released, don't go on
-            if (shouldContinue) {
-                // start AsyncTasks if there is internet connection
-                if (Connectivity.isConnected(getApplicationContext())) {
-                    Log.i(TAG, "Internet connection active. Starting AsyncTasks...");
-                    String connectionType = "Wi-Fi";
-                    if (Connectivity.isConnectedMobile(getApplicationContext()))
-                        connectionType = "Mobile";
-                    Log.i(TAG, "Connection Type: " + connectionType);
-                    USER_AGENT = trayPreferences.getString("webview_user_agent", System.getProperty("http.agent"));
-                    Log.i(TAG, "User Agent: " + USER_AGENT);
+                // when onDestroy() is run and lock is released, don't go on
+                if (shouldContinue) {
+                    // start AsyncTasks if there is internet connection
+                    if (Connectivity.isConnected(getApplicationContext())) {
+                        Log.i(TAG, "Internet connection active. Starting AsyncTasks...");
+                        String connectionType = "Wi-Fi";
+                        if (Connectivity.isConnectedMobile(getApplicationContext()))
+                            connectionType = "Mobile";
+                        Log.i(TAG, "Connection Type: " + connectionType);
+                        userAgent = trayPreferences.getString("webview_user_agent", System.getProperty("http.agent"));
+                        Log.i(TAG, "User Agent: " + userAgent);
 
-                    if (trayPreferences.getBoolean("notifications_activated", false))
-                        new RssReaderTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
-                    if (trayPreferences.getBoolean("message_notifications", false))
-                        new CheckMessagesTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+                        if (trayPreferences.getBoolean("notifications_activated", false))
+                            new RssReaderTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+                        if (trayPreferences.getBoolean("message_notifications", false))
+                            new CheckMessagesTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 
-                    // save current time (last potentially successful checking)
-                    trayPreferences.put("last_check", System.currentTimeMillis());
+                        // save current time (last potentially successful checking)
+                        trayPreferences.put("last_check", System.currentTimeMillis());
+                    } else
+                        Log.i(TAG, "No internet connection. Skip checking.");
+
+                    // set repeat time interval
+                    handler.postDelayed(runnable, timeInterval);
                 } else
-                    Log.i(TAG, "No internet connection. Skip checking.");
+                    Log.i(TAG, "Notified to stop running. Exiting...");
 
-                // set repeat time interval
-                handler.postDelayed(runnable, timeInterval);
-            } else
-                Log.i(TAG, "Notified to stop running. Exiting...");
+            } catch (IllegalStateException ise) {
+                Log.i(TAG, "An extremely rare IllegalStateException caught");
+                restartItself();
+            }
         }
 
     }
@@ -191,7 +205,7 @@ public class NotificationsService extends Service {
 
         private String getFeed(String connectUrl) {
             try {
-                Elements element = Jsoup.connect(connectUrl).userAgent(USER_AGENT).timeout(JSOUP_TIMEOUT)
+                Elements element = Jsoup.connect(connectUrl).userAgent(userAgent).timeout(JSOUP_TIMEOUT)
                         .cookie("https://m.facebook.com", CookieManager.getInstance().getCookie("https://m.facebook.com")).get()
                         .select("div._li").select("div#globalContainer").select("div.fwn").select("a[href*=rss20]");
 
@@ -286,7 +300,7 @@ public class NotificationsService extends Service {
 
         private String getNumber(String connectUrl) {
             try {
-                Elements message = Jsoup.connect(connectUrl).userAgent(USER_AGENT).timeout(JSOUP_TIMEOUT)
+                Elements message = Jsoup.connect(connectUrl).userAgent(userAgent).timeout(JSOUP_TIMEOUT)
                         .cookie("https://m.facebook.com", CookieManager.getInstance().getCookie("https://m.facebook.com")).get()
                         .select("div#viewport").select("div#page").select("div._129-")
                         .select("#messages_jewel").select("span._59tg");
@@ -377,6 +391,14 @@ public class NotificationsService extends Service {
                         Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    // restart the service from inside the service
+    private void restartItself() {
+        final Context context = MyApplication.getContextOfApplication();
+        final Intent intent = new Intent(context, NotificationsService.class);
+        context.stopService(intent);
+        context.startService(intent);
     }
 
     // create a notification and display it

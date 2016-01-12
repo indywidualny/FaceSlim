@@ -47,13 +47,13 @@
             android:summary="@string/notifications_settings_description"/>
 
         <SwitchPreference
-            android:key="message_notifications"
-            android:title="@string/message_notifications"
+            android:key="notifications_activated"
+            android:title="@string/facebook_notifications"
             android:defaultValue="false"/>
 
         <SwitchPreference
-            android:key="notifications_activated"
-            android:title="@string/facebook_notifications"
+            android:key="message_notifications"
+            android:title="@string/message_notifications"
             android:defaultValue="false"/>
 
     </PreferenceCategory>

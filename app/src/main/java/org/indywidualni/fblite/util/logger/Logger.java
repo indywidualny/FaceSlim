@@ -78,17 +78,14 @@ public final class Logger {
 
     public synchronized void i(String tag, String msg) {
         final boolean fileLoggingEnabled = trayPreferences.getBoolean("file_logging", false);
-        final String state = Environment.getExternalStorageState();
-        final boolean mounted = Environment.MEDIA_MOUNTED.equals(state);
-        final boolean readOnly = Environment.MEDIA_MOUNTED_READ_ONLY.equals(state);
-        final boolean storageReady = mounted && !readOnly;
-        final boolean storagePermission = checkStoragePermission();
+        final boolean mounted = Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState());
+        final boolean storageReady = mounted && checkStoragePermission();
 
-        if (fileLoggingEnabled && storageReady && storagePermission) {
+        if (fileLoggingEnabled && storageReady) {
             FileLog.open(logFilePath, Log.VERBOSE, 1000000);  // 1 megabyte
             FileLog.i(tag, msg);
             FileLog.close();
-        } else if (fileLoggingEnabled && (storageReady || storagePermission)) {
+        } else if (fileLoggingEnabled) {
             displayStoragePermissionRefused();
             Log.i(tag, msg);
         } else {

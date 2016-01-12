@@ -108,7 +108,6 @@
     <string name="you_have_n_messages">Masz %d nowych wiadomości.</string>
     <string name="special_thanks_notifications">Podziękowania z pomoc z powiadomieniami:</string>
     <string name="sync_problem">Nie mogę zsynchronizować cookies. Pierwszy start? Zrestartuj aplikację :)</string>
-
     <string name="interval_pref_description_new">Powiadomienia są sprawdzane co %s.</string>
     <string name="facebook_notifications">Powiadomienia z Facebook</string>
     <string name="notification_sound_msg">Dźwięk wiadomości</string>
