@@ -193,7 +193,7 @@ public class NotificationsService extends Service {
             try {
                 Elements element = Jsoup.connect(connectUrl).userAgent(USER_AGENT).timeout(JSOUP_TIMEOUT)
                         .cookie("https://m.facebook.com", CookieManager.getInstance().getCookie("https://m.facebook.com")).get()
-                        .select("div._li").select("div#globalContainer").select("div.fwn").select("a:matches(RSS)");
+                        .select("div._li").select("div#globalContainer").select("div.fwn").select("a[href*=rss20]");
 
                 return element.attr("href");
             } catch (IllegalArgumentException ex) {
