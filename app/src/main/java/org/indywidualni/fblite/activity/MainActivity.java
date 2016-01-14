@@ -4,6 +4,10 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.DownloadManager;
+import android.app.DownloadManager.Query;
+import android.app.DownloadManager.Request;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -25,6 +29,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -52,6 +58,8 @@ import org.indywidualni.fblite.webview.MyAppWebViewClient;
 import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MainActivity extends Activity {
 
@@ -82,6 +90,8 @@ public class MainActivity extends Activity {
     private static String USER_AGENT_DEFAULT;
     private static final String USER_AGENT_BASIC = "Mozilla/5.0 (Linux; U; Android 2.3.3; en-gb; " +
             "Nexus S Build/GRI20) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
+    private String mPendingImageUrlToSave = null;
+    private static final int ID_CONTEXT_MENU_SAVE_IMAGE = 2562617;
 
     @Override
     @SuppressLint("setJavaScriptEnabled")
@@ -175,6 +185,9 @@ public class MainActivity extends Activity {
         webView = (WebView) findViewById(R.id.webView);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setAllowFileAccess(true);
+        webView.getSettings().setSupportZoom(true);
+        webView.getSettings().setBuiltInZoomControls(true);
+        webView.getSettings().setUseWideViewPort(true);
 
         // get user agent
         USER_AGENT_DEFAULT = webView.getSettings().getUserAgentString();
@@ -412,6 +425,7 @@ public class MainActivity extends Activity {
             }
         });
 
+        registerForContextMenu(webView);
     }
 
     // request storage permission, if granted file upload continues
@@ -427,6 +441,28 @@ public class MainActivity extends Activity {
             Log.e(TAG, "We already have storage permission. Yay!");
             return true;
         }
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View view, ContextMenu.ContextMenuInfo menuInfo) {
+        WebView.HitTestResult result = webView.getHitTestResult();
+        if (result != null) {
+            int type = result.getType();
+
+            if (type == WebView.HitTestResult.IMAGE_TYPE || type == WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE) {
+                showLongPressedImageMenu(menu, result.getExtra());
+            }
+        }
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case ID_CONTEXT_MENU_SAVE_IMAGE:
+                saveImageToDisk(mPendingImageUrlToSave);
+                break;
+        }
+        return super.onContextItemSelected(item);
     }
 
     @Override
@@ -721,6 +757,33 @@ public class MainActivity extends Activity {
             Intent restart = new Intent(MainActivity.this, MainActivity.class);
             startActivity(restart);
         }
+    }
+
+    private void showLongPressedImageMenu(ContextMenu menu, String imageUrl) {
+        mPendingImageUrlToSave = imageUrl;
+        menu.add(0, ID_CONTEXT_MENU_SAVE_IMAGE, 0, getString(R.string.save_img));
+    }
+
+    private void saveImageToDisk(String imageUrl) {
+        File imageStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "FaceSlim");
+
+        if (!imageStorageDir.exists()) {
+            imageStorageDir.mkdirs();
+        }
+
+        SimpleDateFormat sdatum = new SimpleDateFormat("yyyyMMdd_HHmmss");
+        String datum = sdatum.format(new Date());
+        String file = new String("IMG_" + datum + ".jpg");
+
+        DownloadManager mgr = (DownloadManager) this.getSystemService(Context.DOWNLOAD_SERVICE);
+        Uri downloadUri = Uri.parse(imageUrl);
+        DownloadManager.Request request = new DownloadManager.Request(downloadUri);
+
+        request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE)
+            .setDestinationInExternalPublicDir(Environment.DIRECTORY_PICTURES+"/FaceSlim", file);
+        mgr.enqueue(request);
+
+        Toast.makeText(this, getString(R.string.downloading_img), Toast.LENGTH_LONG).show();
     }
 
     // handling back button
