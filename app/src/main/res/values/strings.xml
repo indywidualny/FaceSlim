@@ -44,7 +44,7 @@
     <string name="notifications">Notifications</string>
     <string name="no_network">You are offline ;)</string>
     <string name="hardware_acceleration">Hardware Acceleration &#8635;</string>
-    <string name="hardware_acceleration_description">Disable it only on low memory devices (in case of problems).</string>
+    <string name="hardware_acceleration_description">Disable it only on low memory devices. Videos may not work.</string>
     <string name="share_link">Share the link</string>
     <string name="long_clicks">Long clicks</string>
     <string name="long_clicks_description">Long click a link or an image link to share.</string>

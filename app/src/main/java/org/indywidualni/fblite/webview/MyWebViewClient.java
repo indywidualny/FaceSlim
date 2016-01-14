@@ -17,7 +17,7 @@ import org.indywidualni.fblite.util.Connectivity;
 import org.indywidualni.fblite.util.Dimension;
 import org.indywidualni.fblite.util.FileOperation;
 
-public class MyAppWebViewClient extends WebViewClient {
+public class MyWebViewClient extends WebViewClient {
 
     // variable for onReceivedError
     private boolean refreshed;

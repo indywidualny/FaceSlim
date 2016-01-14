@@ -2,6 +2,7 @@ package org.indywidualni.fblite.activity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
@@ -33,6 +34,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -47,7 +49,7 @@ import org.indywidualni.fblite.util.AndroidBug5497Workaround;
 import org.indywidualni.fblite.util.Connectivity;
 import org.indywidualni.fblite.util.Dimension;
 import org.indywidualni.fblite.util.Miscellany;
-import org.indywidualni.fblite.webview.MyAppWebViewClient;
+import org.indywidualni.fblite.webview.MyWebViewClient;
 
 import java.io.File;
 import java.io.IOException;
@@ -59,9 +61,18 @@ public class MainActivity extends Activity {
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
 
+    // main layout, pull to refresh, webview
+    private LinearLayout contentMain;
     private SwipeRefreshLayout swipeRefreshLayout;
     private WebView webView;
     private ProgressBar progressBar;
+
+    // fullscreen videos
+    private MyWebChromeClient mWebChromeClient;
+    private WebChromeClient.CustomViewCallback customViewCallback;
+    private FrameLayout customViewContainer;
+    private View mCustomView;
+    private int previousUiVisibility;
 
     // variables for camera and choosing files methods
     private static final int FILECHOOSER_RESULTCODE = 1;
@@ -77,6 +88,9 @@ public class MainActivity extends Activity {
     private SharedPreferences preferences;
     private TrayAppPreferences trayPreferences;
     private static final int REQUEST_STORAGE = 1;
+
+    // create link handler (long clicked links)
+    private final MyHandler linkHandler = new MyHandler(this);
 
     // user agents
     private static String USER_AGENT_DEFAULT;
@@ -98,6 +112,9 @@ public class MainActivity extends Activity {
         else
             setContentView(R.layout.activity_main_drawer_right);
 
+        // the main layout, everything is inside
+        contentMain = (LinearLayout) findViewById(R.id.content_main);
+
         // if the app is being launched for the first time
         if (preferences.getBoolean("first_run", true)) {
             // show quick start guide
@@ -116,7 +133,6 @@ public class MainActivity extends Activity {
         // KitKat layout fix
         if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
             // apply top padding to avoid layout being hidden by the status bar
-            LinearLayout contentMain = (LinearLayout) findViewById(R.id.content_main);
             contentMain.setPadding(0, Dimension.getStatusBarHeight(getApplicationContext()), 0, 0);
             // bug fix for resizing the view while opening soft keyboard
             AndroidBug5497Workaround.assistActivity(this);
@@ -127,13 +143,12 @@ public class MainActivity extends Activity {
             if (preferences.getBoolean("transparent_nav", false)) {
                 getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
                 // apply top padding to avoid layout being hidden by the status bar
-                LinearLayout contentMain = (LinearLayout) findViewById(R.id.content_main);
                 contentMain.setPadding(0, Dimension.getStatusBarHeight(getApplicationContext()), 0, 0);
                 // bug fix for resizing the view while opening soft keyboard
                 AndroidBug5497Workaround.assistActivity(this);
 
                 // bug fix (1.4.1) for launching the app in landscape mode
-                if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE && Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT)
+                if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE && Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT)
                     contentMain.setPadding(0, Dimension.getStatusBarHeight(getApplicationContext()), Dimension.getNavigationBarHeight(getApplicationContext(), 0), 0);
                 else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE && Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
                     getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
@@ -165,8 +180,12 @@ public class MainActivity extends Activity {
             webViewUrl = "https://mbasic.facebook.com";
 
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
+        swipeRefreshLayout.setVisibility(View.VISIBLE);
         swipeRefreshLayout.setOnRefreshListener(onRefreshListener);
         swipeRefreshLayout.setColorSchemeColors(Color.BLUE);
+
+        // fullscreen videos display here
+        customViewContainer = (FrameLayout) findViewById(R.id.customViewContainer);
 
         // bind progress bar
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -179,7 +198,6 @@ public class MainActivity extends Activity {
         // get user agent
         USER_AGENT_DEFAULT = webView.getSettings().getUserAgentString();
         trayPreferences.put("webview_user_agent", USER_AGENT_DEFAULT);
-        Log.v("Default User Agent", USER_AGENT_DEFAULT);
 
         // set user agent for basic mode
         if (preferences.getBoolean("basic_mode", false))
@@ -246,154 +264,12 @@ public class MainActivity extends Activity {
         if (!Connectivity.isConnected(getApplicationContext()))
             Toast.makeText(getApplicationContext(), getString(R.string.no_network), Toast.LENGTH_SHORT).show();
 
+        mWebChromeClient = new MyWebChromeClient();
+        webView.setWebViewClient(new MyWebViewClient());
+        webView.setWebChromeClient(mWebChromeClient);
+
         // load url in webView
         webView.loadUrl(webViewUrl);
-        webView.setWebViewClient(new MyAppWebViewClient());
-
-        // implement WebChromeClient inner class
-        // we will define openFileChooser for select file from camera
-        webView.setWebChromeClient(new WebChromeClient() {
-
-            // page loading progress, gone when fully loaded
-            public void onProgressChanged(WebView view, int progress) {
-                // display it only when it's enabled (default true)
-                if (preferences.getBoolean("progress_bar", true)) {
-                    if (progress < 100 && progressBar.getVisibility() == ProgressBar.GONE)
-                        progressBar.setVisibility(ProgressBar.VISIBLE);
-                    // set progress, it changes
-                    progressBar.setProgress(progress);
-                    if (progress == 100)
-                        progressBar.setVisibility(ProgressBar.GONE);
-                } else {
-                    // if progress bar is disabled hide it immediately
-                    progressBar.setVisibility(ProgressBar.GONE);
-                }
-            }
-
-            // for >= Lollipop, all in one
-            public boolean onShowFileChooser(
-                    WebView webView, ValueCallback<Uri[]> filePathCallback,
-                    WebChromeClient.FileChooserParams fileChooserParams) {
-
-                /** Request permission for external storage access.
-                 *  If granted it's awesome and go on,
-                 *  otherwise just stop here and leave the method.
-                 */
-                if (!requestStoragePermission())
-                    return false;
-
-                if (mFilePathCallback != null) {
-                    mFilePathCallback.onReceiveValue(null);
-                }
-                mFilePathCallback = filePathCallback;
-
-                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-
-                    // create the file where the photo should go
-                    File photoFile = null;
-                    try {
-                        photoFile = createImageFile();
-                        takePictureIntent.putExtra("PhotoPath", mCameraPhotoPath);
-                    } catch (IOException ex) {
-                        // Error occurred while creating the File
-                        Log.e(TAG, "Unable to create Image File", ex);
-                    }
-
-                    // continue only if the file was successfully created
-                    if (photoFile != null) {
-                        mCameraPhotoPath = "file:" + photoFile.getAbsolutePath();
-                        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
-                                Uri.fromFile(photoFile));
-                    } else {
-                        takePictureIntent = null;
-                    }
-                }
-
-                Intent contentSelectionIntent = new Intent(Intent.ACTION_GET_CONTENT);
-                contentSelectionIntent.addCategory(Intent.CATEGORY_OPENABLE);
-                contentSelectionIntent.setType("image/*");
-
-                Intent[] intentArray;
-                if (takePictureIntent != null) {
-                    intentArray = new Intent[]{takePictureIntent};
-                } else {
-                    intentArray = new Intent[0];
-                }
-
-                Intent chooserIntent = new Intent(Intent.ACTION_CHOOSER);
-                chooserIntent.putExtra(Intent.EXTRA_INTENT, contentSelectionIntent);
-                chooserIntent.putExtra(Intent.EXTRA_TITLE, getString(R.string.image_chooser));
-                chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, intentArray);
-
-                startActivityForResult(chooserIntent, FILECHOOSER_RESULTCODE);
-
-                return true;
-            }
-
-            // creating image files (Lollipop only)
-            private File createImageFile() throws IOException {
-                File imageStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "FaceSlim");
-
-                if (!imageStorageDir.exists()) {
-                    //noinspection ResultOfMethodCallIgnored
-                    imageStorageDir.mkdirs();
-                }
-
-                // create an image file name
-                imageStorageDir = new File(imageStorageDir + File.separator + "IMG_" + String.valueOf(System.currentTimeMillis()) + ".jpg");
-                return imageStorageDir;
-            }
-
-            // openFileChooser for Android 3.0+
-            public void openFileChooser(ValueCallback<Uri> uploadMsg, String acceptType) {
-                mUploadMessage = uploadMsg;
-
-                try {
-                    File imageStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "FaceSlim");
-
-                    if (!imageStorageDir.exists()) {
-                        //noinspection ResultOfMethodCallIgnored
-                        imageStorageDir.mkdirs();
-                    }
-
-                    File file = new File(imageStorageDir + File.separator + "IMG_" + String.valueOf(System.currentTimeMillis()) + ".jpg");
-
-                    mCapturedImageURI = Uri.fromFile(file); // save to the private variable
-
-                    final Intent captureIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                    captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, mCapturedImageURI);
-                    //captureIntent.putExtra(MediaStore.EXTRA_SCREEN_ORIENTATION, ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
-                    Intent i = new Intent(Intent.ACTION_GET_CONTENT);
-                    i.addCategory(Intent.CATEGORY_OPENABLE);
-                    i.setType("image/*");
-
-                    Intent chooserIntent = Intent.createChooser(i, getString(R.string.image_chooser));
-                    chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Parcelable[]{captureIntent});
-
-                    startActivityForResult(chooserIntent, FILECHOOSER_RESULTCODE);
-                } catch (Exception e) {
-                    Toast.makeText(getBaseContext(), "Camera Exception:" + e, Toast.LENGTH_LONG).show();
-                }
-
-            }
-
-            // not needed but let's make it overloaded just in case
-            // openFileChooser for Android < 3.0
-            public void openFileChooser(ValueCallback<Uri> uploadMsg) {
-                openFileChooser(uploadMsg, "");
-            }
-
-            // openFileChooser for other Android versions
-            /** may not work on KitKat due to lack of implementation of openFileChooser() or onShowFileChooser()
-             *  https://code.google.com/p/android/issues/detail?id=62220
-             *  however newer versions of KitKat fixed it on some devices */
-            public void openFileChooser(ValueCallback<Uri> uploadMsg, String acceptType, String capture) {
-                openFileChooser(uploadMsg, acceptType);
-            }
-
-        });
 
         // OnLongClickListener for detecting long clicks on links and images
         webView.setOnLongClickListener(new View.OnLongClickListener() {
@@ -412,6 +288,259 @@ public class MainActivity extends Activity {
             }
         });
 
+    }
+
+    private class MyWebChromeClient extends WebChromeClient {
+
+        // page loading progress, gone when fully loaded
+        public void onProgressChanged(WebView view, int progress) {
+            // display it only when it's enabled (default true)
+            if (preferences.getBoolean("progress_bar", true)) {
+                if (progress < 100 && progressBar.getVisibility() == ProgressBar.GONE)
+                    progressBar.setVisibility(ProgressBar.VISIBLE);
+                // set progress, it changes
+                progressBar.setProgress(progress);
+                if (progress == 100)
+                    progressBar.setVisibility(ProgressBar.GONE);
+            } else {
+                // if progress bar is disabled hide it immediately
+                progressBar.setVisibility(ProgressBar.GONE);
+            }
+        }
+
+        // for >= Lollipop, all in one
+        public boolean onShowFileChooser(
+                WebView webView, ValueCallback<Uri[]> filePathCallback,
+                WebChromeClient.FileChooserParams fileChooserParams) {
+
+            /** Request permission for external storage access.
+             *  If granted it's awesome and go on,
+             *  otherwise just stop here and leave the method.
+             */
+            if (!requestStoragePermission())
+                return false;
+
+            if (mFilePathCallback != null) {
+                mFilePathCallback.onReceiveValue(null);
+            }
+            mFilePathCallback = filePathCallback;
+
+            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+
+                // create the file where the photo should go
+                File photoFile = null;
+                try {
+                    photoFile = createImageFile();
+                    takePictureIntent.putExtra("PhotoPath", mCameraPhotoPath);
+                } catch (IOException ex) {
+                    // Error occurred while creating the File
+                    Log.e(TAG, "Unable to create Image File", ex);
+                }
+
+                // continue only if the file was successfully created
+                if (photoFile != null) {
+                    mCameraPhotoPath = "file:" + photoFile.getAbsolutePath();
+                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
+                            Uri.fromFile(photoFile));
+                } else {
+                    takePictureIntent = null;
+                }
+            }
+
+            Intent contentSelectionIntent = new Intent(Intent.ACTION_GET_CONTENT);
+            contentSelectionIntent.addCategory(Intent.CATEGORY_OPENABLE);
+            contentSelectionIntent.setType("image/*");
+
+            Intent[] intentArray;
+            if (takePictureIntent != null) {
+                intentArray = new Intent[]{takePictureIntent};
+            } else {
+                intentArray = new Intent[0];
+            }
+
+            Intent chooserIntent = new Intent(Intent.ACTION_CHOOSER);
+            chooserIntent.putExtra(Intent.EXTRA_INTENT, contentSelectionIntent);
+            chooserIntent.putExtra(Intent.EXTRA_TITLE, getString(R.string.image_chooser));
+            chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, intentArray);
+
+            startActivityForResult(chooserIntent, FILECHOOSER_RESULTCODE);
+
+            return true;
+        }
+
+        // creating image files (Lollipop only)
+        private File createImageFile() throws IOException {
+            File imageStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "FaceSlim");
+
+            if (!imageStorageDir.exists()) {
+                //noinspection ResultOfMethodCallIgnored
+                imageStorageDir.mkdirs();
+            }
+
+            // create an image file name
+            imageStorageDir = new File(imageStorageDir + File.separator + "IMG_" + String.valueOf(System.currentTimeMillis()) + ".jpg");
+            return imageStorageDir;
+        }
+
+        // openFileChooser for Android 3.0+
+        public void openFileChooser(ValueCallback<Uri> uploadMsg, String acceptType) {
+            mUploadMessage = uploadMsg;
+
+            try {
+                File imageStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "FaceSlim");
+
+                if (!imageStorageDir.exists()) {
+                    //noinspection ResultOfMethodCallIgnored
+                    imageStorageDir.mkdirs();
+                }
+
+                File file = new File(imageStorageDir + File.separator + "IMG_" + String.valueOf(System.currentTimeMillis()) + ".jpg");
+
+                mCapturedImageURI = Uri.fromFile(file); // save to the private variable
+
+                final Intent captureIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, mCapturedImageURI);
+                //captureIntent.putExtra(MediaStore.EXTRA_SCREEN_ORIENTATION, ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+                Intent i = new Intent(Intent.ACTION_GET_CONTENT);
+                i.addCategory(Intent.CATEGORY_OPENABLE);
+                i.setType("image/*");
+
+                Intent chooserIntent = Intent.createChooser(i, getString(R.string.image_chooser));
+                chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Parcelable[]{captureIntent});
+
+                startActivityForResult(chooserIntent, FILECHOOSER_RESULTCODE);
+            } catch (Exception e) {
+                Toast.makeText(getBaseContext(), "Camera Exception:" + e, Toast.LENGTH_LONG).show();
+            }
+
+        }
+
+        // not needed but let's make it overloaded just in case
+        // openFileChooser for Android < 3.0
+        public void openFileChooser(ValueCallback<Uri> uploadMsg) {
+            openFileChooser(uploadMsg, "");
+        }
+
+        // openFileChooser for other Android versions
+        /** may not work on KitKat due to lack of implementation of openFileChooser() or onShowFileChooser()
+         *  https://code.google.com/p/android/issues/detail?id=62220
+         *  however newer versions of KitKat fixed it on some devices */
+        public void openFileChooser(ValueCallback<Uri> uploadMsg, String acceptType, String capture) {
+            openFileChooser(uploadMsg, acceptType);
+        }
+
+        /** This method was deprecated in API level 18.
+         *  This method supports the obsolete plugin mechanism,
+         *  and will not be invoked in future
+         */
+        @SuppressWarnings("deprecation")
+        @Override
+        public void onShowCustomView(View view, int requestedOrientation, CustomViewCallback callback) {
+            onShowCustomView(view, callback);
+        }
+
+        @Override
+        public void onShowCustomView(View view,CustomViewCallback callback) {
+            // if a view already exists then immediately terminate the new one
+            if (mCustomView != null) {
+                callback.onCustomViewHidden();
+                return;
+            }
+            mCustomView = view;
+
+            // hide webView and swipeRefreshLayout
+            webView.setVisibility(View.GONE);
+            swipeRefreshLayout.setVisibility(View.GONE);
+
+            // show customViewContainer
+            customViewContainer.setVisibility(View.VISIBLE);
+            customViewContainer.addView(view);
+            customViewCallback = callback;
+
+            // activate immersive mode
+            if (Build.VERSION.SDK_INT >= 19)
+                hideSystemUI();
+        }
+
+        @Override
+        public void onHideCustomView() {
+            super.onHideCustomView();
+            if (mCustomView == null)
+                return;
+
+            // hide and remove customViewContainer
+            customViewContainer.setVisibility(View.GONE);
+            mCustomView.setVisibility(View.GONE);
+            customViewContainer.removeView(mCustomView);
+            customViewCallback.onCustomViewHidden();
+
+            // show swipeRefreshLayout and webView
+            swipeRefreshLayout.setVisibility(View.VISIBLE);
+            webView.setVisibility(View.VISIBLE);
+
+            mCustomView = null;
+
+            // deactivate immersive mode
+            if (Build.VERSION.SDK_INT >= 19)
+                showSystemUI();
+        }
+
+    }
+
+    // handle long clicks on links, an awesome way to avoid memory leaks
+    private static class MyHandler extends Handler {
+
+        private final WeakReference<MainActivity> mActivity;
+
+        public MyHandler(MainActivity activity) {
+            mActivity = new WeakReference<>(activity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            MainActivity activity = mActivity.get();
+            if (activity != null) {
+
+                // get url to share
+                String url = (String) msg.getData().get("url");
+
+                if (url != null) {
+                    /* "clean" an url to remove Facebook tracking redirection while sharing
+                    and recreate all the special characters */
+                    url = Miscellany.cleanAndDecodeUrl(url);
+
+                    Log.v("Link long clicked", url);
+                    // create share intent for long clicked url
+                    Intent intent = new Intent(Intent.ACTION_SEND);
+                    intent.setType("text/plain");
+                    intent.putExtra(Intent.EXTRA_TEXT, url);
+                    activity.startActivity(Intent.createChooser(intent, activity.getString(R.string.share_link)));
+                }
+            }
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.KITKAT)
+    private void hideSystemUI() {
+        previousUiVisibility = contentMain.getSystemUiVisibility();
+        contentMain.setPadding(0, 0, 0, 0);
+
+        contentMain.setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE);
+    }
+
+    @TargetApi(Build.VERSION_CODES.KITKAT)
+    private void showSystemUI() {
+        contentMain.setSystemUiVisibility(previousUiVisibility);
+        // fake a configuration change to set the right padding
+        onConfigurationChanged(getResources().getConfiguration());
     }
 
     // request storage permission, if granted file upload continues
@@ -446,45 +575,9 @@ public class MainActivity extends Activity {
         }
     }
 
-    // handle long clicks on links, an awesome way to avoid memory leaks
-    private static class MyHandler extends Handler {
-        private final WeakReference<MainActivity> mActivity;
-
-        public MyHandler(MainActivity activity) {
-            mActivity = new WeakReference<>(activity);
-        }
-
-        @Override
-        public void handleMessage(Message msg) {
-            MainActivity activity = mActivity.get();
-            if (activity != null) {
-
-                // get url to share
-                String url = (String) msg.getData().get("url");
-
-                if (url != null) {
-                    /* "clean" an url to remove Facebook tracking redirection while sharing
-                    and recreate all the special characters */
-                    url = Miscellany.cleanAndDecodeUrl(url);
-
-                    Log.v("Link long clicked", url);
-                    // create share intent for long clicked url
-                    Intent intent = new Intent(Intent.ACTION_SEND);
-                    intent.setType("text/plain");
-                    intent.putExtra(Intent.EXTRA_TEXT, url);
-                    activity.startActivity(Intent.createChooser(intent, activity.getString(R.string.share_link)));
-                }
-            }
-        }
-    }
-
-    // create linkHandler, OnLongClickListener wants it bad
-    private final MyHandler linkHandler = new MyHandler(this);
-
     // return here when file selected from camera or from SD Card
     @Override
     public void onActivityResult (int requestCode, int resultCode, Intent data) {
-
         // code for all versions except of Lollipop
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
 
@@ -541,10 +634,9 @@ public class MainActivity extends Activity {
             mFilePathCallback = null;
 
         } // end of code for Lollipop only
-
     }
 
-    SwipeRefreshLayout.OnRefreshListener onRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
+    private SwipeRefreshLayout.OnRefreshListener onRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
 
         // refreshing pages
         @Override
@@ -569,6 +661,7 @@ public class MainActivity extends Activity {
 
     // the click listener for ListView in the navigation drawer
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
+
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             String baseAddress = "https://m.facebook.com/";
@@ -611,7 +704,7 @@ public class MainActivity extends Activity {
             case 7:
                 trayPreferences.put("activity_visible", false);
                 //finish();
-                System.exit(0); // ugly, ugly, ugly!
+                System.exit(0); // ugly, ugly, ugly! They wanted it :(
                 break;
             case 8:
                 webView.loadUrl("javascript:scroll(0,0)");
@@ -630,24 +723,23 @@ public class MainActivity extends Activity {
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
-        // bug fix (1.4.1) for landscape mode
-        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE && preferences.getBoolean("transparent_nav", false)) {
-            if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
-                LinearLayout contentMain = (LinearLayout) findViewById(R.id.content_main);
-                contentMain.setPadding(0, Dimension.getStatusBarHeight(getApplicationContext()), Dimension.getNavigationBarHeight(getApplicationContext(), 0), 0);
-            } else if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
-                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-                LinearLayout contentMain = (LinearLayout) findViewById(R.id.content_main);
-                contentMain.setPadding(0, 0, 0, Dimension.getStatusBarHeight(getApplicationContext()));
-            }
-        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT && preferences.getBoolean("transparent_nav", false)) {
-            if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
-                LinearLayout contentMain = (LinearLayout) findViewById(R.id.content_main);
-                contentMain.setPadding(0, Dimension.getStatusBarHeight(getApplicationContext()), 0, 0);
-            } else if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
-                getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-                LinearLayout contentMain = (LinearLayout) findViewById(R.id.content_main);
-                contentMain.setPadding(0, Dimension.getStatusBarHeight(getApplicationContext()), 0, 0);
+        // don't change padding during fullscreen video playback
+        if (mCustomView == null) {
+            // bug fix (1.4.1) for landscape mode
+            if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE && preferences.getBoolean("transparent_nav", false)) {
+                if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
+                    contentMain.setPadding(0, Dimension.getStatusBarHeight(getApplicationContext()), Dimension.getNavigationBarHeight(getApplicationContext(), 0), 0);
+                } else if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
+                    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+                    contentMain.setPadding(0, 0, 0, Dimension.getStatusBarHeight(getApplicationContext()));
+                }
+            } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT && preferences.getBoolean("transparent_nav", false)) {
+                if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
+                    contentMain.setPadding(0, Dimension.getStatusBarHeight(getApplicationContext()), 0, 0);
+                } else if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
+                    getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+                    contentMain.setPadding(0, Dimension.getStatusBarHeight(getApplicationContext()), 0, 0);
+                }
             }
         }
     }
@@ -726,7 +818,9 @@ public class MainActivity extends Activity {
     // handling back button
     @Override
     public void onBackPressed() {
-        if (webView.canGoBack())
+        if (inCustomView())
+            hideCustomView();
+        else if (mCustomView == null && webView.canGoBack())
             webView.goBack();
         else
             super.onBackPressed();
@@ -751,6 +845,14 @@ public class MainActivity extends Activity {
     }
 
     @Override
+    protected void onStop() {
+        super.onStop();
+        if (inCustomView()) {
+            hideCustomView();
+        }
+    }
+
+    @Override
     public void onDestroy() {
         Log.i(TAG, "onDestroy: Destroying...");
         super.onDestroy();
@@ -759,6 +861,19 @@ public class MainActivity extends Activity {
             webView.destroy();
             webView = null;
         }
+        // just in case, it should be GC anyway
+        if (mWebChromeClient != null)
+            mWebChromeClient = null;
+    }
+
+    // is a video played in fullscreen mode
+    private boolean inCustomView() {
+        return (mCustomView != null);
+    }
+
+    // deactivate fullscreen for video playback
+    private void hideCustomView() {
+        mWebChromeClient.onHideCustomView();
     }
 
     // first run dialog with introduction

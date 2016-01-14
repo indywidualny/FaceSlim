@@ -34,7 +34,7 @@
     <string name="notifications">Powiadomienia</string>
     <string name="no_network">Jesteś offline ;)</string>
     <string name="hardware_acceleration">Przyspieszenie sprzętowe &#8635;</string>
-    <string name="hardware_acceleration_description">Deaktywuj jedynie na urządzeniach z małą ilością pamięci (w razie problemów).</string>
+    <string name="hardware_acceleration_description">Deaktywuj jedynie na urządzeniach z małą ilością pamięci. Filmy mogą nie działać.</string>
     <string name="share_link">Udostępnij link</string>
     <string name="long_clicks">Długie kliknięcia</string>
     <string name="long_clicks_description">Przytrzymaj link lub foto link by udostępnić.</string>
