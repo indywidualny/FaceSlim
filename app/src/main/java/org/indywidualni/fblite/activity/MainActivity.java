@@ -107,7 +107,6 @@ public class MainActivity extends Activity {
     private String mPendingImageUrlToSave = null;
     private static final int ID_CONTEXT_MENU_SAVE_IMAGE = 2562617;
     private static String appDirectoryName;
-    private static boolean storagePermissionGranted;
 
 
     @Override
@@ -341,7 +340,7 @@ public class MainActivity extends Activity {
              *  otherwise just stop here and leave the method.
              */
             requestStoragePermission();
-            if (!storagePermissionGranted)
+            if (!hasStoragePermission())
                 return false;
 
             if (mFilePathCallback != null) {
@@ -495,6 +494,7 @@ public class MainActivity extends Activity {
                 return;
 
             // hide and remove customViewContainer
+            mCustomView.setVisibility(View.GONE);
             customViewContainer.setVisibility(View.GONE);
             customViewContainer.removeView(mCustomView);
             customViewCallback.onCustomViewHidden();
@@ -589,15 +589,13 @@ public class MainActivity extends Activity {
             case REQUEST_STORAGE:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Log.e(TAG, "Storage permission granted");
-                    storagePermissionGranted = true;
                 } else {
                     Log.e(TAG, "Storage permission denied");
                     Toast.makeText(getApplicationContext(), getString(R.string.no_storage_permission), Toast.LENGTH_SHORT).show();
                 }
                 break;
-            default:
-                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     // return here when file selected from camera or from SD Card
@@ -942,10 +940,10 @@ public class MainActivity extends Activity {
             case ID_CONTEXT_MENU_SAVE_IMAGE:
                 // in order to save anything we need storage permission
                 requestStoragePermission();
-                if (!storagePermissionGranted)
+                if (!hasStoragePermission())
                     return false;
                 saveImageToDisk(mPendingImageUrlToSave);
-                return true;
+                break;
         }
         return super.onContextItemSelected(item);
     }

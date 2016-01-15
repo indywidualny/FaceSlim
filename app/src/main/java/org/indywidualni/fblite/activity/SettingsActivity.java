@@ -60,15 +60,13 @@ public class SettingsActivity extends AppCompatActivity {
             case REQUEST_STORAGE:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Log.e(TAG, "Storage permission granted");
-                    // It's awesome, dude!
                 } else {
                     Log.e(TAG, "Storage permission denied");
                     Toast.makeText(this, getString(R.string.no_storage_permission), Toast.LENGTH_SHORT).show();
                 }
                 break;
-            default:
-                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
 }
