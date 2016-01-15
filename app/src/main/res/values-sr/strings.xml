@@ -119,6 +119,8 @@
     <string name="crash_dialog_comment_prompt">Ваш коментар о проблему можете да додате испод:</string>
     <string name="file_logger">Сачувај запис у фајл</string>
     <string name="file_logger_description">Упис записа сервиса обавештавања у спољашње складиште. Захтева дозволе за складиште.</string>
-    <string name="file_logger_needs_permission">Немам приступ спољашњем складишту. Не могу да сачувам записе.</string>
+    <string name="file_logger_needs_permission">Немам приступ спољашњем складишту. Не могу да сачувам записе</string>
 
+    <string name="save_img">Сачувај слику</string>
+    <string name="downloading_img">Преузимам слику&#8230;</string>
 </resources>
