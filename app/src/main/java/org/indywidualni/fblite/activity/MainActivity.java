@@ -106,6 +106,8 @@ public class MainActivity extends Activity {
 
     private String mPendingImageUrlToSave = null;
     private static final int ID_CONTEXT_MENU_SAVE_IMAGE = 2562617;
+    private static String appDirectoryName;
+    private static boolean storagePermissionGranted;
 
 
     @Override
@@ -116,6 +118,7 @@ public class MainActivity extends Activity {
         // get shared preferences and TrayPreferences
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         trayPreferences = new TrayAppPreferences(getApplicationContext());
+        appDirectoryName = getString(R.string.app_name).replace(" ", "");
 
         // set the main content view (for drawer position)
         if ("0".equals(preferences.getString("drawer_pos", "0")))
@@ -207,10 +210,12 @@ public class MainActivity extends Activity {
         webView.getSettings().setAllowFileAccess(true);
 
 
+        // todo
+        webView.getSettings().setLoadWithOverviewMode(true);
+        webView.getSettings().setUseWideViewPort(true);
         webView.getSettings().setSupportZoom(true);
-        //webView.getSettings().setBuiltInZoomControls(true);
-        // todo: it was here in the past and imho it's not needed
-        //webView.getSettings().setUseWideViewPort(true);
+        webView.getSettings().setBuiltInZoomControls(true);
+        webView.getSettings().setDisplayZoomControls(false);
 
 
         // get user agent
@@ -335,7 +340,8 @@ public class MainActivity extends Activity {
              *  If granted it's awesome and go on,
              *  otherwise just stop here and leave the method.
              */
-            if (!requestStoragePermission())
+            requestStoragePermission();
+            if (!storagePermissionGranted)
                 return false;
 
             if (mFilePathCallback != null) {
@@ -389,7 +395,7 @@ public class MainActivity extends Activity {
 
         // creating image files (Lollipop only)
         private File createImageFile() throws IOException {
-            File imageStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "FaceSlim");
+            File imageStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), appDirectoryName);
 
             if (!imageStorageDir.exists()) {
                 //noinspection ResultOfMethodCallIgnored
@@ -406,7 +412,7 @@ public class MainActivity extends Activity {
             mUploadMessage = uploadMsg;
 
             try {
-                File imageStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "FaceSlim");
+                File imageStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), appDirectoryName);
 
                 if (!imageStorageDir.exists()) {
                     //noinspection ResultOfMethodCallIgnored
@@ -490,7 +496,6 @@ public class MainActivity extends Activity {
 
             // hide and remove customViewContainer
             customViewContainer.setVisibility(View.GONE);
-            mCustomView.setVisibility(View.GONE);
             customViewContainer.removeView(mCustomView);
             customViewCallback.onCustomViewHidden();
 
@@ -561,19 +566,21 @@ public class MainActivity extends Activity {
         onConfigurationChanged(getResources().getConfiguration());
     }
 
-    // request storage permission, if granted file upload continues
-    private boolean requestStoragePermission() {
-        String storagePermission = Manifest.permission.WRITE_EXTERNAL_STORAGE;
-        int hasPermission = ContextCompat.checkSelfPermission(this, storagePermission);
-        String[] permissions = new String[] { storagePermission };
-        if (hasPermission != PackageManager.PERMISSION_GRANTED) {
+    // request storage permission
+    private void requestStoragePermission() {
+        String[] permissions = new String[] { Manifest.permission.WRITE_EXTERNAL_STORAGE };
+        if (!hasStoragePermission()) {
             Log.e(TAG, "No storage permission at the moment. Requesting...");
             ActivityCompat.requestPermissions(this, permissions, REQUEST_STORAGE);
-            return false;
-        } else {
+        } else
             Log.e(TAG, "We already have storage permission. Yay!");
-            return true;
-        }
+    }
+
+    // check is storage permission granted
+    private boolean hasStoragePermission() {
+        String storagePermission = Manifest.permission.WRITE_EXTERNAL_STORAGE;
+        int hasPermission = ContextCompat.checkSelfPermission(this, storagePermission);
+        return (hasPermission == PackageManager.PERMISSION_GRANTED);
     }
 
     @Override
@@ -582,7 +589,7 @@ public class MainActivity extends Activity {
             case REQUEST_STORAGE:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Log.e(TAG, "Storage permission granted");
-                    // It's awesome, dude!
+                    storagePermissionGranted = true;
                 } else {
                     Log.e(TAG, "Storage permission denied");
                     Toast.makeText(getApplicationContext(), getString(R.string.no_storage_permission), Toast.LENGTH_SHORT).show();
@@ -934,7 +941,8 @@ public class MainActivity extends Activity {
         switch (item.getItemId()) {
             case ID_CONTEXT_MENU_SAVE_IMAGE:
                 // in order to save anything we need storage permission
-                if (!requestStoragePermission())
+                requestStoragePermission();
+                if (!storagePermissionGranted)
                     return false;
                 saveImageToDisk(mPendingImageUrlToSave);
                 return true;
@@ -949,7 +957,7 @@ public class MainActivity extends Activity {
     }
 
     private void saveImageToDisk(String imageUrl) {
-        File imageStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "FaceSlim");
+        File imageStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), appDirectoryName);
 
         if (!imageStorageDir.exists()) {
             //noinspection ResultOfMethodCallIgnored

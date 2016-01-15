@@ -40,6 +40,7 @@ public class MyWebViewClient extends WebViewClient {
                 || Uri.parse(url).getHost().endsWith("l.facebook.com")
                 || Uri.parse(url).getHost().endsWith("0.facebook.com")
                 || Uri.parse(url).getHost().endsWith("zero.facebook.com")
+                || Uri.parse(url).getHost().endsWith("fbcdn.net")
                 || Uri.parse(url).getHost().endsWith("akamaihd.net")
                 || Uri.parse(url).getHost().endsWith("fb.me")) {
             return false;
