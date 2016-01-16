@@ -569,8 +569,12 @@ public class MainActivity extends Activity {
         if (!hasStoragePermission()) {
             Log.e(TAG, "No storage permission at the moment. Requesting...");
             ActivityCompat.requestPermissions(this, permissions, REQUEST_STORAGE);
-        } else
+        } else {
             Log.e(TAG, "We already have storage permission. Yay!");
+            // new image is about to be saved
+            if (mPendingImageUrlToSave != null)
+                saveImageToDisk(mPendingImageUrlToSave);
+        }
     }
 
     // check is storage permission granted
@@ -920,10 +924,7 @@ public class MainActivity extends Activity {
                 /** In order to save anything we need storage permission.
                  *  onRequestPermissionsResult will save an image.
                  */
-                if (Build.VERSION.SDK_INT >= 23)
-                    requestStoragePermission();
-                else
-                    saveImageToDisk(mPendingImageUrlToSave);
+                requestStoragePermission();
                 break;
         }
         return super.onContextItemSelected(item);
