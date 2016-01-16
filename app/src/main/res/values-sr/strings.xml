@@ -36,7 +36,7 @@
     <string name="notifications">Обавештења</string>
     <string name="no_network">Нисте повезани ;)</string>
     <string name="hardware_acceleration">Хардверско убрзање &#8635;</string>
-    <string name="hardware_acceleration_description">Искључите на уређајима са мало меморије (у случају проблема).</string>
+    <string name="hardware_acceleration_description">Искључите на уређајима са мало меморије. Видео можда неће радити.</string>
     <string name="share_link">Подели везу</string>
     <string name="long_clicks">Дуги тап</string>
     <string name="long_clicks_description">Задржите тап на везу или слику да бисте их делили.</string>
