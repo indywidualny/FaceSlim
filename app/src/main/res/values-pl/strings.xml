@@ -118,5 +118,7 @@
     <string name="file_logger">Zapisuj logi do pliku</string>
     <string name="file_logger_description">Zapisz logi usługi powiadomień w pamięci zewnętrznej. Potrzebne uprawnienie zapisu.</string>
     <string name="file_logger_needs_permission">Brak dostępu do pamięci zewnętrznej. Log nie może zostać zapisany</string>
+    <string name="save_img">Zapisz zdjęcie</string>
+    <string name="downloading_img">Pobieram zdjęcie&#8230;</string>
 
 </resources>

@@ -128,7 +128,7 @@
     <string name="file_logger">Save logs to a file</string>
     <string name="file_logger_description">Save Notification Service logs to an external memory. It needs a storage permission.</string>
     <string name="file_logger_needs_permission">No access to external storage. Log cannot be saved</string>
-
     <string name="save_img">Save image</string>
     <string name="downloading_img">Downloading image&#8230;</string>
+
 </resources>

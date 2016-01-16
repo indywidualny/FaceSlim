@@ -98,16 +98,15 @@ public class MainActivity extends Activity {
     // create link handler (long clicked links)
     private final MyHandler linkHandler = new MyHandler(this);
 
+    // save images
+    private static final int ID_CONTEXT_MENU_SAVE_IMAGE = 2562617;
+    private String mPendingImageUrlToSave = null;
+    private static String appDirectoryName;
+
     // user agents
     private static String USER_AGENT_DEFAULT;
     private static final String USER_AGENT_BASIC = "Mozilla/5.0 (Linux; U; Android 2.3.3; en-gb; " +
             "Nexus S Build/GRI20) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
-
-
-    private String mPendingImageUrlToSave = null;
-    private static final int ID_CONTEXT_MENU_SAVE_IMAGE = 2562617;
-    private static String appDirectoryName;
-
 
     @Override
     @SuppressLint("setJavaScriptEnabled")
@@ -208,14 +207,12 @@ public class MainActivity extends Activity {
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setAllowFileAccess(true);
 
-
-        // todo
+        // show full images
         webView.getSettings().setLoadWithOverviewMode(true);
         webView.getSettings().setUseWideViewPort(true);
         webView.getSettings().setSupportZoom(true);
         webView.getSettings().setBuiltInZoomControls(true);
         webView.getSettings().setDisplayZoomControls(false);
-
 
         // get user agent
         USER_AGENT_DEFAULT = webView.getSettings().getUserAgentString();
@@ -589,6 +586,11 @@ public class MainActivity extends Activity {
             case REQUEST_STORAGE:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Log.e(TAG, "Storage permission granted");
+                    // new image is about to be saved
+                    if (mPendingImageUrlToSave != null) {
+                        saveImageToDisk(mPendingImageUrlToSave);
+                        mPendingImageUrlToSave = null;
+                    }
                 } else {
                     Log.e(TAG, "Storage permission denied");
                     Toast.makeText(getApplicationContext(), getString(R.string.no_storage_permission), Toast.LENGTH_SHORT).show();
@@ -854,7 +856,7 @@ public class MainActivity extends Activity {
         super.onResume();
         webView.onResume();
         webView.resumeTimers();
-        registerForContextMenu(webView); // todo: here?
+        registerForContextMenu(webView);
         trayPreferences.put("activity_visible", true);
     }
 
@@ -862,7 +864,7 @@ public class MainActivity extends Activity {
     protected void onPause() {
         super.onPause();
         if (webView != null) {
-            unregisterForContextMenu(webView);  // todo: here?
+            unregisterForContextMenu(webView);
             webView.onPause();
             webView.pauseTimers();
         }
@@ -886,7 +888,7 @@ public class MainActivity extends Activity {
             webView.destroy();
             webView = null;
         }
-        // just in case, it should be GC anyway
+        // just in case, it should be GCed anyway
         if (mWebChromeClient != null)
             mWebChromeClient = null;
     }
@@ -899,6 +901,59 @@ public class MainActivity extends Activity {
     // deactivate fullscreen for video playback
     private void hideCustomView() {
         mWebChromeClient.onHideCustomView();
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View view, ContextMenu.ContextMenuInfo menuInfo) {
+        WebView.HitTestResult result = webView.getHitTestResult();
+        if (result != null) {
+            int type = result.getType();
+
+            if (type == WebView.HitTestResult.IMAGE_TYPE || type == WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE) {
+                showLongPressedImageMenu(menu, result.getExtra());
+            }
+        }
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case ID_CONTEXT_MENU_SAVE_IMAGE:
+                /** In order to save anything we need storage permission.
+                 *  onRequestPermissionsResult will save an image.
+                 */
+                requestStoragePermission();
+                break;
+        }
+        return super.onContextItemSelected(item);
+    }
+
+
+    private void showLongPressedImageMenu(ContextMenu menu, String imageUrl) {
+        mPendingImageUrlToSave = imageUrl;
+        menu.add(0, ID_CONTEXT_MENU_SAVE_IMAGE, 0, getString(R.string.save_img));
+    }
+
+    private void saveImageToDisk(String imageUrl) {
+        File imageStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), appDirectoryName);
+
+        if (!imageStorageDir.exists()) {
+            //noinspection ResultOfMethodCallIgnored
+            imageStorageDir.mkdirs();
+        }
+
+        String date = DateFormat.getDateTimeInstance().format(new Date());
+        String file = "IMG_" + date.replace(" ", "-") + ".jpg";
+
+        DownloadManager dm = (DownloadManager) this.getSystemService(Context.DOWNLOAD_SERVICE);
+        Uri downloadUri = Uri.parse(imageUrl);
+        DownloadManager.Request request = new DownloadManager.Request(downloadUri);
+
+        request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE)
+                .setDestinationInExternalPublicDir(Environment.DIRECTORY_PICTURES+"/FaceSlim", file);
+        dm.enqueue(request);
+
+        Toast.makeText(this, getString(R.string.downloading_img), Toast.LENGTH_LONG).show();
     }
 
     // first run dialog with introduction
@@ -920,61 +975,5 @@ public class MainActivity extends Activity {
         });
         dialog.show();
     }
-
-
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View view, ContextMenu.ContextMenuInfo menuInfo) {
-        WebView.HitTestResult result = webView.getHitTestResult();
-        if (result != null) {
-            int type = result.getType();
-
-            if (type == WebView.HitTestResult.IMAGE_TYPE || type == WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE) {
-                showLongPressedImageMenu(menu, result.getExtra());
-            }
-        }
-    }
-
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case ID_CONTEXT_MENU_SAVE_IMAGE:
-                // in order to save anything we need storage permission
-                requestStoragePermission();
-                if (!hasStoragePermission())
-                    return false;
-                saveImageToDisk(mPendingImageUrlToSave);
-                break;
-        }
-        return super.onContextItemSelected(item);
-    }
-
-
-    private void showLongPressedImageMenu(ContextMenu menu, String imageUrl) {
-        mPendingImageUrlToSave = imageUrl;
-        menu.add(0, ID_CONTEXT_MENU_SAVE_IMAGE, 0, getString(R.string.save_img));
-    }
-
-    private void saveImageToDisk(String imageUrl) {
-        File imageStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), appDirectoryName);
-
-        if (!imageStorageDir.exists()) {
-            //noinspection ResultOfMethodCallIgnored
-            imageStorageDir.mkdirs();
-        }
-
-        String datum = DateFormat.getDateTimeInstance().format(new Date());
-        String file = "IMG_" + datum.replace(" ", "-") + ".jpg";
-
-        DownloadManager mgr = (DownloadManager) this.getSystemService(Context.DOWNLOAD_SERVICE);
-        Uri downloadUri = Uri.parse(imageUrl);
-        DownloadManager.Request request = new DownloadManager.Request(downloadUri);
-
-        request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE)
-                .setDestinationInExternalPublicDir(Environment.DIRECTORY_PICTURES+"/FaceSlim", file);
-        mgr.enqueue(request);
-
-        Toast.makeText(this, getString(R.string.downloading_img), Toast.LENGTH_LONG).show();
-    }
-
 
 }
