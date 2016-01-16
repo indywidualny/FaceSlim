@@ -7,6 +7,20 @@ Releases | [pl] wydania: https://github.com/indywidualny/FaceSlim/releases
 ## Changelog
 & what makes the application awesome:
 
+**2.2**
+* message notifications (it's awesome!)
+* notifications rebuilt (fully automated, intelligent checker)
+* fullscreen video playback support (immersive mode)
+* basic mobile version of Facebook
+* view / save full size images (with zoom)
+* hide news feed (to avoid sidetracking / procrastination)
+* hide sponsored posts & ads (beta)
+* hide people you may know
+* general & minor improvements
+* crash reports by e-mail
+* save service's logs to file
+* code cleanup & refactoring
+
 **2.1**
 * camera upload for Lollipop is finally fixed
 * black theme is working on every device now (issue #31)
@@ -140,7 +154,7 @@ BTC:&nbsp;  1JUaZytkub2CP5jhRYQDDY6pibqrUUSp2y
 ___
 Copyright notice: Facebook is a trademark of Facebook Inc. This app is NOT connected to Facebook Inc. whatsoever. This app only helps using the official Facebook Mobile website.
 
-Important: It does NOT display chat notifications and has some limitations (eg. no access to your location so you cannot check-in automatically). Install using F-Droid client to get updates.
+Important: The app has some limitations (eg. no access to your location so you cannot check-in automatically). Install using F-Droid client to get updates.
 
 App suspended by Google Play.
 Now open source and available to everyone.
