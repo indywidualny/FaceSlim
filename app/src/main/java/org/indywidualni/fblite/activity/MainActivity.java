@@ -922,7 +922,10 @@ public class MainActivity extends Activity {
                 /** In order to save anything we need storage permission.
                  *  onRequestPermissionsResult will save an image.
                  */
-                requestStoragePermission();
+                if (Build.VERSION.SDK_INT >= 23)
+                    requestStoragePermission();
+                else
+                    saveImageToDisk(mPendingImageUrlToSave);
                 break;
         }
         return super.onContextItemSelected(item);
@@ -950,7 +953,7 @@ public class MainActivity extends Activity {
         DownloadManager.Request request = new DownloadManager.Request(downloadUri);
 
         request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE)
-                .setDestinationInExternalPublicDir(Environment.DIRECTORY_PICTURES+"/FaceSlim", file);
+                .setDestinationInExternalPublicDir(Environment.DIRECTORY_PICTURES + "/" + appDirectoryName, file);
         dm.enqueue(request);
 
         Toast.makeText(this, getString(R.string.downloading_img), Toast.LENGTH_LONG).show();
