@@ -587,10 +587,8 @@ public class MainActivity extends Activity {
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Log.e(TAG, "Storage permission granted");
                     // new image is about to be saved
-                    if (mPendingImageUrlToSave != null) {
+                    if (mPendingImageUrlToSave != null)
                         saveImageToDisk(mPendingImageUrlToSave);
-                        mPendingImageUrlToSave = null;
-                    }
                 } else {
                     Log.e(TAG, "Storage permission denied");
                     Toast.makeText(getApplicationContext(), getString(R.string.no_storage_permission), Toast.LENGTH_SHORT).show();
@@ -957,6 +955,7 @@ public class MainActivity extends Activity {
         dm.enqueue(request);
 
         Toast.makeText(this, getString(R.string.downloading_img), Toast.LENGTH_LONG).show();
+        mPendingImageUrlToSave = null;
     }
 
     // first run dialog with introduction
