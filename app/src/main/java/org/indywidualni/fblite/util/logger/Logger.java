@@ -31,7 +31,7 @@ public final class Logger {
         messageHandler = new MyHandler(this);
         trayPreferences = new TrayAppPreferences(context);
         logFilePath = Environment.getExternalStorageDirectory().getAbsolutePath()
-                + "/" + context.getString(R.string.app_name).replace(" ", "") + ".log";
+                + File.separator + context.getString(R.string.app_name).replace(" ", "") + ".log";
     }
 
     public static Logger getInstance() {
