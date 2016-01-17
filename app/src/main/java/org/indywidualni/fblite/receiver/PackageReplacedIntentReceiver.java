@@ -27,18 +27,18 @@ public class PackageReplacedIntentReceiver extends BroadcastReceiver {
         /** App upgrade, the important part:
          *  Rewrite all the Shared Preferences used in NotificationsService into Tray Preferences
          *  Multi-process Shared Preferences are deprecated since API 23 */
-        trayPreferences.put("feed_url", preferences.getString("feed_url", ""));
         trayPreferences.put("interval_pref", Integer.parseInt(preferences.getString("interval_pref", "1800000")));
         trayPreferences.put("ringtone", preferences.getString("ringtone", "content://settings/system/notification_sound"));
         trayPreferences.put("vibrate", preferences.getBoolean("vibrate", false));
         trayPreferences.put("led_light", preferences.getBoolean("led_light", false));
         trayPreferences.put("notifications_everywhere", preferences.getBoolean("notifications_everywhere", true));
+        trayPreferences.put("notifications_activated", preferences.getBoolean("notifications_activated", false));
 
         // create service start intent
         Intent startIntent = new Intent(context, NotificationsService.class);
 
         // start notifications service when it's activated at Settings
-        if (preferences.getBoolean("notifications_activated", false))
+        if (preferences.getBoolean("notifications_activated", false) || preferences.getBoolean("message_notifications", false))
             context.startService(startIntent);
     }
 

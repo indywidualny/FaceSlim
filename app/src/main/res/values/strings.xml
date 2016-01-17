@@ -9,6 +9,7 @@
     <string name="indywidualni_link" translatable="false"><a href="http://indywidualni.org">indywidualni.org</a></string>
     <string name="get_feed_link" translatable="false">https://goo.gl/t3vJ33</string>
     <string name="facebook" translatable="false">Facebook</string>
+    <string name="special_thanks_notifications_link" translatable="false"><a href="https://github.com/creativetrendsapps">Creative Trends</a></string>
 
     <!-- Strings to translate during creation of a new translation -->
     <string name="app_name">Face Slim</string>
@@ -43,7 +44,7 @@
     <string name="notifications">Notifications</string>
     <string name="no_network">You are offline ;)</string>
     <string name="hardware_acceleration">Hardware Acceleration &#8635;</string>
-    <string name="hardware_acceleration_description">Disable it only on low memory devices (in case of problems).</string>
+    <string name="hardware_acceleration_description">Disable it only on low memory devices. Videos may not work.</string>
     <string name="share_link">Share the link</string>
     <string name="long_clicks">Long clicks</string>
     <string name="long_clicks_description">Long click a link or an image link to share.</string>
@@ -101,6 +102,33 @@
     <string name="setup_notifications">Visit app settings to set up notifications</string>
     <string name="no_images">Disable images &#8635;</string>
     <string name="no_images_description">Don\'t load any images. Reduces data usage drastically.</string>
-    <string name="no_storage_permission">Grant storage permission to use this feature.</string>
+    <string name="no_storage_permission">Grant storage permission to use this feature</string>
+    <string name="basic_mode">Basic mode</string>
+    <string name="basic_mode_description">Use a basic website instead of a standard one. Dark theme has to be disabled. May not work during a fast connection.</string>
+    <string name="preference_category6">News Feed</string>
+    <string name="hide_sponsored">Hide sponsored posts</string>
+    <string name="hide_sponsored_description">We don\'t like sponsored posts and ads.</string>
+    <string name="hide_people">Hide people you may know</string>
+    <string name="hide_people_description">Cleaner feed, more room.</string>
+    <string name="hide_news_feed">Hide News Feed</string>
+    <string name="hide_news_feed_description">[…] to avoid sidetracking / procrastination.</string>
+
+    <string name="message_notifications">Message notifications</string>
+    <string name="you_have_one_message">You have one message.</string>
+    <string name="you_have_n_messages">You have %d messages.</string>
+    <string name="special_thanks_notifications">Special thanks for help with notifications:</string>
+    <string name="sync_problem">Cookies cannot be synced. First run, yeah? Please just restart the app :)</string>
+    <string name="interval_pref_description_new">Notifications will be checked every %s.</string>
+    <string name="facebook_notifications">Facebook notifications</string>
+    <string name="notification_sound_msg">Message sound</string>
+    <string name="crash_toast_text">Face Slim: Something is very wrong. Preparing crash report</string>
+    <string name="crash_dialog_title">Face Slim has crashed</string>
+    <string name="crash_dialog_text">An unexpected error occurred forcing the application to stop. Please help me fix this by sending me error data. All you have to do is to click OK and send an e-mail.</string>
+    <string name="crash_dialog_comment_prompt">You might add your comments about the problem below:</string>
+    <string name="file_logger">Save logs to a file</string>
+    <string name="file_logger_description">Save Notification Service logs to an external memory. It needs a storage permission.</string>
+    <string name="file_logger_needs_permission">No access to external storage. Log cannot be saved</string>
+    <string name="save_img">Save image</string>
+    <string name="downloading_img">Downloading image&#8230;</string>
 
 </resources>

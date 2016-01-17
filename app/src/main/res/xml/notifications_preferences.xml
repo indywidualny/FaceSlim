@@ -6,7 +6,7 @@
 
         <ListPreference
             android:title="@string/interval_pref"
-            android:summary="@string/interval_pref_description"
+            android:summary="@string/interval_pref_description_new"
             android:key="interval_pref"
             android:entries="@array/intervalPrefTitles"
             android:entryValues="@array/intervalPrefValues"
@@ -19,6 +19,15 @@
             android:showSilent="true"
             android:defaultValue="content://settings/system/notification_sound"
             android:title="@string/notification_sound"
+            android:summary="@string/notification_sound_description" />
+
+        <RingtonePreference
+            android:key="ringtone_msg"
+            android:ringtoneType="notification"
+            android:showDefault="true"
+            android:showSilent="true"
+            android:defaultValue="content://settings/system/notification_sound"
+            android:title="@string/notification_sound_msg"
             android:summary="@string/notification_sound_description" />
 
         <CheckBoxPreference

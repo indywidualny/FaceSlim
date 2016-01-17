@@ -10,8 +10,21 @@ import java.util.Locale;
 
 public class Miscellany {
 
+    // "clean" and decode an url, all in one
+    public static String cleanAndDecodeUrl(String url) {
+        return decodeUrl(cleanUrl(url));
+    }
+
+    // "clean" an url and remove Facebook tracking redirection
+    private static String cleanUrl(String url) {
+        return url.replace("http://lm.facebook.com/l.php?u=", "")
+                .replace("https://m.facebook.com/l.php?u=", "")
+                .replace("http://0.facebook.com/l.php?u=", "")
+                .replaceAll("&h=.*", "").replaceAll("\\?acontext=.*", "");
+    }
+
     // url decoder, recreate all the special characters
-    public static String urlDecode(String url) {
+    private static String decodeUrl(String url) {
         return url.replace("%3C", "<").replace("%3E", ">").replace("%23", "#").replace("%25", "%")
                 .replace("%7B", "{").replace("%7D", "}").replace("%7C", "|").replace("%5C", "\\")
                 .replace("%5E", "^").replace("%7E", "~").replace("%5B", "[").replace("%5D", "]")

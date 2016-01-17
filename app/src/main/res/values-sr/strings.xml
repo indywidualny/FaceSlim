@@ -36,14 +36,14 @@
     <string name="notifications">Обавештења</string>
     <string name="no_network">Нисте повезани ;)</string>
     <string name="hardware_acceleration">Хардверско убрзање &#8635;</string>
-    <string name="hardware_acceleration_description">Искључите на уређајима са мало меморије (у случају проблема).</string>
+    <string name="hardware_acceleration_description">Искључите на уређајима са мало меморије. Видео можда неће радити.</string>
     <string name="share_link">Подели везу</string>
     <string name="long_clicks">Дуги тап</string>
     <string name="long_clicks_description">Задржите тап на везу или слику да бисте их делили.</string>
     <string name="me_google_play">Гуглов Плеј</string>
     <string name="preference_category3">Експериментално</string>
     <string name="dark_theme">Тамна тема</string>
-    <string name="dark_theme_description">Тамна позадина Фејсбука. Ваш АМОЛЕД екрану ће да поштеди батерију.</string>
+    <string name="dark_theme_description">Тамна позадина Фејсбука. Вашем АМОЛЕД екрану ово ће да поштеди батерију.</string>
     <string name="fixed_nav">Фиксирана плава трака</string>
     <string name="fixed_nav_description">Фејсбук навигација увек на врху.</string>
     <string name="facebook_zero">Фејсбук Зиро</string>
@@ -71,7 +71,7 @@
     <string name="get_feed_description">Кликните на поље, пронађите ваш јединствени РСС довод обавештења, копирајте адресу и унесите је изнад.</string>
     <string name="notifications_service_created">Обавештења активна</string>
     <string name="notifications_settings">Поставке обавештења</string>
-    <string name="notifications_settings_description">Додатне поставке. Одредите интервал провере, поставите звук, светло и вибрирање.</string>
+    <string name="notifications_settings_description">Додатне поставке. Одређивање интервала провере, поставке звука, светла и вибрирања.</string>
 
     <string-array name="intervalPrefTitles">
         <item>5 минута</item>
@@ -92,8 +92,35 @@
     <string name="notifications_everywhere">Увек обавештевај</string>
     <string name="notifications_everywhere_description">Обавештавање и на главном екрану апликације.</string>
     <string name="setup_notifications">Посетите поставке да бисте активирали обавештења</string>
-    <string name="no_images">Онемогући слике &#8635;</string>
+    <string name="no_images">Искључи слике &#8635;</string>
     <string name="no_images_description">Без учитавања слика. Драстично смањује проток података.</string>
     <string name="no_storage_permission">Одобрите дозволе за складиште да бисте користили ову функцију.</string>
+    <string name="basic_mode">Основни режим</string>
+    <string name="basic_mode_description">Коришћење основног вебсајта уместо стандардног. Тамна тема мора бити искључена. Можда неће радити при брзој вези.</string>
+    <string name="preference_category6">Довод новости</string>
+    <string name="hide_sponsored">Сакриј спонзорисане објаве</string>
+    <string name="hide_sponsored_description">Скривање спонзорисаних објава и реклама.</string>
+    <string name="hide_people">Сакриј људе које можда познајем</string>
+    <string name="hide_people_description">Чистији довод, више простора.</string>
+    <string name="hide_news_feed">Сакриј новости</string>
+    <string name="hide_news_feed_description">Избегните скретање пажње/одлагање обавеза.</string>
+
+    <string name="message_notifications">Обавештења о порукама</string>
+    <string name="you_have_one_message">Имате једну поруку.</string>
+    <string name="you_have_n_messages">Имате %d порука.</string>
+    <string name="special_thanks_notifications">Посебна захвалница за помоћ са обавештењима:</string>
+    <string name="sync_problem">Не могу да синхронизујем колачиће. Прво покретање, је л\' да? Само покрените поново апликацију. :)</string>
+    <string name="interval_pref_description_new">Освежавање обавештења сваких %s.</string>
+    <string name="facebook_notifications">Обавештења са Фејсбука</string>
+    <string name="notification_sound_msg">Звук за поруку</string>
+    <string name="crash_toast_text">Фејс слим: нешто је пошло наопако. Припремам извештај о краху</string>
+    <string name="crash_dialog_title">Фејс слим се срушио</string>
+    <string name="crash_dialog_text">Десила се неочекивана грешка приморавши апликацију да се заустави. Помозите ми да ово поправим тако што ћете да ми пошаљете податке о грешки, само тапните на У реду и пошаљите е-пошту.</string>
+    <string name="crash_dialog_comment_prompt">Ваш коментар о проблему можете да додате испод:</string>
+    <string name="file_logger">Сачувај запис у фајл</string>
+    <string name="file_logger_description">Упис записа сервиса обавештавања у спољашње складиште. Захтева дозволе за складиште.</string>
+    <string name="file_logger_needs_permission">Немам приступ спољашњем складишту. Не могу да сачувам записе</string>
+    <string name="save_img">Сачувај слику</string>
+    <string name="downloading_img">Преузимам слику&#8230;</string>
 
 </resources>
