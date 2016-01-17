@@ -91,12 +91,36 @@
     <string name="notifications_extra">Další</string>
     <string name="notifications_everywhere">Upozorňovat vždy</string>
     <string name="notifications_everywhere_description">I pokud je otevřeno hlavní okno aplikace.</string>
-
     <string name="setup_notifications">Nastavte upozornění v Nastavení aplikace</string>
-
     <string name="no_images">Nezobrazovat obrázky &#8635;</string>
     <string name="no_images_description">Nestahovat žádné obrázky. Velmi sníží množství stahovaných dat.</string>
-    
     <string name="no_storage_permission">K využití této vlastnosti povolte aplikaci práva přístupu k úložišti (storage permissions).</string>
+    <string name="basic_mode">Základní režim</string>
+    <string name="basic_mode_description">Používat základní režim místo standardního. Tmavé téma bude zakázáno. Nemusí fungovat při rychlém spojení.</string>
+    <string name="preference_category6">Kanál novinek</string>
+    <string name="hide_sponsored">Skrýt sponzorované příspěvky</string>
+    <string name="hide_sponsored_description">Nemáme rádi sponzorované příspěvky a reklamy.</string>
+    <string name="hide_people">Skrýt seznam lidí, které možná znáte</string>
+    <string name="hide_people_description">Čistější seznam, více místa.</string>
+    <string name="hide_news_feed">Skrýt kanál novinek</string>
+    <string name="hide_news_feed_description">[…] aby nedošlo k odlákání pozornosti / prokrastinaci.</string>
+
+    <string name="message_notifications">Upozornění na zprávy</string>
+    <string name="you_have_one_message">Máte jednu zprávu.</string>
+    <string name="you_have_n_messages">Máte %d zpráv.</string>
+    <string name="special_thanks_notifications">Zvláštní poděkování za pomoc z upozorněními:</string>
+    <string name="sync_problem">Cookies nemohou být synchronizovány Spuštěno poprvé? Restartujte prosím aplikaci :)</string>
+    <string name="interval_pref_description_new">Upozornění budou kontrolovány každých %s.</string>
+    <string name="facebook_notifications">Facebook upozornění</string>
+    <string name="notification_sound_msg">Zvuk zprávy</string>
+    <string name="crash_toast_text">Face Slim: Stalo se něco neočekávaného. Připravuji chybovou zprávu</string>
+    <string name="crash_dialog_title">Face Slim spadl</string>
+    <string name="crash_dialog_text"Neočekávaná chyba zastavila aplikaci. Pomožte mi zasláním chyby. Klepněte na OK a pošlete mi email.</string>
+    <string name="crash_dialog_comment_prompt">Níže můžete přidat svůj komentář k problému:</string>
+    <string name="file_logger">Uložit hlášení do souboru</string>
+    <string name="file_logger_description">Uložit hlážení upozorňovací služby do externí paměti. Je vyžadováno právo přístupu k úložišti.</string>
+    <string name="file_logger_needs_permission">Není přístup k externímu úložišti. Hlášení nemůže být uloženo</string>
+    <string name="save_img">Uložit obrázek</string>
+    <string name="downloading_img">Stahování obrázku&#8230;</string>
 
 </resources>
