@@ -52,6 +52,7 @@ import org.indywidualni.fblite.service.NotificationsService;
 import org.indywidualni.fblite.util.AndroidBug5497Workaround;
 import org.indywidualni.fblite.util.Connectivity;
 import org.indywidualni.fblite.util.Dimension;
+import org.indywidualni.fblite.util.DownloadManagerResolver;
 import org.indywidualni.fblite.util.Miscellany;
 import org.indywidualni.fblite.webview.MyWebViewClient;
 
@@ -937,6 +938,11 @@ public class MainActivity extends Activity {
     }
 
     private void saveImageToDisk(String imageUrl) {
+	// TODO: everything in try block
+	// catch IllegalArgumentException (download mgr probably disabled, check it - if not display a toast)
+	// catch IllegalStateException (something with file access, display a permissions toast)
+	// catch Exception (something is wrong in general, display another message)
+	// finally: mPendingImageUrlToSave = null;
         File imageStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), appDirectoryName);
 
         if (!imageStorageDir.exists()) {
@@ -952,7 +958,7 @@ public class MainActivity extends Activity {
         DownloadManager.Request request = new DownloadManager.Request(downloadUri);
 
         request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE)
-                .setDestinationInExternalPublicDir(Environment.DIRECTORY_PICTURES + "/" + appDirectoryName, file);
+                .setDestinationInExternalPublicDir(Environment.DIRECTORY_PICTURES + File.separator + appDirectoryName, file);
         dm.enqueue(request);
 
         Toast.makeText(this, getString(R.string.downloading_img), Toast.LENGTH_LONG).show();
