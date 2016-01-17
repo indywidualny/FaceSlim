@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingTranslation">
+
+    <!-- Strings to translate during creation of a new translation -->
+    <string name="app_name">Face Slim</string>
+    <string name="image_chooser">圖片選擇器</string>
+    <string name="loading_link">正在開啟連結...</string>
+    <string name="applying_changes">正在套用變更...</string>
+
+    <string-array name="item_array">
+        <item>動態消息</item>
+        <item>訊息</item>
+        <item>聊天室</item>
+        <item>社團</item>
+        <item>活動</item>
+        <item>程式設定</item>
+        <item>關於開發人員</item>
+        <item>關閉程式</item>
+        <item>回到頁首\u0020 &#8593;</item>
+    </string-array>
+
+    <string name="author">by Krzysztof \'Koras\' Grabowski</string>
+    <string name="title_activity_settings">設定</string>
+    <string name="title_activity_about">關於開發人員</string>
+    <string name="preference_category1">介面</string>
+    <string name="preference_category2">進階設定</string>
+    <string name="progress_bar">進度條</string>
+    <string name="transparent_nav">透明虛擬鍵 &#8635;</string>
+    <string name="transparent_nav_description">適用於Android 4.4以上. 將虛擬鍵的背景改為透明.</string>
+    <string name="clear_cache">清除快取</string>
+    <string name="clear_cache_description">清除程式的快取資料. 同時將您登出FB.</string>
+    <string name="email_author">連絡我</string>
+    <string name="choose_email_client">選擇 e-mail 程式</string>
+    <string name="notifications">通知</string>
+    <string name="no_network">離線中 ;)</string>
+    <string name="hardware_acceleration">硬體加速 &#8635;</string>
+    <string name="hardware_acceleration_description">只需要在低RAM裝置關閉. 可能導致影片無法播放.</string>
+    <string name="share_link">分享連結</string>
+    <string name="long_clicks">長按</string>
+    <string name="long_clicks_description">在連結或圖片上長按以分享.</string>
+    <string name="me_google_play">Google Play</string>
+    <string name="preference_category3">實驗性功能</string>
+    <string name="dark_theme">黑化主題</string>
+    <string name="dark_theme_description">把Facebook黑化. 您的AMOLED螢幕會感謝您.</string>
+    <string name="fixed_nav">導航選單置頂</string>
+    <string name="fixed_nav_description">將Facebook的選單維持在螢幕上方.</string>
+    <string name="facebook_zero">Facebook Zero</string>
+    <string name="facebook_zero_description">免費資料傳輸. 需要電信業者支援. 在使用行動網路時有效.</string>
+    <string name="facebook_zero_active">Facebook Zero 已啟用</string>
+    <string name="preference_category4">更多</string>
+    <string name="quick_guide">快速導覽</string>
+    <string name="messages">訊息</string>
+    <string name="donate_paypal">PayPal\u0020 –\u0020 贊助</string>
+    <string name="paypal_url" formatted="false">https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=koras%2eevil%40gmail%2ecom&amp;lc=GB&amp;item_name=Krzysztof%20Grabowski&amp;currency_code=USD&amp;bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted</string>
+
+    <string-array name="drawerPosTitles">
+        <item>左邊</item>
+        <item>右邊</item>
+    </string-array>
+
+    <string name="drawer_pos">側邊選單位置 &#8635;</string>
+    <string name="drawer_pos_description">選單會在螢幕的%s.</string>
+    <string name="preference_category5">通知</string>
+    <string name="notifications_feed_url">通知RSS連結</string>
+    <string name="interval_pref">檢查通知之時間間隔</string>
+    <string name="interval_pref_description">程式將每隔%s 檢查一次通知.</string>
+    <string name="activate_notifications">啟用通知</string>
+    <string name="get_feed">取得通知RSS連結</string>
+    <string name="get_feed_description">點此以取得專屬於您FB帳號的RSS連結, 請複製後貼到上方.</string>
+    <string name="notifications_service_created">通知已啟用</string>
+    <string name="notifications_settings">通知設定</string>
+    <string name="notifications_settings_description">選擇檢查通知的時間間隔, 設定通知鈴聲, LED和震動.</string>
+
+    <string-array name="intervalPrefTitles">
+        <item>5分鐘</item>
+        <item>15分鐘</item>
+        <item>30分鐘</item>
+        <item>1小時</item>
+        <item>3小時</item>
+        <item>6小時</item>
+    </string-array>
+
+    <string name="all_notifications">所有通知</string>
+    <string name="notification_sound">通知音效</string>
+    <string name="notification_sound_description">選擇鈴聲或是將鈴聲靜音: \u0020</string>
+    <string name="silent">靜音</string>
+    <string name="vibrate">震動</string>
+    <string name="led_light">LED</string>
+    <string name="notifications_extra">更多</string>
+    <string name="notifications_everywhere">總是啟用通知</string>
+    <string name="notifications_everywhere_description">在使用本程式時也接收通知.</string>
+    <string name="setup_notifications">請於程式設定內設定通知功能</string>
+    <string name="no_images">停用圖片顯示 &#8635;</string>
+    <string name="no_images_description">不載入任何圖片. 可有效節省流量.</string>
+    <string name="no_storage_permission">允許儲存權限以使用本功能</string>
+    <string name="basic_mode">基本模式</string>
+    <string name="basic_mode_description">使用基本版的Facebook. 須先關閉黑化主題. 可能不適用於快速連線.</string>
+    <string name="preference_category6">動態消息</string>
+    <string name="hide_sponsored">隱藏贊助貼文</string>
+    <string name="hide_sponsored_description">我們和您一樣討厭贊助貼文和廣告. :p</string>
+    <string name="hide_people">隱藏"你可能認識的朋友"</string>
+    <string name="hide_people_description">還您更乾淨的動態.更多的空間.</string>
+    <string name="hide_news_feed">隱藏動態訊息</string>
+    <string name="hide_news_feed_description">[…] 避免側錄以及節省您的寶貴時間.</string>
+
+    <string name="message_notifications">訊息通知</string>
+    <string name="you_have_one_message">您有一則新訊息.</string>
+    <string name="you_have_n_messages">您有 %d 則新訊息.</string>
+    <string name="special_thanks_notifications">特別感謝加入通知功能:</string>
+    <string name="sync_problem">Cookies無法同步. 請重新啟動程式 :)</string>
+    <string name="interval_pref_description_new">通知將每隔 %s 檢查一次.</string>
+    <string name="facebook_notifications">Facebook通知</string>
+    <string name="notification_sound_msg">訊息提示音</string>
+    <string name="crash_toast_text">Face Slim: 程式出錯. 正在準備錯誤報告...</string>
+    <string name="crash_dialog_title">Face Slim 出錯了 :(</string>
+    <string name="crash_dialog_text">一個無法預期的錯誤導致程式必須關閉. 請傳送錯誤報告以協助我修復這個問題. 請按下確認並寄出回報e-mail給我, 謝謝.</string>
+    <string name="crash_dialog_comment_prompt">請描述問題發生時的狀態等資料(選填):</string>
+    <string name="file_logger">儲存紀錄至檔案</string>
+    <string name="file_logger_description">儲存通知服務紀錄檔至外部空間, 需要儲存權限.</string>
+    <string name="file_logger_needs_permission">無法存取外部空間. 無法儲存紀錄檔</string>
+    <string name="save_img">儲存圖片</string>
+    <string name="downloading_img">正在下載圖片&#8230;</string>
+
+</resources>
