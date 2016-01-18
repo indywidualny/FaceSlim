@@ -15,6 +15,7 @@ import net.grandcentrix.tray.TrayAppPreferences;
 import org.indywidualni.fblite.MyApplication;
 import org.indywidualni.fblite.R;
 
+import java.io.File;
 import java.lang.ref.WeakReference;
 
 /** Singleton pattern */

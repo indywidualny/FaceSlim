@@ -433,7 +433,7 @@ public class MainActivity extends Activity {
 
                 startActivityForResult(chooserIntent, FILECHOOSER_RESULTCODE);
             } catch (Exception e) {
-                Toast.makeText(getBaseContext(), "Camera Exception:" + e, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.camera_exception), Toast.LENGTH_LONG).show();
             }
 
         }
@@ -938,31 +938,37 @@ public class MainActivity extends Activity {
     }
 
     private void saveImageToDisk(String imageUrl) {
-	// TODO: everything in try block
-	// catch IllegalArgumentException (download mgr probably disabled, check it - if not display a toast)
-	// catch IllegalStateException (something with file access, display a permissions toast)
-	// catch Exception (something is wrong in general, display another message)
-	// finally: mPendingImageUrlToSave = null;
-        File imageStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), appDirectoryName);
+        if (!DownloadManagerResolver.resolve(this))
+            return;
 
-        if (!imageStorageDir.exists()) {
-            //noinspection ResultOfMethodCallIgnored
-            imageStorageDir.mkdirs();
+        try {
+            File imageStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), appDirectoryName);
+
+            if (!imageStorageDir.exists()) {
+                //noinspection ResultOfMethodCallIgnored
+                imageStorageDir.mkdirs();
+            }
+
+            String date = DateFormat.getDateTimeInstance().format(new Date());
+            String file = "IMG_" + date.replace(" ", "-") + ".jpg";
+
+            DownloadManager dm = (DownloadManager) this.getSystemService(Context.DOWNLOAD_SERVICE);
+            Uri downloadUri = Uri.parse(imageUrl);
+            DownloadManager.Request request = new DownloadManager.Request(downloadUri);
+
+            request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE)
+                    .setDestinationInExternalPublicDir(Environment.DIRECTORY_PICTURES + File.separator + appDirectoryName, file);
+            dm.enqueue(request);
+
+            Toast.makeText(this, getString(R.string.downloading_img), Toast.LENGTH_LONG).show();
+        } catch (IllegalStateException ex) {
+            Toast.makeText(this, getString(R.string.cannot_access_storage), Toast.LENGTH_LONG).show();
+        } catch (Exception ex) {
+            // just in case, it should never be called anyway
+            Toast.makeText(this, getString(R.string.file_cannot_be_saved), Toast.LENGTH_LONG).show();
+        } finally {
+            mPendingImageUrlToSave = null;
         }
-
-        String date = DateFormat.getDateTimeInstance().format(new Date());
-        String file = "IMG_" + date.replace(" ", "-") + ".jpg";
-
-        DownloadManager dm = (DownloadManager) this.getSystemService(Context.DOWNLOAD_SERVICE);
-        Uri downloadUri = Uri.parse(imageUrl);
-        DownloadManager.Request request = new DownloadManager.Request(downloadUri);
-
-        request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE)
-                .setDestinationInExternalPublicDir(Environment.DIRECTORY_PICTURES + File.separator + appDirectoryName, file);
-        dm.enqueue(request);
-
-        Toast.makeText(this, getString(R.string.downloading_img), Toast.LENGTH_LONG).show();
-        mPendingImageUrlToSave = null;
     }
 
     // first run dialog with introduction

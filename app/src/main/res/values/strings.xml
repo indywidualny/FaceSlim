@@ -131,5 +131,8 @@
     <string name="save_img">Save image</string>
     <string name="downloading_img">Downloading image&#8230;</string>
     <string name="download_manager_disabled">DownloadManager is disabled. Please enable it.</string>
+    <string name="cannot_access_storage">No access to external storage</string>
+    <string name="file_cannot_be_saved">File cannot be saved</string>
+    <string name="camera_exception">Camera Exception</string>
 
 </resources>

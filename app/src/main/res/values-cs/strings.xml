@@ -115,7 +115,7 @@
     <string name="notification_sound_msg">Zvuk zprávy</string>
     <string name="crash_toast_text">Face Slim: Stalo se něco neočekávaného. Připravuji chybovou zprávu</string>
     <string name="crash_dialog_title">Face Slim spadl</string>
-    <string name="crash_dialog_text"Neočekávaná chyba zastavila aplikaci. Pomožte mi zasláním chyby. Klepněte na OK a pošlete mi email.</string>
+    <string name="crash_dialog_text">Neočekávaná chyba zastavila aplikaci. Pomožte mi zasláním chyby. Klepněte na OK a pošlete mi email.</string>
     <string name="crash_dialog_comment_prompt">Níže můžete přidat svůj komentář k problému:</string>
     <string name="file_logger">Uložit hlášení do souboru</string>
     <string name="file_logger_description">Uložit hlážení upozorňovací služby do externí paměti. Je vyžadováno právo přístupu k úložišti.</string>

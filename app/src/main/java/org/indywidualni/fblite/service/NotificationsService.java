@@ -35,6 +35,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.concurrent.RejectedExecutionException;
 
 import nl.matshofman.saxrssreader.RssFeed;
 import nl.matshofman.saxrssreader.RssItem;
@@ -192,6 +193,9 @@ public class NotificationsService extends Service {
 
             } catch (IllegalStateException ise) {
                 Log.i(TAG, "An extremely rare IllegalStateException caught");
+                restartItself();
+            } catch (RejectedExecutionException ree) {
+                Log.i(TAG, "RejectedExecutionException caught");
                 restartItself();
             }
         }
