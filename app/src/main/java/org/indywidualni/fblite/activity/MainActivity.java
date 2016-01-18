@@ -938,8 +938,10 @@ public class MainActivity extends Activity {
     }
 
     private void saveImageToDisk(String imageUrl) {
-        if (!DownloadManagerResolver.resolve(this))
+        if (!DownloadManagerResolver.resolve(this)) {
+            mPendingImageUrlToSave = null;
             return;
+        }
 
         try {
             File imageStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), appDirectoryName);
