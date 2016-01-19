@@ -288,7 +288,7 @@ public class NotificationsService extends Service {
                 // save this check status
                 trayPreferences.put("ntf_last_status", true);
                 Log.i("RssReaderTask", "onPostExecute: Aight biatch ;)");
-            } catch (NullPointerException ex) {
+            } catch (NullPointerException | IndexOutOfBoundsException ex) {
                 // save this check status
                 trayPreferences.put("ntf_last_status", false);
                 Log.i("RssReaderTask", "onPostExecute: Failure");

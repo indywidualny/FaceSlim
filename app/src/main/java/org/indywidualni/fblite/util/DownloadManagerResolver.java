@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatTextView;
 
@@ -26,6 +27,8 @@ public final class DownloadManagerResolver {
         if (!enable) {
             AlertDialog alertDialog = createDialog(context);
             alertDialog.show();
+            alertDialog.getButton(DialogInterface.BUTTON_POSITIVE)
+                    .setTextColor(ContextCompat.getColor(context, R.color.colorAccent));
         }
         return enable;
     }
@@ -33,7 +36,7 @@ public final class DownloadManagerResolver {
     /**
      * Resolve whether the DownloadManager is enable in current devices.
      *
-     * @param context
+     * @param context Context of application
      * @return true if DownloadManager is enable, false otherwise.
      */
     private static boolean resolveEnable(Context context) {
@@ -79,8 +82,10 @@ public final class DownloadManagerResolver {
             e.printStackTrace();
 
             // open the generic Apps page
-            Intent intent = new Intent(android.provider.Settings.ACTION_MANAGE_APPLICATIONS_SETTINGS);
-            context.startActivity(intent);
+            try {
+                Intent intent = new Intent(android.provider.Settings.ACTION_MANAGE_APPLICATIONS_SETTINGS);
+                context.startActivity(intent);
+            } catch (ActivityNotFoundException ignored) {}
         }
     }
 
