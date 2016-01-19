@@ -121,9 +121,9 @@
     <string name="save_img">Zapisz zdjęcie</string>
     <string name="downloading_img">Pobieram zdjęcie&#8230;</string>
 
-    <string name="download_manager_disabled">DownloadManager is disabled. Please enable it.</string>
-    <string name="cannot_access_storage">No access to external storage</string>
-    <string name="file_cannot_be_saved">A file cannot be saved</string>
-    <string name="camera_exception">Problems with a camera</string>
+    <string name="download_manager_disabled">DownloadManager jest wyłączony. Włącz go proszę.</string>
+    <string name="cannot_access_storage">Brak dostępu do pamięci zewnętrznej</string>
+    <string name="file_cannot_be_saved">Plik nie może zostać zapisany</string>
+    <string name="camera_exception">Nie mogę użyć aparatu</string>
 
 </resources>
