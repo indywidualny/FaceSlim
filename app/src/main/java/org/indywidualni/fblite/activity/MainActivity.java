@@ -959,7 +959,9 @@ public class MainActivity extends Activity {
             DownloadManager.Request request = new DownloadManager.Request(downloadUri);
 
             request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE)
-                    .setDestinationInExternalPublicDir(Environment.DIRECTORY_PICTURES + File.separator + appDirectoryName, file);
+                    .setDestinationInExternalPublicDir(Environment.DIRECTORY_PICTURES + File.separator + appDirectoryName, file)
+                    .setTitle(file).setDescription(getString(R.string.save_img))
+                    .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
             dm.enqueue(request);
 
             Toast.makeText(this, getString(R.string.downloading_img), Toast.LENGTH_LONG).show();
