@@ -32,6 +32,7 @@ import org.jsoup.select.Elements;
 import org.xml.sax.SAXException;
 
 import java.io.IOException;
+import java.lang.IndexOutOfBoundsException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
