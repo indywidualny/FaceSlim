@@ -123,4 +123,9 @@
     <string name="save_img">Сачувај слику</string>
     <string name="downloading_img">Преузимам слику&#8230;</string>
 
+    <string name="download_manager_disabled">Менаџер преузимања је онемогућен, омогућите га.</string>
+    <string name="cannot_access_storage">Немам приступ спољашњем складишту</string>
+    <string name="file_cannot_be_saved">Не могу да сачувам фајл</string>
+    <string name="camera_exception">Проблем са камером</string>
+
 </resources>
