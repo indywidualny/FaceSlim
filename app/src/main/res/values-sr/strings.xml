@@ -49,6 +49,8 @@
     <string name="facebook_zero">Фејсбук Зиро</string>
     <string name="facebook_zero_description">Без надокнаде за пренесене податке. Зависи од вашег оператера. Ради при вези мобилних података.</string>
     <string name="facebook_zero_active">Фејсбук Зиро је активан</string>
+    <string name="load_extra">Учитавај спољашње слике</string>
+    <string name="load_extra_description">Учитавање слика са других сајтова унутар апликације. Тренутно подржано само пар сајтова.</string>
     <string name="preference_category4">Додатно</string>
     <string name="quick_guide">Водич за брзи почетак</string>
     <string name="messages">Поруке</string>

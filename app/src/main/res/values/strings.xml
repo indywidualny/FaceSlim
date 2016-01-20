@@ -57,6 +57,8 @@
     <string name="facebook_zero">Facebook Zero</string>
     <string name="facebook_zero_description">No data charges. GSM provider dependent. Works during mobile network connection.</string>
     <string name="facebook_zero_active">Facebook Zero is active</string>
+    <string name="load_extra">Load external pictures</string>
+    <string name="load_extra_description">Open external pictures in-app. Currently only few sites are supported.</string>
     <string name="preference_category4">Additional</string>
     <string name="quick_guide">Quick Start Guide</string>
     <string name="messages">Messages</string>

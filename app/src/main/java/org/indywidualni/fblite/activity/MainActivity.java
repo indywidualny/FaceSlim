@@ -103,6 +103,7 @@ public class MainActivity extends Activity {
     private static final int ID_CONTEXT_MENU_SAVE_IMAGE = 2562617;
     private String mPendingImageUrlToSave = null;
     private static String appDirectoryName;
+    private String imgExt = null;
 
     // user agents
     private static String USER_AGENT_DEFAULT;
@@ -951,8 +952,25 @@ public class MainActivity extends Activity {
                 imageStorageDir.mkdirs();
             }
 
+            if (imageUrl.contains(".jpg") || imageUrl.contains(".jpeg")) {
+                Log.w(TAG, "Image is jpg or jpeg");
+                imgExt = ".jpg";
+            }
+            else if (imageUrl.contains(".gif")) {
+                Log.w(TAG, "Image is gif");
+                imgExt = ".gif";
+            }
+            else if (imageUrl.contains(".png")) {
+                Log.w(TAG, "Image is png");
+                imgExt = ".png";
+            }
+            else {
+                Log.w(TAG, "Image is other, defaulting to jpg");
+                imgExt = ".jpg";
+            }
+
             String date = DateFormat.getDateTimeInstance().format(new Date());
-            String file = "IMG_" + date.replace(" ", "-") + ".jpg";
+            String file = "IMG_" + date.replace(" ", "-") + imgExt;
 
             DownloadManager dm = (DownloadManager) this.getSystemService(Context.DOWNLOAD_SERVICE);
             Uri downloadUri = Uri.parse(imageUrl);

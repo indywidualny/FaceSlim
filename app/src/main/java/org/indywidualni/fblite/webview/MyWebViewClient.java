@@ -45,6 +45,13 @@ public class MyWebViewClient extends WebViewClient {
                 || Uri.parse(url).getHost().endsWith("fb.me")) {
             return false;
         }
+        else if (preferences.getBoolean("load_extra", true)
+                && (Uri.parse(url).getHost().endsWith("googleusercontent.com")
+                || Uri.parse(url).getHost().endsWith("tumblr.com")
+                || Uri.parse(url).getHost().endsWith("pinimg.com")
+                || Uri.parse(url).getHost().endsWith("media.giphy.com"))) {
+            return false;
+        }
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         view.getContext().startActivity(intent);
         return true;
