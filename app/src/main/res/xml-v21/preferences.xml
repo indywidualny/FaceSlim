@@ -112,6 +112,12 @@
             android:summary="@string/hide_news_feed_description"
             android:defaultValue="false"/>
         
+        <CheckBoxPreference
+            android:key="load_extra"
+            android:title="@string/load_extra"
+            android:summary="@string/load_extra_description"
+            android:defaultValue="false"/>
+        
     </PreferenceCategory>
 
 
