@@ -44,8 +44,7 @@ public class MyWebViewClient extends WebViewClient {
                 || Uri.parse(url).getHost().endsWith("akamaihd.net")
                 || Uri.parse(url).getHost().endsWith("fb.me")) {
             return false;
-        }
-        else if (preferences.getBoolean("load_extra", true)
+        } else if (preferences.getBoolean("load_extra", false)
                 && (Uri.parse(url).getHost().endsWith("googleusercontent.com")
                 || Uri.parse(url).getHost().endsWith("tumblr.com")
                 || Uri.parse(url).getHost().endsWith("pinimg.com")

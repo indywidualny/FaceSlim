@@ -197,6 +197,9 @@ public class NotificationsService extends Service {
             } catch (RejectedExecutionException ree) {
                 Log.i(TAG, "RejectedExecutionException caught");
                 restartItself();
+            } catch (RuntimeException re) {
+                Log.i(TAG, "RuntimeException caught");
+                restartItself();
             }
         }
 

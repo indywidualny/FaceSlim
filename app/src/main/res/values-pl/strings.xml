@@ -125,5 +125,7 @@
     <string name="cannot_access_storage">Brak dostępu do pamięci zewnętrznej</string>
     <string name="file_cannot_be_saved">Plik nie może zostać zapisany</string>
     <string name="camera_exception">Nie mogę użyć aparatu</string>
+    <string name="load_extra">Ładuj zewnętrzne obrazy</string>
+    <string name="load_extra_description">Otwieraj zdjęcia z zewnętrznych serwisów. Obecnie niewiele stron jest wspieranych.</string>
 
 </resources>

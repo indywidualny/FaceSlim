@@ -84,7 +84,7 @@ public class MainActivity extends Activity {
     // variables for camera and choosing files methods
     private static final int FILECHOOSER_RESULTCODE = 1;
     private ValueCallback<Uri> mUploadMessage;
-    private Uri mCapturedImageURI = null;
+    private Uri mCapturedImageURI;
 
     // the same for Android 5.0 methods only
     private ValueCallback<Uri[]> mFilePathCallback;
@@ -101,9 +101,8 @@ public class MainActivity extends Activity {
 
     // save images
     private static final int ID_CONTEXT_MENU_SAVE_IMAGE = 2562617;
-    private String mPendingImageUrlToSave = null;
+    private String mPendingImageUrlToSave;
     private static String appDirectoryName;
-    private String imgExt = null;
 
     // user agents
     private static String USER_AGENT_DEFAULT;
@@ -952,25 +951,16 @@ public class MainActivity extends Activity {
                 imageStorageDir.mkdirs();
             }
 
-            if (imageUrl.contains(".jpg") || imageUrl.contains(".jpeg")) {
-                Log.w(TAG, "Image is jpg or jpeg");
-                imgExt = ".jpg";
-            }
-            else if (imageUrl.contains(".gif")) {
-                Log.w(TAG, "Image is gif");
-                imgExt = ".gif";
-            }
-            else if (imageUrl.contains(".png")) {
-                Log.w(TAG, "Image is png");
-                imgExt = ".png";
-            }
-            else {
-                Log.w(TAG, "Image is other, defaulting to jpg");
-                imgExt = ".jpg";
-            }
+            // default image extension
+            String imgExtension = ".jpg";
+
+            if (imageUrl.contains(".gif"))
+                imgExtension = ".gif";
+            else if (imageUrl.contains(".png"))
+                imgExtension = ".png";
 
             String date = DateFormat.getDateTimeInstance().format(new Date());
-            String file = "IMG_" + date.replace(" ", "-") + imgExt;
+            String file = "IMG_" + date.replace(" ", "-") + imgExtension;
 
             DownloadManager dm = (DownloadManager) this.getSystemService(Context.DOWNLOAD_SERVICE);
             Uri downloadUri = Uri.parse(imageUrl);
