@@ -123,4 +123,8 @@
     <string name="save_img">Uložit obrázek</string>
     <string name="downloading_img">Stahování obrázku&#8230;</string>
 
+    <string name="download_manager_disabled">Správce stahování je zakázán. Prosím, povolte jej.</string>
+    <string name="cannot_access_storage">Není přístup do externího úložiště</string>
+    <string name="file_cannot_be_saved">Soubor nemůže být uložen</string>
+    <string name="camera_exception">Problém s kamerou</string>
 </resources>
