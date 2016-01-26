@@ -7,7 +7,7 @@
     <string name="applying_changes">Stosuję zmiany</string>
 
     <string-array name="item_array">
-        <item>Najnowsze</item>
+        <item>Aktualności</item>
         <item>Wiadomości</item>
         <item>Czat (osoby on-line)</item>
         <item>Grupy</item>
@@ -23,7 +23,7 @@
     <string name="title_activity_settings">Ustawienia aplikacji</string>
     <string name="title_activity_about">Informacje &amp; autor</string>
     <string name="clear_cache">Wyczyść cache</string>
-    <string name="clear_cache_description">Wyczyść pamięć podręczną aplikacji. Zostaniesz też wylogowany/wylogowana ;)</string>
+    <string name="clear_cache_description">Wyczyść pamięć podręczną aplikacji. Zostaniesz też wylogowany / wylogowana ;)</string>
     <string name="email_author">Napisz do mnie</string>
     <string name="preference_category1">Interfejs</string>
     <string name="preference_category2">Zaawansowane</string>
@@ -34,7 +34,7 @@
     <string name="notifications">Powiadomienia</string>
     <string name="no_network">Jesteś offline ;)</string>
     <string name="hardware_acceleration">Przyspieszenie sprzętowe &#8635;</string>
-    <string name="hardware_acceleration_description">Deaktywuj jedynie na urządzeniach z małą ilością pamięci (w razie problemów).</string>
+    <string name="hardware_acceleration_description">Deaktywuj jedynie na urządzeniach z małą ilością pamięci. Filmy mogą nie działać.</string>
     <string name="share_link">Udostępnij link</string>
     <string name="long_clicks">Długie kliknięcia</string>
     <string name="long_clicks_description">Przytrzymaj link lub foto link by udostępnić.</string>
@@ -89,11 +89,43 @@
     <string name="notifications_extra">Dodatkowe</string>
     <string name="notifications_everywhere">Zawsze powiadamiaj</string>
     <string name="notifications_everywhere_description">Także podczas korzystania z głównego ekranu tej aplikacji.</string>
-
     <string name="setup_notifications">W ustawieniach możesz aktywować powiadomienia</string>
-
     <string name="no_images">Ignoruj obrazki &#8635;</string>
     <string name="no_images_description">Nie ładuj żadnych obrazów. Drastycznie oszczędza transfer.</string>
-    <string name="no_storage_permission">Zezwól na dostęp do plików, by użyć tej funkcji.</string>
+    <string name="no_storage_permission">Zezwól na dostęp do plików, by użyć tej funkcji</string>
+    <string name="basic_mode">Tryb podstawowy</string>
+    <string name="basic_mode_description">Używaj okrojonej strony zamiast zwykłej. Ciemny motyw musi być wyłączony. Może nie działać przy szybkim połączeniu.</string>
+    <string name="preference_category6">Aktualności</string>
+    <string name="hide_sponsored">Ukryj posty sponsorowane</string>
+    <string name="hide_sponsored_description">Nie lubimy sponsorowanych postów i reklam.</string>
+    <string name="hide_people">Ukryj osoby, które możesz znać</string>
+    <string name="hide_people_description">Przejrzysty stumień, więcej miejsca.</string>
+    <string name="hide_news_feed">Ukryj aktualności</string>
+    <string name="hide_news_feed_description">[…] by uniknąć ślęczenia / prokrastynacji.</string>
+
+    <string name="message_notifications">Powiadamiaj o wiadomościach</string>
+    <string name="you_have_one_message">Masz nową wiadomość.</string>
+    <string name="you_have_n_messages">Masz %d nowych wiadomości.</string>
+    <string name="special_thanks_notifications">Podziękowania z pomoc z powiadomieniami:</string>
+    <string name="sync_problem">Nie mogę zsynchronizować cookies. Pierwszy start? Zrestartuj aplikację :)</string>
+    <string name="interval_pref_description_new">Powiadomienia są sprawdzane co %s.</string>
+    <string name="facebook_notifications">Powiadomienia z Facebook</string>
+    <string name="notification_sound_msg">Dźwięk wiadomości</string>
+    <string name="crash_toast_text">Face Slim: Nie jest dobrze. Przygotowuję raport awarii</string>
+    <string name="crash_dialog_title">Face Slim uległ awarii</string>
+    <string name="crash_dialog_text">Jeden z chomików, które kręcąc kołowrotkiem, napędzają działanie tej aplikacji, zdechł. Jeśli chcesz pomóc, wyślij mi przez e-mail automatycznie wygenerowaną listę błędów. Naciśnij OK oraz zatwierdź wiadomość.</string>
+    <string name="crash_dialog_comment_prompt">Możesz także dopisać jaka akcja doprowadziła do awarii:</string>
+    <string name="file_logger">Zapisuj logi do pliku</string>
+    <string name="file_logger_description">Zapisz logi usługi powiadomień w pamięci zewnętrznej. Potrzebne uprawnienie zapisu.</string>
+    <string name="file_logger_needs_permission">Brak dostępu do pamięci zewnętrznej. Log nie może zostać zapisany</string>
+    <string name="save_img">Zapisz zdjęcie</string>
+    <string name="downloading_img">Pobieram zdjęcie&#8230;</string>
+
+    <string name="download_manager_disabled">DownloadManager jest wyłączony. Włącz go proszę.</string>
+    <string name="cannot_access_storage">Brak dostępu do pamięci zewnętrznej</string>
+    <string name="file_cannot_be_saved">Plik nie może zostać zapisany</string>
+    <string name="camera_exception">Nie mogę użyć aparatu</string>
+    <string name="load_extra">Ładuj zewnętrzne obrazy</string>
+    <string name="load_extra_description">Otwieraj zdjęcia z zewnętrznych serwisów. Obecnie niewiele stron jest wspieranych.</string>
 
 </resources>

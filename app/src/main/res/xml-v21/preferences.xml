@@ -41,16 +41,6 @@
     <PreferenceCategory
         android:title="@string/preference_category5">
 
-        <EditTextPreference
-            android:key="feed_url"
-            android:title="@string/notifications_feed_url"
-            android:inputType="textNoSuggestions"/>
-
-        <Preference
-            android:key="get_feed"
-            android:title="@string/get_feed"
-            android:summary="@string/get_feed_description"/>
-
         <Preference
             android:key="notifications_settings"
             android:title="@string/notifications_settings"
@@ -58,8 +48,12 @@
 
         <SwitchPreference
             android:key="notifications_activated"
-            android:title="@string/activate_notifications"
-            android:dependency="feed_url"
+            android:title="@string/facebook_notifications"
+            android:defaultValue="false"/>
+
+        <SwitchPreference
+            android:key="message_notifications"
+            android:title="@string/message_notifications"
             android:defaultValue="false"/>
 
     </PreferenceCategory>
@@ -75,15 +69,53 @@
             android:defaultValue="false"/>
 
         <SwitchPreference
+            android:key="basic_mode"
+            android:title="@string/basic_mode"
+            android:summary="@string/basic_mode_description"
+            android:enabled="false"
+            android:defaultValue="false"/>
+
+        <SwitchPreference
             android:key="dark_theme"
             android:title="@string/dark_theme"
             android:summary="@string/dark_theme_description"
+            android:enabled="false"
             android:defaultValue="false"/>
 
+        <SwitchPreference
+            android:key="load_extra"
+            android:title="@string/load_extra"
+            android:summary="@string/load_extra_description"
+            android:defaultValue="false"/>
+
+    </PreferenceCategory>
+
+
+    <PreferenceCategory
+        android:title="@string/preference_category6">
+        
+        <SwitchPreference
+            android:key="hide_sponsored"
+            android:title="@string/hide_sponsored"
+            android:summary="@string/hide_sponsored_description"
+            android:defaultValue="false"/>
+            
+        <SwitchPreference
+            android:key="hide_people"
+            android:title="@string/hide_people"
+            android:summary="@string/hide_people_description"
+            android:defaultValue="false"/>
+            
         <SwitchPreference
             android:key="no_images"
             android:title="@string/no_images"
             android:summary="@string/no_images_description"
+            android:defaultValue="false"/>
+            
+        <SwitchPreference
+            android:key="hide_news_feed"
+            android:title="@string/hide_news_feed"
+            android:summary="@string/hide_news_feed_description"
             android:defaultValue="false"/>
 
     </PreferenceCategory>
@@ -102,6 +134,12 @@
             android:title="@string/hardware_acceleration"
             android:summary="@string/hardware_acceleration_description"
             android:defaultValue="true"/>
+
+        <SwitchPreference
+            android:key="file_logging"
+            android:title="@string/file_logger"
+            android:summary="@string/file_logger_description"
+            android:defaultValue="false"/>
 
         <Preference
             android:key="clear_cache"

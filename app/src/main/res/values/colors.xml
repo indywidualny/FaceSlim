@@ -12,4 +12,5 @@
     <color name="editText">#000000</color>
     <color name="aboutText">#6d6d6d</color>
     <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
 </resources>
