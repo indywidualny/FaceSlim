@@ -7,6 +7,14 @@ Releases | [pl] wydania: https://github.com/indywidualny/FaceSlim/releases
 ## Changelog
 & what makes the application awesome:
 
+**2.3**
+* some IllegalStateExceptions caught (no more crashes on some devices)
+* option to load extra images [by @pejakm] (from: googleusercontent.com, tumblr.com, pinimg.com, media.giphy.com)
+* check is DownloadManager enabled before image saving (if not display a dialog to enable)
+* DownloadManager displays some information about a downloaded file now
+* Chinese Traditional translation [by @dic1911]
+* translations updated
+
 **2.2**
 * message notifications (it's awesome!)
 * notifications rebuilt (fully automated, intelligent checker)
