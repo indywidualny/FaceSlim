@@ -9,10 +9,10 @@ Releases | [pl] wydania: https://github.com/indywidualny/FaceSlim/releases
 
 **2.3**
 * some IllegalStateExceptions caught (no more crashes on some devices)
-* option to load extra images [by @pejakm] (from: googleusercontent.com, tumblr.com, pinimg.com, media.giphy.com)
+* option to load extra images (thanks [pejakm](https://github.com/pejakm)) - load external images from: googleusercontent.com, tumblr.com, pinimg.com, media.giphy.com
 * check is DownloadManager enabled before image saving (if not display a dialog to enable)
 * DownloadManager displays some information about a downloaded file now
-* Chinese Traditional translation [by @dic1911]
+* Chinese Traditional translation (thanks [dic1911](https://github.com/dic1911))
 * translations updated
 
 **2.2**
