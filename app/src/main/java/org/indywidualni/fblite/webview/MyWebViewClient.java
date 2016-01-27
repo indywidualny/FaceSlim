@@ -99,9 +99,9 @@ public class MyWebViewClient extends WebViewClient {
 
         // hide sponsored posts and ads (works only for an originally loaded section, not for a dynamically loaded content)
         if (preferences.getBoolean("hide_sponsored", false)) {
-            final String cssHideSponsored = "#m_newsfeed_stream article[data-ft*=\"\\\"ei\\\":\\\"\"], .aymlCoverFlow, .aymlNewCoverFlow[data-ft*=\"\\\"is_sponsored\\\":\\\"1\\\"\"], .pyml, " +
-                    ".storyStream > ._6t2[data-sigil=\"marea\"], .storyStream > .fullwidth._539p, .storyStream > article[id^=\"u_\"]._676, .storyStream > article[id^=\"u_\"].storyAggregation { display: none; }";
-            view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); node.innerHTML = str; document.body.appendChild(node); } addStyleString('" + cssHideSponsored + "');");
+        // this will hide sponsored posts, ads and people you may know.    
+            String cssFixed = "#m_newsfeed_stream article[data-ft*=\"\\\\\"ei\\\\\":\\\\\"\"] { display:none !important; }";
+            view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); node.innerHTML = str; document.body.appendChild(node); } addStyleString('" + cssFixed + "');");
         }
 
         // hide news feed (a feature requested by drjedd)
