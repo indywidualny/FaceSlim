@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources
+	xmlns:tools="http://schemas.android.com/tools"
+	tools:ignore="MissingTranslation">
+
+	<string name="app_name">Face Slim</string>
+	<string name="image_chooser">Sélection d\'image</string>
+	<string name="loading_link">Ouverture d\'un lien</string>
+	<string name="applying_changes">Application des changements</string>
+
+	<string-array name="item_array">
+		<item>Fil d\'actualité</item>
+		<item>Messages</item>
+		<item>Chat (Amis en ligne)</item>
+		<item>Groupes</item>
+		<item>Événements</item>
+		<item>Paramètres</item>
+		<item>À propos</item>
+		<item>Quitter</item>
+		<item>Revenir en haut\u0020 &#8593;</item>
+	</string-array>
+
+	<string name="author">par Krzysztof \'Koras\' Grabowski</string>
+	<string name="title_activity_settings">Paramètres</string>
+	<string name="title_activity_about">À propos</string>
+	<string name="preference_category1">Interface</string>
+	<string name="preference_category2">Paramètres avancés</string>
+	<string name="progress_bar">Barre de chargement</string>
+	<string name="transparent_nav">Barre de navigation transparente &#8635;</string>
+	<string name="transparent_nav_description">La barre de navigation système transparente.</string>
+	<string name="clear_cache">Vider le cache</string>
+	<string name="clear_cache_description">Vider le cache de l\'application. Cela vous déconnectera.</string>
+	<string name="email_author">Contact</string>
+	<string name="choose_email_client">Choisir son client de messagerie</string>
+	<string name="notifications">Notifications</string>
+	<string name="no_network">Vous n\'avez pas de réseau ;)</string>
+	<string name="hardware_acceleration">Accélération matérielle &#8635;</string>
+	<string name="hardware_acceleration_description">Désactiver sur les appareils avec peu de mémoire (vidéos non lues).</string>
+	<string name="share_link">Partager le lien</string>
+	<string name="long_clicks">Appui prolongé</string>
+	<string name="long_clicks_description">Un appui prolongé sur un lien ou une image permet de le partager.</string>
+	<string name="me_google_play">Google Play</string>
+	<string name="preference_category3">Expérimental</string>
+	<string name="dark_theme">Thème sombre</string>
+	<string name="dark_theme_description">Recommandé pour les écrans AMOLED.</string>
+	<string name="fixed_nav">Menu Facebook fixe</string>
+	<string name="fixed_nav_description">La barre de menu Facebook est toujours affichée.</string>
+	<string name="facebook_zero">Facebook Zero</string>
+	<string name="facebook_zero_description">Accès gratuit dépendant de votre opérateur mobile.</string>
+	<string name="facebook_zero_active">Facebook Zero est activé</string>
+	<string name="load_extra">Affichage des images hébergées</string>
+	<string name="load_extra_description">Ouvre les images hébergées hors de Facebook. Peu de sites supportés pour le moment.</string>
+	<string name="preference_category4">Divers</string>
+	<string name="quick_guide">Guide de démarrage</string>
+	<string name="messages">Messages</string>
+	<string name="donate_paypal">Don\u0020 –\u0020 PayPal</string>
+	<string name="paypal_url" formatted="false">https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=koras%2eevil%40gmail%2ecom&amp;lc=GB&amp;item_name=Krzysztof%20Grabowski&amp;currency_code=USD&amp;bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted</string>
+
+	<string-array name="drawerPosTitles">
+		<item>sur la gauche</item>
+		<item>sur la droite</item>
+	</string-array>
+
+	<string name="drawer_pos">Position du menu glissant &#8635;</string>
+	<string name="drawer_pos_description">Le menu s\'affiche %s de l\'écran.</string>
+	<string name="preference_category5">Notifications</string>
+	<string name="notifications_feed_url">Fil de notifications</string>
+	<string name="interval_pref">Intervalle de vérification</string>
+	<string name="interval_pref_description">Le fil de notification sera vérifié toutes les %s.</string>
+	<string name="activate_notifications">Activer les notifications</string>
+	<string name="get_feed">Récupérer votre fil de notification</string>
+	<string name="get_feed_description">Cliquer et trouver votre fil RSS de notifications et copier/coller l\'adresse ici.</string>
+	<string name="notifications_service_created">Notifications actives</string>
+	<string name="notifications_settings">Paramètres de notifications</string>
+	<string name="notifications_settings_description">Options avancées : intervalles, sons, LED et vibrations.</string>
+
+	<string-array name="intervalPrefTitles">
+		<item>5 minutes</item>
+		<item>15 minutes</item>
+		<item>30 minutes</item>
+		<item>1 heure</item>
+		<item>3 heures</item>
+		<item>6 heures</item>
+	</string-array>
+
+	<string name="all_notifications">Toutes les notifications</string>
+	<string name="notification_sound">Son de notification</string>
+	<string name="notification_sound_description">Sonnerie ou silence: \u0020</string>
+	<string name="silent">Pas de son</string>
+	<string name="vibrate">Vibrations</string>
+	<string name="led_light">LED</string>
+	<string name="notifications_extra">Divers</string>
+	<string name="notifications_everywhere">Toujours afficher les notifications</string>
+	<string name="notifications_everywhere_description">Même lorsque vous êtes sur l\'écran principal de l\'application.</string>
+	<string name="setup_notifications">Aller dans les paramètres pour régler les notifications</string>
+	<string name="no_images">Ne pas afficher les images &#8635;</string>
+	<string name="no_images_description">Ne charge pas les images pour réduire drastiquement les données mobiles.</string>
+	<string name="no_storage_permission">Donner les permissions de stockage pour utiliser cette fonctionnalité</string>
+	<string name="basic_mode">Mode basique</string>
+	<string name="basic_mode_description">Utiliser le site Basic. Le thème sombre sera désactivé.</string>
+	<string name="preference_category6">Fil d\'actualités</string>
+	<string name="hide_sponsored">Cacher les publicités</string>
+	<string name="hide_sponsored_description">On n\'aime pas les publicités et les publications suggérées !</string>
+	<string name="hide_people">Cacher les suggestions d\'amis</string>
+	<string name="hide_people_description">Une page propre et plus de place.</string>
+	<string name="hide_news_feed">Cacher le fil d\'actualité</string>
+	<string name="hide_news_feed_description">[…] pour éviter de perdre du temps ou procrastiner.</string>
+
+	<string name="message_notifications">Notifications de messages</string>
+	<string name="you_have_one_message">Vous avez 1 message.</string>
+	<string name="you_have_n_messages">Vous avez %d messages.</string>
+	<string name="special_thanks_notifications">Un gros merci pour l\'aide sur les notifications : </string>
+	<string name="sync_problem">Problème de synchro des cookies. Premier lancement ? Merci de redémarrer l\'application :)</string>
+	<string name="interval_pref_description_new">Les notifications sont vérifiées toutes les %s.</string>
+	<string name="facebook_notifications">Notifications Facebook</string>
+	<string name="notification_sound_msg">Son de notification de message</string>
+	<string name="crash_toast_text">Face Slim: Quelquechose vient de mal se passer. Préparation d\'un rapport d\'erreur.</string>
+	<string name="crash_dialog_title">Face Slim a planté</string>
+	<string name="crash_dialog_text">Une erreur a lanté l\'application. Merci de m\'aider à corriger l\'erreur en envoyant le rapport d\'erreur. Vous avez juste à cliquer sur OK et envoyer un email.</string>
+	<string name="crash_dialog_comment_prompt">Vous pouvez ajouter votre commentaire ci-dessous : </string>
+	<string name="file_logger">Enregistrer les logs dans un fichier</string>
+	<string name="file_logger_description">Enregistrer les logs du service Notification (nécessite les droits de stockage).</string>
+	<string name="file_logger_needs_permission">Pas d\'accès au stockage. Les logs ne peuvent pas être enregistrés</string>
+	<string name="save_img">Enregistrer l\'image</string>
+	<string name="downloading_img">Enregistrement de l\'image&#8230;</string>
+
+	<string name="download_manager_disabled">DownloadManager est désactivé. Veuillez l\'activer.</string>
+	<string name="cannot_access_storage">Pas d\'accès au stockage.</string>
+	<string name="file_cannot_be_saved">Un fichier ne peut ps être enregistré</string>
+	<string name="camera_exception">Problème avec l\'appareil photo</string>
+
+</resources>
