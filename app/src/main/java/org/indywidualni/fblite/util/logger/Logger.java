@@ -78,16 +78,9 @@ public final class Logger {
     }
 
     public synchronized void i(String tag, String msg) {
-        boolean fileLoggingEnabled = false;
+        final boolean fileLoggingEnabled = trayPreferences.getBoolean("file_logging", false);
         final boolean mounted = Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState());
         final boolean storageReady = mounted && checkStoragePermission();
-
-        try {
-            fileLoggingEnabled = trayPreferences.getBoolean("file_logging", false);
-        } catch (IllegalStateException e) {
-            Log.e("Logger", "An extremely rare IllegalStateException caught");
-            e.printStackTrace();
-        }
 
         if (fileLoggingEnabled && storageReady) {
             FileLog.open(logFilePath, Log.VERBOSE, 1000000);  // 1 megabyte

@@ -35,7 +35,6 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.concurrent.RejectedExecutionException;
 
 import nl.matshofman.saxrssreader.RssFeed;
 import nl.matshofman.saxrssreader.RssItem;
@@ -127,13 +126,6 @@ public class NotificationsService extends Service {
     private class HandlerRunnable implements Runnable {
 
         public void run() {
-            /** I'm getting (ACRA) reports that (very rarely) there is a problem with Tray Preferences.
-             *  Apparently an IllegalStateException is thrown when there is a problem in accessing the
-             *  database, where preferences are stored. Since I got two reports of an error that is
-             *  less likely to appear than a frozen hell, let's catch these exceptions until the
-             *  library is fixed:  https://github.com/grandcentrix/tray/issues/50
-             *  When this rare exception occurred just restart the service.
-             */
             try {
 
                 // get time interval from tray preferences
@@ -191,12 +183,6 @@ public class NotificationsService extends Service {
                 } else
                     Log.i(TAG, "Notified to stop running. Exiting...");
 
-            } catch (IllegalStateException ise) {
-                Log.i(TAG, "An extremely rare IllegalStateException caught");
-                restartItself();
-            } catch (RejectedExecutionException ree) {
-                Log.i(TAG, "RejectedExecutionException caught");
-                restartItself();
             } catch (RuntimeException re) {
                 Log.i(TAG, "RuntimeException caught");
                 restartItself();
