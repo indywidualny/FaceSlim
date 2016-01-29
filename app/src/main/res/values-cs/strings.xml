@@ -49,6 +49,8 @@
     <string name="facebook_zero">Facebook Zero</string>
     <string name="facebook_zero_description">Bez placení dat. Musí podporovat poskytovatel GSM. Pouze během datového připojení.</string>
     <string name="facebook_zero_active">Facebook Zero je aktivní</string>
+    <string name="load_extra">Stahovat externí obrázky</string>
+    <string name="load_extra_description">Otevírat externí obrázky v aplikaci. Aktuálně je podporováno pouze několik stránek.</string>
     <string name="preference_category4">Další</string>
     <string name="quick_guide">Průvodce rychlým začátkem</string>
     <string name="messages">Zprávy</string>
