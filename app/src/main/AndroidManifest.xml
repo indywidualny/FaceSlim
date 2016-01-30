@@ -99,7 +99,7 @@
         <activity
             android:name=".activity.MessagesShortcutActivity"
             android:label="@string/messages"
-            android:icon="@mipmap/ic_launcher" >
+            android:icon="@mipmap/ic_messages" >
             <intent-filter>
                 <action android:name="android.intent.action.CREATE_SHORTCUT" />
                 <category android:name="android.intent.category.DEFAULT" />
