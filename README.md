@@ -14,7 +14,7 @@ Releases | [pl] wydania: https://github.com/indywidualny/FaceSlim/releases
 * DownloadManager displays some information about a downloaded file now
 * Chinese Traditional translation (thanks [dic1911](https://github.com/dic1911))
 * French translation (thanks [davidlb](https://github.com/davidlb))
-* New messages shortcut icon (thanks [bnbrown](https://github.com/bnbrown))
+* new messages shortcut icon (thanks [bnbrown](https://github.com/bnbrown))
 * translations updated
 
 **2.2**
