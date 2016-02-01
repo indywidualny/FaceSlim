@@ -8,6 +8,7 @@ import android.util.Log;
 import org.acra.ACRA;
 import org.acra.ReportingInteractionMode;
 import org.acra.annotation.ReportsCrashes;
+import org.indywidualni.fblite.util.Connectivity;
 import org.piwik.sdk.Piwik;
 import org.piwik.sdk.Tracker;
 
@@ -33,14 +34,25 @@ public class MyApplication extends Application {
         mContext = getApplicationContext();
         super.onCreate();
 
-        // the following line triggers the initialization of ACRA
+        /**
+         * The following line triggers the initialization of ACRA.
+         */
         ACRA.init(this);
+
+        /**
+         * Piwik dry run. Uncomment these lines during app development.
+         */
+        //Piwik.getInstance(this).setDryRun(true);
+        //Piwik.getInstance(this).setDebug(true);
 
         /**
          * Count app downloads. Fired only after new installation or upgrade.
          * It's never fired again. In fact the app is not tracking anything but installations.
          */
-        getTracker().trackAppDownload();
+        if (Connectivity.isConnected(this)) {
+            getTracker().trackAppDownload();
+            getTracker().dispatch();
+        }
     }
 
     /**
@@ -63,6 +75,7 @@ public class MyApplication extends Application {
         try {
             mPiwikTracker = Piwik.getInstance(this).newTracker("http://indywidualni.org/analytics/piwik.php", 1);
             mPiwikTracker.setUserId(Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID));
+            mPiwikTracker.setDispatchInterval(-1);
         } catch (MalformedURLException e) {
             Log.w("Piwik", "url is malformed", e);
             return null;
