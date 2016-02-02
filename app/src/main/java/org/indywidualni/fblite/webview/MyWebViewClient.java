@@ -78,6 +78,12 @@ public class MyWebViewClient extends WebViewClient {
     public void onPageFinished(WebView view, String url) {
         // when Zero is activated and there is a mobile network connection ignore extra customizations
         if (!preferences.getBoolean("facebook_zero", false) || !Connectivity.isConnectedMobile(context)) {
+
+            // hide install messenger notice by default
+            view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); " +
+                    "node.innerHTML = str; document.body.appendChild(node); } " +
+                    "addStyleString('[data-sigil*=m-promo-jewel-header]{ display: none; }');");
+
             // turn facebook black (experimental)
             if (preferences.getBoolean("dark_theme", false)) {
                 // fill it with data only one time
@@ -86,16 +92,23 @@ public class MyWebViewClient extends WebViewClient {
                 view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); " +
                         "node.innerHTML = str; document.body.appendChild(node); } addStyleString('" + cssFile + "');");
             }
-            // blue navigation bar always on top
-            if (preferences.getBoolean("fixed_nav", false)) {
-                String cssFixed = "#header{ position: fixed; z-index: 11; top: 0px; } #root{ padding-top: 44px; } " +
-                        ".flyout{ max-height: " + Dimension.heightForFixedFacebookNavbar(context) + "px; overflow-y: scroll; }";
-                if (Uri.parse(url).getHost().endsWith("mbasic.facebook.com"))
-                    cssFixed = "#header{ position: fixed; z-index: 11; top: 0px; } #objects_container{ padding-top: 74px; }";
-                view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); " +
-                        "node.innerHTML = str; document.body.appendChild(node); } addStyleString('" + cssFixed + "');");
-            }
         }
+
+        // blue navigation bar always on top
+        if (preferences.getBoolean("fixed_nav", false)) {
+            String cssFixed = "#header{ position: fixed; z-index: 11; top: 0px; } #root{ padding-top: 44px; } " +
+                    ".flyout{ max-height: " + Dimension.heightForFixedFacebookNavbar(context) + "px; overflow-y: scroll; }";
+
+            if (Uri.parse(url).getHost().endsWith("mbasic.facebook.com"))
+                cssFixed = "#header{ position: fixed; z-index: 11; top: 0px; } #objects_container{ padding-top: 74px; }";
+            else if (Uri.parse(url).getHost().endsWith("0.facebook.com"))
+                cssFixed = "#toggleHeaderContent{position: fixed; z-index: 11; top: 0px;} " +
+                        "#header{ position: fixed; z-index: 11; top: 28px; } #objects_container{ padding-top: 102px; }";
+
+            view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); " +
+                    "node.innerHTML = str; document.body.appendChild(node); } addStyleString('" + cssFixed + "');");
+        }
+
         // apply extra bottom padding for transparent navigation
         if (preferences.getBoolean("transparent_nav", false))
             view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); " +
@@ -111,17 +124,17 @@ public class MyWebViewClient extends WebViewClient {
                     "node.innerHTML = str; document.body.appendChild(node); } addStyleString('" + cssHideSponsored + "');");
         }
 
-        // hide news feed (a feature requested by drjedd)
-        if (preferences.getBoolean("hide_news_feed", false))
-            view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); " +
-                    "node.innerHTML = str; document.body.appendChild(node); } " +
-                    "addStyleString('#m_newsfeed_stream{ display: none; }');");
-
         // hide people you may know
         if (preferences.getBoolean("hide_people", false))
             view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); " +
                     "node.innerHTML = str; document.body.appendChild(node); } " +
                     "addStyleString('article._55wo._5rgr._5gh8._35au{ display: none; }');");
+
+        // hide news feed (a feature requested by drjedd)
+        if (preferences.getBoolean("hide_news_feed", false))
+            view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); " +
+                    "node.innerHTML = str; document.body.appendChild(node); } " +
+                    "addStyleString('#m_newsfeed_stream{ display: none; }');");
 
         // don't display images when they are disabled, we don't need empty placeholders
         if (preferences.getBoolean("no_images", false))
