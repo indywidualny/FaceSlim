@@ -88,6 +88,12 @@
             android:summary="@string/load_extra_description"
             android:defaultValue="false"/>
 
+        <SwitchPreference
+            android:key="offline_mode"
+            android:title="@string/offline_mode"
+            android:summary="@string/offline_mode_description"
+            android:defaultValue="false"/>
+
     </PreferenceCategory>
 
 

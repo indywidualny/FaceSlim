@@ -42,8 +42,8 @@ public class MyApplication extends Application {
         /**
          * Piwik dry run. Uncomment these lines during app development.
          */
-        //Piwik.getInstance(this).setDryRun(true);
-        //Piwik.getInstance(this).setDebug(true);
+        Piwik.getInstance(this).setDryRun(true);
+        Piwik.getInstance(this).setDebug(true);
 
         /**
          * Count app downloads. Fired only after new installation or upgrade.
@@ -75,6 +75,7 @@ public class MyApplication extends Application {
         try {
             mPiwikTracker = Piwik.getInstance(this).newTracker("http://indywidualni.org/analytics/piwik.php", 1);
             mPiwikTracker.setUserId(Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID));
+            mPiwikTracker.setDispatchTimeout(30000);
             mPiwikTracker.setDispatchInterval(-1);
         } catch (MalformedURLException e) {
             Log.w("Piwik", "url is malformed", e);

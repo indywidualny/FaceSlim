@@ -132,10 +132,12 @@
     <string name="file_logger_needs_permission">No access to external storage. Log cannot be saved</string>
     <string name="save_img">Save image</string>
     <string name="downloading_img">Downloading image&#8230;</string>
-
     <string name="download_manager_disabled">DownloadManager is disabled. Please enable it.</string>
     <string name="cannot_access_storage">No access to external storage</string>
     <string name="file_cannot_be_saved">A file cannot be saved</string>
     <string name="camera_exception">Problems with a camera</string>
+
+    <string name="offline_mode">Offline mode</string>
+    <string name="offline_mode_description">When there is no Internet connection try to load a page from cache and a database.</string>
 
 </resources>

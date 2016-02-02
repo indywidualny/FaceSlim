@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.database.SQLException;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -35,6 +36,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -54,6 +56,7 @@ import org.indywidualni.fblite.util.Connectivity;
 import org.indywidualni.fblite.util.Dimension;
 import org.indywidualni.fblite.util.DownloadManagerResolver;
 import org.indywidualni.fblite.util.Miscellany;
+import org.indywidualni.fblite.util.Offline;
 import org.indywidualni.fblite.webview.MyWebViewClient;
 
 import java.io.File;
@@ -215,6 +218,17 @@ public class MainActivity extends Activity {
         webView.getSettings().setBuiltInZoomControls(true);
         webView.getSettings().setDisplayZoomControls(false);
 
+        // since API 18 cache quota is managed automatically
+        if (Build.VERSION.SDK_INT < 18) {
+            //noinspection deprecation
+            webView.getSettings().setAppCacheMaxSize(5 * 1024 * 1024);  // 5 MB
+        }
+
+        // enable caching
+        webView.getSettings().setAppCachePath(getApplicationContext().getCacheDir().getAbsolutePath());
+        webView.getSettings().setAppCacheEnabled(true);
+        webView.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);  // load online by default
+
         // get user agent
         USER_AGENT_DEFAULT = webView.getSettings().getUserAgentString();
         trayPreferences.put("webview_user_agent", USER_AGENT_DEFAULT);
@@ -281,14 +295,15 @@ public class MainActivity extends Activity {
         } catch (Exception ignored) {}
 
         // notify when there is no internet connection
-        if (!Connectivity.isConnected(getApplicationContext()))
+        if (!Connectivity.isConnected(this))
             Toast.makeText(getApplicationContext(), getString(R.string.no_network), Toast.LENGTH_SHORT).show();
 
+        // set webview clients
         mWebChromeClient = new MyWebChromeClient();
         webView.setWebViewClient(new MyWebViewClient());
         webView.setWebChromeClient(mWebChromeClient);
 
-        // load url in webView
+        // load url in a webView
         webView.loadUrl(webViewUrl);
 
         // OnLongClickListener for detecting long clicks on links and images
