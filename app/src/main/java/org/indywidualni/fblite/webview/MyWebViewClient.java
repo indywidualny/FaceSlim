@@ -4,8 +4,10 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.SQLException;
 import android.net.Uri;
 import android.preference.PreferenceManager;
+import android.webkit.URLUtil;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
@@ -16,6 +18,7 @@ import org.indywidualni.fblite.R;
 import org.indywidualni.fblite.util.Connectivity;
 import org.indywidualni.fblite.util.Dimension;
 import org.indywidualni.fblite.util.FileOperation;
+import org.indywidualni.fblite.util.Offline;
 
 public class MyWebViewClient extends WebViewClient {
 
@@ -30,6 +33,9 @@ public class MyWebViewClient extends WebViewClient {
 
     // convert css file to string only one time
     private static String cssFile;
+
+    // object for offline mode management
+    private Offline offline;
 
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -59,8 +65,9 @@ public class MyWebViewClient extends WebViewClient {
     @SuppressWarnings("deprecation")
     @Override
     public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+        // todo: something is wrong here, maybe it should be removed for good
         // refresh on connection error (sometimes there is an error even when there is a network connection)
-        if (!refreshed) {
+        if (Connectivity.isConnected(context) && !refreshed) {
             view.loadUrl(failingUrl);
             // when network error is real do not reload url again
             refreshed = true;
@@ -99,11 +106,13 @@ public class MyWebViewClient extends WebViewClient {
             String cssFixed = "#header{ position: fixed; z-index: 11; top: 0px; } #root{ padding-top: 44px; } " +
                     ".flyout{ max-height: " + Dimension.heightForFixedFacebookNavbar(context) + "px; overflow-y: scroll; }";
 
-            if (Uri.parse(url).getHost().endsWith("mbasic.facebook.com"))
-                cssFixed = "#header{ position: fixed; z-index: 11; top: 0px; } #objects_container{ padding-top: 74px; }";
-            else if (Uri.parse(url).getHost().endsWith("0.facebook.com"))
-                cssFixed = "#toggleHeaderContent{position: fixed; z-index: 11; top: 0px;} " +
-                        "#header{ position: fixed; z-index: 11; top: 28px; } #objects_container{ padding-top: 102px; }";
+            try {
+                if (Uri.parse(url).getHost().endsWith("mbasic.facebook.com"))
+                    cssFixed = "#header{ position: fixed; z-index: 11; top: 0px; } #objects_container{ padding-top: 74px; }";
+                else if (Uri.parse(url).getHost().endsWith("0.facebook.com"))
+                    cssFixed = "#toggleHeaderContent{position: fixed; z-index: 11; top: 0px;} " +
+                            "#header{ position: fixed; z-index: 11; top: 28px; } #objects_container{ padding-top: 102px; }";
+            } catch (NullPointerException ignore) { /* there is no host host in offline mode */ }
 
             view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); " +
                     "node.innerHTML = str; document.body.appendChild(node); } addStyleString('" + cssFixed + "');");
@@ -141,6 +150,28 @@ public class MyWebViewClient extends WebViewClient {
             view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); " +
                     "node.innerHTML = str; document.body.appendChild(node); } " +
                     "addStyleString('.img, ._5sgg, ._-_a, .widePic, .profile-icon{ display: none; }');");
+
+        // offline mode
+        if (preferences.getBoolean("offline_mode", false)) {
+            if (offline == null)
+                offline = new Offline();
+
+            // is an url valid and it's a facebook page
+            if (!URLUtil.isValidUrl(url) || !url.contains("facebook.com"))
+                return;
+
+            try {
+                if (Connectivity.isConnected(context)) {
+                    // save the current page when online
+                    offline.savePage(url);
+                } else {
+                    // try to load page from the database when offline
+                    view.loadData(offline.getPage(url), "text/html; charset=utf-8", "UTF-8");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }

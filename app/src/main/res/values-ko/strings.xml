@@ -21,6 +21,7 @@
     </string-array>
 
     <string-array name="intervalPrefTitles">
+        <item>2분</item>
         <item>5분</item>
         <item>15분</item>
         <item>30분</item>

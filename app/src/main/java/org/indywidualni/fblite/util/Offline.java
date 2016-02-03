@@ -30,12 +30,21 @@ public class Offline {
         syncCookies();
     }
 
-    public OfflineDataSource getDataSource() {
-        return dataSource;
+    public String getPage(String url) throws SQLException {
+        url = removeEndingSlash(url);
+        Log.v(getClass().getSimpleName(), "Getting: " + url);
+        return dataSource.getPage(url);
     }
 
     public void savePage(String url) throws SQLException {
+        url = removeEndingSlash(url);
+        Log.v(getClass().getSimpleName(), "Saving: " + url);
         new SaveTask().execute(url);
+    }
+
+    // for debugging
+    public OfflineDataSource getDataSource() {
+        return dataSource;
     }
 
     private class SaveTask extends AsyncTask<String, Void, Void> {
@@ -66,6 +75,12 @@ public class Offline {
             CookieSyncManager.createInstance(context);
             CookieSyncManager.getInstance().sync();
         }
+    }
+
+    public static String removeEndingSlash(String url) {
+        if (url.length() > 0 && url.charAt(url.length()-1)=='/')
+            url = url.substring(0, url.length()-1);
+        return url;
     }
 
 }

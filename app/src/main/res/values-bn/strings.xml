@@ -76,6 +76,7 @@
     <string name="notifications_settings_description"> অতিরিক্ত সেটিংস্‌ . সময় বিরতি , সাউন্ড সেট আপ , লেড ও ভাইব্রেসন চুজ করুন .</string>
 
     <string-array name="intervalPrefTitles">
+        <item>2 মিনিট </item>
         <item>5 মিনিট </item>
         <item>15 মিনিট</item>
         <item>30 মিনিট</item>

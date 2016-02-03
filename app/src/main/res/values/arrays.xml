@@ -9,6 +9,7 @@
     </string-array>
 
     <string-array name="intervalPrefValues">
+        <item>120000</item>
         <item>300000</item>
         <item>900000</item>
         <item>1800000</item>

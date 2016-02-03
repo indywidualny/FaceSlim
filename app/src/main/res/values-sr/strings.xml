@@ -76,6 +76,7 @@
     <string name="notifications_settings_description">Додатне поставке. Одређивање интервала провере, поставке звука, светла и вибрирања.</string>
 
     <string-array name="intervalPrefTitles">
+        <item>2 минута</item>
         <item>5 минута</item>
         <item>15 минута</item>
         <item>30 минута</item>

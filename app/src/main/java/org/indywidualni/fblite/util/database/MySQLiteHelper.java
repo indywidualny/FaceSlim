@@ -19,9 +19,9 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase database) {
         Log.v("SQLiteDatabase", "Creating database");
         database.execSQL("CREATE TABLE Pages (" +
-                            "url TEXT NOT NULL PRIMARY KEY, " +
-                            "html TEXT" +
-                         ");");
+                "url TEXT PRIMARY KEY, " +
+                "html TEXT" +
+                ");");
     }
 
     @Override

@@ -11,7 +11,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
-import android.database.SQLException;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -57,6 +56,7 @@ import org.indywidualni.fblite.util.Dimension;
 import org.indywidualni.fblite.util.DownloadManagerResolver;
 import org.indywidualni.fblite.util.Miscellany;
 import org.indywidualni.fblite.util.Offline;
+import org.indywidualni.fblite.util.database.PageModel;
 import org.indywidualni.fblite.webview.MyWebViewClient;
 
 import java.io.File;
@@ -64,6 +64,7 @@ import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class MainActivity extends Activity {
 
@@ -108,7 +109,7 @@ public class MainActivity extends Activity {
     private static String appDirectoryName;
 
     // user agents
-    private static String USER_AGENT_DEFAULT;
+    private static String userAgentDefault;
     private static final String USER_AGENT_BASIC = "Mozilla/5.0 (Linux; U; Android 2.3.3; en-gb; " +
             "Nexus S Build/GRI20) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
 
@@ -230,8 +231,8 @@ public class MainActivity extends Activity {
         webView.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);  // load online by default
 
         // get user agent
-        USER_AGENT_DEFAULT = webView.getSettings().getUserAgentString();
-        trayPreferences.put("webview_user_agent", USER_AGENT_DEFAULT);
+        userAgentDefault = webView.getSettings().getUserAgentString();
+        trayPreferences.put("webview_user_agent", userAgentDefault);
 
         // set user agent for basic mode
         if (preferences.getBoolean("basic_mode", false))
@@ -322,6 +323,15 @@ public class MainActivity extends Activity {
                 return false;
             }
         });
+
+/*        try {
+            // todo: remove it, for testing
+            List<PageModel> pages = new Offline().getDataSource().getAllPages();
+            Log.e("PAGE", "Pages");
+            for (PageModel p : pages) {
+                Log.e("PAGE", p.getUrl() + " " + p.getHtml().substring(0, 50));
+            }
+        } catch (Exception ignore) {}*/
 
     }
 
@@ -804,7 +814,7 @@ public class MainActivity extends Activity {
         if (preferences.getBoolean("basic_mode", false))
             webView.getSettings().setUserAgentString(USER_AGENT_BASIC);
         else
-            webView.getSettings().setUserAgentString(USER_AGENT_DEFAULT);
+            webView.getSettings().setUserAgentString(userAgentDefault);
 
         /** get a subject and text and check if this is a link trying to be shared */
         String sharedSubject = getIntent().getStringExtra(Intent.EXTRA_SUBJECT);

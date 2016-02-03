@@ -76,6 +76,7 @@
     <string name="notifications_settings_description">Další nastavení. Nastavte časovou prodlevu, zvuky, LED a vibrace.</string>
 
     <string-array name="intervalPrefTitles">
+        <item>2 minut</item>
         <item>5 minut</item>
         <item>15 minut</item>
         <item>30 minut</item>
