@@ -145,6 +145,7 @@
     <string name="loading_offline_database">Loading page from offline database</string>
     <string name="offline_keep_max">Max number of pages to keep</string>
     <string name="offline_keep_max_description">When online visited pages are asynchronously saved to cache and a database. A default value is (latest) 10.</string>
-    <string name="offline_dummy_description">This option is great for Wi-Fi connection because the app will use twice as much data as before. If it\'s not a problem for you use it also during mobile connection. The source code of the current page is asynchronously saved in a database. If a duplicate is found it will be replaced.</string>
+    <string name="offline_dummy_description">This option is great for Wi-Fi connection because the app will use twice as much data as before. If it\'s not a problem for you use it also during a mobile connection. The source code of the current page is asynchronously saved in a database. If a duplicate is found it will be replaced.</string>
+    <string name="keyboard_fix">Fix overlaying keyboard</string>
 
 </resources>

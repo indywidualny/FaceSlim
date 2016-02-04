@@ -135,9 +135,8 @@ public class MainActivity extends Activity {
         // the main layout, everything is inside
         contentMain = (LinearLayout) findViewById(R.id.content_main);
 
-        // TODO: keyboard fix? optional
-        //getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-        //getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        if (preferences.getBoolean("keyboard_fix", false))
+            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         // if the app is being launched for the first time
         if (preferences.getBoolean("first_run", true)) {
