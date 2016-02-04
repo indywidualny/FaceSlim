@@ -8,14 +8,18 @@ import android.database.SQLException;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.Gravity;
 import android.webkit.URLUtil;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.devspark.appmsg.AppMsg;
+
 import org.indywidualni.fblite.MyApplication;
 import org.indywidualni.fblite.R;
+import org.indywidualni.fblite.activity.MainActivity;
 import org.indywidualni.fblite.util.Connectivity;
 import org.indywidualni.fblite.util.Dimension;
 import org.indywidualni.fblite.util.FileOperation;
@@ -26,7 +30,7 @@ import java.util.List;
 public class MyWebViewClient extends WebViewClient {
 
     // a currently loaded page
-    public static String currentlyLoadedPage = "https://m.facebook.com";
+    public static String currentlyLoadedPage;
     private static long lastSavingTime = System.currentTimeMillis();
 
     // variable for onReceivedError
@@ -173,14 +177,19 @@ public class MyWebViewClient extends WebViewClient {
                     if (!currentlyLoadedPage.equals(url)) {
                         offline.savePage(url);
                         lastSavingTime = System.currentTimeMillis();
-                    } else if (currentlyLoadedPage.equals(url) && lastSavingTime < System.currentTimeMillis() - 5000) {
-                        // don't save it when it's the same page which was saved less than 5s ago
+                    } else if (currentlyLoadedPage.equals(url) && lastSavingTime < System.currentTimeMillis() - 5500) {
+                        // don't save it when it's the same page which was saved less than 5.5s ago
                         offline.savePage(url);
                         lastSavingTime = System.currentTimeMillis();
                     }
                 } else {
                     // try to load page from the database when offline
                     view.loadData(offline.getPage(url), "text/html; charset=utf-8", "UTF-8");
+                    // show the message at the bottom of the screen
+                    AppMsg appMsg = AppMsg.makeText(MainActivity.getMainActivity(),
+                            context.getString(R.string.loading_offline_database),
+                            new AppMsg.Style(AppMsg.LENGTH_SHORT, R.color.colorAccent));
+                    appMsg.setLayoutGravity(Gravity.BOTTOM).show();
                 }
             } catch (SQLException e) {
                 e.printStackTrace();

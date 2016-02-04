@@ -12,7 +12,6 @@ import net.grandcentrix.tray.TrayAppPreferences;
 
 import org.indywidualni.fblite.MyApplication;
 import org.indywidualni.fblite.util.database.OfflineDataSource;
-import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -52,11 +51,11 @@ public class Offline {
         @Override
         protected Void doInBackground(String... args) throws SQLException {
             try {
-                final Connection.Response response = Jsoup.connect(args[0]).userAgent(userAgent)
-                        .cookie("https://m.facebook.com", CookieManager.getInstance().getCookie("https://m.facebook.com")).execute();
-                final Document doc = response.parse();
+                final Document response = Jsoup.connect(args[0]).userAgent(userAgent)
+                        .header("Accept-Encoding", "gzip, deflate").timeout(5000)
+                        .cookie("https://m.facebook.com", CookieManager.getInstance().getCookie("https://m.facebook.com")).get();
                 // insert values into a database
-                dataSource.insertPage(args[0], doc.outerHtml());
+                dataSource.insertPage(args[0], response.toString());
             } catch (Exception e) {
                 Log.e(getClass().getSimpleName(), "Problem saving the current page");
                 e.printStackTrace();

@@ -65,6 +65,9 @@ import java.util.Date;
 
 public class MainActivity extends Activity {
 
+    // reference to this object
+    private static Activity mainActivity;
+
     // variables for drawer layout
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
@@ -115,6 +118,9 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // set reference to this object
+        mainActivity = this;
+
         // get shared preferences and TrayPreferences
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         trayPreferences = new TrayAppPreferences(getApplicationContext());
@@ -128,6 +134,10 @@ public class MainActivity extends Activity {
 
         // the main layout, everything is inside
         contentMain = (LinearLayout) findViewById(R.id.content_main);
+
+        // TODO: keyboard fix? optional
+        //getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        //getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         // if the app is being launched for the first time
         if (preferences.getBoolean("first_run", true)) {
@@ -292,8 +302,8 @@ public class MainActivity extends Activity {
             }
         } catch (Exception ignored) {}
 
-        // notify when there is no internet connection
-        if (!Connectivity.isConnected(this))
+        // notify when there is no internet connection (offline mode have its own messages)
+        if (!Connectivity.isConnected(this) && !preferences.getBoolean("offline_mode", false))
             Toast.makeText(getApplicationContext(), getString(R.string.no_network), Toast.LENGTH_SHORT).show();
 
         // set webview clients
@@ -302,6 +312,7 @@ public class MainActivity extends Activity {
         webView.setWebChromeClient(mWebChromeClient);
 
         // load url in a webView
+        MyWebViewClient.currentlyLoadedPage = webViewUrl;
         webView.loadUrl(webViewUrl);
 
         // OnLongClickListener for detecting long clicks on links and images
@@ -682,8 +693,8 @@ public class MainActivity extends Activity {
         // refreshing pages
         @Override
         public void onRefresh() {
-            // notify when there is no internet connection
-            if (!Connectivity.isConnected(getApplicationContext()))
+            // notify when there is no internet connection (offline mode have its own messages)
+            if (!Connectivity.isConnected(getApplicationContext()) && !preferences.getBoolean("offline_mode", false))
                 Toast.makeText(getApplicationContext(), getString(R.string.no_network), Toast.LENGTH_SHORT).show();
 
             // reloading page (if offline try to load a live version first)
@@ -1017,6 +1028,10 @@ public class MainActivity extends Activity {
             }
         });
         dialog.show();
+    }
+
+    public static Activity getMainActivity() {
+        return mainActivity;
     }
 
 }

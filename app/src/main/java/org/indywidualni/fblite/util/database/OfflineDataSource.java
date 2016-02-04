@@ -1,9 +1,11 @@
 package org.indywidualni.fblite.util.database;
 
 import android.content.ContentValues;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.preference.PreferenceManager;
 
 import org.indywidualni.fblite.MyApplication;
 import org.indywidualni.fblite.R;
@@ -13,10 +15,12 @@ import java.util.ArrayList;
 public class OfflineDataSource {
 
     private static volatile OfflineDataSource instance;
-    private static final int MAX_PAGES = 10;
 
     private SQLiteDatabase database;
     private MySQLiteHelper dbHelper;
+
+    private SharedPreferences preferences = PreferenceManager
+            .getDefaultSharedPreferences(MyApplication.getContextOfApplication());
 
     private OfflineDataSource() {}
 
@@ -48,8 +52,15 @@ public class OfflineDataSource {
 
     public void trimDatabase() {
         // a database has to be opened first
+        int maxPages = 10;
+        try {  // just in case
+            maxPages = Integer.parseInt(preferences.getString("offline_keep_max", "10"));
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        // delete the oldest rows leaving the latest maxPages rows
         database.execSQL("DELETE FROM Pages WHERE ROWID IN (" +
-                "SELECT ROWID FROM Pages ORDER BY ROWID DESC LIMIT -1 OFFSET " + MAX_PAGES + ");");
+                "SELECT ROWID FROM Pages ORDER BY ROWID DESC LIMIT -1 OFFSET " + maxPages + ");");
     }
 
     public synchronized void insertPage(String url, String html) throws SQLException {

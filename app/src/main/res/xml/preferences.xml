@@ -127,13 +127,30 @@
 
 
     <PreferenceCategory
-        android:title="@string/preference_category2">
+        android:title="@string/offline_mode">
 
         <CheckBoxPreference
             android:key="offline_mode"
-            android:title="@string/offline_mode"
+            android:title="@string/offline_mode_enable"
             android:summary="@string/offline_mode_description"
             android:defaultValue="false"/>
+
+        <EditTextPreference
+            android:key="offline_keep_max"
+            android:inputType="number"
+            android:title="@string/offline_keep_max"
+            android:summary="@string/offline_keep_max_description"
+            android:defaultValue="10"/>
+
+        <Preference
+            android:summary="@string/offline_dummy_description"
+            android:selectable="false"/>
+
+    </PreferenceCategory>
+
+
+    <PreferenceCategory
+        android:title="@string/preference_category2">
 
         <CheckBoxPreference
             android:key="hardware_acceleration"
