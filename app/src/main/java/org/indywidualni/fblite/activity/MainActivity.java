@@ -55,8 +55,6 @@ import org.indywidualni.fblite.util.Connectivity;
 import org.indywidualni.fblite.util.Dimension;
 import org.indywidualni.fblite.util.DownloadManagerResolver;
 import org.indywidualni.fblite.util.Miscellany;
-import org.indywidualni.fblite.util.Offline;
-import org.indywidualni.fblite.util.database.PageModel;
 import org.indywidualni.fblite.webview.MyWebViewClient;
 
 import java.io.File;
@@ -64,7 +62,6 @@ import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.text.DateFormat;
 import java.util.Date;
-import java.util.List;
 
 public class MainActivity extends Activity {
 
@@ -323,15 +320,6 @@ public class MainActivity extends Activity {
                 return false;
             }
         });
-
-/*        try {
-            // todo: remove it, for testing
-            List<PageModel> pages = new Offline().getDataSource().getAllPages();
-            Log.e("PAGE", "Pages");
-            for (PageModel p : pages) {
-                Log.e("PAGE", p.getUrl() + " " + p.getHtml().substring(0, 50));
-            }
-        } catch (Exception ignore) {}*/
 
     }
 
@@ -698,8 +686,11 @@ public class MainActivity extends Activity {
             if (!Connectivity.isConnected(getApplicationContext()))
                 Toast.makeText(getApplicationContext(), getString(R.string.no_network), Toast.LENGTH_SHORT).show();
 
-            // reloading page
-            webView.reload();
+            // reloading page (if offline try to load a live version first)
+            if (preferences.getBoolean("offline_mode", false))
+                webView.loadUrl(MyWebViewClient.currentlyLoadedPage);
+            else
+                webView.reload();
 
             new Handler().postDelayed(new Runnable() {
 

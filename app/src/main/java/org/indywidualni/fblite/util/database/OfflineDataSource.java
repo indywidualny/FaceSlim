@@ -5,12 +5,15 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+import org.indywidualni.fblite.MyApplication;
+import org.indywidualni.fblite.R;
+
 import java.util.ArrayList;
 
 public class OfflineDataSource {
 
     private static volatile OfflineDataSource instance;
-    private static final int MAX_PAGES = 50;
+    private static final int MAX_PAGES = 10;
 
     private SQLiteDatabase database;
     private MySQLiteHelper dbHelper;
@@ -36,14 +39,18 @@ public class OfflineDataSource {
 
     private void close() {
         if (database != null) {
+            trimDatabase();
             dbHelper.close();
             dbHelper = null;
             database = null;
         }
     }
 
-    // todo: trim the database during every app start when offline mode is enabled to store MAX_PAGES values
-    // todo: or better trim it every onStop() to avoid (relatively) huge storage consumption
+    public void trimDatabase() {
+        // a database has to be opened first
+        database.execSQL("DELETE FROM Pages WHERE ROWID IN (" +
+                "SELECT ROWID FROM Pages ORDER BY ROWID DESC LIMIT -1 OFFSET " + MAX_PAGES + ");");
+    }
 
     public synchronized void insertPage(String url, String html) throws SQLException {
         open();
@@ -67,7 +74,7 @@ public class OfflineDataSource {
         boolean exists = false;
 
         try {
-            cursor = database.rawQuery("select 1 from Pages where url=?;", new String[]{url});
+            cursor = database.rawQuery("select 1 from Pages where url=?;", new String[] {url});
             exists = (cursor.getCount() > 0);
         } finally {
             if (cursor != null)
@@ -80,8 +87,7 @@ public class OfflineDataSource {
     public synchronized String getPage(String url) throws SQLException {
         open();
         Cursor cursor = null;
-        // TODO: make it a resource string
-        String html = "<center><h1>This page was not found in offline database</h1></center>";
+        String html = MyApplication.getContextOfApplication().getString(R.string.not_found_offline);
 
         try {
             cursor = database.rawQuery("SELECT html FROM Pages WHERE url=?;", new String[] { url });
@@ -99,19 +105,19 @@ public class OfflineDataSource {
     }
 
     // for debugging
-    public synchronized ArrayList<PageModel> getAllPages() {
+    public synchronized ArrayList<String> getAllPages() {
         open();
         Cursor cursor = null;
-        ArrayList<PageModel> list = new ArrayList<>();
+        ArrayList<String> list = new ArrayList<>();
 
         try {
-            cursor = database.rawQuery("Select url, html from Pages", new String[] {});
+            cursor = database.rawQuery("Select url from Pages", new String[] {});
             if(cursor.getCount() > 0) {
                 // retrieve the data to my custom model
                 cursor.moveToFirst();
 
                 while (!cursor.isAfterLast()) {
-                    PageModel page = cursorToPages(cursor);
+                    String page = cursorToPages(cursor);
                     list.add(page);
                     cursor.moveToNext();
                 }
@@ -125,8 +131,8 @@ public class OfflineDataSource {
         return list;
     }
 
-    private PageModel cursorToPages(Cursor cursor) {
-        return new PageModel(cursor.getString(0), cursor.getString(1));
+    private String cursorToPages(Cursor cursor) {
+        return cursor.getString(0);
     }
 
 }

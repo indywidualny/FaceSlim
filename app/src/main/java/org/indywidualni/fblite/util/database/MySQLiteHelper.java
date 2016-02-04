@@ -9,7 +9,7 @@ import org.indywidualni.fblite.MyApplication;
 public class MySQLiteHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "offline.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 5;
 
     public MySQLiteHelper() {
         super(MyApplication.getContextOfApplication(), DATABASE_NAME, null, DATABASE_VERSION);

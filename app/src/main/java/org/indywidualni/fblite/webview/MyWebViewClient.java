@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.database.SQLException;
 import android.net.Uri;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.webkit.URLUtil;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
@@ -20,7 +21,13 @@ import org.indywidualni.fblite.util.Dimension;
 import org.indywidualni.fblite.util.FileOperation;
 import org.indywidualni.fblite.util.Offline;
 
+import java.util.List;
+
 public class MyWebViewClient extends WebViewClient {
+
+    // a currently loaded page
+    public static String currentlyLoadedPage = "https://m.facebook.com";
+    private static long lastSavingTime = System.currentTimeMillis();
 
     // variable for onReceivedError
     private boolean refreshed;
@@ -67,7 +74,7 @@ public class MyWebViewClient extends WebViewClient {
     public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
         // todo: something is wrong here, maybe it should be removed for good
         // refresh on connection error (sometimes there is an error even when there is a network connection)
-        if (Connectivity.isConnected(context) && !refreshed) {
+        if (Connectivity.isConnected(context) && !failingUrl.contains("edge-chat") && !refreshed) {
             view.loadUrl(failingUrl);
             // when network error is real do not reload url again
             refreshed = true;
@@ -156,14 +163,21 @@ public class MyWebViewClient extends WebViewClient {
             if (offline == null)
                 offline = new Offline();
 
-            // is an url valid and it's a facebook page
+            // is url valid and is it a facebook page
             if (!URLUtil.isValidUrl(url) || !url.contains("facebook.com"))
                 return;
 
             try {
                 if (Connectivity.isConnected(context)) {
                     // save the current page when online
-                    offline.savePage(url);
+                    if (!currentlyLoadedPage.equals(url)) {
+                        offline.savePage(url);
+                        lastSavingTime = System.currentTimeMillis();
+                    } else if (currentlyLoadedPage.equals(url) && lastSavingTime < System.currentTimeMillis() - 5000) {
+                        // don't save it when it's the same page which was saved less than 5s ago
+                        offline.savePage(url);
+                        lastSavingTime = System.currentTimeMillis();
+                    }
                 } else {
                     // try to load page from the database when offline
                     view.loadData(offline.getPage(url), "text/html; charset=utf-8", "UTF-8");
@@ -172,6 +186,20 @@ public class MyWebViewClient extends WebViewClient {
                 e.printStackTrace();
             }
         }
+
+        // save the currently loaded page (needed for a reliable refreshing)
+        currentlyLoadedPage = url;
+
+        // todo: remove it, it's just for testing
+/*        if (offline != null) {
+            try {
+                List<String> pages = offline.getDataSource().getAllPages();
+                Log.i("OfflineMode", "Pages");
+                for (String pageUrl : pages) {
+                    Log.i("Page", pageUrl);
+                }
+            } catch (Exception ignore) {}
+        }*/
     }
 
 }

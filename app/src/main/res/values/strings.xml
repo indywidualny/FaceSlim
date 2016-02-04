@@ -140,5 +140,6 @@
 
     <string name="offline_mode">Offline mode</string>
     <string name="offline_mode_description">When there is no Internet connection try to load a page from cache and a database.</string>
+    <string name="not_found_offline"><![CDATA[<center><h1>This page was not found in offline database</h1></center>]]></string>
 
 </resources>

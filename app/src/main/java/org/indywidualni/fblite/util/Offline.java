@@ -55,6 +55,7 @@ public class Offline {
                 final Connection.Response response = Jsoup.connect(args[0]).userAgent(userAgent)
                         .cookie("https://m.facebook.com", CookieManager.getInstance().getCookie("https://m.facebook.com")).execute();
                 final Document doc = response.parse();
+                // insert values into a database
                 dataSource.insertPage(args[0], doc.outerHtml());
             } catch (Exception e) {
                 Log.e(getClass().getSimpleName(), "Problem saving the current page");
