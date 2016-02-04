@@ -858,7 +858,7 @@ public class MainActivity extends Activity {
             webView.loadUrl(webViewUrl);
 
         // notify when there is no internet connection
-        if (!Connectivity.isConnected(getApplicationContext()))
+        if (!Connectivity.isConnected(getApplicationContext()) && !preferences.getBoolean("offline_mode", false))
             Toast.makeText(getApplicationContext(), getString(R.string.no_network), Toast.LENGTH_SHORT).show();
 
         // recreate activity when something important was just changed

@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.database.SQLException;
 import android.net.Uri;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.Gravity;
 import android.webkit.URLUtil;
 import android.webkit.WebResourceError;
@@ -24,8 +23,6 @@ import org.indywidualni.fblite.util.Connectivity;
 import org.indywidualni.fblite.util.Dimension;
 import org.indywidualni.fblite.util.FileOperation;
 import org.indywidualni.fblite.util.Offline;
-
-import java.util.List;
 
 public class MyWebViewClient extends WebViewClient {
 
@@ -76,7 +73,6 @@ public class MyWebViewClient extends WebViewClient {
     @SuppressWarnings("deprecation")
     @Override
     public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-        // todo: something is wrong here, maybe it should be removed for good
         // refresh on connection error (sometimes there is an error even when there is a network connection)
         if (Connectivity.isConnected(context) && !failingUrl.contains("edge-chat") && !refreshed) {
             view.loadUrl(failingUrl);
