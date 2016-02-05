@@ -437,6 +437,8 @@ public class NotificationsService extends Service {
         // vibration
         if (trayPreferences.getBoolean("vibrate", false))
             mBuilder.setVibrate(new long[] {500, 500});
+        else
+            mBuilder.setVibrate(new long[] {0l});
 
         // LED light
         if (trayPreferences.getBoolean("led_light", false))
@@ -459,6 +461,10 @@ public class NotificationsService extends Service {
         mBuilder.setContentIntent(resultPendingIntent);
         mBuilder.setOngoing(false);
         Notification note = mBuilder.build();
+
+        // LED light flag
+        if (trayPreferences.getBoolean("led_light", false))
+            note.flags |= Notification.FLAG_SHOW_LIGHTS;
 
         // display a notification
         NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
