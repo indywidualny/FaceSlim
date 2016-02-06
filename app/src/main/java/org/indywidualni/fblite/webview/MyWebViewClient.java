@@ -261,7 +261,8 @@ public class MyWebViewClient extends WebViewClient {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        }
+        } else
+	    offline = null;
 
         // save the currently loaded page (needed for a reliable refreshing)
         currentlyLoadedPage = url;
