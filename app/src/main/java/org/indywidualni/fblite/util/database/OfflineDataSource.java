@@ -115,14 +115,13 @@ public class OfflineDataSource {
         return html;
     }
 
-    // for debugging
     public synchronized ArrayList<String> getAllPages() {
         open();
         Cursor cursor = null;
         ArrayList<String> list = new ArrayList<>();
 
         try {
-            cursor = database.rawQuery("Select url from Pages", new String[] {});
+            cursor = database.rawQuery("Select url from Pages ORDER BY ROWID DESC", new String[] {});
             if(cursor.getCount() > 0) {
                 // retrieve the data to my custom model
                 cursor.moveToFirst();

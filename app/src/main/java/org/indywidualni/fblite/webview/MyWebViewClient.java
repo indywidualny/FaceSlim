@@ -1,18 +1,24 @@
 package org.indywidualni.fblite.webview;
 
 import android.annotation.TargetApi;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.database.SQLException;
 import android.net.Uri;
 import android.preference.PreferenceManager;
+import android.support.v4.content.ContextCompat;
 import android.view.Gravity;
+import android.view.View;
 import android.webkit.URLUtil;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import com.devspark.appmsg.AppMsg;
 
@@ -22,7 +28,11 @@ import org.indywidualni.fblite.activity.MainActivity;
 import org.indywidualni.fblite.util.Connectivity;
 import org.indywidualni.fblite.util.Dimension;
 import org.indywidualni.fblite.util.FileOperation;
+import org.indywidualni.fblite.util.FloatingActionButton;
 import org.indywidualni.fblite.util.Offline;
+import org.indywidualni.fblite.util.OfflinePagesAdapter;
+
+import java.util.ArrayList;
 
 public class MyWebViewClient extends WebViewClient {
 
@@ -44,6 +54,13 @@ public class MyWebViewClient extends WebViewClient {
 
     // object for offline mode management
     private Offline offline;
+    private FloatingActionButton fab;
+    private static WebView webView;
+
+    // in order to load pages we need a reference to a WebView object from MainActivity
+    public static void setWebviewReference(WebView wv) {
+        webView = wv;
+    }
 
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -74,7 +91,8 @@ public class MyWebViewClient extends WebViewClient {
     @Override
     public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
         // refresh on connection error (sometimes there is an error even when there is a network connection)
-        if (Connectivity.isConnected(context) && !failingUrl.contains("edge-chat") && !refreshed) {
+        if (Connectivity.isConnected(context) && !failingUrl.contains("edge-chat") && !failingUrl.contains("akamaihd")
+                && !failingUrl.contains("atdmt") && !refreshed) {
             view.loadUrl(failingUrl);
             // when network error is real do not reload url again
             refreshed = true;
@@ -163,6 +181,10 @@ public class MyWebViewClient extends WebViewClient {
             if (offline == null)
                 offline = new Offline();
 
+            // hide floating action button
+            if (fab != null && Connectivity.isConnected(context) && !fab.isHidden())
+                fab.hideFloatingActionButton();
+
             // is url valid and is it a facebook page
             if (!URLUtil.isValidUrl(url) || !url.contains("facebook.com"))
                 return;
@@ -181,11 +203,55 @@ public class MyWebViewClient extends WebViewClient {
                 } else {
                     // try to load page from the database when offline
                     view.loadData(offline.getPage(url), "text/html; charset=utf-8", "UTF-8");
+
                     // show the message at the bottom of the screen
                     AppMsg appMsg = AppMsg.makeText(MainActivity.getMainActivity(),
                             context.getString(R.string.loading_offline_database),
                             new AppMsg.Style(AppMsg.LENGTH_SHORT, R.color.colorAccent));
-                    appMsg.setLayoutGravity(Gravity.BOTTOM).show();
+                    appMsg.setLayoutGravity(Gravity.TOP);
+                    if (preferences.getBoolean("transparent_nav", false) && context.getResources()
+                            .getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
+                        appMsg.setLayoutParams(Dimension.getParamsAppMsg(context));
+                    appMsg.show();
+
+                    // floating action button
+                    if (fab == null) {
+                        fab = new FloatingActionButton.Builder(MainActivity.getMainActivity())
+                                .withDrawable(ContextCompat.getDrawable(context, R.mipmap.ic_device_storage))
+                                .withButtonColor(ContextCompat.getColor(context, R.color.colorAccent))
+                                .withGravity(Gravity.BOTTOM | Gravity.END)
+                                .withMargins(0, 0, 16, 16)
+                                .create();
+
+                        if (preferences.getBoolean("transparent_nav", false))
+                            fab.setY(-Dimension.getNavigationBarHeight(context, 0));
+
+                        // on click listener for fab
+                        fab.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                final Dialog dialog = new Dialog(MainActivity.getMainActivity());
+                                dialog.setContentView(R.layout.dialog_offline_list);
+                                dialog.setTitle(context.getString(R.string.offline_list));
+                                dialog.show();
+
+                                final ArrayList<String> page = offline.getDataSource().getAllPages();
+                                ListView lv = (ListView) dialog.findViewById(R.id.list_offline);
+                                OfflinePagesAdapter opa = new OfflinePagesAdapter(MainActivity.getMainActivity(), page);
+                                lv.setAdapter(opa);
+
+                                lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                        if (webView != null) {
+                                            webView.loadUrl(page.get(position));
+                                            dialog.dismiss();
+                                        }
+                                    }
+                                });
+                            }
+                        });
+                    } else if (fab.isHidden())
+                        fab.showFloatingActionButton();
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -194,17 +260,6 @@ public class MyWebViewClient extends WebViewClient {
 
         // save the currently loaded page (needed for a reliable refreshing)
         currentlyLoadedPage = url;
-
-        // todo: remove it, it's just for testing
-/*        if (offline != null) {
-            try {
-                List<String> pages = offline.getDataSource().getAllPages();
-                Log.i("OfflineMode", "Pages");
-                for (String pageUrl : pages) {
-                    Log.i("Page", pageUrl);
-                }
-            } catch (Exception ignore) {}
-        }*/
     }
 
 }

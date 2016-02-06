@@ -50,7 +50,6 @@ public class Offline {
         new SaveTask().execute(url);
     }
 
-    // for debugging
     public OfflineDataSource getDataSource() {
         return dataSource;
     }
