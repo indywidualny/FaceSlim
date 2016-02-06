@@ -310,12 +310,12 @@ public class MainActivity extends Activity {
         webView.setWebViewClient(new MyWebViewClient());
         webView.setWebChromeClient(mWebChromeClient);
 
+        // set webView reference
+        MyWebViewClient.setWebviewReference(webView);
+
         // load url in a webView
         MyWebViewClient.currentlyLoadedPage = webViewUrl;
         webView.loadUrl(webViewUrl);
-
-        // set webView reference
-        MyWebViewClient.setWebviewReference(webView);
 
         // OnLongClickListener for detecting long clicks on links and images
         webView.setOnLongClickListener(new View.OnLongClickListener() {
@@ -700,7 +700,7 @@ public class MainActivity extends Activity {
                 Toast.makeText(getApplicationContext(), getString(R.string.no_network), Toast.LENGTH_SHORT).show();
 
             // reloading page (if offline try to load a live version first)
-            if (preferences.getBoolean("offline_mode", false) && !Connectivity.isConnected(getApplicationContext()))
+            if (preferences.getBoolean("offline_mode", false) && MyWebViewClient.wasOffline)
                 webView.loadUrl(MyWebViewClient.currentlyLoadedPage);
             else
                 webView.reload();

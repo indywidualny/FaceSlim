@@ -39,6 +39,7 @@ public class MyWebViewClient extends WebViewClient {
     // a currently loaded page
     public static String currentlyLoadedPage;
     private static long lastSavingTime = System.currentTimeMillis();
+    public static boolean wasOffline;
 
     // variable for onReceivedError
     private boolean refreshed;
@@ -185,6 +186,9 @@ public class MyWebViewClient extends WebViewClient {
             if (fab != null && Connectivity.isConnected(context) && !fab.isHidden())
                 fab.hideFloatingActionButton();
 
+	    // reset offline status, it's gonna be set later if needed
+	    wasOffline = false;
+
             // is url valid and is it a facebook page
             if (!URLUtil.isValidUrl(url) || !url.contains("facebook.com"))
                 return;
@@ -203,6 +207,7 @@ public class MyWebViewClient extends WebViewClient {
                 } else {
                     // try to load page from the database when offline
                     view.loadData(offline.getPage(url), "text/html; charset=utf-8", "UTF-8");
+		    wasOffline = true;
 
                     // show the message at the bottom of the screen
                     AppMsg appMsg = AppMsg.makeText(MainActivity.getMainActivity(),
