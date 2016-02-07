@@ -192,6 +192,13 @@ public class MyWebViewClient extends WebViewClient {
             if (Connectivity.isConnected(context))
                 wasOffline = false;
 
+            // rare case when we suddenly got an internet connection but an offline page is being refreshed
+            if (Connectivity.isConnected(context) && Uri.parse(url).getHost() == null) {
+                webView.loadUrl(currentlyLoadedPage);
+                wasOffline = false;  // again, just to be 100% sure
+                return;
+            }
+
             // is url valid and is it a facebook page
             if (!URLUtil.isValidUrl(url) || !url.contains("facebook.com"))
                 return;
@@ -249,14 +256,13 @@ public class MyWebViewClient extends WebViewClient {
                                 final ArrayList<String> page = offline.getDataSource().getAllPages();
                                 ListView lv = (ListView) dialog.findViewById(R.id.list_offline);
                                 OfflinePagesAdapter opa = new OfflinePagesAdapter(MainActivity.getMainActivity(), page);
+                                lv.setEmptyView(dialog.findViewById(R.id.empty_element));
                                 lv.setAdapter(opa);
 
                                 lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                        if (webView != null) {
-                                            webView.loadUrl(page.get(position));
-                                            dialog.dismiss();
-                                        }
+                                        webView.loadUrl(page.get(position));
+                                        dialog.dismiss();
                                     }
                                 });
                             }
