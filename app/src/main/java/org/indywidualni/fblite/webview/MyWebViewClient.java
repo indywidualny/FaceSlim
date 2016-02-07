@@ -1,5 +1,6 @@
 package org.indywidualni.fblite.webview;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.content.Context;
@@ -11,6 +12,7 @@ import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.v4.content.ContextCompat;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.webkit.URLUtil;
 import android.webkit.WebResourceError;
@@ -186,8 +188,9 @@ public class MyWebViewClient extends WebViewClient {
             if (fab != null && Connectivity.isConnected(context) && !fab.isHidden())
                 fab.hideFloatingActionButton();
 
-	    // reset offline status, it's gonna be set later if needed
-	    wasOffline = false;
+            // reset offline status, it's gonna be set later if needed
+            if (Connectivity.isConnected(context))
+                wasOffline = false;
 
             // is url valid and is it a facebook page
             if (!URLUtil.isValidUrl(url) || !url.contains("facebook.com"))
@@ -207,7 +210,7 @@ public class MyWebViewClient extends WebViewClient {
                 } else {
                     // try to load page from the database when offline
                     view.loadData(offline.getPage(url), "text/html; charset=utf-8", "UTF-8");
-		    wasOffline = true;
+                    wasOffline = true;
 
                     // show the message at the bottom of the screen
                     AppMsg appMsg = AppMsg.makeText(MainActivity.getMainActivity(),
@@ -235,9 +238,12 @@ public class MyWebViewClient extends WebViewClient {
                         fab.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                final Dialog dialog = new Dialog(MainActivity.getMainActivity());
-                                dialog.setContentView(R.layout.dialog_offline_list);
-                                dialog.setTitle(context.getString(R.string.offline_list));
+                                LayoutInflater inflater = MainActivity.getMainActivity().getLayoutInflater();
+                                @SuppressLint("InflateParams") View customView = inflater
+                                        .inflate(R.layout.dialog_offline_list, null);
+
+                                final Dialog dialog = new Dialog(MainActivity.getMainActivity(), R.style.CustomDialogTheme);
+                                dialog.setContentView(customView);
                                 dialog.show();
 
                                 final ArrayList<String> page = offline.getDataSource().getAllPages();
@@ -262,7 +268,7 @@ public class MyWebViewClient extends WebViewClient {
                 e.printStackTrace();
             }
         } else
-	    offline = null;
+            offline = null;
 
         // save the currently loaded page (needed for a reliable refreshing)
         currentlyLoadedPage = url;
