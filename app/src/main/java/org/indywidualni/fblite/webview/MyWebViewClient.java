@@ -194,8 +194,8 @@ public class MyWebViewClient extends WebViewClient {
 
             // rare case when we suddenly got an internet connection but an offline page is being refreshed
             if (Connectivity.isConnected(context) && Uri.parse(url).getHost() == null) {
-                webView.loadUrl(currentlyLoadedPage);
                 wasOffline = false;  // again, just to be 100% sure
+                webView.loadUrl(currentlyLoadedPage);
                 return;
             }
 
