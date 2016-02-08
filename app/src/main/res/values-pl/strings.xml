@@ -121,12 +121,22 @@
     <string name="file_logger_needs_permission">Brak dostępu do pamięci zewnętrznej. Log nie może zostać zapisany</string>
     <string name="save_img">Zapisz zdjęcie</string>
     <string name="downloading_img">Pobieram zdjęcie&#8230;</string>
-
     <string name="download_manager_disabled">DownloadManager jest wyłączony. Włącz go proszę.</string>
     <string name="cannot_access_storage">Brak dostępu do pamięci zewnętrznej</string>
     <string name="file_cannot_be_saved">Plik nie może zostać zapisany</string>
     <string name="camera_exception">Nie mogę użyć aparatu</string>
     <string name="load_extra">Ładuj zewnętrzne obrazy</string>
     <string name="load_extra_description">Otwieraj zdjęcia z zewnętrznych serwisów. Obecnie niewiele stron jest wspieranych.</string>
+
+    <string name="offline_mode">Tryb offline</string>
+    <string name="offline_mode_enable">Aktywuj tryb offline</string>
+    <string name="offline_mode_description">Gdy nie ma połączenia z Internetem spróbuj załadować stronę z cache i bazy danych.</string>
+    <string name="not_found_offline" formatted="false"><![CDATA[<div style=\"position: absolute;top: 50%;left: 50%;transform: translateX(-50%) translateY(-50%);\"><div><h1>Niestety strona nie została znaleziona w bazie</h1><h1>Tip: by cofnąć, cofnij dwukrotnie</h1></div></div>]]></string>
+    <string name="loading_offline_database">Ładowanie strony z bazy danych</string>
+    <string name="offline_keep_max">Max liczba stron do przechowania</string>
+    <string name="offline_keep_max_description">Gdy online odwiedzone strony są zapisywane w bazie danych. Domyślnie (najnowsze) 10 stron.</string>
+    <string name="offline_dummy_description">Kod źródłowy bieżącej strony jest asynchronicznie zapisywany w bazie danych. W przypadku duplikatu zachowam najnowszą wersję. Odśwież by wymusić aktualizację. Nie działa dla dynamicznych treści.</string>
+    <string name="keyboard_fix">Napraw niewidoczne formularze &#8635;</string>
+    <string name="offline_database_empty">Baza danych jest pusta</string>
 
 </resources>

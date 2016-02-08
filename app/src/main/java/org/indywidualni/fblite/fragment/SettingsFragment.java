@@ -106,6 +106,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
                     case "transparent_nav":
                     case "drawer_pos":
                     case "no_images":
+                    case "keyboard_fix":
                     case "hardware_acceleration":
                         relaunch();
                         break;

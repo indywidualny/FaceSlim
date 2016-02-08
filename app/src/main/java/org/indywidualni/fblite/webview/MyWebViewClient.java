@@ -134,13 +134,14 @@ public class MyWebViewClient extends WebViewClient {
             String cssFixed = "#header{ position: fixed; z-index: 11; top: 0px; } #root{ padding-top: 44px; } " +
                     ".flyout{ max-height: " + Dimension.heightForFixedFacebookNavbar(context) + "px; overflow-y: scroll; }";
 
-            try {
+            // there is no host in offline mode
+            if (Uri.parse(url).getHost() != null) {
                 if (Uri.parse(url).getHost().endsWith("mbasic.facebook.com"))
                     cssFixed = "#header{ position: fixed; z-index: 11; top: 0px; } #objects_container{ padding-top: 74px; }";
                 else if (Uri.parse(url).getHost().endsWith("0.facebook.com"))
                     cssFixed = "#toggleHeaderContent{position: fixed; z-index: 11; top: 0px;} " +
                             "#header{ position: fixed; z-index: 11; top: 28px; } #objects_container{ padding-top: 102px; }";
-            } catch (NullPointerException ignore) { /* there is no host host in offline mode */ }
+            }
 
             view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); " +
                     "node.innerHTML = str; document.body.appendChild(node); } addStyleString('" + cssFixed + "');");

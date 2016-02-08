@@ -39,14 +39,14 @@ public class Offline {
     public String getPage(String url) throws SQLException {
         url = removeRefID(url);
         url = removeEndingSlash(url);
-        Log.v(getClass().getSimpleName(), "Getting: " + url);
+        //Log.v(getClass().getSimpleName(), "Getting: " + url);
         return dataSource.getPage(url);
     }
 
     public void savePage(String url) throws SQLException {
         url = removeRefID(url);
         url = removeEndingSlash(url);
-        Log.v(getClass().getSimpleName(), "Saving: " + url);
+        //Log.v(getClass().getSimpleName(), "Saving: " + url);
         new SaveTask().execute(url);
     }
 

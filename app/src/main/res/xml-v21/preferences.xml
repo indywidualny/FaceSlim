@@ -131,7 +131,7 @@
 
         <SwitchPreference
             android:key="offline_mode"
-            android:title="@string/offline_mode"
+            android:title="@string/offline_mode_enable"
             android:summary="@string/offline_mode_description"
             android:defaultValue="false"/>
 

@@ -42,8 +42,8 @@ public class MyApplication extends Application {
         /**
          * Piwik dry run. Uncomment these lines during app development.
          */
-        Piwik.getInstance(this).setDryRun(true);
-        Piwik.getInstance(this).setDebug(true);
+        //Piwik.getInstance(this).setDryRun(true);
+        //Piwik.getInstance(this).setDebug(true);
 
         /**
          * Count app downloads. Fired only after new installation or upgrade.
