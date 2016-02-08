@@ -131,5 +131,14 @@
     <string name="camera_exception">Problém s kamerou</string>
     
     <string name="offline_mode">V režimu offline</string>
+    <string name="offline_mode_enable">Povolit režim offline</string>
     <string name="offline_mode_description">Pokud není dostupné spojení do internetu, pokusit se načíst stránku z dočasné paměti a databáze.</string>
+    <string name="not_found_offline" formatted="false"><![CDATA[<div style=\"position: absolute;top: 50%;left: 50%;transform: translateX(-50%) translateY(-50%);\"><div><h1>Tato stránka bohužel nebyla v offline databázi nalezena</h1><h1>Tip: zpět se dostanete klepnutím na zpět 2x</h1></div></div>]]></string>
+    <string name="loading_offline_database">Nahrávám stránku z offline databáze</string>
+    <string name="offline_keep_max">Maximální počet stránek k uložení</string>
+    <string name="offline_keep_max_description">Ve stavu online se stránky ukládají asynchronně do dočasné paměti a databáze. Výchozí hodnota je 10 posledních.</string>
+    <string name="offline_dummy_description">Tato vlastnost je vhodná pro Wi-Fi spojení, protože aplikace stahuje dvojnásobné množství dat. Pokud vám to nevadí, můžete tuto vlastnost využít i při mobilním spojení. Zdrojový kód aktuální stránky je nezávisle ukládán do databáze. Při nalezení duplicity je přepsána. Přepsání stránky dosáhnete její aktualizací.</string>
+    <string name="keyboard_fix">Oprava překrývání klávesnice</string>
+    <string name="offline_database_empty">Offline databáze je prázdná</string>
+
 </resources>
