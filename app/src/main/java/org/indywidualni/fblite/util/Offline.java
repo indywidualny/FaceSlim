@@ -37,15 +37,13 @@ public class Offline {
     }
 
     public String getPage(String url) throws SQLException {
-        url = removeRefID(url);
-        url = removeEndingSlash(url);
+        url = cleanUrl(url);
         //Log.v(getClass().getSimpleName(), "Getting: " + url);
         return dataSource.getPage(url);
     }
 
     public void savePage(String url) throws SQLException {
-        url = removeRefID(url);
-        url = removeEndingSlash(url);
+        url = cleanUrl(url);
         //Log.v(getClass().getSimpleName(), "Saving: " + url);
         new SaveTask().execute(url);
     }
@@ -101,15 +99,26 @@ public class Offline {
         }
     }
 
-    public static String removeEndingSlash(String url) {
+    private static String removeEndingSlash(String url) {
         if (url.length() > 0 && url.charAt(url.length()-1)=='/')
             url = url.substring(0, url.length()-1);
         return url;
     }
 
-    public static String removeRefID(String url) {
-        url = url.replaceAll("\\?refid=.*", "");
-        return url.replace("home.php", "");
+    public static String cleanUrl(String url) {
+        /**
+         * remove ?refid=*      it's always first and nothing is later
+         * remove ?hrc=*        it's always first and nothing important is later
+         * remove &refsrc=*     it's always last and nothing important is later
+         * remove home.php      it's always first and nothing is later (main page)
+         * replace              mobile.  to  m.
+         * remove ?_rdr         it's always last and nothing is later
+         * remove &_rdr         it's always last and nothing is later
+         * remove /             it's always last and nothing is later
+        */
+        url = url.replaceAll("\\?refid=.*", "").replaceAll("\\?hrc=.*", "").replaceAll("&refsrc=.*", "");
+        url = url.replace("home.php", "").replace("mobile.", "m.").replace("?_rdr", "").replace("&_rdr", "");
+        return removeEndingSlash(url);
     }
 
 }

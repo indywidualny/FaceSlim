@@ -277,6 +277,19 @@ public class MyWebViewClient extends WebViewClient {
         } else
             offline = null;
 
+
+/*        // todo: remove it, it's just for testing
+        if (offline != null) {
+            try {
+                List<String> pages = offline.getDataSource().getAllPages();
+                Log.i("OfflineMode", "Pages");
+                for (String pageUrl : pages) {
+                    Log.i("Page", pageUrl);
+                }
+            } catch (Exception ignore) {}
+        }*/
+
+
         // save the currently loaded page (needed for a reliable refreshing)
         currentlyLoadedPage = url;
     }
