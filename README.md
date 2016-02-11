@@ -7,6 +7,20 @@ Releases | [pl] wydania: https://github.com/indywidualny/FaceSlim/releases
 ## Changelog
 & what makes the application awesome:
 
+**2.4**
+* offline mode - When there is no network load pages from a database. It's not perfect and doesn't work for a dynamically loaded content... but it may be useful! #89
+* new notifications check interval (2 minutes) #119
+* rare bug with keyboard overlaying forms fixed (advanced settings checkbox) #98
+* no vibrations when the setting is turned off (fix) #123
+* LED for Samsung devices (Marshmallow) should work. I hope ;) #121
+* problems with loading a page during app startup fixed
+* send button in chat when 'disable images' option is enabled is no longer missing #114
+* fixed Facebook blue navigation bar works for all the modes now (normal, basic, zero)
+* 'install messenger' notice is hidden by default, it was so annoying
+
+New way to buy me a beer. Google Play Donation package - see About App page's menu or follow the link:<br />
+https://play.google.com/store/apps/details?id=org.indywidualni.faceslim_donation
+
 **2.3**
 * some IllegalStateExceptions caught (no more crashes on some devices)
 * option to load extra images (thanks [pejakm](https://github.com/pejakm)) - load external images from: googleusercontent.com, tumblr.com, pinimg.com, media.giphy.com
@@ -156,6 +170,9 @@ Refresh the page by pulling down with your finger. External links will open in y
 ## Support future development!
 Buy me a beer or two :)<br />
 BTC:&nbsp;  1JUaZytkub2CP5jhRYQDDY6pibqrUUSp2y
+
+<b>Google Play donation package:</b><br />
+https://play.google.com/store/apps/details?id=org.indywidualni.faceslim_donation
 
 [![Donate with PayPal](https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif "Donate with PayPal")](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=koras%2eevil%40gmail%2ecom&lc=GB&item_name=Krzysztof%20Grabowski&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)
 

@@ -63,6 +63,7 @@
     <string name="quick_guide">Quick Start Guide</string>
     <string name="messages">Messages</string>
     <string name="donate_paypal">Donate\u0020 –\u0020 PayPal</string>
+    <string name="donate_google">Donate\u0020 –\u0020 Google</string>
     <string name="paypal_url" formatted="false">https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=koras%2eevil%40gmail%2ecom&amp;lc=GB&amp;item_name=Krzysztof%20Grabowski&amp;currency_code=USD&amp;bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted</string>
 
     <string-array name="drawerPosTitles">

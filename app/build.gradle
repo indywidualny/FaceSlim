@@ -9,8 +9,8 @@ android {
         resValue "string", "tray__authority", "${applicationId}.tray"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 29
-        versionName "2.3.2"
+        versionCode 30
+        versionName "2.4.0"
     }
     buildTypes {
         release {
@@ -18,7 +18,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }

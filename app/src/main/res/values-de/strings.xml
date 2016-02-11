@@ -11,6 +11,7 @@
     <string name="dark_theme">Dunkles Thema</string>
     <string name="dark_theme_description">Facebook schwärzen. Dein AMOLED Display wird das schätzen.</string>
     <string name="donate_paypal">Spenden\u0020 –\u0020 PayPal</string>
+    <string name="donate_google">Spenden\u0020 –\u0020 Google</string>
     <string name="drawer_pos">Gleitmenü Position &#8635;</string>
     <string name="drawer_pos_description">Menü befindet sich derzeit %s.</string>
     <string name="email_author">Kontakt</string>

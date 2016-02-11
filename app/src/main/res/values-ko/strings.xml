@@ -65,6 +65,7 @@
     <string name="quick_guide">빠른 시작 안내</string>
     <string name="messages">메세지</string>
     <string name="donate_paypal">기부하기 \u0020 –\u0020 PayPal</string>
+    <string name="donate_google">기부하기 \u0020 –\u0020 Google</string>
     <string name="drawer_pos">슬라이드 메뉴 위치 &#8635;</string>
     <string name="drawer_pos_description">메뉴가 화면의 %s 방향에서 열립니다.</string>
     <string name="preference_category5">알림</string>

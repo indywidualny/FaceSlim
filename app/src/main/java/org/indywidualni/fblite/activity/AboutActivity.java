@@ -50,6 +50,10 @@ public class AboutActivity extends AppCompatActivity {
                 // author at Google Play
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/developer?id=Indywidualni")));
                 return true;
+            case R.id.donate_google:
+                // donate with Google Play
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=org.indywidualni.faceslim_donation")));
+                return true;
             case R.id.paypal:
                 // donate with PayPal
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.paypal_url))));
