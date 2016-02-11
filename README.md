@@ -8,7 +8,7 @@ Releases | [pl] wydania: https://github.com/indywidualny/FaceSlim/releases
 & what makes the application awesome:
 
 **2.4**
-* offline mode - When there is no network load pages from a database. It's not perfect and doesn't work for a dynamically loaded content... but it may be useful! [#89](../../issues/89)
+* offline mode - When there is no network load pages from a database. It's not perfect and doesn't work for a dynamically loaded content automatically... but it may be useful! [#89](../../issues/89)
 * new notifications check interval (2 minutes) [#119](../../issues/119)
 * rare bug with keyboard overlaying forms fixed (advanced settings checkbox) [#98](../../issues/98)
 * no vibrations when the setting is turned off (fix) [#123](../../issues/123)
