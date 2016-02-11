@@ -136,7 +136,7 @@
     <string name="offline_keep_max">Max liczba stron do przechowania</string>
     <string name="offline_keep_max_description">Gdy online odwiedzone strony są zapisywane w bazie danych. Domyślnie (najnowsze) 10 stron.</string>
     <string name="offline_dummy_description">Kod źródłowy bieżącej strony jest asynchronicznie zapisywany w bazie danych. W przypadku duplikatu zachowam najnowszą wersję. Odśwież by wymusić aktualizację. Nie działa dla dynamicznych treści.</string>
-    <string name="keyboard_fix">Napraw niewidoczne formularze &#8635;</string>
+    <string name="keyboard_fix">Napraw zasłonięte formularze &#8635;</string>
     <string name="offline_database_empty">Baza danych jest pusta</string>
 
 </resources>

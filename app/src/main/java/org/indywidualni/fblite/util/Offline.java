@@ -110,13 +110,20 @@ public class Offline {
          * remove ?refid=*      it's always first and nothing is later
          * remove ?hrc=*        it's always first and nothing important is later
          * remove &refsrc=*     it's always last and nothing important is later
+         * remove ?fref=*       it's always last and nothing important is later
+         * remove ?ref=*        it's always last and nothing important is later
+         * remove &ref=*        it's always last and nothing important is later
+         * remove ?ref_type=*   it's always last and nothing important is later
+         * remove &ref_type=*   it's always last and nothing important is later (just in case)
          * remove home.php      it's always first and nothing is later (main page)
          * replace              mobile.  to  m.
          * remove ?_rdr         it's always last and nothing is later
          * remove &_rdr         it's always last and nothing is later
          * remove /             it's always last and nothing is later
-        */
-        url = url.replaceAll("\\?refid=.*", "").replaceAll("\\?hrc=.*", "").replaceAll("&refsrc=.*", "");
+         */
+        url = url.replaceAll("\\?refid=.*", "").replaceAll("\\?hrc=.*", "").replaceAll("&refsrc=.*", "")
+                .replaceAll("\\?fref=.*", "").replaceAll("\\?ref=.*", "").replaceAll("&ref=.*", "")
+                .replaceAll("\\?ref_type=.*", "").replaceAll("&ref_type=.*", "");
         url = url.replace("home.php", "").replace("mobile.", "m.").replace("?_rdr", "").replace("&_rdr", "");
         return removeEndingSlash(url);
     }
