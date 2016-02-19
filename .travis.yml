@@ -1,0 +1,17 @@
+language: android
+
+sudo: false
+
+jdk:
+  - oraclejdk8
+
+android:
+  components:
+    - platform-tools
+    - tools     # see https://github.com/travis-ci/travis-ci/issues/5036
+    - android-23
+    - build-tools-23.0.2
+    - extra-google-m2repository
+    - extra-android-m2repository
+
+script: ./gradlew build check --stacktrace
