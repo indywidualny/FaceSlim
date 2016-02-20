@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingTranslation">
+    <!-- Strings to translate during creation of a new translation -->
+    <string name="app_name">Face Slim</string>
+    <string name="image_chooser">Избери изображение</string>
+    <string name="loading_link">Отвори връзка</string>
+    <string name="applying_changes">Прилагане промени</string>
+
+    <string-array name="item_array">
+        <item>Новини</item>
+        <item>Съобщения</item>
+        <item>Чат (Приятели онлайн)</item>
+        <item>Групи</item>
+        <item>Събития</item>
+        <item>Настройки</item>
+        <item>Относно &amp; Dev</item>
+        <item>Затваряне приложение</item>
+        <item>Отиди най-горе\u0020 &#8593;</item>
+    </string-array>
+
+    <string name="author">Krzysztof \'Koras\' Grabowski</string>
+    <string name="title_activity_settings">Настройки</string>
+    <string name="title_activity_about">Относно &amp; Dev</string>
+    <string name="preference_category1">Облик</string>
+    <string name="preference_category2">Настройки за напреднали</string>
+    <string name="progress_bar">Лента за прогрес</string>
+    <string name="transparent_nav">Прозрачна лента &#8635;</string>
+    <string name="transparent_nav_description">KitKat и Lollipop. Прозрачна система за навигиращи клавиши.</string>
+    <string name="clear_cache">Изчисти кеш</string>
+    <string name="clear_cache_description">Изчиства кешът на приложението. Разлогва профила.</string>
+    <string name="email_author">Свържи се с мен</string>
+    <string name="choose_email_client">Избери e-mail клиент</string>
+    <string name="notifications">Уведoмления</string>
+    <string name="no_network">Вие сте офлайн ;)</string>
+    <string name="hardware_acceleration">Хардуерно ускорение &#8635;</string>
+    <string name="hardware_acceleration_description">Забранете на устройства с малко памет. Видеата може да не работят.</string>
+    <string name="share_link">Споделете връзката</string>
+    <string name="long_clicks">Дълги натискания</string>
+    <string name="long_clicks_description">Дълго натискане върху връзка или картина за споделяне.</string>
+    <string name="me_google_play">Google Play</string>
+    <string name="preference_category3">Експериментални</string>
+    <string name="dark_theme">Тъмна тема</string>
+    <string name="dark_theme_description">Превръща Facebook черен. Вашият AMOLED екран ще го оцени.</string>
+    <string name="fixed_nav">Фиксирана синя лента</string>
+    <string name="fixed_nav_description">Facebook навигираща лента винаги отгоре.</string>
+    <string name="facebook_zero">Facebook Zero</string>
+    <string name="facebook_zero_description">Без отчитане на данни. Зависи от GSM доставчика. Работи при мобилна мрежова връзка</string>
+    <string name="facebook_zero_active">Facebook Zero е активен</string>
+    <string name="load_extra">Зареждай външни изображения</string>
+    <string name="load_extra_description">Отваряй външни изображения в приложението. За сега само някои сайтове се поддържат.</string>
+    <string name="preference_category4">Допълнително</string>
+    <string name="quick_guide">Отвори Бързи стъпки</string>
+    <string name="messages">Съобщения</string>
+    <string name="donate_paypal">Дарете\u0020 –\u0020 PayPal</string>
+    <string name="paypal_url" formatted="false">https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=koras%2eevil%40gmail%2ecom&amp;lc=GB&amp;item_name=Krzysztof%20Grabowski&amp;currency_code=USD&amp;bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted</string>
+
+    <string-array name="drawerPosTitles">
+        <item>Отляво</item>
+        <item>Отдясно</item>
+    </string-array>
+
+    <string name="drawer_pos">Позиция на плъзгащо меню &#8635;</string>
+    <string name="drawer_pos_description">Менюто е %s на екрана.</string>
+    <string name="preference_category5">Уведомления</string>
+    <string name="notifications_feed_url">Фийдове</string>
+    <string name="interval_pref">Времеви интервал за проверка</string>
+    <string name="interval_pref_description">Фийдовете ще бъдат проверявани на всеки %s.</string>
+    <string name="activate_notifications">Активирай уведомления</string>
+    <string name="get_feed">Заредете вашите фийдове в програмата</string>
+    <string name="get_feed_description">Кликни на полето, намери уникалния RSS, копирай адреса и го постави в горното поле.</string>
+    <string name="notifications_service_created">Уведомленията са активни</string>
+    <string name="notifications_settings">Настройки на уведомления</string>
+    <string name="notifications_settings_description">Допълнителни настройки. Изберете времеви интервал, задайте звуци. LED и вибрация.</string>
+
+    <string-array name="intervalPrefTitles">
+		<item>2 минути</item>
+        <item>5 минути</item>
+        <item>15 минути</item>
+        <item>30 минути</item>
+        <item>1 час</item>
+        <item>3 часа</item>
+        <item>6 часа</item>
+    </string-array>
+
+    <string name="all_notifications">Всички уведомления</string>
+    <string name="notification_sound">Звук за уведомление</string>
+    <string name="notification_sound_description">Избери звук или тих: \u0020</string>
+    <string name="silent">Без звук</string>
+    <string name="vibrate">Вибрации</string>
+    <string name="led_light">LED светлина</string>
+    <string name="notifications_extra">Допълнителни</string>
+    <string name="notifications_everywhere">Винаги уведомявай</string>
+    <string name="notifications_everywhere_description">Дори когато си в заглавния прозорец на приложението.</string>
+    <string name="setup_notifications">Посети настройките за настройване уведомления</string>
+    <string name="no_images">Забрани изображения &#8635;</string>
+    <string name="no_images_description">Не зареждай никакви изображения. Намалява използваните данни драстично.</string>
+    <string name="no_storage_permission">Разреши права за съхранение, за да използваш тази функция.</string>
+    <string name="basic_mode">Базов режим</string>
+    <string name="basic_mode_description">Използвай базов вместо стандартен сайт. Тъмната тема трябва да бъде забранена. Може да не работи при бърза връзка.</string>
+    <string name="preference_category6">Новини</string>
+    <string name="hide_sponsored">Скрий спонсорските постове</string>
+    <string name="hide_sponsored_description">Не харесваме спонсорирани постове и реклами.</string>
+    <string name="hide_people">Скриване на "Хора които можеби познавам"</string>
+    <string name="hide_people_description">По-чист фийд и повече място.</string>
+    <string name="hide_news_feed">Скрий Новини</string>
+    <string name="hide_news_feed_description">[…] за избягване на разсейването.</string>
+
+    <string name="message_notifications">Уведмоления за съобщения</string>
+    <string name="you_have_one_message">Имаш едно ново съобщение.</string>
+    <string name="you_have_n_messages">Имаш %d нови съобщения</string>
+    <string name="special_thanks_notifications">Специални благодарности за помощта с уведомленията:</string>
+    <string name="sync_problem">Бисквитките не могат да бъдат синхронизирани. Първо стартиране? Моля рестартирайте приложението. :)</string>
+    <string name="interval_pref_description_new">Уведомленията ще бъдат проверявани всеки %s.</string>
+    <string name="facebook_notifications">Facebook уведомления</string>
+    <string name="notification_sound_msg">Звук за съобщения</string>
+    <string name="crash_toast_text">Face Slim: Нещо лошо се случи. Приготвяне на репорт за срив.</string>
+    <string name="crash_dialog_title">Face Slim се срина</string>
+    <string name="crash_dialog_text">Възникна неочаквана грешка, заради която приложението спря. Моля помогнете ми да я оправя като ми изпратите данните за грешката. Само натиснете OK и ми изпратете e-mail.</string>
+    <string name="crash_dialog_comment_prompt">Можете да добавите коментара ви отдолу:</string>
+    <string name="file_logger">Запази журнала във файл</string>
+    <string name="file_logger_description">Запази журнала от сървиса на уведомленията във външната памет. Нуждае се от права до картата.</string>
+    <string name="file_logger_needs_permission">Няма достъп до външния носител. Журналът не може да бъде запазен</string>
+    <string name="save_img">Запази изображение</string>
+    <string name="downloading_img">Сваляне изображение&#8230;</string>
+
+    <string name="download_manager_disabled">Мениджърът за сваляне е забранен. Моля разрешете го.</string>
+    <string name="cannot_access_storage">Няма достъп до външен носител</string>
+    <string name="file_cannot_be_saved">Файлът не може да бъде запазен</string>
+    <string name="camera_exception">Проблеми с камерата</string>
+	
+	<string name="offline_mode">Офлайн режим</string>
+    <string name="offline_mode_enable">Разреши Офлайн режим</string>
+    <string name="offline_mode_description">Когато няма интернет връзка се опитай да заредиш страницата от локалния кеш и база.</string>
+    <string name="not_found_offline" formatted="false"><![CDATA[<div style=\"position: absolute;top: 50%;left: 50%;transform: translateX(-50%) translateY(-50%);\"><div><h1>За съжаление тази страница не беше намерена в локалната база.</h1><h1>Съвет: За връщане натиснете назад два пъти</h1></div></div>]]></string>
+    <string name="loading_offline_database">Зареждане на страницата от локалната база</string>
+    <string name="offline_keep_max">Максимален брой страници за съхранение</string>
+    <string name="offline_keep_max_description">Когато сте онлайн постените страници асинхронно се запазват в локална база. По подразбиране са последните 10 страници.</string>
+    <string name="offline_dummy_description">Кодът на текущата страница асинхронно се запазва в локалната база. При дублиране се замества. Презаредете страницата, за да предизвикате обновяване. Не работи за динамично съдържание.</string>
+    <string name="keyboard_fix">Поправка за застъпващата клавиатура &#8635;</string>
+    <string name="offline_database_empty">Локалната база е празна</string>
+
+</resources>
