@@ -95,7 +95,52 @@
     <string name="notifications_extra">অ্যাডিশোনাল </string>
     <string name="notifications_everywhere"> অলয়েস নটিফাই </string>
     <string name="notifications_everywhere_description"> আপনি যখন অ্যাপ এর মেইন স্ক্রীন এ আছেন .</string>
-
     <string name="setup_notifications"> নটিফিকেসন্স সেট করতে অ্যাপ সেটিং দেখুন </string>
+
+    <string name="no_images"> ইমেজ ডিস এবল করুন &#8635;</string>
+    <string name="no_images_description"> কোন ইমেজ লোড করবেন না। বহুলাংসে ডেটার ব্যবহার হ্রাস করে  </string>
+    <string name="no_storage_permission"> এই সুবিধা টি ব্যবহার করতে স্টোরেজ পারমিশন গ্রান্ট করুন  </string>
+    <string name="basic_mode"> বেসিক মুড  </string>
+    <string name ="basic_mode_description"> স্ট্যান্ডার্ড সাইট এর পরিবর্তে বেসিক সাইট ব্যবহার করুন । ডার্ক থিম ডিস এবল করুন।  ফাস্ট কানেকশন এ কাজ নাও করতে পারে .  </string>
+    <string name="preference_category6"> নিউজ ফিড </string>
+    <string name="hide_sponsored"> স্পন্সর পোস্ট হাইড করুন   </string>
+    <string name="hide_sponsored_description"> আমরা স্পন্সর পোস্ট ও অ্যাড পছন্দ করিনা .  </string>
+    <string name="hide_people"> আপনি হয়ত চেনেন এমন মানুষ ডের হাইড করতে পারেন ।  </string>
+    <string name="hide_people_description"> বেশি জায়গা পেতে ফিড পরিষ্কার করুন .</string>
+    <string name="hide_news_feed"> নিউজ ফিড হাইড করুন  </string>
+    <string name="hide_news_feed_description">[…] সাইড ট্র্যাক এড়িয়ে জান .</string>
+
+    <string name="message_notifications"> মেসেজ  নটিফিকেসন্স  </string>
+    <string name="you_have_one_message"> আপনার একটি মেসেজ আছে .</string>
+    <string name="you_have_n_messages"> আপনার মেসেজ আছে .</string>
+    <string name="special_thanks_notifications"> নটিফিকেসন্স দিয়ে হেল্প করার জন্যে ধন্যবাদ </string>
+    <string name="sync_problem"> কুকিস সিঙ্ক হয়না . প্রথম রান হাঁ? দয়া করে অ্যাপ্লিকেশন পুনরায় আরম্ভ করুন  </string>
+    <string name="interval_pref_description_new"> নটিফিকেসন্স চেক হবে  </string>
+    <string name="facebook_notifications"> ফেসবুক নটিফিকেসন্স  </string>
+    <string name="notification_sound_msg">মেসেজ সাউন্ড </string>
+    <string name="crash_toast_text">ফেস স্লিম  : কিছু একটা ঠিক নেই ।  ক্র্যাশ রিপোর্ট তৈরি হছে  </string> 
+    <string name="crash_dialog_title"> ফেস স্লিম ক্র্যাশ হয়ে গেছে     </string>
+    <string name="crash_dialog_text"> অযাচিত  সমস্যা দেখা দিয়েছে , অ্যাপ্লিকেশন বন্দ হছে . এরর ডাটা পাঠিয়ে সমস্যা সমাধান করতে সাহায্য করুন . আপনাকে শুধু মাত্র ওকে ক্লিক করতে হবে মেইল সেন্ড করতে হবে .</string>
+    <string name="crash_dialog_comment_prompt"> আপনি চাইলে আপনার মন্তব্য লিখতে পারেন :</string>
+    <string name="file_logger">লগ ফাইল এ সেভ করুন </string>
+    <string name="file_logger_description"> সার্ভিস লগ এর নটিফিকেসন্স এক্সটারনাল মেমরি তে সেভ করুন . এটার স্টোরেজ পারমিশন দরকার .</string>
+    <string name="file_logger_needs_permission">এক্সটারনাল স্টোরেজ অ্যাক্সেস না থাকলে লগ সেভ হতে পারবেনা </string>
+    <string name="save_img">ইমেজ সেভ করুন </string>
+    <string name="downloading_img">ইমেজ ডাউনলোড হছে &#8230;</string>
+    <string name="download_manager_disabled"> ডাউনলোড ম্যানেজার ডিসএবল আছে।  ওটাকে এনএবল করুন .</string>
+    <string name="cannot_access_storage"> এক্সটারনাল স্টোরেজ এ অ্যাক্সেস নেই  </string>
+    <string name="file_cannot_be_saved">ফাইল সেভ হছেনা </string>
+    <string name="camera_exception">ক্যামেরা তে প্রব্লেম আছে </string>
+
+    <string name="offline_mode"> অফলাইন মোড </string>
+    <string name="offline_mode_enable"> অফলাইন মোড এনএবল করুন   </string>
+    <string name="offline_mode_description"> যখন ইন্টারনেট কানেকশন থাকবেনা তখন ডাটাবেস অথবা ক্যাচে থেকে পেইজ লোড করুন .</string>
+    <string name="not_found_offline" formatted="false"><![CDATA[<div style=\"position: absolute;top: 50%;left: 50%;transform: translateX(-50%) translateY(-50%);\"><div><h1> এই পেইজ টি ডাটাবেস এ পাওয়া যায়নি </h1><h1>Tip: ফিরে যেতে দুবার প্রেস করুন </h1></div></div>]]></string>
+    <string name="loading_offline_database"> অফলাইন ডাটাবেস থেকে পেইজ লোড করা হছে   </string>
+    <string name="offline_keep_max"> সর্বাধিক সংখ্যার পৃষ্ঠাগুলি রাখতে  </string>
+    <string name="offline_keep_max_description">যখন পেইজ গুলি অন লাইনে ভিসিট হছে তখন সেসব ডাটাবেস এ সেভ হছে . একটি ডিফল্ট মান ( সর্বশেষ ) 10 পৃষ্ঠা .</string>
+    <string name="offline_dummy_description"> কারেন্ট পেইজ এর সোর্স কোড ডাটাবেস এ সেভ হছে . ডুপ্লিকেট পাওয়া গেলে নিজে থেকেই সরিয়ে দেবে . পেইজ রিফ্রেশ করুন . লোডে ভরা কন্টেন্ট এ এটা কাজ করেনা .</string>
+    <string name="keyboard_fix"> কিবোর্ড ফিক্স  &#8635;</string>
+    <string name="offline_database_empty"> অফ লাইন ডাটাবেস এ ডাটা নেই </string>
 
 </resources>
