@@ -19,6 +19,7 @@ Releases | [pl] wydania: https://github.com/indywidualny/FaceSlim/releases
 * send button in chat when 'disable images' option is enabled is no longer missing [#114](../../issues/114)
 * fixed Facebook blue navigation bar works for all the modes now (normal, basic, zero)
 * 'install messenger' notice is hidden by default, it was so annoying
+* Bulgarian translation (thanks [pecuna](https://github.com/pecuna))
 
 New way to buy me a beer. Google Play Donation package - see About App page's menu or follow the link:<br />
 https://play.google.com/store/apps/details?id=org.indywidualni.faceslim_donation
