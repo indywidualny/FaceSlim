@@ -13,57 +13,57 @@
 
     <!-- Strings to translate during creation of a new translation -->
     <string name="app_name">Face Slim</string>
-    <string name="image_chooser">Image Chooser</string>
-    <string name="loading_link">Opening a link</string>
-    <string name="applying_changes">Applying changes</string>
+    <string name="image_chooser">Imagini...</string>
+    <string name="loading_link">Se deschide legatura...</string>
+    <string name="applying_changes">Se aplica schimbarile...</string>
 
     <string-array name="item_array">
-        <item>News Feed</item>
-        <item>Messages</item>
-        <item>Chat (Friends Online)</item>
-        <item>Groups</item>
-        <item>Events</item>
-        <item>App Settings</item>
-        <item>About &amp; Dev</item>
-        <item>Terminate</item>
-        <item>Jump to Top\u0020 &#8593;</item>
+        <item>Flux de noutati</item>
+        <item>Mesaje</item>
+        <item>Mesaje (Prieteni activi)</item>
+        <item>Grupuri</item>
+        <item>Evenimente</item>
+        <item>Setari aplicatie</item>
+        <item>Despre</item>
+        <item>Inchidere</item>
+        <item>Sari la inceput\u0020 &#8593;</item>
     </string-array>
 
     <string name="author">by Krzysztof \'Koras\' Grabowski</string>
-    <string name="title_activity_settings">Settings</string>
-    <string name="title_activity_about">About &amp; Dev</string>
-    <string name="preference_category1">Interface</string>
-    <string name="preference_category2">Advanced Settings</string>
-    <string name="progress_bar">Progress bar</string>
-    <string name="transparent_nav">Transparent navbar &#8635;</string>
-    <string name="transparent_nav_description">KitKat and Lollipop. Transparent system navigation keys.</string>
-    <string name="clear_cache">Clear cache</string>
-    <string name="clear_cache_description">Clear app cache. It will also log you out.</string>
-    <string name="email_author">Contact me</string>
-    <string name="choose_email_client">Choose e-mail client</string>
-    <string name="notifications">Notifications</string>
-    <string name="no_network">You are offline ;)</string>
-    <string name="hardware_acceleration">Hardware Acceleration &#8635;</string>
-    <string name="hardware_acceleration_description">Disable it only on low memory devices. Videos may not work.</string>
-    <string name="share_link">Share the link</string>
-    <string name="long_clicks">Long clicks</string>
-    <string name="long_clicks_description">Long click a link or an image link to share.</string>
+    <string name="title_activity_settings">Setari</string>
+    <string name="title_activity_about">Despre</string>
+    <string name="preference_category1">Interfata</string>
+    <string name="preference_category2">Setari avansate</string>
+    <string name="progress_bar">Bara de progres</string>
+    <string name="transparent_nav">Bara de navigatie transparenta &#8635;</string>
+    <string name="transparent_nav_description">KitKat si Lollipop. Transparenta controalelor de navigatie ale sistemului.</string>
+    <string name="clear_cache">Goleste memoria de lucru</string>
+    <string name="clear_cache_description">Se va sterge memoria de lucru. Aceasta actiune te va scoate din cont.</string>
+    <string name="email_author">Contacteaza-ma</string>
+    <string name="choose_email_client">Alege aplicatia de e-mail</string>
+    <string name="notifications">Notificari</string>
+    <string name="no_network">Esti deconectat ;)</string>
+    <string name="hardware_acceleration">Accelerare hardware &#8635;</string>
+    <string name="hardware_acceleration_description">A se dezactiva doar in lipsa de memorie interna. E posibil ca filmarile sa nu functioneze.</string>
+    <string name="share_link">Imparte aceasta legatura cu cineva</string>
+    <string name="long_clicks">Apasari lungi</string>
+    <string name="long_clicks_description">Apasa lung pe o legatura sau pe o imagime pentru a o imparti cu cineva.</string>
     <string name="me_google_play">Google Play</string>
-    <string name="preference_category3">Experimental</string>
-    <string name="dark_theme">Dark theme</string>
-    <string name="dark_theme_description">Turn Facebook black. Your AMOLED screen will appreciate it.</string>
-    <string name="fixed_nav">Fixed blue bar</string>
-    <string name="fixed_nav_description">Facebook navigation bar always on top.</string>
+    <string name="preference_category3">Experimente</string>
+    <string name="dark_theme">tema inchisa la culoare</string>
+    <string name="dark_theme_description">Activeaza tema inchisa la culoare. Ecranul tau AMOLED va consuma mai putin.</string>
+    <string name="fixed_nav">Bara de navigare</string>
+    <string name="fixed_nav_description">Bara de navigare nativa Facebook intotdeauna vizibila.</string>
     <string name="facebook_zero">Facebook Zero</string>
-    <string name="facebook_zero_description">No data charges. GSM provider dependent. Works during mobile network connection.</string>
-    <string name="facebook_zero_active">Facebook Zero is active</string>
-    <string name="load_extra">Load external pictures</string>
-    <string name="load_extra_description">Open external pictures in-app. Currently only few sites are supported.</string>
-    <string name="preference_category4">Additional</string>
-    <string name="quick_guide">Quick Start Guide</string>
-    <string name="messages">Messages</string>
-    <string name="donate_paypal">Donate\u0020 –\u0020 PayPal</string>
-    <string name="donate_google">Donate\u0020 –\u0020 Google</string>
+    <string name="facebook_zero_description">Fara costuri pentru traficul de date. Depinde de furnizorul de servicii GSM. Functioneaza doar cu datele mobile activate.</string>
+    <string name="facebook_zero_active">Facebook Zero e activ</string>
+    <string name="load_extra">Incarca imaginile</string>
+    <string name="load_extra_description">Deschide imaginile in aplicatie. Pentru moment, doar cateva site-uri sunt compatibile.</string>
+    <string name="preference_category4">Aditionale</string>
+    <string name="quick_guide">Ghid rapid de utilizare</string>
+    <string name="messages">Mesaje</string>
+    <string name="donate_paypal">Doneaza\u0020 –\u0020 PayPal</string>
+    <string name="donate_google">Doneaza\u0020 –\u0020 Google</string>
     <string name="paypal_url" formatted="false">https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=koras%2eevil%40gmail%2ecom&amp;lc=GB&amp;item_name=Krzysztof%20Grabowski&amp;currency_code=USD&amp;bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted</string>
 
     <string-array name="drawerPosTitles">
@@ -71,83 +71,83 @@
         <item>on the right</item>
     </string-array>
 
-    <string name="drawer_pos">Sliding menu position &#8635;</string>
-    <string name="drawer_pos_description">Menu is %s side of the screen.</string>
-    <string name="preference_category5">Notifications</string>
-    <string name="notifications_feed_url">Notifications feed</string>
-    <string name="interval_pref">Time interval for checking</string>
-    <string name="interval_pref_description">Notifications feed will be checked every %s.</string>
-    <string name="activate_notifications">Activate notifications</string>
-    <string name="get_feed">Get your notifications feed</string>
-    <string name="get_feed_description">Click the field, find your unique notifications RSS, copy the address and paste it above.</string>
-    <string name="notifications_service_created">Notifications active</string>
-    <string name="notifications_settings">Notifications settings</string>
-    <string name="notifications_settings_description">Additional settings. Choose time interval, set up sounds, LED and vibration.</string>
+    <string name="drawer_pos">Pozitia meniului de scurtaturi &#8635;</string>
+    <string name="drawer_pos_description">Meniul este acum in partea %s a ecranului.</string>
+    <string name="preference_category5">Notificarile</string>
+    <string name="notifications_feed_url">Fluxul de notificari</string>
+    <string name="interval_pref">Intervalul de timp pentru verificare</string>
+    <string name="interval_pref_description">Notificarile vor fi verificate la fiecare %s.</string>
+    <string name="activate_notifications">Activeaza notificarile</string>
+    <string name="get_feed">Acceseaza fluxul tau de notificari</string>
+    <string name="get_feed_description">Acceseaza site-ul, gaseste fluxul tau unic RSS si copiaza adresa sa mai jos.</string>
+    <string name="notifications_service_created">Notificarile sunt active</string>
+    <string name="notifications_settings">Setarile notificarilor</string>
+    <string name="notifications_settings_description">Setari aditionale. Alege intervalul de timp, sunetele emise, vibratiile si LED-ul .</string>
 
     <string-array name="intervalPrefTitles">
-        <item>2 minutes</item>
-        <item>5 minutes</item>
-        <item>15 minutes</item>
-        <item>30 minutes</item>
-        <item>1 hour</item>
-        <item>3 hours</item>
-        <item>6 hours</item>
+        <item>2 minute</item>
+        <item>5 minute</item>
+        <item>15 minute</item>
+        <item>30 minute</item>
+        <item>1 ora</item>
+        <item>3 ore</item>
+        <item>6 ore</item>
     </string-array>
 
-    <string name="all_notifications">All notifications</string>
-    <string name="notification_sound">Notification sound</string>
-    <string name="notification_sound_description">Choose a ringtone or silence: \u0020</string>
-    <string name="silent">No sound</string>
-    <string name="vibrate">Vibrations</string>
-    <string name="led_light">LED light</string>
-    <string name="notifications_extra">Additional</string>
-    <string name="notifications_everywhere">Always notify</string>
-    <string name="notifications_everywhere_description">Also when you are on the main screen of the app.</string>
-    <string name="setup_notifications">Visit app settings to set up notifications</string>
-    <string name="no_images">Disable images &#8635;</string>
-    <string name="no_images_description">Don\'t load any images. Reduces data usage drastically.</string>
-    <string name="no_storage_permission">Grant storage permission to use this feature</string>
-    <string name="basic_mode">Basic mode</string>
-    <string name="basic_mode_description">Use a basic website instead of a standard one. Dark theme has to be disabled. May not work during a fast connection.</string>
-    <string name="preference_category6">News Feed</string>
-    <string name="hide_sponsored">Hide sponsored posts</string>
-    <string name="hide_sponsored_description">We don\'t like sponsored posts and ads.</string>
-    <string name="hide_people">Hide people you may know</string>
-    <string name="hide_people_description">Cleaner feed, more room.</string>
-    <string name="hide_news_feed">Hide News Feed</string>
-    <string name="hide_news_feed_description">[…] to avoid sidetracking / procrastination.</string>
+    <string name="all_notifications">Toate notificarile</string>
+    <string name="notification_sound">Suntetul de notificare</string>
+    <string name="notification_sound_description">Alege un sunet de apel/silentios: \u0020</string>
+    <string name="silent">Fara sunet</string>
+    <string name="vibrate">Vibratii</string>
+    <string name="led_light">Lumina LED</string>
+    <string name="notifications_extra">Aditional</string>
+    <string name="notifications_everywhere">Notificare permanenta</string>
+    <string name="notifications_everywhere_description">Notificarile apar chiar daca ecranul principal e activ.</string>
+    <string name="setup_notifications">Seteaza notificarile din setarile aplicatiei</string>
+    <string name="no_images">Dezactiveaza imaginile &#8635;</string>
+    <string name="no_images_description"Nu incarca nici o imagine. Scade traficul de date.</string>
+    <string name="no_storage_permission">Acorda permisiunea de salvare in memoria interna pentru a folosi aceasta functie.</string>
+    <string name="basic_mode">Modul de lucru simplu</string>
+    <string name="basic_mode_description">Foloseste modul simplu pentru site-ul Facebook. Tema inchisa la culoare trebuie sa fie dezactivata. S-ar putea sa nu functioneze in timpul unei conexiuni rapide.</string>
+    <string name="preference_category6">Fluxul de informatii</string>
+    <string name="hide_sponsored">Ascunde postarile publicitare</string>
+    <string name="hide_sponsored_description">Nu ne plac postarile publicitare si reclamele.</string>
+    <string name="hide_people">Ascunde personele posibil cunoscute</string>
+    <string name="hide_people_description">Un flux de informatii mai rapid si mai curat.</string>
+    <string name="hide_news_feed">Ascunde fluxul de informatii</string>
+    <string name="hide_news_feed_description">[…] pentru a preveni sidetracking-ul / procrastination-ul.</string>
 
-    <string name="message_notifications">Message notifications</string>
-    <string name="you_have_one_message">You have one message.</string>
-    <string name="you_have_n_messages">You have %d messages.</string>
-    <string name="special_thanks_notifications">Special thanks for help with notifications:</string>
-    <string name="sync_problem">Cookies cannot be synced. First run, yeah? Please just restart the app :)</string>
-    <string name="interval_pref_description_new">Notifications will be checked every %s.</string>
-    <string name="facebook_notifications">Facebook notifications</string>
-    <string name="notification_sound_msg">Message sound</string>
-    <string name="crash_toast_text">Face Slim: Something is very wrong. Preparing crash report</string>
-    <string name="crash_dialog_title">Face Slim has crashed</string>
-    <string name="crash_dialog_text">An unexpected error occurred forcing the application to stop. Please help me fix this by sending me error data. All you have to do is to click OK and send an e-mail.</string>
-    <string name="crash_dialog_comment_prompt">You might add your comments about the problem below:</string>
-    <string name="file_logger">Save logs to a file</string>
-    <string name="file_logger_description">Save Notification Service logs to an external memory. It needs a storage permission.</string>
-    <string name="file_logger_needs_permission">No access to external storage. Log cannot be saved</string>
-    <string name="save_img">Save image</string>
-    <string name="downloading_img">Downloading image&#8230;</string>
-    <string name="download_manager_disabled">DownloadManager is disabled. Please enable it.</string>
-    <string name="cannot_access_storage">No access to external storage</string>
-    <string name="file_cannot_be_saved">A file cannot be saved</string>
-    <string name="camera_exception">Problems with a camera</string>
+    <string name="message_notifications">Notificarile de mesaje</string>
+    <string name="you_have_one_message">Ai un mesaj.</string>
+    <string name="you_have_n_messages">Ai %d mesaje.</string>
+    <string name="special_thanks_notifications">Multumiri speciale pentru ajutor la notificari:</string>
+    <string name="sync_problem">Datele de lucru nu pot fi sincronizate. Prima rulare a aplciatiei? Reporneste aplicatia :)</string>
+    <string name="interval_pref_description_new">Notificarile vor fi verificate la fiecare %s.</string>
+    <string name="facebook_notifications">Notificarile Facebook</string>
+    <string name="notification_sound_msg">Sunetul de notificare mesaj</string>
+    <string name="crash_toast_text">Face Slim: Ceva a mers foarte prost. Se pregateste raportul erorilor</string>
+    <string name="crash_dialog_title">Face Slim a incetat sa functioneze.</string>
+    <string name="crash_dialog_text">A aparut o eroare care a fortat aplicatia sa se inchida. Te rog ajuta-ma sa repar eroarea prin trimiterea raportului de erori. Tot ce trebuie sa faci e sa vrei sa-l trimiti prin mail.</string>
+    <string name="crash_dialog_comment_prompt">Poti adauga date suplimentare despre problema aparuta dedesupt:</string>
+    <string name="file_logger">Salveaza inregistrarile de lucru intr-un fisier</string>
+    <string name="file_logger_description">Salveaza inregistrarile de lucru a serviciului de notificari intr-un fisier. Va fi nevoie de permisiune speciala.</string>
+    <string name="file_logger_needs_permission">Accesul la memoria interna e interzis. Inregistrarile nu pot fi salvate.</string>
+    <string name="save_img">Salveaza imaginea</string>
+    <string name="downloading_img">Se descarca imaginea&#8230;</string>
+    <string name="download_manager_disabled">Managerul de download e dezactivat. Te rog activeaza-l.</string>
+    <string name="cannot_access_storage">Accesul la memoria interna e interzis.</string>
+    <string name="file_cannot_be_saved"Un fisier nu poate fi salvat</string>
+    <string name="camera_exception">Probleme cu aparatul foto</string>
 
-    <string name="offline_mode">Offline mode</string>
-    <string name="offline_mode_enable">Enable offline mode</string>
-    <string name="offline_mode_description">When there is no Internet connection try to load a page from cache and the database.</string>
+    <string name="offline_mode">Modul de lucru deconectat</string>
+    <string name="offline_mode_enable">Activarea modului de lucru deconectat</string>
+    <string name="offline_mode_description">Cand nu e acces la internet se va incerca incarcarea paginilor din baza de date.</string>
     <string name="not_found_offline" formatted="false"><![CDATA[<div style=\"position: absolute;top: 50%;left: 50%;transform: translateX(-50%) translateY(-50%);\"><div><h1>Unfortunately this page was not found in offline database</h1><h1>Tip: to go back just go back twice</h1></div></div>]]></string>
-    <string name="loading_offline_database">Loading page from offline database</string>
-    <string name="offline_keep_max">Max number of pages to keep</string>
-    <string name="offline_keep_max_description">When online visited pages are asynchronously saved in the database. A default value is (latest) 10 pages.</string>
-    <string name="offline_dummy_description">The source code of the current page is asynchronously saved in the database. If a duplicate is found it will be replaced. Refresh a page to force update it. It doesn\'t work for a dynamically loaded content.</string>
-    <string name="keyboard_fix">Overlaying keyboard fix &#8635;</string>
-    <string name="offline_database_empty">Offline database is empty</string>
+    <string name="loading_offline_database">Incarc pagina din baza de date</string>
+    <string name="offline_keep_max">Numarul maxim de pagini ce vor fi pastrate</string>
+    <string name="offline_keep_max_description">Cand vizitezi paginile acestea se vor salva asa cum sunt. Valoarea implicita este de 10 pagini.</string>
+    <string name="offline_dummy_description">Pagina curenta e salvata in baza de date. Daca exista deja in baza de date se va rescrie. Re-incarca o pagina pentru a forta re-actualizarea ei. Nu functioneaza pentru continutul dinamic.</string>
+    <string name="keyboard_fix">Fixarea erorii cu tastatura deasupra &#8635;</string>
+    <string name="offline_database_empty">Baza de date este goala</string>
 
 </resources>
