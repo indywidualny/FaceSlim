@@ -97,7 +97,7 @@
     <string name="notifications_everywhere_description">Notificarile apar chiar daca ecranul principal e activ.</string>
     <string name="setup_notifications">Seteaza notificarile din setarile aplicatiei</string>
     <string name="no_images">Dezactiveaza imaginile &#8635;</string>
-    <string name="no_images_description"Nu incarca nici o imagine. Scade traficul de date.</string>
+    <string name="no_images_description">Nu incarca nici o imagine. Scade traficul de date.</string>
     <string name="no_storage_permission">Acorda permisiunea de salvare in memoria interna pentru a folosi aceasta functie.</string>
     <string name="basic_mode">Modul de lucru simplu</string>
     <string name="basic_mode_description">Foloseste modul simplu pentru site-ul Facebook. Tema inchisa la culoare trebuie sa fie dezactivata. S-ar putea sa nu functioneze in timpul unei conexiuni rapide.</string>
@@ -128,7 +128,7 @@
     <string name="downloading_img">Se descarca imaginea&#8230;</string>
     <string name="download_manager_disabled">Managerul de download e dezactivat. Te rog activeaza-l.</string>
     <string name="cannot_access_storage">Accesul la memoria interna e interzis.</string>
-    <string name="file_cannot_be_saved"Un fisier nu poate fi salvat</string>
+    <string name="file_cannot_be_saved">Un fisier nu poate fi salvat</string>
     <string name="camera_exception">Probleme cu aparatul foto</string>
 
     <string name="offline_mode">Modul de lucru deconectat</string>
@@ -141,4 +141,5 @@
     <string name="offline_dummy_description">Pagina curenta e salvata in baza de date. Daca exista deja in baza de date se va rescrie. Re-incarca o pagina pentru a forta re-actualizarea ei. Nu functioneaza pentru continutul dinamic.</string>
     <string name="keyboard_fix">Fixarea erorii cu tastatura deasupra &#8635;</string>
     <string name="offline_database_empty">Baza de date este goala</string>
+
 </resources>
