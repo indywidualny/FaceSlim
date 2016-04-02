@@ -1,83 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Face Slim</string>
-    <string name="activate_notifications">Benachrichtigungen aktivieren</string>
-    <string name="all_notifications">Alle Benachrichtigungen</string>
-    <string name="applying_changes">Änderungen werden angewendet</string>
-    <string name="author">von Krzysztof \'Koras\' Grabowski</string>
-    <string name="choose_email_client">E-Mail Anwendung auswählen</string>
-    <string name="clear_cache">Zwischenspeicher leeren</string>
-    <string name="clear_cache_description">Anwendungsspeicher leeren. Du wirst dabei ausgeloggt.</string>
-    <string name="dark_theme">Dunkles Thema</string>
-    <string name="dark_theme_description">Facebook schwärzen. Dein AMOLED Display wird das schätzen.</string>
-    <string name="donate_paypal">Spenden\u0020 –\u0020 PayPal</string>
-    <string name="donate_google">Spenden\u0020 –\u0020 Google</string>
-    <string name="drawer_pos">Gleitmenü Position &#8635;</string>
-    <string name="drawer_pos_description">Menü befindet sich derzeit %s.</string>
-    <string name="email_author">Kontakt</string>
-    <string name="facebook_zero">Facebook Zero</string>
-    <string name="facebook_zero_active">Facebook Zero ist aktiv</string>
-    <string name="facebook_zero_description">Keine Kosten für Mobildaten. Provider abhängig. Funktioniert während mobiler Datenverbindung.</string>
-    <string name="fixed_nav">Fixierte Facebook Leiste</string>
-    <string name="fixed_nav_description">Facebook Navigationsleiste immer ganz oben.</string>
-    <string name="get_feed">Benachrichtigungs-Feed abrufen</string>
-    <string name="get_feed_description">Anklicken und deinen eigenen RSS-Feed auslesen. Die Adresse kopieren und oben einfügen.</string>
-    <string name="hardware_acceleration">Hardware Beschleunigung &#8635;</string>
-    <string name="hardware_acceleration_description">Nur auf Geräten mit wenig Arbeitsspeicher deaktivieren. (Bei Problemen)</string>
     <string name="image_chooser">Bildwähler</string>
-    <string name="interval_pref">Überprüfungs-Intervall</string>
-    <string name="interval_pref_description">Benachrichtigungs-Feed wird alle %s überprüft.</string>
-    <string name="led_light">LED</string>
-    <string name="loading_link">Öffnen eines Links</string>
-    <string name="long_clicks">Lange Klicks</string>
-    <string name="long_clicks_description">Link oder Bild lange klicken um zu teilen.</string>
-    <string name="me_google_play">Google Play</string>
-    <string name="messages">Nachrichten</string>
-    <string name="no_network">Du bist offline ;)</string>
-    <string name="notification_sound">Benachrichtigungs Ton</string>
-    <string name="notification_sound_description">Ton oder Lautlos auswählen: \u0020</string>
-    <string name="notifications">Benachrichtigungen</string>
-    <string name="notifications_everywhere">Immer benachrichtigen</string>
-    <string name="notifications_everywhere_description">Auch wenn du in der App bist.</string>
-    <string name="notifications_extra">Zusätzlich</string>
-    <string name="notifications_feed_url">Benachrichtigungs-Feed</string>
-    <string name="notifications_service_created">Benachrichtigungen aktiv</string>
-    <string name="notifications_settings">Benachrichtungs Einstellungen</string>
-    <string name="notifications_settings_description">Zusätzliche Einstellungen. Einstellugen von Überprüfungs-Interval, Tönen, LED Farben und Vibration.</string>
-    <string name="preference_category1">Oberfläche</string>
-    <string name="preference_category2">Erweiterte Einstellungen</string>
-    <string name="preference_category3">Experimentell</string>
-    <string name="preference_category4">Zusätzlich</string>
-    <string name="preference_category5">Benachrichtigungen</string>
-    <string name="progress_bar">Fortschrittsanzeige</string>
-    <string name="quick_guide">Schnelleinstieg</string>
-    <string name="setup_notifications">In den Einstellungen kannst du Benachrichtigungen konfigurieren.</string>
-    <string name="share_link">Link teilen</string>
-    <string name="silent">Lautlos</string>
-    <string name="title_activity_about">Über</string>
-    <string name="title_activity_settings">Einstellungen</string>
-    <string name="transparent_nav">Transparente Navigations-Leiste &#8635;</string>
-    <string name="transparent_nav_description">Für Android-Versionen ab KitKat (4.4). Transparente Navigationstasten.</string>
-    <string name="vibrate">Vibration</string>
-    <string name="no_images">Grafiken deaktivieren &#8635;</string>
-    <string name="no_images_description">Keine Bilder laden. Senkt den Datenverbrauch enorm.</string>
-    <string name="no_storage_permission">Die Speicher-Berechtigung muss gewährt werden, um dieses Feature nutzen zu können.</string>
-    <string name="paypal_url" formatted="false">https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=koras%2eevil%40gmail%2ecom&amp;lc=DE&amp;item_name=Krzysztof%20Grabowski&amp;currency_code=EUR&amp;bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted</string>
-
-    <string-array name="intervalPrefTitles">
-        <item>2 Minuten</item>
-        <item>5 Minuten</item>
-        <item>15 Minuten</item>
-        <item>30 Minuten</item>
-        <item>1 Stunde</item>
-        <item>3 Stunden</item>
-        <item>6 Stunden</item>
-    </string-array>
-
-    <string-array name="drawerPosTitles">
-        <item>links</item>
-        <item>rechts</item>
-    </string-array>
+    <string name="loading_link">Link öffnen</string>
+    <string name="applying_changes">Änderungen werden angewendet</string>
 
     <string-array name="item_array">
         <item>Neuigkeiten</item>
@@ -90,4 +16,125 @@
         <item>Beenden</item>
         <item>Nach oben\u0020 &#8593;</item>
     </string-array>
+
+    <string name="author">von Krzysztof \'Koras\' Grabowski</string>
+    <string name="title_activity_settings">Einstellungen</string>
+    <string name="title_activity_about">Über</string>
+    <string name="preference_category1">Oberfläche</string>
+    <string name="preference_category2">Erweiterte Einstellungen</string>
+    <string name="progress_bar">Fortschrittsanzeige</string>
+    <string name="transparent_nav">Transparente Navigationsleiste &#8635;</string>
+    <string name="transparent_nav_description">KitKat und Lollipop. Transparente Navigationstasten.</string>
+    <string name="clear_cache">Zwischenspeicher leeren</string>
+    <string name="clear_cache_description">Anwendungsspeicher leeren. Du wirst dabei ausgeloggt.</string>
+    <string name="email_author">Mich kontaktieren</string>
+    <string name="choose_email_client">E-Mail-Anwendung auswählen</string>
+    <string name="notifications">Benachrichtigungen</string>
+    <string name="no_network">Du bist offline ;)</string>
+    <string name="hardware_acceleration">Hardware Beschleunigung &#8635;</string>
+    <string name="hardware_acceleration_description">Nur auf Geräten mit wenig Arbeitsspeicher deaktivieren. Videos funktionieren vielleicht nicht.</string>
+    <string name="share_link">Link teilen</string>
+    <string name="long_clicks">Lange Klicks</string>
+    <string name="long_clicks_description">Link oder Bild lange klicken um zu teilen.</string>
+    <string name="me_google_play">Google Play</string>
+    <string name="preference_category3">Experimentell</string>
+    <string name="dark_theme">Dunkle Ansicht</string>
+    <string name="dark_theme_description">Facebook schwärzen. Dein AMOLED Display wird es zu schätzen wissen.</string>
+    <string name="fixed_nav">Fixierte blaue Leiste</string>
+    <string name="fixed_nav_description">Facebook Navigationsleiste immer ganz oben.</string>
+    <string name="facebook_zero">Facebook Zero</string>
+    <string name="facebook_zero_description">Keine Kosten für Mobildaten. Abhängig vom Provider. Funktioniert während mobiler Datenverbindung.</string>
+    <string name="facebook_zero_active">Facebook Zero ist aktiv</string>
+    <string name="load_extra">Externe Bilder laden</string>
+    <string name="load_extra_description">Externe Bilder in der App laden. Momentan werden nur wenige Seiten unterstützt.</string>
+    <string name="preference_category4">Zusätzlich</string>
+    <string name="quick_guide">Schnellanleitung</string>
+    <string name="messages">Nachrichten</string>
+    <string name="donate_paypal">Spenden\u0020 –\u0020 PayPal</string>
+    <string name="donate_google">Spenden\u0020 –\u0020 Google</string>
+    <string name="paypal_url" formatted="false">https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=koras%2eevil%40gmail%2ecom&amp;lc=GB&amp;item_name=Krzysztof%20Grabowski&amp;currency_code=USD&amp;bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted</string>
+
+    <string-array name="drawerPosTitles">
+        <item>links</item>
+        <item>rechts</item>
+    </string-array>
+
+    <string name="drawer_pos">Gleitmenü Position &#8635;</string>
+    <string name="drawer_pos_description">Menü befindet sich derzeit %s.</string>
+    <string name="preference_category5">Benachrichtigungen</string>
+    <string name="notifications_feed_url">Benachrichtigungs-Feed</string>
+    <string name="interval_pref">Überprüfungs-Intervall</string>
+    <string name="interval_pref_description">Benachrichtigungs-Feed wird alle %s überprüft.</string>
+    <string name="activate_notifications">Benachrichtigungen aktivieren</string>
+    <string name="get_feed">Benachrichtigungs-Feed abrufen</string>
+    <string name="get_feed_description">Anklicken und deinen eigenen RSS-Feed auslesen. Die Adresse kopieren und oben einfügen.</string>
+    <string name="notifications_service_created">Benachrichtigungen aktiv</string>
+    <string name="notifications_settings">Benachrichtigungs-Einstellungen</string>
+    <string name="notifications_settings_description">Zusätzliche Einstellungen. Einstellen von Überprüfungs-Interval, Tönen, LED Farben und Vibration.</string>
+
+    <string-array name="intervalPrefTitles">
+        <item>2 Minuten</item>
+        <item>5 Minuten</item>
+        <item>15 Minuten</item>
+        <item>30 Minuten</item>
+        <item>1 Stunde</item>
+        <item>3 Stunden</item>
+        <item>6 Stunden</item>
+    </string-array>
+
+    <string name="all_notifications">Alle Benachrichtigungen</string>
+    <string name="notification_sound">Benachrichtigungs-Ton</string>
+    <string name="notification_sound_description">Ton oder Lautlos auswählen: \u0020</string>
+    <string name="silent">Lautlos</string>
+    <string name="vibrate">Vibration</string>
+    <string name="led_light">LED</string>
+    <string name="notifications_extra">Zusätzlich</string>
+    <string name="notifications_everywhere">Immer benachrichtigen</string>
+    <string name="notifications_everywhere_description">Auch auf dem App-Hauptbildschirm.</string>
+    <string name="setup_notifications">In den Einstellungen kannst du Benachrichtigungen konfigurieren.</string>
+    <string name="no_images">Bilder deaktivieren &#8635;</string>
+    <string name="no_images_description">Keine Bilder laden. Senkt den Datenverbrauch enorm.</string>
+    <string name="no_storage_permission">Die Speicher-Berechtigung muss gewährt werden, um diese Funktion nutzen zu können.</string>
+    <string name="basic_mode">Einfacher Modus</string>
+    <string name="basic_mode_description">Nutzt die vereinfachte Webseite statt der normalen. Dunkle Ansicht muss deaktiviert sein. Funktioniert eventuell nicht bei schnellen Verbindungen.</string>
+    <string name="preference_category6">Neuigkeiten</string>
+    <string name="hide_sponsored">Gesponsorte Posts verstecken.</string>
+    <string name="hide_sponsored_description">Wir mögen keine gesponserten Posts und Werbung.</string>
+    <string name="hide_people">Leute die du vielleicht kennst verstecken</string>
+    <string name="hide_people_description">Saubere Neuigkeiten, mehr Platz.</string>
+    <string name="hide_news_feed">Neuigkeiten verstecken</string>
+    <string name="hide_news_feed_description">[…] Ablenkung / Nichtstun vermeiden.</string>
+
+    <string name="message_notifications">Benachrichtigung über Nachrichten</string>
+    <string name="you_have_one_message">Du hast eine Nachricht.</string>
+    <string name="you_have_n_messages">Du hast %d Nachrichten.</string>
+    <string name="special_thanks_notifications">Vielen Dank für die Hilfe mit den Benachrichtigungen:</string>
+    <string name="sync_problem">Cookies können nicht synchronisiert werden. Erster Start? Bitte die App neustarten :)</string>
+    <string name="interval_pref_description_new">Benachrichtigungen werden aller %s überprüft.</string>
+    <string name="facebook_notifications">Facebook-Benachrichtigungen</string>
+    <string name="notification_sound_msg">Nachrichtenton</string>
+    <string name="crash_toast_text">Face Slim: Irgendetwas ist schief gegangen. Absturzbericht wird vorbereitet.</string>
+    <string name="crash_dialog_title">Face Slim ist abgestürzt.</string>
+    <string name="crash_dialog_text">Ein unerwarteter Fehler ist aufgetreten und hat die App zum Absturz gebracht. Bitte hilf mir den Fehler zu beheben indem du mir die Fehlerdaten schickst. Du musst nur OK klicken und eine E-Mail schicken.</string>
+    <string name="crash_dialog_comment_prompt">Unten bitte deinen Kommentar zum Fehler eintragen:</string>
+    <string name="file_logger">Fehlerprotokoll als Datei speichern.</string>
+    <string name="file_logger_description">Benachrichtigungs-Service-Protokoll auf externen Speicher speichern. Speicher-Berechtigung benötigt.</string>
+    <string name="file_logger_needs_permission">Kein Zugang zu externem Speicher. Protokoll kann nicht gespeichert werden.</string>
+    <string name="save_img">Bild speichern</string>
+    <string name="downloading_img">Bild&#8230; herunterladen</string>
+    <string name="download_manager_disabled">DownloadManager ist deaktiviert. Bitte aktivieren.</string>
+    <string name="cannot_access_storage">Kein Zugang zu externem Speicher</string>
+    <string name="file_cannot_be_saved">Eine Datei konnte nicht gespeichert werden</string>
+    <string name="camera_exception">Probleme mit der Kamera</string>
+
+    <string name="offline_mode">Offline-Modus</string>
+    <string name="offline_mode_enable">Offline-Modus aktivieren</string>
+    <string name="offline_mode_description">Bei fehledner Internetverbindung wird versucht eine Seite aus dem Zwischenspeicher und der Datenbank zu laden.</string>
+    <string name="not_found_offline" formatted="false"><![CDATA[<div style=\"position: absolute;top: 50%;left: 50%;transform: translateX(-50%) translateY(-50%);\"><div><h1>Unglücklicherweise wurde diese Seite nicht in der Offline-Datenbank gefunden</h1><h1>Tipp: um zurück zu gehen zweimal auf zurück tippen</h1></div></div>]]></string>
+    <string name="loading_offline_database">Lade Seite aus der Offline-Datenbank</string>
+    <string name="offline_keep_max">Maximale Anzahl der Seiten die behalten werden sollen</string>
+    <string name="offline_keep_max_description">Online besuchte Seiten werden asynchron in der Datenbank gespeichert. Der Standardwert sind (die letzten) 10 Seiten.</string>
+    <string name="offline_dummy_description">Der Source Code der aktuellen Seite wird asynchron in der Datenbank gespeichert.Duplikate werden ersetzt. Seite aktualisieren um sie manuell zu updaten. Funktioniert nicht für alle dynamisch geladenen Inhalte.</string>
+    <string name="keyboard_fix">Fix für überlappende Tastatur &#8635;</string>
+    <string name="offline_database_empty">Offline-Datenbank ist leer.</string>
 </resources>
