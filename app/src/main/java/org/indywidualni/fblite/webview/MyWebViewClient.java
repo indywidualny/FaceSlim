@@ -3,6 +3,7 @@ package org.indywidualni.fblite.webview;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,6 +12,7 @@ import android.database.SQLException;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -86,7 +88,12 @@ public class MyWebViewClient extends WebViewClient {
             return false;
         }
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-        view.getContext().startActivity(intent);
+        try {
+            view.getContext().startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            Log.e("shouldOverrideUrlLoad", "" + e.getMessage());
+            e.printStackTrace();
+        }
         return true;
     }
 
