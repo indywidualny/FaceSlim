@@ -253,6 +253,11 @@ public class MyWebViewClient extends WebViewClient {
                         fab.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
+                                if (offline == null) {
+                                    fab.hideFloatingActionButton();
+                                    return;
+                                }
+
                                 LayoutInflater inflater = MainActivity.getMainActivity().getLayoutInflater();
                                 @SuppressLint("InflateParams") View customView = inflater
                                         .inflate(R.layout.dialog_offline_list, null);
