@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -438,11 +439,15 @@ public class NotificationsService extends Service {
         if (trayPreferences.getBoolean("vibrate", false))
             mBuilder.setVibrate(new long[] {500, 500});
         else
-            mBuilder.setVibrate(new long[] {0l});
+            mBuilder.setVibrate(new long[] {0L});
 
         // LED light
-        if (trayPreferences.getBoolean("led_light", false))
-            mBuilder.setLights(Color.CYAN, 1, 1);
+        if (trayPreferences.getBoolean("led_light", false)) {
+            Resources resources = getResources(), systemResources = Resources.getSystem();
+            mBuilder.setLights(Color.CYAN,
+                    resources.getInteger(systemResources.getIdentifier("config_defaultNotificationLedOn", "integer", "android")),
+                    resources.getInteger(systemResources.getIdentifier("config_defaultNotificationLedOff", "integer", "android")));
+        }
 
         // priority for Heads-up
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN)
