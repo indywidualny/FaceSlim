@@ -1,5 +1,6 @@
 package org.indywidualni.fblite.activity;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -39,9 +40,11 @@ public class SettingsActivity extends AppCompatActivity {
     public void onBackPressed() {
         int count = getFragmentManager().getBackStackEntryCount();
 
-        if (count == 0)
-            super.onBackPressed();
-        else
+        if (count == 0) {
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
+            //super.onBackPressed();
+        } else
             getFragmentManager().popBackStack();
     }
 

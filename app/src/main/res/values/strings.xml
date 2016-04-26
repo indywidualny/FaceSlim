@@ -138,7 +138,6 @@
     <string name="cannot_access_storage">No access to external storage</string>
     <string name="file_cannot_be_saved">A file cannot be saved</string>
     <string name="camera_exception">Problems with a camera</string>
-
     <string name="offline_mode">Offline mode</string>
     <string name="offline_mode_enable">Enable offline mode</string>
     <string name="offline_mode_description">When there is no Internet connection try to load a page from cache and the database.</string>
@@ -149,5 +148,8 @@
     <string name="offline_dummy_description">The source code of the current page is asynchronously saved in the database. If a duplicate is found it will be replaced. Refresh a page to force update it. It doesn\'t work for a dynamically loaded content.</string>
     <string name="keyboard_fix">Overlaying keyboard fix &#8635;</string>
     <string name="offline_database_empty">Offline database is empty</string>
+
+    <string name="no_location_permission">Grant location permission to use this feature</string>
+    <string name="location_access">Enable geolocation</string>
 
 </resources>

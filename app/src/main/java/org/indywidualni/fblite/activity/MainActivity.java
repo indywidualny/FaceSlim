@@ -33,6 +33,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.webkit.GeolocationPermissions;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -99,6 +100,7 @@ public class MainActivity extends Activity {
     private SharedPreferences preferences;
     private TrayAppPreferences trayPreferences;
     private static final int REQUEST_STORAGE = 1;
+    private static final int REQUEST_LOCATION = 2;
 
     // create link handler (long clicked links)
     private final MyHandler linkHandler = new MyHandler(this);
@@ -217,6 +219,7 @@ public class MainActivity extends Activity {
         webView = (WebView) findViewById(R.id.webView);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setAllowFileAccess(true);
+        webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
 
         // show full images
         webView.getSettings().setLoadWithOverviewMode(true);
@@ -224,6 +227,12 @@ public class MainActivity extends Activity {
         webView.getSettings().setSupportZoom(true);
         webView.getSettings().setBuiltInZoomControls(true);
         webView.getSettings().setDisplayZoomControls(false);
+
+        // location
+        if (preferences.getBoolean("location", false)) {
+            webView.getSettings().setGeolocationEnabled(true);
+            webView.getSettings().setGeolocationDatabasePath(getFilesDir().getPath());
+        }
 
         // since API 18 cache quota is managed automatically
         if (Build.VERSION.SDK_INT < 18) {
@@ -534,6 +543,20 @@ public class MainActivity extends Activity {
                 showSystemUI();
         }
 
+        // location
+        public void onGeolocationPermissionsShowPrompt(String origin,
+                                                       GeolocationPermissions.Callback callback) {
+            /** Request location permission.
+             *  If granted it's awesome and go on,
+             *  otherwise just stop here and leave the method.
+             */
+            requestLocationPermission();
+            if (!hasLocationPermission())
+                return;
+
+            callback.invoke(origin, true, false);
+        }
+
     }
 
     // handle long clicks on links, an awesome way to avoid memory leaks
@@ -611,6 +634,24 @@ public class MainActivity extends Activity {
         return (hasPermission == PackageManager.PERMISSION_GRANTED);
     }
 
+    // request location permission
+    private void requestLocationPermission() {
+        String[] permissions = new String[] { Manifest.permission.ACCESS_FINE_LOCATION };
+        if (!hasLocationPermission()) {
+            Log.e(TAG, "No location permission at the moment. Requesting...");
+            ActivityCompat.requestPermissions(this, permissions, REQUEST_LOCATION);
+        } else {
+            Log.e(TAG, "We already have location permission. Yay!");
+        }
+    }
+
+    // check is location permission granted
+    private boolean hasLocationPermission() {
+        String locationPermission = Manifest.permission.ACCESS_FINE_LOCATION;
+        int hasPermission = ContextCompat.checkSelfPermission(this, locationPermission);
+        return (hasPermission == PackageManager.PERMISSION_GRANTED);
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
@@ -623,6 +664,15 @@ public class MainActivity extends Activity {
                 } else {
                     Log.e(TAG, "Storage permission denied");
                     Toast.makeText(getApplicationContext(), getString(R.string.no_storage_permission), Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case REQUEST_LOCATION:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Log.e(TAG, "Location permission granted");
+                    webView.reload();
+                } else {
+                    Log.e(TAG, "Location permission denied");
+                    Toast.makeText(getApplicationContext(), getString(R.string.no_location_permission), Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
@@ -868,6 +918,14 @@ public class MainActivity extends Activity {
         // notify when there is no internet connection
         if (!Connectivity.isConnected(getApplicationContext()) && !preferences.getBoolean("offline_mode", false))
             Toast.makeText(getApplicationContext(), getString(R.string.no_network), Toast.LENGTH_SHORT).show();
+
+        // location
+        if (preferences.getBoolean("location", false)) {
+            webView.getSettings().setGeolocationEnabled(true);
+            webView.getSettings().setGeolocationDatabasePath(getFilesDir().getPath());
+        } else {
+            webView.getSettings().setGeolocationEnabled(false);
+        }
 
         // recreate activity when something important was just changed
         if (getIntent().getBooleanExtra("core_settings_changed", false)) {

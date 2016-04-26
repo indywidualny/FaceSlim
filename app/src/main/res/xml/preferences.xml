@@ -83,6 +83,11 @@
             android:defaultValue="false"/>
 
         <CheckBoxPreference
+            android:key="location"
+            android:title="@string/location_access"
+            android:defaultValue="false"/>
+
+        <CheckBoxPreference
             android:key="load_extra"
             android:title="@string/load_extra"
             android:summary="@string/load_extra_description"
