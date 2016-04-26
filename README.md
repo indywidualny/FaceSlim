@@ -184,7 +184,7 @@ https://play.google.com/store/apps/details?id=org.indywidualni.faceslim_donation
 ___
 Copyright notice: Facebook is a trademark of Facebook Inc. This app is NOT connected to Facebook Inc. whatsoever. This app only helps using the official Facebook Mobile website.
 
-Important: The app has some limitations (eg. no access to your location so you cannot check-in automatically).<br />
+Important: The app has some limitations (just like the official Facebook mobile website).<br />
 Install using F-Droid client to get automatic updates.
 
 App suspended by Google Play.
