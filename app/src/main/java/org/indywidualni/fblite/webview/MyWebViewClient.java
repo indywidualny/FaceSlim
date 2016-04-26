@@ -69,32 +69,38 @@ public class MyWebViewClient extends WebViewClient {
 
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
-        // handling external links as intents
-        if (Uri.parse(url).getHost().endsWith("facebook.com")
-                || Uri.parse(url).getHost().endsWith("m.facebook.com")
-                || Uri.parse(url).getHost().endsWith("h.facebook.com")
-                || Uri.parse(url).getHost().endsWith("l.facebook.com")
-                || Uri.parse(url).getHost().endsWith("0.facebook.com")
-                || Uri.parse(url).getHost().endsWith("zero.facebook.com")
-                || Uri.parse(url).getHost().endsWith("fbcdn.net")
-                || Uri.parse(url).getHost().endsWith("akamaihd.net")
-                || Uri.parse(url).getHost().endsWith("fb.me")) {
-            return false;
-        } else if (preferences.getBoolean("load_extra", false)
-                && (Uri.parse(url).getHost().endsWith("googleusercontent.com")
-                || Uri.parse(url).getHost().endsWith("tumblr.com")
-                || Uri.parse(url).getHost().endsWith("pinimg.com")
-                || Uri.parse(url).getHost().endsWith("media.giphy.com"))) {
-            return false;
-        }
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        // really ugly but let's do it just to avoid rare crashes
         try {
-            view.getContext().startActivity(intent);
-        } catch (ActivityNotFoundException e) {
-            Log.e("shouldOverrideUrlLoad", "" + e.getMessage());
-            e.printStackTrace();
+            // handling external links as intents
+            if (Uri.parse(url).getHost().endsWith("facebook.com")
+                    || Uri.parse(url).getHost().endsWith("m.facebook.com")
+                    || Uri.parse(url).getHost().endsWith("h.facebook.com")
+                    || Uri.parse(url).getHost().endsWith("l.facebook.com")
+                    || Uri.parse(url).getHost().endsWith("0.facebook.com")
+                    || Uri.parse(url).getHost().endsWith("zero.facebook.com")
+                    || Uri.parse(url).getHost().endsWith("fbcdn.net")
+                    || Uri.parse(url).getHost().endsWith("akamaihd.net")
+                    || Uri.parse(url).getHost().endsWith("fb.me")) {
+                return false;
+            } else if (preferences.getBoolean("load_extra", false)
+                    && (Uri.parse(url).getHost().endsWith("googleusercontent.com")
+                    || Uri.parse(url).getHost().endsWith("tumblr.com")
+                    || Uri.parse(url).getHost().endsWith("pinimg.com")
+                    || Uri.parse(url).getHost().endsWith("media.giphy.com"))) {
+                return false;
+            }
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            try {
+                view.getContext().startActivity(intent);
+            } catch (ActivityNotFoundException e) {
+                Log.e("shouldOverrideUrlLoad", "" + e.getMessage());
+                e.printStackTrace();
+            }
+            return true;
+        } catch (NullPointerException npe) {
+            npe.printStackTrace();
+            return true;
         }
-        return true;
     }
 
     @SuppressWarnings("deprecation")
