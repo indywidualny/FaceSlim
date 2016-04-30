@@ -64,6 +64,7 @@ import java.lang.ref.WeakReference;
 import java.text.DateFormat;
 import java.util.Date;
 
+@SuppressWarnings("UnusedDeclaration")
 public class MainActivity extends Activity {
 
     // reference to this object
@@ -114,6 +115,10 @@ public class MainActivity extends Activity {
     private static String userAgentDefault;
     private static final String USER_AGENT_BASIC = "Mozilla/5.0 (Linux; U; Android 2.3.3; en-gb; " +
             "Nexus S Build/GRI20) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
+    public static final String USER_AGENT_MESSENGER = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 " +
+            "(KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36";
+
+    public static final String MESSENGER_URL = "https://www.messenger.com/login";
 
     @Override
     @SuppressLint("setJavaScriptEnabled")
@@ -302,8 +307,11 @@ public class MainActivity extends Activity {
             //noinspection ConstantConditions
             if (getIntent().getExtras().getString("start_url") != null) {
                 String temp = getIntent().getExtras().getString("start_url");
-                if (!isFacebookZero || !isConnectedMobile)
+                if (!isFacebookZero || !isConnectedMobile) {
                     webViewUrl = temp;
+                    if (webViewUrl != null && webViewUrl.equals(MESSENGER_URL))
+                        webView.getSettings().setUserAgentString(MainActivity.USER_AGENT_MESSENGER);
+                }
                 // cancel all notifications if 'All notifications' button was clicked
                 if ("https://m.facebook.com/notifications".equals(temp))
                     NotificationsService.cancelAllNotifications();
@@ -789,12 +797,20 @@ public class MainActivity extends Activity {
 
     // when a drawer item is clicked do instructions from below
     private void selectItem(int position, String baseAddress) {
+        webView.stopLoading();
+        setUserAgent();
+
         switch (position) {
             case 0:
                 webView.loadUrl(baseAddress);
                 break;
             case 1:
-                webView.loadUrl(baseAddress + "messages");
+                if (preferences.getBoolean("facebook_zero", false) && Connectivity.isConnectedMobile(this)) {
+                    Toast.makeText(getApplicationContext(), getString(R.string.facebook_zero_active), Toast.LENGTH_SHORT).show();
+                    break;
+                }
+                webView.getSettings().setUserAgentString(MainActivity.USER_AGENT_MESSENGER);
+                webView.loadUrl(MESSENGER_URL);
                 break;
             case 2:
                 webView.loadUrl(baseAddress + "buddylist.php");
@@ -870,10 +886,7 @@ public class MainActivity extends Activity {
         boolean isFacebookZero = preferences.getBoolean("facebook_zero", false);
 
         // set the right user agent
-        if (preferences.getBoolean("basic_mode", false))
-            webView.getSettings().setUserAgentString(USER_AGENT_BASIC);
-        else
-            webView.getSettings().setUserAgentString(userAgentDefault);
+        setUserAgent();
 
         /** get a subject and text and check if this is a link trying to be shared */
         String sharedSubject = getIntent().getStringExtra(Intent.EXTRA_SUBJECT);
@@ -902,18 +915,24 @@ public class MainActivity extends Activity {
 
         /** if opened by a notification or a shortcut */
         try {
-            if (getIntent().getExtras().getString("start_url") != null)
+            if (getIntent().getExtras().getString("start_url") != null) {
                 webViewUrl = getIntent().getExtras().getString("start_url");
                 // cancel all notifications if 'All notifications' button was clicked
                 if ("https://m.facebook.com/notifications".equals(webViewUrl))
                     NotificationsService.cancelAllNotifications();
+            }
         } catch (Exception ignored) {}
 
         /** load a grabbed url instead of the current page */
         if (isFacebookZero && isConnectedMobile)
             Toast.makeText(getApplicationContext(), getString(R.string.facebook_zero_active), Toast.LENGTH_SHORT).show();
-        else
+        else {
+            if (webViewUrl != null && webViewUrl.equals(MESSENGER_URL))
+                webView.getSettings().setUserAgentString(MainActivity.USER_AGENT_MESSENGER);
+            else
+                setUserAgent();
             webView.loadUrl(webViewUrl);
+        }
 
         // notify when there is no internet connection
         if (!Connectivity.isConnected(getApplicationContext()) && !preferences.getBoolean("offline_mode", false))
@@ -940,9 +959,13 @@ public class MainActivity extends Activity {
     public void onBackPressed() {
         if (inCustomView())
             hideCustomView();
-        else if (mCustomView == null && webView.canGoBack())
+        else if (mCustomView == null && webView.canGoBack()) {
+            if (MyWebViewClient.currentlyLoadedPage.contains("messenger.com")) {
+                webView.getSettings().setUserAgentString(MainActivity.USER_AGENT_MESSENGER);
+            } else
+                setUserAgent();
             webView.goBack();
-        else
+        } else
             super.onBackPressed();
     }
 
@@ -1095,8 +1118,20 @@ public class MainActivity extends Activity {
         dialog.show();
     }
 
+    private void setUserAgent() {
+        // set the right user agent
+        if (preferences.getBoolean("basic_mode", false))
+            webView.getSettings().setUserAgentString(USER_AGENT_BASIC);
+        else
+            webView.getSettings().setUserAgentString(userAgentDefault);
+    }
+
     public static Activity getMainActivity() {
         return mainActivity;
+    }
+
+    public SwipeRefreshLayout getSwipeRefreshLayout() {
+        return swipeRefreshLayout;
     }
 
 }

@@ -71,8 +71,17 @@ public class MyWebViewClient extends WebViewClient {
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
         // really ugly but let's do it just to avoid rare crashes
         try {
-            // handling external links as intents
+            if (Uri.parse(url).getHost().endsWith("messenger.com")) {
+                view.getSettings().setUseWideViewPort(false);
+                ((MainActivity) MainActivity.getMainActivity()).getSwipeRefreshLayout().setEnabled(false);
+                return false;
+            } else {
+                view.getSettings().setUseWideViewPort(true);
+                ((MainActivity) MainActivity.getMainActivity()).getSwipeRefreshLayout().setEnabled(true);
+            }
+
             if (Uri.parse(url).getHost().endsWith("facebook.com")
+                    || Uri.parse(url).getHost().endsWith("mobile.facebook.com")
                     || Uri.parse(url).getHost().endsWith("m.facebook.com")
                     || Uri.parse(url).getHost().endsWith("h.facebook.com")
                     || Uri.parse(url).getHost().endsWith("l.facebook.com")
@@ -89,6 +98,7 @@ public class MyWebViewClient extends WebViewClient {
                     || Uri.parse(url).getHost().endsWith("media.giphy.com"))) {
                 return false;
             }
+
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             try {
                 view.getContext().startActivity(intent);
@@ -192,6 +202,13 @@ public class MyWebViewClient extends WebViewClient {
             view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); " +
                     "node.innerHTML = str; document.body.appendChild(node); } " +
                     "addStyleString('.img, ._5sgg, ._-_a, .widePic, .profile-icon{ display: none; }');");
+
+        // hide install messenger notice at messenger page
+        if (url.contains("messenger.com")) {
+            view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); " +
+                    "node.innerHTML = str; document.body.appendChild(node); } " +
+                    "addStyleString('._s15{ display: none; }');");
+        }
 
         // offline mode
         if (preferences.getBoolean("offline_mode", false)) {

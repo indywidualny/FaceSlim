@@ -15,7 +15,7 @@ public class MessagesShortcutActivity extends Activity {
 
         Intent intent = new Intent();
         Intent launchIntent = new Intent(this, MainActivity.class);
-        launchIntent.putExtra("start_url", "https://m.facebook.com/messages");
+        launchIntent.putExtra("start_url", MainActivity.MESSENGER_URL);
         intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, launchIntent);
         intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, getString(R.string.messages));
         Parcelable iconResource = Intent.ShortcutIconResource.fromContext(this, R.mipmap.ic_messages);
