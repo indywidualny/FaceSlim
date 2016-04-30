@@ -49,7 +49,7 @@ public class NotificationsService extends Service {
     private static final String NOTIFICATIONS_URL_BACKUP = "https://web.facebook.com/notifications";
     private static final String MESSAGES_URL = "https://m.facebook.com/messages";
     private static final String MESSAGES_URL_BACKUP = "https://mobile.facebook.com/messages";
-    private static final String NOTIFICATION_MESSAGE_URL = "https://m.facebook.com/messages";
+    private static final String NOTIFICATION_MESSAGE_URL = "https://www.messenger.com/login";
 
     // number of trials during notifications or messages checking
     private static final int MAX_RETRY = 3;
