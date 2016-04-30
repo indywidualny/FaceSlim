@@ -128,7 +128,6 @@
     <string name="camera_exception">Nie mogę użyć aparatu</string>
     <string name="load_extra">Ładuj zewnętrzne obrazy</string>
     <string name="load_extra_description">Otwieraj zdjęcia z zewnętrznych serwisów. Obecnie niewiele stron jest wspieranych.</string>
-
     <string name="offline_mode">Tryb offline</string>
     <string name="offline_mode_enable">Aktywuj tryb offline</string>
     <string name="offline_mode_description">Gdy nie ma połączenia z Internetem spróbuj załadować stronę z cache i bazy danych.</string>
@@ -139,5 +138,8 @@
     <string name="offline_dummy_description">Kod źródłowy bieżącej strony jest asynchronicznie zapisywany w bazie danych. W przypadku duplikatu zachowam najnowszą wersję. Odśwież by wymusić aktualizację. Nie działa dla dynamicznych treści.</string>
     <string name="keyboard_fix">Napraw zasłonięte formularze &#8635;</string>
     <string name="offline_database_empty">Baza danych jest pusta</string>
+
+    <string name="no_location_permission">Zezwól na dostęp do lokalizacji, by użyć tej funkcji</string>
+    <string name="location_access">Dostęp do lokalizacji</string>
 
 </resources>
