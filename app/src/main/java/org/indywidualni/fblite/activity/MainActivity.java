@@ -878,6 +878,13 @@ public class MainActivity extends Activity {
         super.onNewIntent(intent);
         setIntent(intent);
 
+        // recreate activity when something important was just changed
+        if (getIntent().getBooleanExtra("core_settings_changed", false)) {
+            finish(); // finish and create a new Instance
+            Intent restart = new Intent(MainActivity.this, MainActivity.class);
+            startActivity(restart);
+        }
+
         // grab an url if opened by clicking a link
         String webViewUrl = getIntent().getDataString();
 
@@ -931,6 +938,7 @@ public class MainActivity extends Activity {
                 webView.getSettings().setUserAgentString(MainActivity.USER_AGENT_MESSENGER);
             else
                 setUserAgent();
+            webView.stopLoading();
             webView.loadUrl(webViewUrl);
         }
 
@@ -945,13 +953,6 @@ public class MainActivity extends Activity {
         } else {
             webView.getSettings().setGeolocationEnabled(false);
         }
-
-        // recreate activity when something important was just changed
-        if (getIntent().getBooleanExtra("core_settings_changed", false)) {
-            finish(); // finish and create a new Instance
-            Intent restart = new Intent(MainActivity.this, MainActivity.class);
-            startActivity(restart);
-        }
     }
 
     // handling back button
@@ -960,10 +961,8 @@ public class MainActivity extends Activity {
         if (inCustomView())
             hideCustomView();
         else if (mCustomView == null && webView.canGoBack()) {
-            if (MyWebViewClient.currentlyLoadedPage.contains("messenger.com")) {
-                webView.getSettings().setUserAgentString(MainActivity.USER_AGENT_MESSENGER);
-            } else
-                setUserAgent();
+            webView.stopLoading();
+            setUserAgent();
             webView.goBack();
         } else
             super.onBackPressed();
@@ -1128,10 +1127,6 @@ public class MainActivity extends Activity {
 
     public static Activity getMainActivity() {
         return mainActivity;
-    }
-
-    public SwipeRefreshLayout getSwipeRefreshLayout() {
-        return swipeRefreshLayout;
     }
 
 }

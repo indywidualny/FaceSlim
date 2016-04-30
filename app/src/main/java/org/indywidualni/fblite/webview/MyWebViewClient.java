@@ -73,12 +73,9 @@ public class MyWebViewClient extends WebViewClient {
         try {
             if (Uri.parse(url).getHost().endsWith("messenger.com")) {
                 view.getSettings().setUseWideViewPort(false);
-                ((MainActivity) MainActivity.getMainActivity()).getSwipeRefreshLayout().setEnabled(false);
                 return false;
-            } else {
+            } else
                 view.getSettings().setUseWideViewPort(true);
-                ((MainActivity) MainActivity.getMainActivity()).getSwipeRefreshLayout().setEnabled(true);
-            }
 
             if (Uri.parse(url).getHost().endsWith("facebook.com")
                     || Uri.parse(url).getHost().endsWith("mobile.facebook.com")
