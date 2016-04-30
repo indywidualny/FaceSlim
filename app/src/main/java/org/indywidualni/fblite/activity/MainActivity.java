@@ -757,6 +757,8 @@ public class MainActivity extends Activity {
             if (!Connectivity.isConnected(getApplicationContext()) && !preferences.getBoolean("offline_mode", false))
                 Toast.makeText(getApplicationContext(), getString(R.string.no_network), Toast.LENGTH_SHORT).show();
 
+            webView.stopLoading();
+
             // reloading page (if offline try to load a live version first)
             if (preferences.getBoolean("offline_mode", false) && MyWebViewClient.wasOffline)
                 webView.loadUrl(MyWebViewClient.currentlyLoadedPage);
@@ -1127,6 +1129,10 @@ public class MainActivity extends Activity {
 
     public static Activity getMainActivity() {
         return mainActivity;
+    }
+
+    public SwipeRefreshLayout getSwipeRefreshLayout() {
+        return swipeRefreshLayout;
     }
 
 }

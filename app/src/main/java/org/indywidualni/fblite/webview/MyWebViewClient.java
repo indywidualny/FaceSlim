@@ -131,6 +131,11 @@ public class MyWebViewClient extends WebViewClient {
 
     @Override
     public void onPageFinished(WebView view, String url) {
+        if (url.contains("messenger.com"))
+            ((MainActivity) MainActivity.getMainActivity()).getSwipeRefreshLayout().setEnabled(false);
+        else
+            ((MainActivity) MainActivity.getMainActivity()).getSwipeRefreshLayout().setEnabled(true);
+
         // when Zero is activated and there is a mobile network connection ignore extra customizations
         if (!preferences.getBoolean("facebook_zero", false) || !Connectivity.isConnectedMobile(context)) {
 
