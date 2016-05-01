@@ -9,6 +9,12 @@ Releases | [pl] wydania: https://github.com/indywidualny/FaceSlim/releases
 ## Changelog
 & what makes the application awesome:
 
+**2.5**
+* mobile Messenger integration. Drawer shortcut to messages opens mobile Messenger now (as well as a launcher shortcut and a message notification) - Facebook decided to disable messages tab soon [#155](../../issues/155)
+* geolocation access for checking-in automatically (optional) 
+* fix for not blinking LED on some devices 
+* minor fixes (thanks to your bug reports) 
+
 **2.4**
 * offline mode - When there is no network load pages from a database. It's not perfect and doesn't work for a dynamically loaded content automatically... but it may be useful! [#89](../../issues/89)
 * new notifications check interval (2 minutes) [#119](../../issues/119)

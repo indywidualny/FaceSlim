@@ -98,7 +98,7 @@
     <string name="basic_mode">Tryb podstawowy</string>
     <string name="basic_mode_description">Używaj okrojonej strony zamiast zwykłej. Ciemny motyw musi być wyłączony. Może nie działać przy szybkim połączeniu.</string>
     <string name="preference_category6">Aktualności</string>
-    <string name="hide_sponsored">Ukryj posty sponsorowane</string>
+    <string name="hide_sponsored">Ukryj część postów sponsorowanych</string>
     <string name="hide_sponsored_description">Nie lubimy sponsorowanych postów i reklam.</string>
     <string name="hide_people">Ukryj osoby, które możesz znać</string>
     <string name="hide_people_description">Przejrzysty stumień, więcej miejsca.</string>
