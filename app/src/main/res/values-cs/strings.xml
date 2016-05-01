@@ -130,7 +130,6 @@
     <string name="cannot_access_storage">Není přístup do externího úložiště</string>
     <string name="file_cannot_be_saved">Soubor nemůže být uložen</string>
     <string name="camera_exception">Problém s kamerou</string>
-    
     <string name="offline_mode">V režimu offline</string>
     <string name="offline_mode_enable">Povolit režim offline</string>
     <string name="offline_mode_description">Pokud není dostupné spojení do internetu, pokusit se načíst stránku z dočasné paměti a databáze.</string>
@@ -142,4 +141,7 @@
     <string name="keyboard_fix">Oprava překrývání klávesnice &#8635;</string>
     <string name="offline_database_empty">Offline databáze je prázdná</string>
 
+    <string name="no_location_permission">Pro tuto funkci je třeba povolit práva ke zjištění polohy</string>
+    <string name="location_access">Povolit geolokaci</string>
+    
 </resources>
