@@ -126,10 +126,22 @@
     <string name="file_logger_needs_permission">Немам приступ спољашњем складишту. Не могу да сачувам записе</string>
     <string name="save_img">Сачувај слику</string>
     <string name="downloading_img">Преузимам слику&#8230;</string>
-
     <string name="download_manager_disabled">Менаџер преузимања је онемогућен, омогућите га.</string>
     <string name="cannot_access_storage">Немам приступ спољашњем складишту</string>
     <string name="file_cannot_be_saved">Не могу да сачувам фајл</string>
-    <string name="camera_exception">Проблем са камером</string>
+    <string name="camera_exception">Проблеми са камером</string>
+    <string name="offline_mode">Ванмрежни режим</string>
+    <string name="offline_mode_enable">Укључи ванмрежни режим</string>
+    <string name="offline_mode_description">Учитавање странице из кеша и базе података ако нема везе са интернетом.</string>
+    <string name="not_found_offline" formatted="false"><![CDATA[<div style=\"position: absolute;top: 50%;left: 50%;transform: translateX(-50%) translateY(-50%);\"><div><h1>Нажалост, нема ове странице у бази података</h1><h1>Савет: да бисте се вратили назад, само тапните два пута дугме за назад</h1></div></div>]]></string>
+    <string name="loading_offline_database">Учитавам страницу из ванмрежне базе података</string>
+    <string name="offline_keep_max">Максимално страница за чување</string>
+    <string name="offline_keep_max_description">Када су посећене странице на мрежи асинхроно сачуване у базу података. Подразумевана вредност је (најскоријих) 10 страница.</string>
+    <string name="offline_dummy_description">Изворни кôд текуће странице је асинхроно сачуван у бази података. Ако се појави дупликат, биће замењен. Освежите страницу да приморате њено ажурирање. Не ради за динамички учитан садржај.</string>
+    <string name="keyboard_fix">Поправка за прекривајућу тастатуру &#8635;</string>
+    <string name="offline_database_empty">Ванмрежна база података је празна</string>
+
+    <string name="no_location_permission">Одобрите дозволе за локацију да бисте користили ову функционалност</string>
+    <string name="location_access">Укључи геолокацију</string>
 
 </resources>
