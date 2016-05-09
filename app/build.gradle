@@ -9,8 +9,8 @@ android {
         resValue "string", "tray__authority", "${applicationId}.tray"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 33
-        versionName "2.5.0"
+        versionCode 34
+        versionName "2.5.1"
     }
     buildTypes {
         release {
@@ -29,7 +29,7 @@ dependencies {
     compile 'com.android.support:support-v4:23.3.0'
     compile 'com.android.support:appcompat-v7:23.3.0'
     compile 'net.grandcentrix.tray:tray:0.9.2'
-    compile 'org.jsoup:jsoup:1.8.3'
+    compile 'org.jsoup:jsoup:1.9.1'
     compile 'ch.acra:acra:4.7.0'
     compile 'com.github.johnkil.android-appmsg:appmsg:1.2.0'
     compile project(':saxrssreader')

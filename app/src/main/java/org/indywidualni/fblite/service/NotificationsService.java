@@ -396,6 +396,7 @@ public class NotificationsService extends Service {
     }
 
     // create a notification and display it
+    @SuppressWarnings("unused")
     private void notifier(String title, String summary, String url, boolean isMessage) {
         // let's display a notification, dude!
         final String contentTitle;
