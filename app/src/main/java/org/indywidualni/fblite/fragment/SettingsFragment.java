@@ -91,6 +91,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
                     case "no_images":
                     case "keyboard_fix":
                     case "hardware_acceleration":
+                    case "custom_user_agent":
                         relaunch();
                         break;
                 }

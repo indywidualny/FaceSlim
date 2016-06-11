@@ -150,7 +150,7 @@
     <string name="offline_database_empty">Offline database is empty</string>
     <string name="no_location_permission">Grant location permission to use this feature</string>
     <string name="location_access">Enable geolocation</string>
-    <string name="custom_user_agent">Custom User Agent</string>
+    <string name="custom_user_agent">Custom User Agent &#8635;</string>
     <string name="custom_user_agent_description">Use your own User Agent String</string>
     <string name="custom_user_agent_hint">Blank for default</string>
     <string name="touch_mode">Touch mode</string>
