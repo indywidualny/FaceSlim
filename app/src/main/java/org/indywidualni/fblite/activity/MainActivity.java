@@ -151,7 +151,7 @@ public class MainActivity extends Activity {
 
         // start the service when it's activated but somehow it's not running
         // when it's already running nothing happens so it's ok
-        if (preferences.getBoolean("notifications_activated", false) || preferences.getBoolean("message_notifications", false)) {
+        if (preferences.getBoolean("message_notifications", false)) {
             final Intent intent = new Intent(MyApplication.getContextOfApplication(), NotificationsService.class);
             MyApplication.getContextOfApplication().startService(intent);
         }
