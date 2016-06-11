@@ -32,6 +32,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.lang.Integer;
 
 public class NotificationsService extends Service {
 
@@ -118,7 +119,7 @@ public class NotificationsService extends Service {
             try {
 
                 // get time interval from tray preferences
-                final int timeInterval = preferences.getInt("interval_pref", 1800000);
+                final int timeInterval = Integer.parseInt(preferences.getString("interval_pref", "1800000"));
                 Log.i(TAG, "Time interval: " + (timeInterval / 1000) + " seconds");
 
                 // time since last check = now - last check
