@@ -13,15 +13,6 @@
             android:defaultValue="1800000" />
 
         <RingtonePreference
-            android:key="ringtone"
-            android:ringtoneType="notification"
-            android:showDefault="true"
-            android:showSilent="true"
-            android:defaultValue="content://settings/system/notification_sound"
-            android:title="@string/notification_sound"
-            android:summary="@string/notification_sound_description" />
-
-        <RingtonePreference
             android:key="ringtone_msg"
             android:ringtoneType="notification"
             android:showDefault="true"

@@ -47,11 +47,6 @@
             android:summary="@string/notifications_settings_description"/>
 
         <CheckBoxPreference
-            android:key="notifications_activated"
-            android:title="@string/facebook_notifications"
-            android:defaultValue="false"/>
-
-        <CheckBoxPreference
             android:key="message_notifications"
             android:title="@string/message_notifications"
             android:defaultValue="false"/>
@@ -66,6 +61,13 @@
             android:key="facebook_zero"
             android:title="@string/facebook_zero"
             android:summary="@string/facebook_zero_description"
+            android:defaultValue="false"/>
+
+        <CheckBoxPreference
+            android:key="touch_mode"
+            android:title="@string/touch_mode"
+            android:summary="@string/touch_mode_description"
+            android:enabled="false"
             android:defaultValue="false"/>
 
         <CheckBoxPreference
@@ -173,6 +175,14 @@
             android:key="keyboard_fix"
             android:title="@string/keyboard_fix"
             android:defaultValue="false"/>
+
+        <EditTextPreference
+            android:key="custom_user_agent"
+            android:inputType="text"
+            android:title="@string/custom_user_agent"
+            android:summary="@string/custom_user_agent_description"
+            android:hint="@string/custom_user_agent_hint"
+            android:defaultValue=""/>
 
         <Preference
             android:key="clear_cache"

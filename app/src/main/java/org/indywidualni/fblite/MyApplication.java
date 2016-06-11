@@ -21,7 +21,8 @@ import java.net.MalformedURLException;
         resDialogText = R.string.crash_dialog_text,
         resDialogIcon = R.mipmap.ic_launcher,
         resDialogTitle = R.string.crash_dialog_title,
-        resDialogCommentPrompt = R.string.crash_dialog_comment_prompt
+        resDialogCommentPrompt = R.string.crash_dialog_comment_prompt,
+        resDialogTheme = R.style.CrashDialog
         )
 
 public class MyApplication extends Application {
@@ -42,8 +43,8 @@ public class MyApplication extends Application {
         /**
          * Piwik dry run. Uncomment these lines during app development.
          */
-        //Piwik.getInstance(this).setDryRun(true);
-        //Piwik.getInstance(this).setDebug(true);
+        Piwik.getInstance(this).setDryRun(BuildConfig.DEBUG);
+        Piwik.getInstance(this).setDebug(BuildConfig.DEBUG);
 
         /**
          * Count app downloads. Fired only after new installation or upgrade.

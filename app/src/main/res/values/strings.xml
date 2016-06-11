@@ -148,8 +148,12 @@
     <string name="offline_dummy_description">The source code of the current page is asynchronously saved in the database. If a duplicate is found it will be replaced. Refresh a page to force update it. It doesn\'t work for a dynamically loaded content.</string>
     <string name="keyboard_fix">Overlaying keyboard fix &#8635;</string>
     <string name="offline_database_empty">Offline database is empty</string>
-
     <string name="no_location_permission">Grant location permission to use this feature</string>
     <string name="location_access">Enable geolocation</string>
+    <string name="custom_user_agent">Custom User Agent</string>
+    <string name="custom_user_agent_description">Use your own User Agent String</string>
+    <string name="custom_user_agent_hint">Blank for default</string>
+    <string name="touch_mode">Touch mode</string>
+    <string name="touch_mode_description">Use touch.facebook.com website.</string>
 
 </resources>

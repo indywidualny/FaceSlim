@@ -2,15 +2,15 @@ package org.indywidualni.fblite.util.logger;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.widget.Toast;
-
-import net.grandcentrix.tray.TrayAppPreferences;
 
 import org.indywidualni.fblite.MyApplication;
 import org.indywidualni.fblite.R;
@@ -24,13 +24,13 @@ public final class Logger {
     private static volatile Logger instance;
     private static final int MSG_SHOW_TOAST = 1;
     private static final Context context = MyApplication.getContextOfApplication();
-    private final TrayAppPreferences trayPreferences;
+    private final SharedPreferences preferences;
     private final String logFilePath;
     private final MyHandler messageHandler;
 
     private Logger() {
         messageHandler = new MyHandler(this);
-        trayPreferences = new TrayAppPreferences(context);
+        preferences = PreferenceManager.getDefaultSharedPreferences(context);
         logFilePath = Environment.getExternalStorageDirectory().getAbsolutePath()
                 + File.separator + context.getString(R.string.app_name).replace(" ", "") + ".log";
     }
@@ -78,7 +78,7 @@ public final class Logger {
     }
 
     public synchronized void i(String tag, String msg) {
-        final boolean fileLoggingEnabled = trayPreferences.getBoolean("file_logging", false);
+        final boolean fileLoggingEnabled = preferences.getBoolean("file_logging", false);
         final boolean mounted = Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState());
         final boolean storageReady = mounted && checkStoragePermission();
 

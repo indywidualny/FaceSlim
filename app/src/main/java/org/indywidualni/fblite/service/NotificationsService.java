@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.net.Uri;
@@ -15,13 +16,12 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.Looper;
+import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
 import android.widget.Toast;
-
-import net.grandcentrix.tray.TrayAppPreferences;
 
 import org.indywidualni.fblite.MyApplication;
 import org.indywidualni.fblite.R;
@@ -30,23 +30,12 @@ import org.indywidualni.fblite.util.Connectivity;
 import org.indywidualni.fblite.util.logger.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.select.Elements;
-import org.xml.sax.SAXException;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
-
-import nl.matshofman.saxrssreader.RssFeed;
-import nl.matshofman.saxrssreader.RssItem;
-import nl.matshofman.saxrssreader.RssReader;
 
 public class NotificationsService extends Service {
 
     // Facebook URL constants
-    private static final String BASE_URL = "https://www.facebook.com";
-    private static final String NOTIFICATIONS_URL = "https://www.facebook.com/notifications";
-    private static final String NOTIFICATIONS_URL_BACKUP = "https://web.facebook.com/notifications";
     private static final String MESSAGES_URL = "https://m.facebook.com/messages";
     private static final String MESSAGES_URL_BACKUP = "https://mobile.facebook.com/messages";
     private static final String NOTIFICATION_MESSAGE_URL = "https://www.messenger.com/login";
@@ -64,7 +53,7 @@ public class NotificationsService extends Service {
     // volatile boolean to safely skip checking while service is being stopped
     private volatile boolean shouldContinue = true;
     private static String userAgent;
-    private TrayAppPreferences trayPreferences;
+    private SharedPreferences preferences;
 
     /* Well, bad practice. Object name starting with a capital, but it's convenient.
     In order to use my custom logger I just removed Log import and I'm getting an
@@ -94,8 +83,7 @@ public class NotificationsService extends Service {
         Log.i(TAG, "********** Service created! **********");
         super.onCreate();
 
-        // get TrayPreferences
-        trayPreferences = new TrayAppPreferences(getApplicationContext());
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         // create a runnable needed by a Handler
         runnable = new HandlerRunnable();
@@ -130,14 +118,14 @@ public class NotificationsService extends Service {
             try {
 
                 // get time interval from tray preferences
-                final int timeInterval = trayPreferences.getInt("interval_pref", 1800000);
+                final int timeInterval = preferences.getInt("interval_pref", 1800000);
                 Log.i(TAG, "Time interval: " + (timeInterval / 1000) + " seconds");
 
                 // time since last check = now - last check
                 final long now = System.currentTimeMillis();
-                final long sinceLastCheck = now - trayPreferences.getLong("last_check", now);
-                final boolean ntfLastStatus = trayPreferences.getBoolean("ntf_last_status", false);
-                final boolean msgLastStatus = trayPreferences.getBoolean("msg_last_status", false);
+                final long sinceLastCheck = now - preferences.getLong("last_check", now);
+                final boolean ntfLastStatus = preferences.getBoolean("ntf_last_status", false);
+                final boolean msgLastStatus = preferences.getBoolean("msg_last_status", false);
 
                 if ((sinceLastCheck < timeInterval) && ntfLastStatus && msgLastStatus) {
                     final long waitTime = timeInterval - sinceLastCheck;
@@ -161,21 +149,19 @@ public class NotificationsService extends Service {
                 if (shouldContinue) {
                     // start AsyncTasks if there is internet connection
                     if (Connectivity.isConnected(getApplicationContext())) {
-                        Log.i(TAG, "Internet connection active. Starting AsyncTasks...");
+                        Log.i(TAG, "Internet connection active. Starting AsyncTask...");
                         String connectionType = "Wi-Fi";
                         if (Connectivity.isConnectedMobile(getApplicationContext()))
                             connectionType = "Mobile";
                         Log.i(TAG, "Connection Type: " + connectionType);
-                        userAgent = trayPreferences.getString("webview_user_agent", System.getProperty("http.agent"));
+                        userAgent = preferences.getString("webview_user_agent", System.getProperty("http.agent"));
                         Log.i(TAG, "User Agent: " + userAgent);
 
-                        if (trayPreferences.getBoolean("notifications_activated", false))
-                            new RssReaderTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
-                        if (trayPreferences.getBoolean("message_notifications", false))
+                        if (preferences.getBoolean("message_notifications", false))
                             new CheckMessagesTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 
                         // save current time (last potentially successful checking)
-                        trayPreferences.put("last_check", System.currentTimeMillis());
+                        preferences.edit().putLong("last_check", System.currentTimeMillis()).apply();
                     } else
                         Log.i(TAG, "No internet connection. Skip checking.");
 
@@ -187,101 +173,6 @@ public class NotificationsService extends Service {
             } catch (RuntimeException re) {
                 Log.i(TAG, "RuntimeException caught");
                 restartItself();
-            }
-        }
-
-    }
-
-    /** Notifications checker task: it checks Facebook notifications only. */
-    private class RssReaderTask extends AsyncTask<Void, Void, ArrayList<RssItem>> {
-
-        private boolean syncProblemOccurred = false;
-
-        private String getFeed(String connectUrl) {
-            try {
-                Elements element = Jsoup.connect(connectUrl).userAgent(userAgent).timeout(JSOUP_TIMEOUT)
-                        .cookie("https://m.facebook.com", CookieManager.getInstance().getCookie("https://m.facebook.com")).get()
-                        .select("div._li").select("div#globalContainer").select("div.fwn").select("a[href*=rss20]");
-
-                return element.attr("href");
-            } catch (IllegalArgumentException ex) {
-                Log.i("CheckMessagesTask", "Cookie sync problem occurred");
-                if (!syncProblemOccurred) {
-                    syncProblemToast();
-                    syncProblemOccurred = true;
-                }
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-            return "failure";
-        }
-
-        @Override
-        protected ArrayList<RssItem> doInBackground(Void... params) {
-            ArrayList<RssItem> result = null;
-            String feedUrl;
-            int tries = 0;
-
-            // sync cookies to get the right data
-            syncCookies();
-
-            while (tries++ < MAX_RETRY && result == null) {
-                // try to generate rss feed address
-                Log.i("RssReaderTask:getFeed", "Trying: " + NOTIFICATIONS_URL);
-                String secondPart = getFeed(NOTIFICATIONS_URL);
-                if (secondPart.length() < 10) {
-                    Log.i("RssReaderTask:getFeed", "Trying: " + NOTIFICATIONS_URL_BACKUP);
-                    secondPart = getFeed(NOTIFICATIONS_URL_BACKUP);
-                }
-                // final generation: base + second part
-                if (secondPart.length() > 10)
-                    feedUrl = BASE_URL + secondPart;
-                else
-                    feedUrl = "malformed";
-
-                try {
-                    Log.i("RssReaderTask", "doInBackground: Processing... Trial: " + tries);
-                    URL url = new URL(feedUrl);
-                    RssFeed feed = RssReader.read(url);
-                    result = feed.getRssItems();
-                } catch (MalformedURLException ex) {
-                    Log.i("RssReaderTask", "doInBackground: URL error");
-                } catch (SAXException | IOException ex) {
-                    Log.i("RssReaderTask", "doInBackground: Feed error");
-                }
-            }
-
-            return result;
-        }
-
-        @Override
-        protected void onPostExecute(ArrayList<RssItem> result) {
-
-            /** The first service start ever will display a fake notification.
-             *  Not fake actually - the latest one. I've been thinking instead
-             *  of avoiding it, it's a nice example how it will work in the future.
-             */
-
-            // get the last PubDate (String) from TrayPreferences
-            final String savedDate = trayPreferences.getString("saved_date", "nothing");
-
-            // if the saved PubDate is different than the new one it means there is new notification
-            // display it only when MainActivity is not active or 'Always notify' is checked
-            try {
-                if (!result.get(0).getPubDate().toString().equals(savedDate))
-                    if (!trayPreferences.getBoolean("activity_visible", false) || trayPreferences.getBoolean("notifications_everywhere", true))
-                        notifier(result.get(0).getTitle(), result.get(0).getDescription(), result.get(0).getLink(), false);
-
-                // save the latest PubDate (as a String) to TrayPreferences
-                trayPreferences.put("saved_date", result.get(0).getPubDate().toString());
-
-                // save this check status
-                trayPreferences.put("ntf_last_status", true);
-                Log.i("RssReaderTask", "onPostExecute: Aight biatch ;)");
-            } catch (NullPointerException | IndexOutOfBoundsException ex) {
-                // save this check status
-                trayPreferences.put("ntf_last_status", false);
-                Log.i("RssReaderTask", "onPostExecute: Failure");
             }
         }
 
@@ -343,19 +234,19 @@ public class NotificationsService extends Service {
                 // parse a number of unread messages
                 int newMessages = Integer.parseInt(result);
 
-                if (!trayPreferences.getBoolean("activity_visible", false) || trayPreferences.getBoolean("notifications_everywhere", true)) {
+                if (!preferences.getBoolean("activity_visible", false) || preferences.getBoolean("notifications_everywhere", true)) {
                     if (newMessages == 1)
-                        notifier(getString(R.string.you_have_one_message), null, NOTIFICATION_MESSAGE_URL, true);
+                        notifier(getString(R.string.you_have_one_message), null, NOTIFICATION_MESSAGE_URL);
                     else if (newMessages > 1)
-                        notifier(String.format(getString(R.string.you_have_n_messages), newMessages), null, NOTIFICATION_MESSAGE_URL, true);
+                        notifier(String.format(getString(R.string.you_have_n_messages), newMessages), null, NOTIFICATION_MESSAGE_URL);
                 }
 
                 // save this check status
-                trayPreferences.put("msg_last_status", true);
+                preferences.edit().putBoolean("msg_last_status", true).apply();
                 Log.i("CheckMessagesTask", "onPostExecute: Aight biatch ;)");
             } catch (NumberFormatException ex) {
                 // save this check status
-                trayPreferences.put("msg_last_status", false);
+                preferences.edit().putBoolean("msg_last_status", false).apply();
                 Log.i("CheckMessagesTask", "onPostExecute: Failure");
             }
         }
@@ -397,16 +288,12 @@ public class NotificationsService extends Service {
 
     // create a notification and display it
     @SuppressWarnings("unused")
-    private void notifier(String title, String summary, String url, boolean isMessage) {
+    private void notifier(String title, String summary, String url) {
         // let's display a notification, dude!
-        final String contentTitle;
-        if (isMessage)
-            contentTitle = getString(R.string.app_name) + ": " + getString(R.string.messages);
-        else
-            contentTitle = getString(R.string.app_name) + ": " + getString(R.string.notifications);
+        final String contentTitle = getString(R.string.app_name) + ": " + getString(R.string.messages);
 
         // log line (show what type of notification is about to be displayed)
-        Log.i(TAG, "Start notification - isMessage: " + isMessage);
+        Log.i(TAG, "Start notification");
 
         // start building a notification
         NotificationCompat.Builder mBuilder =
@@ -419,31 +306,17 @@ public class NotificationsService extends Service {
                         .setWhen(System.currentTimeMillis())
                         .setAutoCancel(true);
 
-        // see all the notifications button (if it's not a message)
-        if (!isMessage) {
-            Intent allNotificationsIntent = new Intent(this, MainActivity.class);
-            allNotificationsIntent.putExtra("start_url", "https://m.facebook.com/notifications");
-            allNotificationsIntent.setAction("ALL_NOTIFICATIONS_ACTION");
-            PendingIntent piAllNotifications = PendingIntent.getActivity(getApplicationContext(), 0, allNotificationsIntent, 0);
-            mBuilder.addAction(0, getString(R.string.all_notifications), piAllNotifications);
-        }
-
-        // ringtone
-        String ringtoneKey = "ringtone";
-        if (isMessage)
-            ringtoneKey = "ringtone_msg";
-
-        Uri ringtoneUri = Uri.parse(trayPreferences.getString(ringtoneKey, "content://settings/system/notification_sound"));
+        Uri ringtoneUri = Uri.parse(preferences.getString("ringtone_msg", "content://settings/system/notification_sound"));
         mBuilder.setSound(ringtoneUri);
 
         // vibration
-        if (trayPreferences.getBoolean("vibrate", false))
+        if (preferences.getBoolean("vibrate", false))
             mBuilder.setVibrate(new long[] {500, 500});
         else
             mBuilder.setVibrate(new long[] {0L});
 
         // LED light
-        if (trayPreferences.getBoolean("led_light", false)) {
+        if (preferences.getBoolean("led_light", false)) {
             Resources resources = getResources(), systemResources = Resources.getSystem();
             mBuilder.setLights(Color.CYAN,
                     resources.getInteger(systemResources.getIdentifier("config_defaultNotificationLedOn", "integer", "android")),
@@ -469,24 +342,12 @@ public class NotificationsService extends Service {
         Notification note = mBuilder.build();
 
         // LED light flag
-        if (trayPreferences.getBoolean("led_light", false))
+        if (preferences.getBoolean("led_light", false))
             note.flags |= Notification.FLAG_SHOW_LIGHTS;
 
         // display a notification
         NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-        // because message notifications are displayed separately
-        if (isMessage)
-            mNotificationManager.notify(1, note);
-        else
-            mNotificationManager.notify(0, note);
-    }
-
-    // cancel all the notifications which are visible at the moment
-    public static void cancelAllNotifications() {
-        NotificationManager notificationManager = (NotificationManager)
-                MyApplication.getContextOfApplication().getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.cancelAll();
+        mNotificationManager.notify(1, note);
     }
 
 }

@@ -46,8 +46,6 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import net.grandcentrix.tray.TrayAppPreferences;
-
 import org.indywidualni.fblite.MyApplication;
 import org.indywidualni.fblite.R;
 import org.indywidualni.fblite.service.NotificationsService;
@@ -99,7 +97,6 @@ public class MainActivity extends Activity {
     // log tag, preferences, runtime permissions
     private static final String TAG = MainActivity.class.getSimpleName();
     private SharedPreferences preferences;
-    private TrayAppPreferences trayPreferences;
     private static final int REQUEST_STORAGE = 1;
     private static final int REQUEST_LOCATION = 2;
 
@@ -130,7 +127,6 @@ public class MainActivity extends Activity {
 
         // get shared preferences and TrayPreferences
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        trayPreferences = new TrayAppPreferences(getApplicationContext());
         appDirectoryName = getString(R.string.app_name).replace(" ", "");
 
         // set the main content view (for drawer position)
@@ -205,8 +201,9 @@ public class MainActivity extends Activity {
         // define url that will open in webView
         String webViewUrl = "https://m.facebook.com";
 
-        // use basic mode
-        if (preferences.getBoolean("basic_mode", false))
+        if (preferences.getBoolean("touch_mode", false))
+            webViewUrl = "https://touch.facebook.com";
+        else if (preferences.getBoolean("basic_mode", false))
             webViewUrl = "https://mbasic.facebook.com";
 
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
@@ -252,10 +249,11 @@ public class MainActivity extends Activity {
 
         // get user agent
         userAgentDefault = webView.getSettings().getUserAgentString();
-        trayPreferences.put("webview_user_agent", userAgentDefault);
+        preferences.edit().putString("webview_user_agent", userAgentDefault).apply();
 
-        // set user agent for basic mode
-        if (preferences.getBoolean("basic_mode", false))
+        if (!preferences.getString("custom_user_agent", "").isEmpty())
+            webView.getSettings().setUserAgentString(preferences.getString("custom_user_agent", ""));
+        else if (preferences.getBoolean("basic_mode", false))
             webView.getSettings().setUserAgentString(USER_AGENT_BASIC);
 
         // disable images to reduce data usage
@@ -284,7 +282,10 @@ public class MainActivity extends Activity {
                 }
                 // final step, set the proper Sharer...
                 webViewUrl = String.format("https://m.facebook.com/sharer.php?u=%s&t=%s", sharedUrl, sharedSubject);
-                if (preferences.getBoolean("basic_mode", false))
+
+                if (preferences.getBoolean("touch_mode", false))
+                    webViewUrl = String.format("https://touch.facebook.com/sharer.php?u=%s&t=%s", sharedUrl, sharedSubject);
+                else if (preferences.getBoolean("basic_mode", false))
                     webViewUrl = String.format("https://mbasic.facebook.com/sharer.php?u=%s&t=%s", sharedUrl, sharedSubject);
                 // ... and parse it just in case
                 webViewUrl = Uri.parse(webViewUrl).toString();
@@ -312,9 +313,6 @@ public class MainActivity extends Activity {
                     if (webViewUrl != null && webViewUrl.equals(MESSENGER_URL))
                         webView.getSettings().setUserAgentString(MainActivity.USER_AGENT_MESSENGER);
                 }
-                // cancel all notifications if 'All notifications' button was clicked
-                if ("https://m.facebook.com/notifications".equals(temp))
-                    NotificationsService.cancelAllNotifications();
             }
         } catch (Exception ignored) {}
 
@@ -788,7 +786,9 @@ public class MainActivity extends Activity {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             String baseAddress = "https://m.facebook.com/";
 
-            if (preferences.getBoolean("basic_mode", false))
+            if (preferences.getBoolean("touch_mode", false))
+                baseAddress = "https://touch.facebook.com/";
+            else if (preferences.getBoolean("basic_mode", false))
                 baseAddress = "https://mbasic.facebook.com/";
             if (preferences.getBoolean("facebook_zero", false) && Connectivity.isConnectedMobile(getApplicationContext()))
                 baseAddress = "https://0.facebook.com/";
@@ -832,7 +832,7 @@ public class MainActivity extends Activity {
                 startActivity(about);
                 break;
             case 7:
-                trayPreferences.put("activity_visible", false);
+                preferences.edit().putBoolean("activity_visible", false).apply();
                 //finish();
                 System.exit(0); // ugly, ugly, ugly! They wanted it :(
                 break;
@@ -915,7 +915,10 @@ public class MainActivity extends Activity {
                 }
                 // final step, set the proper Sharer...
                 webViewUrl = String.format("https://m.facebook.com/sharer.php?u=%s&t=%s", sharedUrl, sharedSubject);
-                if (preferences.getBoolean("basic_mode", false))
+
+                if (preferences.getBoolean("touch_mode", false))
+                    webViewUrl = String.format("https://touch.facebook.com/sharer.php?u=%s&t=%s", sharedUrl, sharedSubject);
+                else if (preferences.getBoolean("basic_mode", false))
                     webViewUrl = String.format("https://mbasic.facebook.com/sharer.php?u=%s&t=%s", sharedUrl, sharedSubject);
                 // ... and parse it just in case
                 webViewUrl = Uri.parse(webViewUrl).toString();
@@ -924,12 +927,8 @@ public class MainActivity extends Activity {
 
         /** if opened by a notification or a shortcut */
         try {
-            if (getIntent().getExtras().getString("start_url") != null) {
+            if (getIntent().getExtras().getString("start_url") != null)
                 webViewUrl = getIntent().getExtras().getString("start_url");
-                // cancel all notifications if 'All notifications' button was clicked
-                if ("https://m.facebook.com/notifications".equals(webViewUrl))
-                    NotificationsService.cancelAllNotifications();
-            }
         } catch (Exception ignored) {}
 
         /** load a grabbed url instead of the current page */
@@ -976,7 +975,7 @@ public class MainActivity extends Activity {
         webView.onResume();
         webView.resumeTimers();
         registerForContextMenu(webView);
-        trayPreferences.put("activity_visible", true);
+        preferences.edit().putBoolean("activity_visible", true).apply();
     }
 
     @Override
@@ -987,7 +986,7 @@ public class MainActivity extends Activity {
             webView.onPause();
             webView.pauseTimers();
         }
-        trayPreferences.put("activity_visible", false);
+        preferences.edit().putBoolean("activity_visible", false).apply();
     }
 
     @Override
@@ -1121,6 +1120,11 @@ public class MainActivity extends Activity {
 
     private void setUserAgent() {
         // set the right user agent
+        if (!preferences.getString("custom_user_agent", "").isEmpty()) {
+            webView.getSettings().setUserAgentString(preferences.getString("custom_user_agent", ""));
+            return;
+        }
+
         if (preferences.getBoolean("basic_mode", false))
             webView.getSettings().setUserAgentString(USER_AGENT_BASIC);
         else

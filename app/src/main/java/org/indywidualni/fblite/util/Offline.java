@@ -10,8 +10,6 @@ import android.util.Log;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
 
-import net.grandcentrix.tray.TrayAppPreferences;
-
 import org.indywidualni.fblite.MyApplication;
 import org.indywidualni.fblite.util.database.OfflineDataSource;
 import org.jsoup.Jsoup;
@@ -30,8 +28,8 @@ public class Offline {
 
     public Offline() {
         context = MyApplication.getContextOfApplication();
-        TrayAppPreferences trayPreferences = new TrayAppPreferences(context);
-        userAgent = trayPreferences.getString("webview_user_agent", System.getProperty("http.agent"));
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        userAgent = preferences.getString("webview_user_agent", System.getProperty("http.agent"));
         dataSource = OfflineDataSource.getInstance();
         syncCookies();
     }
@@ -62,7 +60,9 @@ public class Offline {
                         .cookie("https://m.facebook.com", CookieManager.getInstance().getCookie("https://m.facebook.com")).get();
 
                 String base = "https://m.facebook.com";
-                if (preferences.getBoolean("basic_mode", false))
+                if (preferences.getBoolean("touch_mode", false))
+                    base = "https://touch.facebook.com";
+                else if (preferences.getBoolean("basic_mode", false))
                     base = "https://mbasic.facebook.com";
                 if (Connectivity.isConnectedMobile(context) && preferences.getBoolean("facebook_zero", false))
                     base = "https://0.facebook.com";

@@ -79,6 +79,7 @@ public class MyWebViewClient extends WebViewClient {
 
             if (Uri.parse(url).getHost().endsWith("facebook.com")
                     || Uri.parse(url).getHost().endsWith("mobile.facebook.com")
+                    || Uri.parse(url).getHost().endsWith("touch.facebook.com")
                     || Uri.parse(url).getHost().endsWith("m.facebook.com")
                     || Uri.parse(url).getHost().endsWith("h.facebook.com")
                     || Uri.parse(url).getHost().endsWith("l.facebook.com")
