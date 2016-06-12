@@ -108,7 +108,6 @@
     <string name="hide_people_description">Čistější seznam, více místa.</string>
     <string name="hide_news_feed">Skrýt kanál novinek</string>
     <string name="hide_news_feed_description">[…] aby nedošlo k odlákání pozornosti / prokrastinaci.</string>
-
     <string name="message_notifications">Upozornění na zprávy</string>
     <string name="you_have_one_message">Máte jednu zprávu.</string>
     <string name="you_have_n_messages">Máte %d zpráv.</string>
@@ -140,8 +139,11 @@
     <string name="offline_dummy_description">Zdrojový kód aktuální stránky je asynchronně ukládán do databáze. Při nalezení duplicity je starší přepsána. Obnovení stránky vynutíte její aktualizací. Dynamický obsah stránky však nefunguje.</string>
     <string name="keyboard_fix">Oprava překrývání klávesnice &#8635;</string>
     <string name="offline_database_empty">Offline databáze je prázdná</string>
-
     <string name="no_location_permission">Pro tuto funkci je třeba povolit práva ke zjištění polohy</string>
     <string name="location_access">Povolit geolokaci</string>
-    
+    <string name="custom_user_agent">Vlastní User Agent &#8635;</string>
+    <string name="custom_user_agent_description">Použít svůj vlastní řetězec User Agent.</string>
+    <string name="custom_user_agent_hint">Prázdné pro výchozí</string>
+    <string name="touch_mode">Dotykový režim</string>
+    <string name="touch_mode_description">Používá stránky touch.facebook.com.</string>    
 </resources>
