@@ -100,6 +100,11 @@
             android:summary="@string/load_extra_description"
             android:defaultValue="false"/>
 
+        <SwitchPreference
+            android:key="app_updates"
+            android:title="@string/check_for_updates"
+            android:defaultValue="true"/>
+
     </PreferenceCategory>
 
 

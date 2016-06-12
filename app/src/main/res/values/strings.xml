@@ -156,5 +156,6 @@
     <string name="touch_mode">Touch mode</string>
     <string name="touch_mode_description">Use touch.facebook.com website.</string>
     <string name="new_version_detected">New app version is available</string>
+    <string name="check_for_updates">Check for app updates</string>
 
 </resources>

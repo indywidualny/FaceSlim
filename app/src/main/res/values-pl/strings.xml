@@ -145,5 +145,6 @@
     <string name="touch_mode">Tryb dotykowy</string>
     <string name="touch_mode_description">Użyj strony touch.facebook.com</string>
     <string name="new_version_detected">Nowa wersja apki dostępna</string>
+    <string name="check_for_updates">Powiadamiaj o nowej wersji apki</string>
 
 </resources>

@@ -352,13 +352,16 @@ public class MainActivity extends Activity {
             }
         });
 
-        // check new app version
-        final long now = System.currentTimeMillis();
-        final long lastUpdateCheck = preferences.getLong("latest_update_check", now);
-        final long sinceLastCheck = now - lastUpdateCheck;
-        if (sinceLastCheck < UPDATE_CHECK_INTERVAL && Connectivity.isConnected(this) && !preferences.getBoolean("first_run", true) &&
-                !(preferences.getBoolean("facebook_zero", false) && Connectivity.isConnectedMobile(this)))
-            new CheckUpdatesTask(this).execute();
+        // check for app updates
+        if (preferences.getBoolean("app_updates", true)) {
+            final long now = System.currentTimeMillis();
+            final long lastUpdateCheck = preferences.getLong("latest_update_check", now);
+            final long sinceLastCheck = now - lastUpdateCheck;
+            if (sinceLastCheck < UPDATE_CHECK_INTERVAL && Connectivity.isConnected(this) && !preferences.getBoolean("first_run", true) &&
+                    !(preferences.getBoolean("facebook_zero", false) && Connectivity.isConnectedMobile(this))) {
+                new CheckUpdatesTask(this).execute();
+            }
+        }
     }
 
     private class MyWebChromeClient extends WebChromeClient {
