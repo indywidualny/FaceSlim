@@ -8,8 +8,8 @@ android {
         applicationId "org.indywidualni.fblite"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 38
-        versionName "2.6.0 beta3"
+        versionCode 39
+        versionName "2.6.0 beta4"
     }
     buildTypes {
         release {
