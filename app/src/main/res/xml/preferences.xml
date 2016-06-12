@@ -182,7 +182,7 @@
             android:title="@string/custom_user_agent"
             android:summary="@string/custom_user_agent_description"
             android:hint="@string/custom_user_agent_hint"
-            android:defaultValue=""/>
+            android:defaultValue="@string/predefined_user_agent"/>
 
         <Preference
             android:key="clear_cache"

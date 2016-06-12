@@ -11,6 +11,7 @@ import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
 
 import org.indywidualni.fblite.MyApplication;
+import org.indywidualni.fblite.R;
 import org.indywidualni.fblite.util.database.OfflineDataSource;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -30,8 +31,8 @@ public class Offline {
         context = MyApplication.getContextOfApplication();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         userAgent = preferences.getString("webview_user_agent", System.getProperty("http.agent"));
-        if (!preferences.getString("custom_user_agent", "").isEmpty())
-            userAgent = preferences.getString("custom_user_agent", "");
+        if (!preferences.getString("custom_user_agent", context.getString(R.string.predefined_user_agent)).isEmpty())
+            userAgent = preferences.getString("custom_user_agent", context.getString(R.string.predefined_user_agent));
         dataSource = OfflineDataSource.getInstance();
         syncCookies();
     }

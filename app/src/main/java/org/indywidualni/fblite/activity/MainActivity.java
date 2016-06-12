@@ -50,6 +50,7 @@ import org.indywidualni.fblite.MyApplication;
 import org.indywidualni.fblite.R;
 import org.indywidualni.fblite.service.NotificationsService;
 import org.indywidualni.fblite.util.AndroidBug5497Workaround;
+import org.indywidualni.fblite.util.CheckUpdatesTask;
 import org.indywidualni.fblite.util.Connectivity;
 import org.indywidualni.fblite.util.Dimension;
 import org.indywidualni.fblite.util.DownloadManagerResolver;
@@ -116,6 +117,7 @@ public class MainActivity extends Activity {
             "(KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36";
 
     public static final String MESSENGER_URL = "https://www.messenger.com/login";
+    private static final long UPDATE_CHECK_INTERVAL = 43200000;  // 12 hours
 
     @Override
     @SuppressLint("setJavaScriptEnabled")
@@ -251,8 +253,8 @@ public class MainActivity extends Activity {
         userAgentDefault = webView.getSettings().getUserAgentString();
         preferences.edit().putString("webview_user_agent", userAgentDefault).apply();
 
-        if (!preferences.getString("custom_user_agent", "").isEmpty())
-            webView.getSettings().setUserAgentString(preferences.getString("custom_user_agent", ""));
+        if (!preferences.getString("custom_user_agent", getString(R.string.predefined_user_agent)).isEmpty())
+            webView.getSettings().setUserAgentString(preferences.getString("custom_user_agent", getString(R.string.predefined_user_agent)));
         else if (preferences.getBoolean("basic_mode", false))
             webView.getSettings().setUserAgentString(USER_AGENT_BASIC);
 
@@ -349,6 +351,13 @@ public class MainActivity extends Activity {
             }
         });
 
+        // check new app version
+        final long now = System.currentTimeMillis();
+        final long lastUpdateCheck = preferences.getLong("latest_update_check", now);
+        final long sinceLastCheck = now - lastUpdateCheck;
+        if (sinceLastCheck < UPDATE_CHECK_INTERVAL && Connectivity.isConnected(this) && !preferences.getBoolean("first_run", true) &&
+                !(preferences.getBoolean("facebook_zero", false) && Connectivity.isConnectedMobile(this)))
+            new CheckUpdatesTask(this).execute();
     }
 
     private class MyWebChromeClient extends WebChromeClient {
@@ -1120,8 +1129,8 @@ public class MainActivity extends Activity {
 
     private void setUserAgent() {
         // set the right user agent
-        if (!preferences.getString("custom_user_agent", "").isEmpty()) {
-            webView.getSettings().setUserAgentString(preferences.getString("custom_user_agent", ""));
+        if (!preferences.getString("custom_user_agent", getString(R.string.predefined_user_agent)).isEmpty()) {
+            webView.getSettings().setUserAgentString(preferences.getString("custom_user_agent", getString(R.string.predefined_user_agent)));
             return;
         }
 
