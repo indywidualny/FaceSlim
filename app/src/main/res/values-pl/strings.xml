@@ -104,7 +104,6 @@
     <string name="hide_people_description">Przejrzysty stumień, więcej miejsca.</string>
     <string name="hide_news_feed">Ukryj aktualności</string>
     <string name="hide_news_feed_description">[…] by uniknąć ślęczenia / prokrastynacji.</string>
-
     <string name="message_notifications">Powiadamiaj o wiadomościach</string>
     <string name="you_have_one_message">Masz nową wiadomość.</string>
     <string name="you_have_n_messages">Masz %d nowych wiadomości.</string>
@@ -138,8 +137,12 @@
     <string name="offline_dummy_description">Kod źródłowy bieżącej strony jest asynchronicznie zapisywany w bazie danych. W przypadku duplikatu zachowam najnowszą wersję. Odśwież by wymusić aktualizację. Nie działa dla dynamicznych treści.</string>
     <string name="keyboard_fix">Napraw zasłonięte formularze &#8635;</string>
     <string name="offline_database_empty">Baza danych jest pusta</string>
-
     <string name="no_location_permission">Zezwól na dostęp do lokalizacji, by użyć tej funkcji</string>
     <string name="location_access">Dostęp do lokalizacji</string>
+    <string name="custom_user_agent">Własny User Agent &#8635;</string>
+    <string name="custom_user_agent_description">Podaj własny User Agent String.</string>
+    <string name="custom_user_agent_hint">Domyślny, gdy puste</string>
+    <string name="touch_mode">Tryb dotykowy</string>
+    <string name="touch_mode_description">Użyj strony touch.facebook.com</string>
 
 </resources>
