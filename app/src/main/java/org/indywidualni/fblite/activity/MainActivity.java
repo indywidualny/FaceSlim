@@ -358,7 +358,7 @@ public class MainActivity extends Activity {
             final long now = System.currentTimeMillis();
             final long lastUpdateCheck = preferences.getLong("latest_update_check", now);
             final long sinceLastCheck = now - lastUpdateCheck;
-            if (sinceLastCheck < UPDATE_CHECK_INTERVAL && Connectivity.isConnected(this) && !preferences.getBoolean("first_run", true) &&
+            if (sinceLastCheck > UPDATE_CHECK_INTERVAL && Connectivity.isConnected(this) && !preferences.getBoolean("first_run", true) &&
                     !(preferences.getBoolean("facebook_zero", false) && Connectivity.isConnectedMobile(this))) {
                 new CheckUpdatesTask(this).execute();
             }

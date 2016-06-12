@@ -67,12 +67,12 @@ public class CheckUpdatesTask extends AsyncTask<Void, Void, String> {
         }
     }
 
-    private String downloadUrl(String myurl) throws IOException {
+    private String downloadUrl(String myUrl) throws IOException {
         InputStream is = null;
         int len = 3;
             
         try {
-            URL url = new URL(myurl);
+            URL url = new URL(myUrl);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(10000 /* milliseconds */);
             conn.setConnectTimeout(15000 /* milliseconds */);
