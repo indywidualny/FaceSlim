@@ -23,8 +23,8 @@ import java.net.URL;
 public class CheckUpdatesTask extends AsyncTask<Void, Void, String> {
 
     public static final String TAG = "CheckUpdatesTask";
-    private static final String url = "https://raw.githubusercontent.com/indywidualny/FaceSlim/master/VERSION";
-    private static final int currentVersion = BuildConfig.VERSION_CODE;
+    private static final String URL = "https://raw.githubusercontent.com/indywidualny/FaceSlim/master/VERSION";
+    private static final int CURRENT_VERSION = BuildConfig.VERSION_CODE;
 
     private Activity activity;
     private SharedPreferences preferences;
@@ -37,7 +37,7 @@ public class CheckUpdatesTask extends AsyncTask<Void, Void, String> {
     @Override
     protected String doInBackground(Void... ignored) {
         try {
-            return downloadUrl(url);
+            return downloadUrl(URL);
         } catch (IOException e) {
             return "";
         }
@@ -47,7 +47,7 @@ public class CheckUpdatesTask extends AsyncTask<Void, Void, String> {
     protected void onPostExecute(String result) {
         try {
             result = result.trim();
-            if (!result.isEmpty() && Integer.valueOf(result) > currentVersion) {
+            if (!result.isEmpty() && Integer.valueOf(result) > CURRENT_VERSION) {
                 // there's a new version
                 AppMsg appMsg = AppMsg.makeText(activity, activity.getString(R.string.new_version_detected),
                         new AppMsg.Style(AppMsg.LENGTH_LONG, R.color.colorAccent));
