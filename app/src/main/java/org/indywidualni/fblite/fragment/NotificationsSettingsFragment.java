@@ -48,7 +48,7 @@ public class NotificationsSettingsFragment extends PreferenceFragment {
                 switch (key) {
                     case "interval_pref":
                         // restart the service after time interval change
-                        if (prefs.getBoolean("message_notifications", false)) {
+                        if (prefs.getBoolean("notifications_activated", false) || prefs.getBoolean("message_notifications", false)) {
                             context.stopService(intent);
                             context.startService(intent);
                         }
@@ -76,10 +76,28 @@ public class NotificationsSettingsFragment extends PreferenceFragment {
     public void onResume() {
         super.onResume();
 
-        // update message ringtone preference summary
-        String ringtoneString = preferences.getString("ringtone_msg", "content://settings/system/notification_sound");
+        // update notification ringtone preference summary
+        String ringtoneString = preferences.getString("ringtone", "content://settings/system/notification_sound");
         Uri ringtoneUri = Uri.parse(ringtoneString);
         String name;
+
+        try {
+            Ringtone ringtone = RingtoneManager.getRingtone(context, ringtoneUri);
+            name = ringtone.getTitle(context);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            name = "Default";
+        }
+
+        if ("".equals(ringtoneString))
+            name = getString(R.string.silent);
+
+        RingtonePreference rpn = (RingtonePreference) findPreference("ringtone");
+        rpn.setSummary(getString(R.string.notification_sound_description) + name);
+
+        // update message ringtone preference summary
+        ringtoneString = preferences.getString("ringtone_msg", "content://settings/system/notification_sound");
+        ringtoneUri = Uri.parse(ringtoneString);
 
         try {
             Ringtone ringtone = RingtoneManager.getRingtone(context, ringtoneUri);

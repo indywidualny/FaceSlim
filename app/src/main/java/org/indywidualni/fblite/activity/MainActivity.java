@@ -153,7 +153,7 @@ public class MainActivity extends Activity {
 
         // start the service when it's activated but somehow it's not running
         // when it's already running nothing happens so it's ok
-        if (preferences.getBoolean("message_notifications", false)) {
+        if (preferences.getBoolean("notifications_activated", false) || preferences.getBoolean("message_notifications", false)) {
             final Intent intent = new Intent(MyApplication.getContextOfApplication(), NotificationsService.class);
             MyApplication.getContextOfApplication().startService(intent);
         }
@@ -310,6 +310,7 @@ public class MainActivity extends Activity {
             //noinspection ConstantConditions
             if (getIntent().getExtras().getString("start_url") != null) {
                 String temp = getIntent().getExtras().getString("start_url");
+                NotificationsService.cancelAllNotifications();
                 if (!isFacebookZero || !isConnectedMobile) {
                     webViewUrl = temp;
                     if (webViewUrl != null && webViewUrl.equals(MESSENGER_URL))
@@ -936,8 +937,10 @@ public class MainActivity extends Activity {
 
         /** if opened by a notification or a shortcut */
         try {
-            if (getIntent().getExtras().getString("start_url") != null)
+            if (getIntent().getExtras().getString("start_url") != null) {
                 webViewUrl = getIntent().getExtras().getString("start_url");
+                NotificationsService.cancelAllNotifications();
+            }
         } catch (Exception ignored) {}
 
         /** load a grabbed url instead of the current page */

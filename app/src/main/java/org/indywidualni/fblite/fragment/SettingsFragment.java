@@ -62,11 +62,29 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
                 final Intent intent = new Intent(context, NotificationsService.class);
 
                 switch (key) {
-                    case "message_notifications":
-                        if (prefs.getBoolean("message_notifications", false))
-                            context.startService(intent);
-                        else
+                    case "notifications_activated":
+                        if (prefs.getBoolean("notifications_activated", false) && preferences.getBoolean("message_notifications", false)) {
                             context.stopService(intent);
+                            context.startService(intent);
+                        } else //noinspection StatementWithEmptyBody
+                            if (!prefs.getBoolean("notifications_activated", false) && preferences.getBoolean("message_notifications", false)) {
+                                // ignore this case
+                            } else if (prefs.getBoolean("notifications_activated", false) && !preferences.getBoolean("message_notifications", false)) {
+                                context.startService(intent);
+                            } else
+                                context.stopService(intent);
+                        break;
+                    case "message_notifications":
+                        if (prefs.getBoolean("message_notifications", false) && preferences.getBoolean("notifications_activated", false)) {
+                            context.stopService(intent);
+                            context.startService(intent);
+                        } else //noinspection StatementWithEmptyBody
+                            if (!prefs.getBoolean("message_notifications", false) && preferences.getBoolean("notifications_activated", false)) {
+                                // ignore this case
+                            } else if (prefs.getBoolean("message_notifications", false) && !preferences.getBoolean("notifications_activated", false)) {
+                                context.startService(intent);
+                            } else
+                                context.stopService(intent);
                         break;
                     case "basic_mode":
                         Preference preference_dark = findPreference("dark_theme");

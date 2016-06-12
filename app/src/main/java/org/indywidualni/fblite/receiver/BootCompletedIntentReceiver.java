@@ -15,7 +15,7 @@ public class BootCompletedIntentReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        Log.i("BroadcastReceiver", "********** Boot time! **********");
+        Log.i("BroadcastReceiver", "********** Boot time or package replaced! **********");
         context = MyApplication.getContextOfApplication();
 
         Intent startIntent = new Intent(context, NotificationsService.class);
@@ -24,7 +24,7 @@ public class BootCompletedIntentReceiver extends BroadcastReceiver {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
 
         // start notifications service when it's activated at Settings
-        if (preferences.getBoolean("message_notifications", false))
+        if (preferences.getBoolean("notifications_activated", false) || preferences.getBoolean("message_notifications", false))
             context.startService(startIntent);
     }
 

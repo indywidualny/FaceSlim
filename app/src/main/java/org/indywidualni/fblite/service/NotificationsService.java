@@ -29,14 +29,16 @@ import org.indywidualni.fblite.activity.MainActivity;
 import org.indywidualni.fblite.util.Connectivity;
 import org.indywidualni.fblite.util.logger.Logger;
 import org.jsoup.Jsoup;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import java.lang.Integer;
 
 public class NotificationsService extends Service {
 
     // Facebook URL constants
+    private static final String BASE_URL = "https://mobile.facebook.com";
+    private static final String NOTIFICATIONS_URL = "https://m.facebook.com/notifications.php";
     private static final String MESSAGES_URL = "https://m.facebook.com/messages";
     private static final String MESSAGES_URL_BACKUP = "https://mobile.facebook.com/messages";
     private static final String NOTIFICATION_MESSAGE_URL = "https://www.messenger.com/login";
@@ -117,7 +119,6 @@ public class NotificationsService extends Service {
 
         public void run() {
             try {
-
                 // get time interval from tray preferences
                 final int timeInterval = Integer.parseInt(preferences.getString("interval_pref", "1800000"));
                 Log.i(TAG, "Time interval: " + (timeInterval / 1000) + " seconds");
@@ -158,6 +159,8 @@ public class NotificationsService extends Service {
                         userAgent = preferences.getString("webview_user_agent", System.getProperty("http.agent"));
                         Log.i(TAG, "User Agent: " + userAgent);
 
+                        if (preferences.getBoolean("notifications_activated", false))
+                            new CheckNotificationsTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
                         if (preferences.getBoolean("message_notifications", false))
                             new CheckMessagesTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 
@@ -174,6 +177,72 @@ public class NotificationsService extends Service {
             } catch (RuntimeException re) {
                 Log.i(TAG, "RuntimeException caught");
                 restartItself();
+            }
+        }
+
+    }
+
+    /** Notifications checker task: it checks Facebook notifications only. */
+    private class CheckNotificationsTask extends AsyncTask<Void, Void, Element> {
+
+        boolean syncProblemOccurred = false;
+
+        private Element getElement(String connectUrl) {
+            try {
+                return Jsoup.connect(connectUrl).userAgent(userAgent).timeout(JSOUP_TIMEOUT)
+                        .cookie("https://mobile.facebook.com", CookieManager.getInstance().getCookie("https://mobile.facebook.com")).get()
+                        .select("a.touchable").not("a._19no").not("a.button").first();
+            } catch (IllegalArgumentException ex) {
+                Log.i("CheckNotificationsTask", "Cookie sync problem occurred");
+                if (!syncProblemOccurred) {
+                    syncProblemToast();
+                    syncProblemOccurred = true;
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected Element doInBackground(Void... params) {
+            Element result = null;
+            int tries = 0;
+
+            syncCookies();
+
+            while (tries++ < MAX_RETRY && result == null) {
+                Log.i("CheckNotificationsTask", "doInBackground: Processing... Trial: " + tries);
+                Log.i("CheckNotificationsTask", "Trying: " + NOTIFICATIONS_URL);
+                Element notification = getElement(NOTIFICATIONS_URL);
+                if (notification != null)
+                    result = notification;
+            }
+
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(Element result) {
+            try {
+                if (result == null)
+                    return;
+                if (result.text() == null)
+                    return;
+
+                if (!preferences.getBoolean("activity_visible", false) || preferences.getBoolean("notifications_everywhere", true)) {
+                    if (!preferences.getString("last_notification_text", "").equals(result.text()))
+                        notifier(result.text(), BASE_URL + result.attr("href"), false);
+                    preferences.edit().putString("last_notification_text", result.text()).apply();
+                }
+
+                // save this check status
+                preferences.edit().putBoolean("ntf_last_status", true).apply();
+                Log.i("CheckMessagesTask", "onPostExecute: Aight biatch ;)");
+            } catch (NumberFormatException ex) {
+                // save this check status
+                preferences.edit().putBoolean("ntf_last_status", false).apply();
+                Log.i("CheckMessagesTask", "onPostExecute: Failure");
             }
         }
 
@@ -237,9 +306,9 @@ public class NotificationsService extends Service {
 
                 if (!preferences.getBoolean("activity_visible", false) || preferences.getBoolean("notifications_everywhere", true)) {
                     if (newMessages == 1)
-                        notifier(getString(R.string.you_have_one_message), null, NOTIFICATION_MESSAGE_URL);
+                        notifier(getString(R.string.you_have_one_message), NOTIFICATION_MESSAGE_URL, true);
                     else if (newMessages > 1)
-                        notifier(String.format(getString(R.string.you_have_n_messages), newMessages), null, NOTIFICATION_MESSAGE_URL);
+                        notifier(String.format(getString(R.string.you_have_n_messages), newMessages), NOTIFICATION_MESSAGE_URL, true);
                 }
 
                 // save this check status
@@ -253,7 +322,6 @@ public class NotificationsService extends Service {
         }
 
     }
-
 
     /** CookieSyncManager was deprecated in API level 21.
      *  We need it for API level lower than 21 though.
@@ -288,13 +356,16 @@ public class NotificationsService extends Service {
     }
 
     // create a notification and display it
-    @SuppressWarnings("unused")
-    private void notifier(String title, String summary, String url) {
+    private void notifier(String title, String url, boolean isMessage) {
         // let's display a notification, dude!
-        final String contentTitle = getString(R.string.app_name) + ": " + getString(R.string.messages);
+        final String contentTitle;
+        if (isMessage)
+            contentTitle = getString(R.string.app_name) + ": " + getString(R.string.messages);
+        else
+            contentTitle = getString(R.string.app_name) + ": " + getString(R.string.notifications);
 
         // log line (show what type of notification is about to be displayed)
-        Log.i(TAG, "Start notification");
+        Log.i(TAG, "Start notification - isMessage: " + isMessage);
 
         // start building a notification
         NotificationCompat.Builder mBuilder =
@@ -307,7 +378,12 @@ public class NotificationsService extends Service {
                         .setWhen(System.currentTimeMillis())
                         .setAutoCancel(true);
 
-        Uri ringtoneUri = Uri.parse(preferences.getString("ringtone_msg", "content://settings/system/notification_sound"));
+        // ringtone
+        String ringtoneKey = "ringtone";
+        if (isMessage)
+            ringtoneKey = "ringtone_msg";
+
+        Uri ringtoneUri = Uri.parse(preferences.getString(ringtoneKey, "content://settings/system/notification_sound"));
         mBuilder.setSound(ringtoneUri);
 
         // vibration
@@ -348,7 +424,19 @@ public class NotificationsService extends Service {
 
         // display a notification
         NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        mNotificationManager.notify(1, note);
+
+        // because message notifications are displayed separately
+        if (isMessage)
+            mNotificationManager.notify(1, note);
+        else
+            mNotificationManager.notify(0, note);
+    }
+
+    // cancel all the notifications which are visible at the moment
+    public static void cancelAllNotifications() {
+        NotificationManager notificationManager = (NotificationManager)
+                MyApplication.getContextOfApplication().getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.cancelAll();
     }
 
 }
