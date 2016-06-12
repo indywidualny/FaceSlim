@@ -42,6 +42,7 @@ public class NotificationsService extends Service {
     private static final String MESSAGES_URL = "https://m.facebook.com/messages";
     private static final String MESSAGES_URL_BACKUP = "https://mobile.facebook.com/messages";
     private static final String NOTIFICATION_MESSAGE_URL = "https://www.messenger.com/login";
+    private static final String NOTIFICATION_OLD_MESSAGE_URL = "https://m.facebook.com/messages#";
 
     // number of trials during notifications or messages checking
     private static final int MAX_RETRY = 3;
@@ -306,9 +307,9 @@ public class NotificationsService extends Service {
 
                 if (!preferences.getBoolean("activity_visible", false) || preferences.getBoolean("notifications_everywhere", true)) {
                     if (newMessages == 1)
-                        notifier(getString(R.string.you_have_one_message), NOTIFICATION_MESSAGE_URL, true);
+                        notifier(getString(R.string.you_have_one_message), NOTIFICATION_OLD_MESSAGE_URL, true);
                     else if (newMessages > 1)
-                        notifier(String.format(getString(R.string.you_have_n_messages), newMessages), NOTIFICATION_MESSAGE_URL, true);
+                        notifier(String.format(getString(R.string.you_have_n_messages), newMessages), NOTIFICATION_OLD_MESSAGE_URL, true);
                 }
 
                 // save this check status

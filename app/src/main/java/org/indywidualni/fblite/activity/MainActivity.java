@@ -117,6 +117,7 @@ public class MainActivity extends Activity {
             "(KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36";
 
     public static final String MESSENGER_URL = "https://www.messenger.com/login";
+    public static final String NOTIFICATION_OLD_MESSAGES_URL = "https://m.facebook.com/messages#";
     private static final long UPDATE_CHECK_INTERVAL = 43200000;  // 12 hours
 
     @Override
