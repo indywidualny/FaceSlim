@@ -231,19 +231,22 @@ public class NotificationsService extends Service {
                 if (result.text() == null)
                     return;
 
+                String time = result.select("span.mfss.fcg").text();
+                String text = result.text().replace(time, "");
+
                 if (!preferences.getBoolean("activity_visible", false) || preferences.getBoolean("notifications_everywhere", true)) {
-                    if (!preferences.getString("last_notification_text", "").equals(result.text()))
-                        notifier(result.text(), BASE_URL + result.attr("href"), false);
-                    preferences.edit().putString("last_notification_text", result.text()).apply();
+                    if (!preferences.getString("last_notification_text", "").equals(text))
+                        notifier(text, BASE_URL + result.attr("href"), false);
+                    preferences.edit().putString("last_notification_text", text).apply();
                 }
 
                 // save this check status
                 preferences.edit().putBoolean("ntf_last_status", true).apply();
-                Log.i("CheckMessagesTask", "onPostExecute: Aight biatch ;)");
+                Log.i("CheckNotificationsTask", "onPostExecute: Aight biatch ;)");
             } catch (NumberFormatException ex) {
                 // save this check status
                 preferences.edit().putBoolean("ntf_last_status", false).apply();
-                Log.i("CheckMessagesTask", "onPostExecute: Failure");
+                Log.i("CheckNotificationsTask", "onPostExecute: Failure");
             }
         }
 
