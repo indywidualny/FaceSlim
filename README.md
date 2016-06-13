@@ -9,6 +9,15 @@ Releases | [pl] wydania: https://github.com/indywidualny/FaceSlim/releases
 ## Changelog
 & what makes the application awesome:
 
+**2.6**
+* notifications reimplemented and fully functional again
+* custom User Agent String (to reenable "old" messages tab)
+* touch.facebook.com is supported
+* app checks for its updates
+
+If you changed custom User Agent and you want to revert it, the predefined value is
+`Mozilla/5.0 (FuckMessenger 1.0; Mobile; rv:41.0) Gecko/41.0 Firefox/41.0`
+
 **2.5**
 * mobile Messenger integration. Drawer shortcut to messages opens mobile Messenger now (as well as a launcher shortcut and a message notification) - Facebook decided to disable messages tab soon [#155](../../issues/155)
 * geolocation access for checking-in automatically (optional) 
