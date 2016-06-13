@@ -145,5 +145,8 @@
     <string name="custom_user_agent_description">Použít svůj vlastní řetězec User Agent.</string>
     <string name="custom_user_agent_hint">Prázdné pro výchozí</string>
     <string name="touch_mode">Dotykový režim</string>
-    <string name="touch_mode_description">Používá stránky touch.facebook.com.</string>    
+    <string name="touch_mode_description">Používá stránky touch.facebook.com.</string>
+    <string name="new_version_detected">Je dostupná nová verze aplikace</string>
+    <string name="check_for_updates">Zkontrolovat aktualizace</string>    
+    
 </resources>
