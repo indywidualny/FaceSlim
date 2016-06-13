@@ -58,7 +58,8 @@ public class CheckUpdatesTask extends AsyncTask<Void, Void, String> {
                 }
                 appMsg.show();
             }
-            preferences.edit().putLong("latest_update_check", System.currentTimeMillis()).apply();
+            if (!result.isEmpty())
+                preferences.edit().putLong("latest_update_check", System.currentTimeMillis()).apply();
         } catch (Exception e) {
             Log.e(TAG, "Sad face... Error", e);
         } finally {
