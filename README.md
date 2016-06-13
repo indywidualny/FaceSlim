@@ -15,7 +15,7 @@ Releases | [pl] wydania: https://github.com/indywidualny/FaceSlim/releases
 * touch.facebook.com is supported
 * app checks for its updates
 
-If you changed custom User Agent and you want to revert it, the predefined value is
+If you changed custom User Agent and you want to revert it, the predefined value is  
 `Mozilla/5.0 (FuckMessenger 1.0; Mobile; rv:41.0) Gecko/41.0 Firefox/41.0`
 
 **2.5**
