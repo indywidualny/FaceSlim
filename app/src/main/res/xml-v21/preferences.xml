@@ -27,6 +27,15 @@
             android:summary="@string/transparent_nav_description"
             android:defaultValue="false"/>
 
+        <EditTextPreference
+            android:title="@string/font_size"
+            android:summary="@string/font_size_description"
+            android:key="font_size"
+            android:defaultValue="100"
+            android:hint="@string/font_size_hint"
+            android:maxLength="3"
+            android:inputType="number"/>
+
         <ListPreference
             android:title="@string/drawer_pos"
             android:summary="@string/drawer_pos_description"
@@ -157,6 +166,7 @@
             android:inputType="number"
             android:title="@string/offline_keep_max"
             android:summary="@string/offline_keep_max_description"
+            android:maxLength="5"
             android:defaultValue="10"/>
 
         <Preference

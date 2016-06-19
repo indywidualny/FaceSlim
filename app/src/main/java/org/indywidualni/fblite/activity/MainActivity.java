@@ -233,6 +233,9 @@ public class MainActivity extends Activity {
         webView.getSettings().setBuiltInZoomControls(true);
         webView.getSettings().setDisplayZoomControls(false);
 
+        // text size (percent)
+        webView.getSettings().setTextZoom(Integer.valueOf(preferences.getString("font_size", "100")));
+
         // location
         if (preferences.getBoolean("location", false)) {
             webView.getSettings().setGeolocationEnabled(true);
@@ -979,6 +982,9 @@ public class MainActivity extends Activity {
         } else {
             webView.getSettings().setGeolocationEnabled(false);
         }
+
+        // text size (percent)
+        webView.getSettings().setTextZoom(Integer.valueOf(preferences.getString("font_size", "100")));
     }
 
     // handling back button

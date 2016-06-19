@@ -157,5 +157,8 @@
     <string name="touch_mode_description">Use touch.facebook.com website.</string>
     <string name="new_version_detected">New app version is available</string>
     <string name="check_for_updates">Check for app updates</string>
+    <string name="font_size">Text scale</string>
+    <string name="font_size_description">Change text size (percent).</string>
+    <string name="font_size_hint">100 is 100%</string>
 
 </resources>

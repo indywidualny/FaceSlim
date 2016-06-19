@@ -143,8 +143,11 @@
     <string name="custom_user_agent_description">Podaj własny User Agent String.</string>
     <string name="custom_user_agent_hint">Domyślny, gdy puste</string>
     <string name="touch_mode">Tryb dotykowy</string>
-    <string name="touch_mode_description">Użyj strony touch.facebook.com</string>
+    <string name="touch_mode_description">Użyj strony touch.facebook.com.</string>
     <string name="new_version_detected">Nowa wersja apki dostępna</string>
     <string name="check_for_updates">Powiadamiaj o nowej wersji apki</string>
+    <string name="font_size">Skaluj tekst</string>
+    <string name="font_size_description">Zmień rozmiar czcionki (procentowo).</string>
+    <string name="font_size_hint">100 to 100%</string>
 
 </resources>
