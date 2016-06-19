@@ -148,5 +148,8 @@
     <string name="touch_mode_description">Používá stránky touch.facebook.com.</string>
     <string name="new_version_detected">Je dostupná nová verze aplikace</string>
     <string name="check_for_updates">Zkontrolovat aktualizace</string>    
+    <string name="font_size">Velikost textu</string>
+    <string name="font_size_description">Změnit velikost textu (v procentech).</string>
+    <string name="font_size_hint">100 je 100%</string>
     
 </resources>
