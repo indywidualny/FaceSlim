@@ -33,6 +33,7 @@ import org.indywidualni.fblite.util.Connectivity;
 import org.indywidualni.fblite.util.Dimension;
 import org.indywidualni.fblite.util.FileOperation;
 import org.indywidualni.fblite.util.FloatingActionButton;
+import org.indywidualni.fblite.util.Miscellany;
 import org.indywidualni.fblite.util.Offline;
 import org.indywidualni.fblite.util.OfflinePagesAdapter;
 
@@ -49,7 +50,7 @@ public class MyWebViewClient extends WebViewClient {
     private boolean refreshed;
 
     // get application context
-    private static Context context = MyApplication.getContextOfApplication();
+    private static final Context context = MyApplication.getContextOfApplication();
 
     // get shared preferences
     final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -67,8 +68,18 @@ public class MyWebViewClient extends WebViewClient {
         webView = wv;
     }
 
+    @SuppressLint("NewApi")
+    @Override
+    public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+        return shouldOverrideUrlLoading(view, request.getUrl().toString());
+    }
+
+    @SuppressWarnings("deprecation")
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
+        // clean an url from facebook redirection before processing (no more blank pages on back)
+        if (url != null)
+            url = Miscellany.cleanAndDecodeUrl(url);
         // really ugly but let's do it just to avoid rare crashes
         try {
             if (Uri.parse(url).getHost().endsWith("messenger.com")) {
@@ -101,7 +112,7 @@ public class MyWebViewClient extends WebViewClient {
             try {
                 view.getContext().startActivity(intent);
             } catch (ActivityNotFoundException e) {
-                Log.e("shouldOverrideUrlLoad", "" + e.getMessage());
+                Log.e("shouldOverrideUrlLoad", "No Activity to handle action", e);
                 e.printStackTrace();
             }
             return true;

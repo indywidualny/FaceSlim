@@ -22,9 +22,9 @@ public class Offline {
 
     private static String userAgent;
     private static Context context;
-    private OfflineDataSource dataSource;
+    private final OfflineDataSource dataSource;
 
-    private SharedPreferences preferences = PreferenceManager
+    private final SharedPreferences preferences = PreferenceManager
             .getDefaultSharedPreferences(MyApplication.getContextOfApplication());
 
     public Offline() {

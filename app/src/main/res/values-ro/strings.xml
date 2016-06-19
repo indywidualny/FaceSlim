@@ -5,9 +5,9 @@
 
     <!-- Strings to translate during creation of a new translation -->
     <string name="app_name">Face Slim</string>
-    <string name="image_chooser">Imagini...</string>
-    <string name="loading_link">Se deschide legatura...</string>
-    <string name="applying_changes">Se aplica schimbarile...</string>
+    <string name="image_chooser">Imagini…</string>
+    <string name="loading_link">Se deschide legatura…</string>
+    <string name="applying_changes">Se aplica schimbarile…</string>
 
     <string-array name="item_array">
         <item>Flux de noutati</item>

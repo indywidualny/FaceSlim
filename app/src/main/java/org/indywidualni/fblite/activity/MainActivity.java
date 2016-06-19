@@ -236,7 +236,10 @@ public class MainActivity extends Activity {
         // location
         if (preferences.getBoolean("location", false)) {
             webView.getSettings().setGeolocationEnabled(true);
-            webView.getSettings().setGeolocationDatabasePath(getFilesDir().getPath());
+            if (Build.VERSION.SDK_INT < 24) {
+                //noinspection deprecation
+                webView.getSettings().setGeolocationDatabasePath(getFilesDir().getPath());
+            }
         }
 
         // since API 18 cache quota is managed automatically
@@ -327,6 +330,12 @@ public class MainActivity extends Activity {
         mWebChromeClient = new MyWebChromeClient();
         webView.setWebViewClient(new MyWebViewClient());
         webView.setWebChromeClient(mWebChromeClient);
+
+        // speed it up for some devices
+        if (Build.VERSION.SDK_INT < 18) {
+            //noinspection deprecation
+            webView.getSettings().setRenderPriority(WebSettings.RenderPriority.HIGH);
+        }
 
         // set webView reference
         MyWebViewClient.setWebviewReference(webView);
@@ -758,7 +767,7 @@ public class MainActivity extends Activity {
         } // end of code for Lollipop only
     }
 
-    private SwipeRefreshLayout.OnRefreshListener onRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
+    private final SwipeRefreshLayout.OnRefreshListener onRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
 
         // refreshing pages
         @Override
@@ -963,7 +972,10 @@ public class MainActivity extends Activity {
         // location
         if (preferences.getBoolean("location", false)) {
             webView.getSettings().setGeolocationEnabled(true);
-            webView.getSettings().setGeolocationDatabasePath(getFilesDir().getPath());
+            if (Build.VERSION.SDK_INT < 24) {
+                //noinspection deprecation
+                webView.getSettings().setGeolocationDatabasePath(getFilesDir().getPath());
+            }
         } else {
             webView.getSettings().setGeolocationEnabled(false);
         }

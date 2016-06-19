@@ -6,8 +6,8 @@
     <!-- Strings to translate during creation of a new translation -->
     <string name="app_name">Face Slim</string>
     <string name="image_chooser">圖片選擇器</string>
-    <string name="loading_link">正在開啟連結...</string>
-    <string name="applying_changes">正在套用變更...</string>
+    <string name="loading_link">正在開啟連結…</string>
+    <string name="applying_changes">正在套用變更…</string>
 
     <string-array name="item_array">
         <item>動態消息</item>
@@ -115,7 +115,7 @@
     <string name="interval_pref_description_new">通知將每隔 %s 檢查一次.</string>
     <string name="facebook_notifications">Facebook通知</string>
     <string name="notification_sound_msg">訊息提示音</string>
-    <string name="crash_toast_text">Face Slim: 程式出錯. 正在準備錯誤報告...</string>
+    <string name="crash_toast_text">Face Slim: 程式出錯. 正在準備錯誤報告…</string>
     <string name="crash_dialog_title">Face Slim 出錯了 :(</string>
     <string name="crash_dialog_text">一個無法預期的錯誤導致程式必須關閉. 請傳送錯誤報告以協助我修復這個問題. 請按下確認並寄出回報e-mail給我, 謝謝.</string>
     <string name="crash_dialog_comment_prompt">請描述問題發生時的狀態等資料(選填):</string>
