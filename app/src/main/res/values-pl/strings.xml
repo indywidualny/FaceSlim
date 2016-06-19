@@ -149,5 +149,7 @@
     <string name="font_size">Skaluj tekst</string>
     <string name="font_size_description">Zmień rozmiar czcionki (procentowo).</string>
     <string name="font_size_hint">100 to 100%</string>
+    <string name="most_recent">Startuj z najświeższymi postami</string>
+    <string name="most_recent_description">Czasem by w pełni wymusić to zachowanie, musisz wybrać najnowsze posty również w menu Facebooka.</string>
 
 </resources>

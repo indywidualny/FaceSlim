@@ -119,7 +119,13 @@
 
     <PreferenceCategory
         android:title="@string/preference_category6">
-        
+
+        <CheckBoxPreference
+            android:key="most_recent"
+            android:title="@string/most_recent"
+            android:summary="@string/most_recent_description"
+            android:defaultValue="false"/>
+
         <CheckBoxPreference
             android:key="hide_sponsored"
             android:title="@string/hide_sponsored"

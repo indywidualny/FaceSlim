@@ -209,6 +209,9 @@ public class MainActivity extends Activity {
         else if (preferences.getBoolean("basic_mode", false))
             webViewUrl = "https://mbasic.facebook.com";
 
+        // most recent posts
+        webViewUrl = appendMostRecentInfix(webViewUrl);
+
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
         swipeRefreshLayout.setVisibility(View.VISIBLE);
         swipeRefreshLayout.setOnRefreshListener(onRefreshListener);
@@ -309,6 +312,7 @@ public class MainActivity extends Activity {
         } else if (isFacebookZero && isConnectedMobile) {
             // facebook zero if activated and connected to a mobile network
             webViewUrl = "https://0.facebook.com";
+            webViewUrl = appendMostRecentInfix(webViewUrl);
             Toast.makeText(getApplicationContext(), getString(R.string.facebook_zero_active), Toast.LENGTH_SHORT).show();
         }
 
@@ -828,7 +832,7 @@ public class MainActivity extends Activity {
 
         switch (position) {
             case 0:
-                webView.loadUrl(baseAddress);
+                webView.loadUrl(appendMostRecentInfix(baseAddress));
                 break;
             case 1:
                 if (preferences.getBoolean("facebook_zero", false) && Connectivity.isConnectedMobile(this)) {
@@ -1127,6 +1131,12 @@ public class MainActivity extends Activity {
         } finally {
             mPendingImageUrlToSave = null;
         }
+    }
+
+    private String appendMostRecentInfix(String url) {
+        if (preferences.getBoolean("most_recent", false))
+            url += "?sk=h_chr";
+        return url;
     }
 
     // first run dialog with introduction

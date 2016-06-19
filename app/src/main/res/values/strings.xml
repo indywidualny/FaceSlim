@@ -160,5 +160,7 @@
     <string name="font_size">Text scale</string>
     <string name="font_size_description">Change text size (percent).</string>
     <string name="font_size_hint">100 is 100%</string>
+    <string name="most_recent">Start with most recent posts</string>
+    <string name="most_recent_description">Sometimes to fully activate this behaviour you need to choose recent posts from your Facebook menu either.</string>
 
 </resources>
