@@ -14,6 +14,9 @@ Releases | [pl] wydania: https://github.com/indywidualny/FaceSlim/releases
 * new predefined User Agent which is awesome [#180](../../issues/180)
 * blank page after returning to app finally fixed (eg opening external browser)
 
+If you changed custom User Agent and you want to revert it, the predefined value is  
+`Mozilla/5.0 (BB10; Kbd) AppleWebKit/537.10+ (KHTML, like Gecko) Version/10.1.0.4633 Mobile Safari/537.10+`
+
 **2.6**
 * notifications reimplemented and fully functional again
 * custom User Agent String (to reenable "old" messages tab)
