@@ -10,6 +10,11 @@
             android:defaultValue="true"/>
 
         <SwitchPreference
+            android:key="confirm_exit"
+            android:title="@string/confirm_exit"
+            android:defaultValue="false"/>
+
+        <SwitchPreference
             android:key="long_clicks"
             android:title="@string/long_clicks"
             android:summary="@string/long_clicks_description"

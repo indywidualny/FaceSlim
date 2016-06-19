@@ -57,7 +57,8 @@ public final class DownloadManagerResolver {
         AppCompatTextView messageTextView = new AppCompatTextView(context);
         messageTextView.setTextSize(16f);
         messageTextView.setText(context.getString(R.string.download_manager_disabled));
-        messageTextView.setPadding(50, 30, 50, 30);
+        messageTextView.setPadding(50, 50, 50, 0);
+        messageTextView.setTextColor(ContextCompat.getColor(context, R.color.black));
         return new AlertDialog.Builder(context)
                 .setView(messageTextView)
                 .setPositiveButton("ok", new DialogInterface.OnClickListener() {

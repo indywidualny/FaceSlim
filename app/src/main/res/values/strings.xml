@@ -162,5 +162,9 @@
     <string name="font_size_hint">100 is 100%</string>
     <string name="most_recent">Start with most recent posts</string>
     <string name="most_recent_description">Sometimes to fully activate this behaviour you need to choose recent posts from your Facebook menu either.</string>
+    <string name="really_quit_question">Do you really want to quit?</string>
+    <string name="confirm_exit">Confirm exiting the app</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
 </resources>

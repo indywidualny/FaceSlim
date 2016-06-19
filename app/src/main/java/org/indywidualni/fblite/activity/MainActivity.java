@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.app.DownloadManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -27,6 +28,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.AppCompatTextView;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuItem;
@@ -1000,8 +1003,12 @@ public class MainActivity extends Activity {
             webView.stopLoading();
             setUserAgent();
             webView.goBack();
-        } else
-            super.onBackPressed();
+        } else {
+            if (preferences.getBoolean("confirm_exit", false))
+                showExitDialog();
+            else
+                super.onBackPressed();
+        }
     }
 
     @Override
@@ -1157,6 +1164,39 @@ public class MainActivity extends Activity {
             }
         });
         dialog.show();
+    }
+
+    private AlertDialog createExitDialog() {
+        AppCompatTextView messageTextView = new AppCompatTextView(this);
+        messageTextView.setTextSize(16f);
+        messageTextView.setText(getString(R.string.really_quit_question));
+        messageTextView.setPadding(50, 50, 50, 0);
+        messageTextView.setTextColor(ContextCompat.getColor(this, R.color.black));
+        return new AlertDialog.Builder(this)
+                .setView(messageTextView)
+                .setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                })
+                .setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // nothing to do here
+                    }
+                })
+                .setCancelable(true)
+                .create();
+    }
+
+    private void showExitDialog() {
+        AlertDialog alertDialog = createExitDialog();
+        alertDialog.show();
+        alertDialog.getButton(DialogInterface.BUTTON_POSITIVE)
+                .setTextColor(ContextCompat.getColor(this, R.color.colorAccent));
+        alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE)
+                .setTextColor(ContextCompat.getColor(this, R.color.colorAccent));
     }
 
     private void setUserAgent() {

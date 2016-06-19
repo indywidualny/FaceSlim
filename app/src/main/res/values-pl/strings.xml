@@ -151,5 +151,9 @@
     <string name="font_size_hint">100 to 100%</string>
     <string name="most_recent">Startuj z najświeższymi postami</string>
     <string name="most_recent_description">Czasem by w pełni wymusić to zachowanie, musisz wybrać najnowsze posty również w menu Facebooka.</string>
+    <string name="really_quit_question">Czy na pewno chcesz wyjść z aplikacji?</string>
+    <string name="confirm_exit">Potwierdź wyjście z aplikacji</string>
+    <string name="yes">Tak</string>
+    <string name="no">Nie</string>
 
 </resources>
