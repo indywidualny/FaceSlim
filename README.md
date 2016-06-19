@@ -9,6 +9,11 @@ Releases | [pl] wydania: https://github.com/indywidualny/FaceSlim/releases
 ## Changelog
 & what makes the application awesome:
 
+**2.7**
+* Android N support (the app is targeting upcoming Android release)
+* new predefined User Agent which is awesome [#180](../../issues/180)
+* blank page after returning to app finally fixed (eg opening external browser)
+
 **2.6**
 * notifications reimplemented and fully functional again
 * custom User Agent String (to reenable "old" messages tab)
