@@ -1,12 +1,15 @@
 package org.indywidualni.fblite.util;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.View;
 
 import com.devspark.appmsg.AppMsg;
 
@@ -24,6 +27,7 @@ public class CheckUpdatesTask extends AsyncTask<Void, Void, String> {
 
     public static final String TAG = "CheckUpdatesTask";
     private static final String URL = "https://raw.githubusercontent.com/indywidualny/FaceSlim/master/VERSION";
+    private static final String NOTES = "https://github.com/indywidualny/FaceSlim/releases/latest";
     private static final int CURRENT_VERSION = BuildConfig.VERSION_CODE;
 
     private Activity activity;
@@ -47,18 +51,25 @@ public class CheckUpdatesTask extends AsyncTask<Void, Void, String> {
     protected void onPostExecute(String result) {
         try {
             result = result.trim();
-            if (!result.isEmpty() && Integer.valueOf(result) > CURRENT_VERSION) {
+            String[] parts = result.split(":");
+            if (!parts[0].isEmpty() && !parts[1].isEmpty() && Integer.valueOf(parts[0]) > CURRENT_VERSION) {
                 // there's a new version
-                AppMsg appMsg = AppMsg.makeText(activity, activity.getString(R.string.new_version_detected),
-                        new AppMsg.Style(AppMsg.LENGTH_LONG, R.color.colorAccent));
+                AppMsg appMsg = AppMsg.makeText(activity, activity.getString(R.string.new_version_detected)
+                        + " (" + parts[1] + ")", new AppMsg.Style(AppMsg.LENGTH_LONG, R.color.colorAccent));
                 appMsg.setLayoutGravity(Gravity.TOP);
+                appMsg.getView().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        view.getContext().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(NOTES)));
+                    }
+                });
                 if (preferences.getBoolean("transparent_nav", false) && activity.getResources()
                         .getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
                     appMsg.setLayoutParams(Dimension.getParamsAppMsg(activity));
                 }
                 appMsg.show();
             }
-            if (!result.isEmpty())
+            if (!parts[0].isEmpty())
                 preferences.edit().putLong("latest_update_check", System.currentTimeMillis()).apply();
         } catch (Exception e) {
             Log.e(TAG, "Sad face... Error", e);
@@ -70,7 +81,7 @@ public class CheckUpdatesTask extends AsyncTask<Void, Void, String> {
 
     private String downloadUrl(String myUrl) throws IOException {
         InputStream is = null;
-        int len = 3;
+        int len = 25;
             
         try {
             URL url = new URL(myUrl);
@@ -96,6 +107,7 @@ public class CheckUpdatesTask extends AsyncTask<Void, Void, String> {
     }
 
     private String readIt(InputStream stream, int len) throws IOException {
+        // Example:  042:2.8.0
         Reader reader;
         reader = new InputStreamReader(stream, "UTF-8");
         char[] buffer = new char[len];
