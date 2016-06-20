@@ -151,5 +151,11 @@
     <string name="font_size">Velikost textu</string>
     <string name="font_size_description">Změnit velikost textu (v procentech).</string>
     <string name="font_size_hint">100 je 100%</string>
+    <string name="most_recent">Začít s nejnovějšími příspěvky</string>
+    <string name="most_recent_description">Aby toto fungovalo, je třeba občas vybrat Nejnovější příspěvky i v menu Facebooku.</string>
+    <string name="really_quit_question">Opravdu chcete ukončit?</string>
+    <string name="confirm_exit">Potvrzení ukončení aplikace</string>
+    <string name="yes">Ano</string>
+    <string name="no">Ne</string>
     
 </resources>
