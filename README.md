@@ -6,8 +6,18 @@ With Face Slim you can keep in touch with your friends even if you are not using
 
 Releases | [pl] wydania: https://github.com/indywidualny/FaceSlim/releases
 
+Face Slim is an unofficial Facebook application for Android devices that resembles the Facebook Mobile Web Application before Facebook started removing features. FaceSlim is free of spyware, unlike what is built into the official Facebook and Facebook Messenger applications.
+
 ## Changelog
 & what makes the application awesome:
+
+**2.8**
+* possibility to change text size (text scale)
+* start with the most recent posts
+* confirm exiting the app
+* better update checking (more info, clickable)
+
+Sometimes to fully activate most recent posts you need to choose recent posts from your Facebook menu either.
 
 **2.7**
 * Android N support (the app is targeting upcoming Android release)
