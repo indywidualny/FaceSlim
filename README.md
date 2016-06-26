@@ -1,10 +1,8 @@
 ## Face Slim [![Build Status](https://travis-ci.org/indywidualny/FaceSlim.svg?branch=master)](https://travis-ci.org/indywidualny/FaceSlim)
 
-With Face Slim you can keep in touch with your friends without using the official Facebook app!
+Releases | [pl] wydania: https://github.com/indywidualny/FaceSlim/releases
 
 [![Face Slim on fdroid.org](https://f-droid.org/wiki/images/0/06/F-Droid-button_get-it-on.png "Download from fdroid.org")](https://f-droid.org/app/org.indywidualni.fblite)
-
-Releases | [pl] wydania: https://github.com/indywidualny/FaceSlim/releases
 
 Face Slim is an unofficial Facebook application for Android devices that resembles the Facebook Mobile Web Application before Facebook started removing features. FaceSlim is free of spyware, unlike what is built into the official Facebook and Facebook Messenger applications.
 
