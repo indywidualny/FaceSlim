@@ -109,6 +109,7 @@ public class MainActivity extends Activity {
 
     // save images
     private static final int ID_CONTEXT_MENU_SAVE_IMAGE = 2562617;
+    private static final int ID_CONTEXT_MENU_SHARE_IMAGE = 2562618;
     private String mPendingImageUrlToSave;
     private static String appDirectoryName;
 
@@ -1084,6 +1085,12 @@ public class MainActivity extends Activity {
                  */
                 requestStoragePermission();
                 break;
+            case ID_CONTEXT_MENU_SHARE_IMAGE:
+                Intent share = new Intent(Intent.ACTION_SEND);
+                share.setType("text/plain");
+                share.putExtra(Intent.EXTRA_TEXT, mPendingImageUrlToSave);
+                startActivity(Intent.createChooser(share, getString(R.string.share_link)));
+                break;
         }
         return super.onContextItemSelected(item);
     }
@@ -1092,6 +1099,7 @@ public class MainActivity extends Activity {
     private void showLongPressedImageMenu(ContextMenu menu, String imageUrl) {
         mPendingImageUrlToSave = imageUrl;
         menu.add(0, ID_CONTEXT_MENU_SAVE_IMAGE, 0, getString(R.string.save_img));
+        menu.add(0, ID_CONTEXT_MENU_SHARE_IMAGE, 1, getString(R.string.share_link));
     }
 
     private void saveImageToDisk(String imageUrl) {
