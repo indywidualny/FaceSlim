@@ -1095,7 +1095,6 @@ public class MainActivity extends Activity {
         return super.onContextItemSelected(item);
     }
 
-
     private void showLongPressedImageMenu(ContextMenu menu, String imageUrl) {
         mPendingImageUrlToSave = imageUrl;
         menu.add(0, ID_CONTEXT_MENU_SAVE_IMAGE, 0, getString(R.string.save_img));
