@@ -108,7 +108,6 @@
     <string name="hide_people_description">Чистији довод, више простора.</string>
     <string name="hide_news_feed">Сакриј новости</string>
     <string name="hide_news_feed_description">Избегните скретање пажње/одлагање обавеза.</string>
-
     <string name="message_notifications">Обавештења о порукама</string>
     <string name="you_have_one_message">Имате једну поруку.</string>
     <string name="you_have_n_messages">Имате %d порука.</string>
@@ -140,8 +139,23 @@
     <string name="offline_dummy_description">Изворни кôд текуће странице је асинхроно сачуван у бази података. Ако се појави дупликат, биће замењен. Освежите страницу да приморате њено ажурирање. Не ради за динамички учитан садржај.</string>
     <string name="keyboard_fix">Поправка за прекривајућу тастатуру &#8635;</string>
     <string name="offline_database_empty">Ванмрежна база података је празна</string>
-
     <string name="no_location_permission">Одобрите дозволе за локацију да бисте користили ову функционалност</string>
     <string name="location_access">Укључи геолокацију</string>
+    <string name="custom_user_agent">Прилагођена идентификација &#8635;</string>
+    <string name="custom_user_agent_description">Сопствена ниска идентификације прегледача.</string>
+    <string name="custom_user_agent_hint">Празно за подразумевану</string>
+    <string name="touch_mode">Режим додира</string>
+    <string name="touch_mode_description">Коришћење touch.facebook.com вебсајта.</string>
+    <string name="new_version_detected">Ново издање апликације је доступно</string>
+    <string name="check_for_updates">Проверавај надоградње апликације</string>
+    <string name="font_size">Размера текста</string>
+    <string name="font_size_description">Промена величине текста (у %).</string>
+    <string name="font_size_hint">100 је 100%</string>
+    <string name="most_recent">Почни са најновијим објавама</string>
+    <string name="most_recent_description">Да бисте ово у потпуности активирали понекад је потребно да изаберете најновије објаве са Фејсбук менија.</string>
+    <string name="really_quit_question">Заиста желите да изађете?</string>
+    <string name="confirm_exit">Потврђуј напуштање апликације</string>
+    <string name="yes">Да</string>
+    <string name="no">Не</string>
 
 </resources>
