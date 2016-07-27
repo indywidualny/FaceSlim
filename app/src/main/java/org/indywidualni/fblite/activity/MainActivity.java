@@ -1124,7 +1124,7 @@ public class MainActivity extends Activity {
                 imgExtension = ".png";
 
             String date = DateFormat.getDateTimeInstance().format(new Date());
-            String file = "IMG_" + date.replace(" ", "-") + imgExtension;
+            String file = "faceslim-saved-image-" + date.replace(" ", "").replace(":", "").replace(".", "") + imgExtension;
 
             DownloadManager dm = (DownloadManager) this.getSystemService(Context.DOWNLOAD_SERVICE);
             Uri downloadUri = Uri.parse(imageUrl);
