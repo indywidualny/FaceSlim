@@ -1,11 +1,66 @@
-body, #root, .storyStream, ._2v9s, ._4nmh, ._4u3j, ._35aq, ._146a, ._4g34, ._5pxb, ._55wq, ._53_-, ._55ws, ._u42, .jx-result, .jx-typeahead-results, ._56bt, ._52x7, ._vqv, ._4g33, ._5rgt, .popover_flyout, .flyout, #m_newsfeed_stream, ._55wo, ._3iln, .mentions-suggest, #header, ._xy, ._bgx, .acb, .acg, .aclb, .touch ._4g34, ._59e9, .nontouch ._5ui0, input[type=text], .acw, ._5up8, ._5kgn, .tlLinkContainer, .aps, .jewel .flyout .header, .appCenterCategorySelectorButton, .tlBody, #timelineBody, .timelineX, .timeline .feed, .timeline .tlPrelude, .timeline .tlFeedPlaceholder, .touch ._5c9u, .touch ._5ca9, .innerLink, ._5dy4, ._52x3, #m_group_stories_container, .albums, .subpage, ._uwu, ._uww, .scrollAreaBody, .al, .apl, .structuredPublisher, .groupChromeView, ._djv, ._bjg, ._5kgn, ._3f50, ._55wm, ._58f0 {
-    background: #000 !important;
+body * {
+    border-color:  transparent !important;
+    color:  #888 !important;
+    background-color:  transparent !important;
 }
-._50cg._2ss {
-    background: #000 !important;
+
+html, body, ._2v9s  {
+    background-image: url("data:image/gif;base64,R0lGODlhBAAEAKECABERESQkJP///////yH5BAEKAAIALAAAAAAEAAQAAAIFhB6nhlIAOw==") !important;
+    background-repeat: repeat !important;
+    background-color: #181818 !important;
 }
+
+.storyStream, ._4nmh, ._4u3j, ._35aq, ._146a, ._5pxb, ._55wq, ._53_-, ._55ws, ._u42, .jx-result, .jx-typeahead-results, ._56bt, ._52x7, ._vqv, ._5rgt, .popover_flyout, .flyout, #m_newsfeed_stream, ._55wo, ._3iln, .mentions-suggest, #header, ._xy, ._bgx, .acb, .acg, .aclb, .nontouch ._5ui0, input[type=text], .acw, ._5up8, ._5kgn, .tlLinkContainer, .aps, .jewel .flyout .header, .appCenterCategorySelectorButton, .tlBody, #timelineBody, .timelineX, .timeline .feed, .timeline .tlPrelude, .timeline .tlFeedPlaceholder, .touch ._5c9u, .touch ._5ca9, .innerLink, ._5dy4, ._52x3, #m_group_stories_container, .albums, .subpage, ._uwu, ._uww, .scrollAreaBody, .al, .apl, .structuredPublisher, .groupChromeView, ._djv, ._bjg, ._5kgn, ._3f50, ._55wm, ._58f0 {
+    background: #202020 !important;
+     text-shadow: 0px 0px 2px #000 !important;
+     -webkit-transition: background .2s, box-shadow .4s, border-color .2s !important; /* Safari */
+    transition: background .2s, box-shadow .4s, border-color .2s !important;
+    transition-timing-function: linear !important;
+}
+
 .composerLinkText, .fcg {
     color: #d2d2d2 !important;
+}
+
+._56bu, ._56bs {
+    background: #202020 !important;
+}
+
+.touch ._56bu::before, .touch.wp.x1-5 ._56bu::before, .touch.wp.x2 ._56bu::before{
+    background-color: #202020 !important;
+    text-shadow: 0px 0px 2px #000 !important;
+}
+
+/* New feed info*/
+._15nz {
+   background-color: #121212 !important;
+}
+
+._4g33, ._4g34 ._1svy {
+    box-shadow:  none !important;
+    background: none !important;
+    border: none !important;
+}
+
+._15ny::after {
+    border: none !important;
+}
+
+/* load spinner */
+._50cg._2ss {
+    box-shadow:   none !important;
+    background:  none !important;
+    border:  none !important;
+}
+
+/* comments */
+._5c4t ._1g06 {
+    color: #ccc !important;
+}
+
+/* new message dialog */
+._52z5 {
+
 }
 
 /* white text */
@@ -29,7 +84,7 @@ a, .actor, .mfsl, .fcw, .title, .blueName, ._5aw4, ._vqv, ._5yll, ._5qc3, ._52lz
 .acy, .nontouch ._55mb .actor-link, .nontouch a.btnD, .inlineMedia.storyAttachment {
     background: #304702 !important;
 }
-.statusBox, ._5whq, ._56bt, .composerInput, .mentions-input, ._1svy, ._bji {
+.statusBox, ._5whq, ._56bt, .composerInput, .mentions-input,  ._bji {
     background: #323232 !important;
 }
 .ufiBorder, ._5as0, ._5ef_, ._35aq {
@@ -84,3 +139,4 @@ article h3 {
 ._2lut {
     border: 1px dotted #e9eaed !important;
 }
+
