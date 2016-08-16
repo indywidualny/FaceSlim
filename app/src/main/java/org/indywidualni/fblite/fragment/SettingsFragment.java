@@ -135,10 +135,8 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
                         new NotificationsSettingsFragment()).commit();
                 return true;
             case "clear_cache":
-                // clear cache dirs
-                FileOperation.deleteCache(getActivity().getApplicationContext());
-                // restart the app (really ugly way of doing it but...)
-                android.os.Process.killProcess(android.os.Process.myPid());
+                //clears cache without the need to log out!
+               deleteCache(getActivity().getApplicationContext());
                 return true;
         }
 
@@ -181,5 +179,27 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         } else
             Log.e(TAG, "We already have storage permission. Yay!");
     }
+
+public static void deleteCache(Context context) {
+        try {
+            File dir = context.getCacheDir();
+            deleteDir(dir);
+        } catch (Exception ignored) {}
+    }
+
+    public static boolean deleteDir(File dir) {
+        if (dir != null && dir.isDirectory()) {
+            String[] children = dir.list();
+            for (String aChildren : children) {
+                boolean success = deleteDir(new File(dir, aChildren));
+                if (!success) {
+                    return false;
+                }
+            }
+            return dir.delete();
+        } else
+            return dir != null && dir.isFile() && dir.delete();
+    }
+
 
 }
