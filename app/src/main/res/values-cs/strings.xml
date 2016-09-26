@@ -157,5 +157,7 @@
     <string name="confirm_exit">Potvrzení ukončení aplikace</string>
     <string name="yes">Ano</string>
     <string name="no">Ne</string>
+    <string name="use_tor_title">Používat Tor &#8635;</string>
+    <string name="use_tor_summary">Pro zajištění vyššího soukromí přenášet veškerý provoz přes Tor. Vyžaduje Orbot.</string>
     
 </resources>
