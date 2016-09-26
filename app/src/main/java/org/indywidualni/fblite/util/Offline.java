@@ -58,9 +58,13 @@ public class Offline {
         @Override
         protected Void doInBackground(String... args) throws SQLException {
             try {
-                final Document response = Jsoup.connect(args[0]).userAgent(userAgent)
-                        .header("Accept-Encoding", "gzip, deflate").timeout(5000)
-                        .cookie("https://m.facebook.com", CookieManager.getInstance().getCookie("https://m.facebook.com")).get();
+                final Document response = Jsoup.connect(args[0])
+                        .userAgent(userAgent)
+                        .proxy(Miscellany.getProxy(preferences))
+                        .header("Accept-Encoding", "gzip, deflate")
+                        .timeout(5000)
+                        .cookie("https://m.facebook.com", CookieManager.getInstance().getCookie("https://m.facebook.com"))
+                        .get();
 
                 String base = "https://m.facebook.com";
                 if (preferences.getBoolean("touch_mode", false))

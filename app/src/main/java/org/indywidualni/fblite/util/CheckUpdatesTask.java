@@ -85,7 +85,7 @@ public class CheckUpdatesTask extends AsyncTask<Void, Void, String> {
             
         try {
             URL url = new URL(myUrl);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection(Miscellany.getProxy(preferences));
             conn.setReadTimeout(10000 /* milliseconds */);
             conn.setConnectTimeout(15000 /* milliseconds */);
             conn.setRequestMethod("GET");
