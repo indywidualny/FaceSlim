@@ -5,7 +5,7 @@ android {
     buildToolsVersion "24.0.1"
 
     defaultConfig {
-        applicationId "org.indywidualni.fblite"
+        applicationId "org.indywidualni.fblite.debug"
         minSdkVersion 15
         targetSdkVersion 24
         versionCode 43
@@ -25,9 +25,10 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:support-v4:24.1.1'
-    compile 'com.android.support:appcompat-v7:24.1.1'
+    compile 'com.android.support:support-v4:24.2.1'
+    compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'org.jsoup:jsoup:1.9.2'
     compile 'ch.acra:acra:4.9.0'
     compile 'com.github.johnkil.android-appmsg:appmsg:1.2.0'
+    compile 'info.guardianproject.netcipher:netcipher:1.2.1'
 }
