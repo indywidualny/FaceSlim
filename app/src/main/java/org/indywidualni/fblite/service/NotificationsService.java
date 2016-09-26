@@ -27,6 +27,7 @@ import org.indywidualni.fblite.MyApplication;
 import org.indywidualni.fblite.R;
 import org.indywidualni.fblite.activity.MainActivity;
 import org.indywidualni.fblite.util.Connectivity;
+import org.indywidualni.fblite.util.Miscellany;
 import org.indywidualni.fblite.util.logger.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
@@ -190,9 +191,15 @@ public class NotificationsService extends Service {
 
         private Element getElement(String connectUrl) {
             try {
-                return Jsoup.connect(connectUrl).userAgent(userAgent).timeout(JSOUP_TIMEOUT)
-                        .cookie("https://mobile.facebook.com", CookieManager.getInstance().getCookie("https://mobile.facebook.com")).get()
-                        .select("a.touchable").not("a._19no").not("a.button").first();
+                return Jsoup.connect(connectUrl)
+                        .userAgent(userAgent).timeout(JSOUP_TIMEOUT)
+                        .proxy(Miscellany.getProxy(preferences))
+                        .cookie("https://mobile.facebook.com", CookieManager.getInstance().getCookie("https://mobile.facebook.com"))
+                        .get()
+                        .select("a.touchable")
+                        .not("a._19no")
+                        .not("a.button")
+                        .first();
             } catch (IllegalArgumentException ex) {
                 Log.i("CheckNotificationsTask", "Cookie sync problem occurred");
                 if (!syncProblemOccurred) {
@@ -259,8 +266,12 @@ public class NotificationsService extends Service {
 
         private String getNumber(String connectUrl) {
             try {
-                Elements message = Jsoup.connect(connectUrl).userAgent(userAgent).timeout(JSOUP_TIMEOUT)
-                        .cookie("https://m.facebook.com", CookieManager.getInstance().getCookie("https://m.facebook.com")).get()
+                Elements message = Jsoup.connect(connectUrl)
+                        .userAgent(userAgent)
+                        .proxy(Miscellany.getProxy(preferences))
+                        .timeout(JSOUP_TIMEOUT)
+                        .cookie("https://m.facebook.com", CookieManager.getInstance().getCookie("https://m.facebook.com"))
+                        .get()
                         .select("div#viewport").select("div#page").select("div._129-")
                         .select("#messages_jewel").select("span._59tg");
 

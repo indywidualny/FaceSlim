@@ -49,6 +49,8 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import info.guardianproject.netcipher.NetCipher;
+import info.guardianproject.netcipher.web.WebkitProxy;
 import org.indywidualni.fblite.MyApplication;
 import org.indywidualni.fblite.R;
 import org.indywidualni.fblite.service.NotificationsService;
@@ -63,10 +65,9 @@ import org.indywidualni.fblite.webview.MyWebViewClient;
 import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
+import java.net.InetSocketAddress;
 import java.text.DateFormat;
 import java.util.Date;
-
-import info.guardianproject.netcipher.web.WebkitProxy;
 
 @SuppressWarnings("UnusedDeclaration")
 public class MainActivity extends Activity {
@@ -255,12 +256,12 @@ public class MainActivity extends Activity {
         }
 
         // Tor proxy
-        if (preferences.getBoolean("use_tor", false)) {
-            try {
-                WebkitProxy.setProxy("org.indywidualni.fblite.MyApplication", getApplicationContext(), webView, "localhost", 8118);
-            } catch (Exception e) {
-                Log.w(TAG, "Failed to set webview proxy", e);
-            }
+        try {
+            InetSocketAddress isa = (InetSocketAddress) Miscellany.getProxy(preferences).address();
+            WebkitProxy.setProxy("org.indywidualni.fblite.MyApplication", getApplicationContext(), webView,
+                                 isa.getHostName(), isa.getPort());
+        } catch (Exception e) {
+            Log.w(TAG, "Failed to set webview proxy", e);
         }
 
         // since API 18 cache quota is managed automatically
