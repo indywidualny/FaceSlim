@@ -49,8 +49,6 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import info.guardianproject.netcipher.NetCipher;
-import info.guardianproject.netcipher.web.WebkitProxy;
 import org.indywidualni.fblite.MyApplication;
 import org.indywidualni.fblite.R;
 import org.indywidualni.fblite.service.NotificationsService;
@@ -68,6 +66,8 @@ import java.lang.ref.WeakReference;
 import java.net.InetSocketAddress;
 import java.text.DateFormat;
 import java.util.Date;
+
+import info.guardianproject.netcipher.web.WebkitProxy;
 
 @SuppressWarnings("UnusedDeclaration")
 public class MainActivity extends Activity {
@@ -262,6 +262,7 @@ public class MainActivity extends Activity {
                                  isa.getHostName(), isa.getPort());
         } catch (Exception e) {
             Log.w(TAG, "Failed to set webview proxy", e);
+            Toast.makeText(this, "" + e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
         }
 
         // since API 18 cache quota is managed automatically

@@ -110,6 +110,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
                     case "keyboard_fix":
                     case "hardware_acceleration":
                     case "custom_user_agent":
+                    case "use_tor":
                         relaunch();
                         break;
                 }
