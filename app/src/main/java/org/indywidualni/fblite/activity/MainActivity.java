@@ -66,6 +66,8 @@ import java.lang.ref.WeakReference;
 import java.text.DateFormat;
 import java.util.Date;
 
+import info.guardianproject.netcipher.web.WebkitProxy;
+
 @SuppressWarnings("UnusedDeclaration")
 public class MainActivity extends Activity {
 
@@ -249,6 +251,15 @@ public class MainActivity extends Activity {
             if (Build.VERSION.SDK_INT < 24) {
                 //noinspection deprecation
                 webView.getSettings().setGeolocationDatabasePath(getFilesDir().getPath());
+            }
+        }
+
+        // Tor proxy
+        if (preferences.getBoolean("use_tor", false)) {
+            try {
+                WebkitProxy.setProxy("org.indywidualni.fblite.MyApplication", getApplicationContext(), webView, "localhost", 8118);
+            } catch (Exception e) {
+                Log.w(TAG, "Failed to set webview proxy", e);
             }
         }
 

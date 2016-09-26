@@ -13,3 +13,7 @@
 
 # jsoup library
 -keeppackagenames org.jsoup.nodes
+
+# StrongHttpsClient and its support classes are totally unused, so the
+# ch.boye.httpclientandroidlib.** classes are also unneeded
+-dontwarn info.guardianproject.netcipher.client.*
