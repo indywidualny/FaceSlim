@@ -262,7 +262,7 @@ public class MainActivity extends Activity {
                                  isa.getHostName(), isa.getPort());
         } catch (Exception e) {
             Log.w(TAG, "Failed to set webview proxy", e);
-            Toast.makeText(this, "" + e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, "" + e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
         }
 
         // since API 18 cache quota is managed automatically
