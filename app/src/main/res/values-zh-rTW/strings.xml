@@ -11,7 +11,7 @@
 
     <string-array name="item_array">
         <item>動態消息</item>
-        <item>訊息</item>
+        <item>Messenger.com</item>
         <item>聊天室</item>
         <item>社團</item>
         <item>活動</item>
@@ -155,7 +155,7 @@
     <string name="most_recent_description">您可能也需要從Facebook選單設定以套用這項設定.</string>
     <string name="really_quit_question">真的要說掰掰了?</string>
     <string name="confirm_exit">確認離開本程式?</string>
-    <string name="yes">嗯...</string>
+    <string name="yes">嗯…</string>
     <string name="no">不要啊啊~</string>
 
 </resources>

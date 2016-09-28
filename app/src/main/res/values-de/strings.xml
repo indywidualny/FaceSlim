@@ -7,7 +7,7 @@
 
     <string-array name="item_array">
         <item>Neuigkeiten</item>
-        <item>@string/messages</item>
+        <item>Messenger.com</item>
         <item>Chat (Online Freunde)</item>
         <item>Gruppen</item>
         <item>Veranstaltungen</item>
