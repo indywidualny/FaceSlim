@@ -3,6 +3,7 @@ package org.indywidualni.fblite.webview;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,6 +12,7 @@ import android.database.SQLException;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +33,7 @@ import org.indywidualni.fblite.util.Connectivity;
 import org.indywidualni.fblite.util.Dimension;
 import org.indywidualni.fblite.util.FileOperation;
 import org.indywidualni.fblite.util.FloatingActionButton;
+import org.indywidualni.fblite.util.Miscellany;
 import org.indywidualni.fblite.util.Offline;
 import org.indywidualni.fblite.util.OfflinePagesAdapter;
 
@@ -47,7 +50,7 @@ public class MyWebViewClient extends WebViewClient {
     private boolean refreshed;
 
     // get application context
-    private static Context context = MyApplication.getContextOfApplication();
+    private static final Context context = MyApplication.getContextOfApplication();
 
     // get shared preferences
     final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -65,29 +68,58 @@ public class MyWebViewClient extends WebViewClient {
         webView = wv;
     }
 
+    @SuppressLint("NewApi")
+    @Override
+    public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+        return shouldOverrideUrlLoading(view, request.getUrl().toString());
+    }
+
+    @SuppressWarnings("deprecation")
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
-        // handling external links as intents
-        if (Uri.parse(url).getHost().endsWith("facebook.com")
-                || Uri.parse(url).getHost().endsWith("m.facebook.com")
-                || Uri.parse(url).getHost().endsWith("h.facebook.com")
-                || Uri.parse(url).getHost().endsWith("l.facebook.com")
-                || Uri.parse(url).getHost().endsWith("0.facebook.com")
-                || Uri.parse(url).getHost().endsWith("zero.facebook.com")
-                || Uri.parse(url).getHost().endsWith("fbcdn.net")
-                || Uri.parse(url).getHost().endsWith("akamaihd.net")
-                || Uri.parse(url).getHost().endsWith("fb.me")) {
-            return false;
-        } else if (preferences.getBoolean("load_extra", false)
-                && (Uri.parse(url).getHost().endsWith("googleusercontent.com")
-                || Uri.parse(url).getHost().endsWith("tumblr.com")
-                || Uri.parse(url).getHost().endsWith("pinimg.com")
-                || Uri.parse(url).getHost().endsWith("media.giphy.com"))) {
-            return false;
+        // clean an url from facebook redirection before processing (no more blank pages on back)
+        if (url != null)
+            url = Miscellany.cleanAndDecodeUrl(url);
+        // really ugly but let's do it just to avoid rare crashes
+        try {
+            if (Uri.parse(url).getHost().endsWith("messenger.com")) {
+                view.getSettings().setUseWideViewPort(false);
+                return false;
+            } else
+                view.getSettings().setUseWideViewPort(true);
+
+            if (Uri.parse(url).getHost().endsWith("facebook.com")
+                    || Uri.parse(url).getHost().endsWith("mobile.facebook.com")
+                    || Uri.parse(url).getHost().endsWith("touch.facebook.com")
+                    || Uri.parse(url).getHost().endsWith("m.facebook.com")
+                    || Uri.parse(url).getHost().endsWith("h.facebook.com")
+                    || Uri.parse(url).getHost().endsWith("l.facebook.com")
+                    || Uri.parse(url).getHost().endsWith("0.facebook.com")
+                    || Uri.parse(url).getHost().endsWith("zero.facebook.com")
+                    || Uri.parse(url).getHost().endsWith("fbcdn.net")
+                    || Uri.parse(url).getHost().endsWith("akamaihd.net")
+                    || Uri.parse(url).getHost().endsWith("fb.me")) {
+                return false;
+            } else if (preferences.getBoolean("load_extra", false)
+                    && (Uri.parse(url).getHost().endsWith("googleusercontent.com")
+                    || Uri.parse(url).getHost().endsWith("tumblr.com")
+                    || Uri.parse(url).getHost().endsWith("pinimg.com")
+                    || Uri.parse(url).getHost().endsWith("media.giphy.com"))) {
+                return false;
+            }
+
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            try {
+                view.getContext().startActivity(intent);
+            } catch (ActivityNotFoundException e) {
+                Log.e("shouldOverrideUrlLoad", "No Activity to handle action", e);
+                e.printStackTrace();
+            }
+            return true;
+        } catch (NullPointerException npe) {
+            npe.printStackTrace();
+            return true;
         }
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-        view.getContext().startActivity(intent);
-        return true;
     }
 
     @SuppressWarnings("deprecation")
@@ -111,6 +143,11 @@ public class MyWebViewClient extends WebViewClient {
 
     @Override
     public void onPageFinished(WebView view, String url) {
+        if (url.contains("messenger.com"))
+            ((MainActivity) MainActivity.getMainActivity()).getSwipeRefreshLayout().setEnabled(false);
+        else
+            ((MainActivity) MainActivity.getMainActivity()).getSwipeRefreshLayout().setEnabled(true);
+
         // when Zero is activated and there is a mobile network connection ignore extra customizations
         if (!preferences.getBoolean("facebook_zero", false) || !Connectivity.isConnectedMobile(context)) {
 
@@ -180,6 +217,13 @@ public class MyWebViewClient extends WebViewClient {
                     "node.innerHTML = str; document.body.appendChild(node); } " +
                     "addStyleString('.img, ._5sgg, ._-_a, .widePic, .profile-icon{ display: none; }');");
 
+        // hide install messenger notice at messenger page
+        if (url.contains("messenger.com")) {
+            view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); " +
+                    "node.innerHTML = str; document.body.appendChild(node); } " +
+                    "addStyleString('._s15{ display: none; }');");
+        }
+
         // offline mode
         if (preferences.getBoolean("offline_mode", false)) {
             if (offline == null)
@@ -246,6 +290,11 @@ public class MyWebViewClient extends WebViewClient {
                         fab.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
+                                if (offline == null) {
+                                    fab.hideFloatingActionButton();
+                                    return;
+                                }
+
                                 LayoutInflater inflater = MainActivity.getMainActivity().getLayoutInflater();
                                 @SuppressLint("InflateParams") View customView = inflater
                                         .inflate(R.layout.dialog_offline_list, null);

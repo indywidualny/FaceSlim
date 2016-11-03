@@ -1,11 +1,14 @@
 package org.indywidualni.fblite.util;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import info.guardianproject.netcipher.NetCipher;
 
+import java.net.Proxy;
 import java.util.Locale;
 
 public class Miscellany {
@@ -62,6 +65,16 @@ public class Miscellany {
         sb.append("\nLocale: ").append(Locale.getDefault().toString());
 
         return sb.toString();
+    }
+
+    /**
+     * Returns a Tor proxy if the option is enabled, or no proxy.
+     */
+    public static Proxy getProxy(SharedPreferences preferences) {
+        boolean useTor = preferences.getBoolean("use_tor", false);
+        return (useTor)
+                ? NetCipher.getProxy()
+                : Proxy.NO_PROXY;
     }
 
 }

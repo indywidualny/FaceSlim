@@ -11,9 +11,6 @@ import android.preference.ListPreference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
-import android.util.Log;
-
-import net.grandcentrix.tray.TrayAppPreferences;
 
 import org.indywidualni.fblite.MyApplication;
 import org.indywidualni.fblite.R;
@@ -24,7 +21,6 @@ public class NotificationsSettingsFragment extends PreferenceFragment {
     private static Context context;
     private SharedPreferences preferences;
     private SharedPreferences.OnSharedPreferenceChangeListener prefChangeListener;
-    private TrayAppPreferences trayPreferences;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,7 +31,6 @@ public class NotificationsSettingsFragment extends PreferenceFragment {
 
         context = MyApplication.getContextOfApplication();
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        trayPreferences = new TrayAppPreferences(context);
 
         // default value for interval_pref preference summary
         ListPreference lp = (ListPreference) findPreference("interval_pref");
@@ -52,33 +47,13 @@ public class NotificationsSettingsFragment extends PreferenceFragment {
 
                 switch (key) {
                     case "interval_pref":
-                        // update Tray Preference before restarting the service
-                        trayPreferences.put("interval_pref", Integer.parseInt(preferences.getString("interval_pref", "1800000")));
                         // restart the service after time interval change
-                        if (prefs.getBoolean("notifications_activated", false)) {
+                        if (prefs.getBoolean("notifications_activated", false) || prefs.getBoolean("message_notifications", false)) {
                             context.stopService(intent);
                             context.startService(intent);
                         }
                         break;
-                    case "ringtone":
-                        trayPreferences.put("ringtone", preferences.getString("ringtone", "content://settings/system/notification_sound"));
-                        break;
-                    case "ringtone_msg":
-                        trayPreferences.put("ringtone_msg", preferences.getString("ringtone_msg", "content://settings/system/notification_sound"));
-                        break;
-                    case "vibrate":
-                        trayPreferences.put("vibrate", preferences.getBoolean("vibrate", false));
-                        break;
-                    case "led_light":
-                        trayPreferences.put("led_light", preferences.getBoolean("led_light", false));
-                        break;
-                    case "notifications_everywhere":
-                        trayPreferences.put("notifications_everywhere", preferences.getBoolean("notifications_everywhere", true));
-                        break;
                 }
-
-                // what's going on, dude?
-                Log.v("SharedPreferenceChange", key + " changed in NotificationsSettingsFragment");
             }
         };
     }

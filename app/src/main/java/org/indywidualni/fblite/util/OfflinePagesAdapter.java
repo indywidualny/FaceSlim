@@ -1,5 +1,6 @@
 package org.indywidualni.fblite.util;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +28,7 @@ public class OfflinePagesAdapter extends ArrayAdapter<String> {
 
         TextView page = (TextView) convertView.findViewById(R.id.page);
 
-        String formattedId = "" + String.format("%02d", position + 1);
+        @SuppressLint("DefaultLocale") String formattedId = "" + String.format("%02d", position + 1);
         String stringToSet = formattedId + ":  " + item;
 
         page.setText(stringToSet);

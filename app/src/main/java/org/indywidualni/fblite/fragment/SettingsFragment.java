@@ -14,13 +14,12 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.widget.Toast;
 
-import net.grandcentrix.tray.TrayAppPreferences;
-
 import org.indywidualni.fblite.MyApplication;
 import org.indywidualni.fblite.R;
 import org.indywidualni.fblite.activity.MainActivity;
 import org.indywidualni.fblite.service.NotificationsService;
 import org.indywidualni.fblite.util.FileOperation;
+import org.indywidualni.fblite.util.Miscellany;
 
 public class SettingsFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener {
 
@@ -28,7 +27,6 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     private static final int REQUEST_STORAGE = 1;
     private static Context context;
     private SharedPreferences.OnSharedPreferenceChangeListener prefChangeListener;
-    private TrayAppPreferences trayPreferences;
     private SharedPreferences preferences;
 
     @Override
@@ -42,7 +40,6 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         context = MyApplication.getContextOfApplication();
 
         // get Tray Preferences and Shared Preferences
-        trayPreferences = new TrayAppPreferences(context);
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
 
         // set onPreferenceClickListener for a few preferences
@@ -55,7 +52,9 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         Preference preference_dark = findPreference("dark_theme");
         preference_dark.setEnabled(!preferences.getBoolean("basic_mode", false));
         Preference preference_basic = findPreference("basic_mode");
-        preference_basic.setEnabled(!preferences.getBoolean("dark_theme", false));
+        preference_basic.setEnabled(!preferences.getBoolean("dark_theme", false) && !preferences.getBoolean("touch_mode", false));
+        Preference preference_touch = findPreference("touch_mode");
+        preference_touch.setEnabled(!preferences.getBoolean("basic_mode", false));
 
         // listener for changing preferences (works after the value change)
         prefChangeListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
@@ -65,41 +64,44 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
                 switch (key) {
                     case "notifications_activated":
-                        trayPreferences.put("notifications_activated", preferences.getBoolean("notifications_activated", false));
                         if (prefs.getBoolean("notifications_activated", false) && preferences.getBoolean("message_notifications", false)) {
                             context.stopService(intent);
                             context.startService(intent);
                         } else //noinspection StatementWithEmptyBody
                             if (!prefs.getBoolean("notifications_activated", false) && preferences.getBoolean("message_notifications", false)) {
-                            // ignore this case
-                        } else if (prefs.getBoolean("notifications_activated", false) && !preferences.getBoolean("message_notifications", false)) {
-                            context.startService(intent);
-                        } else
-                            context.stopService(intent);
+                                // ignore this case
+                            } else if (prefs.getBoolean("notifications_activated", false) && !preferences.getBoolean("message_notifications", false)) {
+                                context.startService(intent);
+                            } else
+                                context.stopService(intent);
                         break;
                     case "message_notifications":
-                        trayPreferences.put("message_notifications", preferences.getBoolean("message_notifications", false));
                         if (prefs.getBoolean("message_notifications", false) && preferences.getBoolean("notifications_activated", false)) {
                             context.stopService(intent);
                             context.startService(intent);
                         } else //noinspection StatementWithEmptyBody
                             if (!prefs.getBoolean("message_notifications", false) && preferences.getBoolean("notifications_activated", false)) {
-                            // ignore this case
-                        } else if (prefs.getBoolean("message_notifications", false) && !preferences.getBoolean("notifications_activated", false)) {
-                            context.startService(intent);
-                        } else
-                            context.stopService(intent);
+                                // ignore this case
+                            } else if (prefs.getBoolean("message_notifications", false) && !preferences.getBoolean("notifications_activated", false)) {
+                                context.startService(intent);
+                            } else
+                                context.stopService(intent);
                         break;
                     case "basic_mode":
                         Preference preference_dark = findPreference("dark_theme");
                         preference_dark.setEnabled(!prefs.getBoolean("basic_mode", false));
+                        Preference preference_touch = findPreference("touch_mode");
+                        preference_touch.setEnabled(!prefs.getBoolean("basic_mode", false));
+                        break;
+                    case "touch_mode":
+                        Preference preference_basic = findPreference("basic_mode");
+                        preference_basic.setEnabled(!prefs.getBoolean("touch_mode", false));
                         break;
                     case "dark_theme":
-                        Preference preference_basic = findPreference("basic_mode");
-                        preference_basic.setEnabled(!prefs.getBoolean("dark_theme", false));
+                        Preference basic = findPreference("basic_mode");
+                        basic.setEnabled(!prefs.getBoolean("dark_theme", false));
                         break;
                     case "file_logging":
-                        trayPreferences.put("file_logging", preferences.getBoolean("file_logging", false));
                         if (prefs.getBoolean("file_logging", false))
                             requestStoragePermission();
                         break;
@@ -108,6 +110,8 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
                     case "no_images":
                     case "keyboard_fix":
                     case "hardware_acceleration":
+                    case "custom_user_agent":
+                    case "use_tor":
                         relaunch();
                         break;
                 }
@@ -126,6 +130,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
         switch (key) {
             case "notifications_settings":
+                //noinspection ResourceType
                 getFragmentManager().beginTransaction()
                         .setCustomAnimations(R.anim.slide_in_right, 0)
                         .addToBackStack(null).replace(R.id.content_frame,
@@ -147,6 +152,13 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         super.onResume();
         // register the listener
         preferences.registerOnSharedPreferenceChangeListener(prefChangeListener);
+        // update tor (proxy) info
+        try {
+            findPreference("use_tor").setSummary(getString(R.string.use_tor_summary) + " ― Proxy: " +
+                    Miscellany.getProxy(preferences).toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

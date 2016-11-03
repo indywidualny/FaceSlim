@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.app.DownloadManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -27,12 +28,15 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.AppCompatTextView;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.webkit.GeolocationPermissions;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -45,12 +49,11 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import net.grandcentrix.tray.TrayAppPreferences;
-
 import org.indywidualni.fblite.MyApplication;
 import org.indywidualni.fblite.R;
 import org.indywidualni.fblite.service.NotificationsService;
 import org.indywidualni.fblite.util.AndroidBug5497Workaround;
+import org.indywidualni.fblite.util.CheckUpdatesTask;
 import org.indywidualni.fblite.util.Connectivity;
 import org.indywidualni.fblite.util.Dimension;
 import org.indywidualni.fblite.util.DownloadManagerResolver;
@@ -60,9 +63,13 @@ import org.indywidualni.fblite.webview.MyWebViewClient;
 import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
+import java.net.InetSocketAddress;
 import java.text.DateFormat;
 import java.util.Date;
 
+import info.guardianproject.netcipher.web.WebkitProxy;
+
+@SuppressWarnings("UnusedDeclaration")
 public class MainActivity extends Activity {
 
     // reference to this object
@@ -97,14 +104,15 @@ public class MainActivity extends Activity {
     // log tag, preferences, runtime permissions
     private static final String TAG = MainActivity.class.getSimpleName();
     private SharedPreferences preferences;
-    private TrayAppPreferences trayPreferences;
     private static final int REQUEST_STORAGE = 1;
+    private static final int REQUEST_LOCATION = 2;
 
     // create link handler (long clicked links)
     private final MyHandler linkHandler = new MyHandler(this);
 
     // save images
     private static final int ID_CONTEXT_MENU_SAVE_IMAGE = 2562617;
+    private static final int ID_CONTEXT_MENU_SHARE_IMAGE = 2562618;
     private String mPendingImageUrlToSave;
     private static String appDirectoryName;
 
@@ -112,6 +120,12 @@ public class MainActivity extends Activity {
     private static String userAgentDefault;
     private static final String USER_AGENT_BASIC = "Mozilla/5.0 (Linux; U; Android 2.3.3; en-gb; " +
             "Nexus S Build/GRI20) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
+    public static final String USER_AGENT_MESSENGER = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 " +
+            "(KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36";
+
+    public static final String MESSENGER_URL = "https://www.messenger.com/login";
+    public static final String NOTIFICATION_OLD_MESSAGES_URL = "https://m.facebook.com/messages#";
+    private static final long UPDATE_CHECK_INTERVAL = 43200000;  // 12 hours
 
     @Override
     @SuppressLint("setJavaScriptEnabled")
@@ -123,7 +137,6 @@ public class MainActivity extends Activity {
 
         // get shared preferences and TrayPreferences
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        trayPreferences = new TrayAppPreferences(getApplicationContext());
         appDirectoryName = getString(R.string.app_name).replace(" ", "");
 
         // set the main content view (for drawer position)
@@ -198,9 +211,13 @@ public class MainActivity extends Activity {
         // define url that will open in webView
         String webViewUrl = "https://m.facebook.com";
 
-        // use basic mode
-        if (preferences.getBoolean("basic_mode", false))
+        if (preferences.getBoolean("touch_mode", false))
+            webViewUrl = "https://touch.facebook.com";
+        else if (preferences.getBoolean("basic_mode", false))
             webViewUrl = "https://mbasic.facebook.com";
+
+        // most recent posts
+        webViewUrl = appendMostRecentInfix(webViewUrl);
 
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
         swipeRefreshLayout.setVisibility(View.VISIBLE);
@@ -217,6 +234,7 @@ public class MainActivity extends Activity {
         webView = (WebView) findViewById(R.id.webView);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setAllowFileAccess(true);
+        webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
 
         // show full images
         webView.getSettings().setLoadWithOverviewMode(true);
@@ -224,6 +242,28 @@ public class MainActivity extends Activity {
         webView.getSettings().setSupportZoom(true);
         webView.getSettings().setBuiltInZoomControls(true);
         webView.getSettings().setDisplayZoomControls(false);
+
+        // text size (percent)
+        webView.getSettings().setTextZoom(Integer.valueOf(preferences.getString("font_size", "100")));
+
+        // location
+        if (preferences.getBoolean("location", false)) {
+            webView.getSettings().setGeolocationEnabled(true);
+            if (Build.VERSION.SDK_INT < 24) {
+                //noinspection deprecation
+                webView.getSettings().setGeolocationDatabasePath(getFilesDir().getPath());
+            }
+        }
+
+        // Tor proxy
+        try {
+            InetSocketAddress isa = (InetSocketAddress) Miscellany.getProxy(preferences).address();
+            WebkitProxy.setProxy("org.indywidualni.fblite.MyApplication", getApplicationContext(), webView,
+                                 isa.getHostName(), isa.getPort());
+        } catch (Exception e) {
+            Log.w(TAG, "Failed to set webview proxy", e);
+            //Toast.makeText(this, "" + e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+        }
 
         // since API 18 cache quota is managed automatically
         if (Build.VERSION.SDK_INT < 18) {
@@ -238,10 +278,11 @@ public class MainActivity extends Activity {
 
         // get user agent
         userAgentDefault = webView.getSettings().getUserAgentString();
-        trayPreferences.put("webview_user_agent", userAgentDefault);
+        preferences.edit().putString("webview_user_agent", userAgentDefault).apply();
 
-        // set user agent for basic mode
-        if (preferences.getBoolean("basic_mode", false))
+        if (!preferences.getString("custom_user_agent", getString(R.string.predefined_user_agent)).isEmpty())
+            webView.getSettings().setUserAgentString(preferences.getString("custom_user_agent", getString(R.string.predefined_user_agent)));
+        else if (preferences.getBoolean("basic_mode", false))
             webView.getSettings().setUserAgentString(USER_AGENT_BASIC);
 
         // disable images to reduce data usage
@@ -270,7 +311,10 @@ public class MainActivity extends Activity {
                 }
                 // final step, set the proper Sharer...
                 webViewUrl = String.format("https://m.facebook.com/sharer.php?u=%s&t=%s", sharedUrl, sharedSubject);
-                if (preferences.getBoolean("basic_mode", false))
+
+                if (preferences.getBoolean("touch_mode", false))
+                    webViewUrl = String.format("https://touch.facebook.com/sharer.php?u=%s&t=%s", sharedUrl, sharedSubject);
+                else if (preferences.getBoolean("basic_mode", false))
                     webViewUrl = String.format("https://mbasic.facebook.com/sharer.php?u=%s&t=%s", sharedUrl, sharedSubject);
                 // ... and parse it just in case
                 webViewUrl = Uri.parse(webViewUrl).toString();
@@ -285,6 +329,7 @@ public class MainActivity extends Activity {
         } else if (isFacebookZero && isConnectedMobile) {
             // facebook zero if activated and connected to a mobile network
             webViewUrl = "https://0.facebook.com";
+            webViewUrl = appendMostRecentInfix(webViewUrl);
             Toast.makeText(getApplicationContext(), getString(R.string.facebook_zero_active), Toast.LENGTH_SHORT).show();
         }
 
@@ -293,11 +338,11 @@ public class MainActivity extends Activity {
             //noinspection ConstantConditions
             if (getIntent().getExtras().getString("start_url") != null) {
                 String temp = getIntent().getExtras().getString("start_url");
-                if (!isFacebookZero || !isConnectedMobile)
+                if (!isFacebookZero || !isConnectedMobile) {
                     webViewUrl = temp;
-                // cancel all notifications if 'All notifications' button was clicked
-                if ("https://m.facebook.com/notifications".equals(temp))
-                    NotificationsService.cancelAllNotifications();
+                    if (webViewUrl != null && webViewUrl.equals(MESSENGER_URL))
+                        webView.getSettings().setUserAgentString(MainActivity.USER_AGENT_MESSENGER);
+                }
             }
         } catch (Exception ignored) {}
 
@@ -309,6 +354,12 @@ public class MainActivity extends Activity {
         mWebChromeClient = new MyWebChromeClient();
         webView.setWebViewClient(new MyWebViewClient());
         webView.setWebChromeClient(mWebChromeClient);
+
+        // speed it up for some devices
+        if (Build.VERSION.SDK_INT < 18) {
+            //noinspection deprecation
+            webView.getSettings().setRenderPriority(WebSettings.RenderPriority.HIGH);
+        }
 
         // set webView reference
         MyWebViewClient.setWebviewReference(webView);
@@ -334,6 +385,15 @@ public class MainActivity extends Activity {
             }
         });
 
+        // check for app updates
+        if (preferences.getBoolean("app_updates", true)) {
+            final long now = System.currentTimeMillis();
+            final long lastUpdateCheck = preferences.getLong("latest_update_check", 0);
+            final long sinceLastCheck = now - lastUpdateCheck;
+            if (sinceLastCheck > UPDATE_CHECK_INTERVAL && Connectivity.isConnected(this) && !preferences.getBoolean("first_run", true)) {
+                new CheckUpdatesTask(this).execute();
+            }
+        }
     }
 
     private class MyWebChromeClient extends WebChromeClient {
@@ -534,6 +594,20 @@ public class MainActivity extends Activity {
                 showSystemUI();
         }
 
+        // location
+        public void onGeolocationPermissionsShowPrompt(String origin,
+                                                       GeolocationPermissions.Callback callback) {
+            /** Request location permission.
+             *  If granted it's awesome and go on,
+             *  otherwise just stop here and leave the method.
+             */
+            requestLocationPermission();
+            if (!hasLocationPermission())
+                return;
+
+            callback.invoke(origin, true, false);
+        }
+
     }
 
     // handle long clicks on links, an awesome way to avoid memory leaks
@@ -611,6 +685,24 @@ public class MainActivity extends Activity {
         return (hasPermission == PackageManager.PERMISSION_GRANTED);
     }
 
+    // request location permission
+    private void requestLocationPermission() {
+        String[] permissions = new String[] { Manifest.permission.ACCESS_FINE_LOCATION };
+        if (!hasLocationPermission()) {
+            Log.e(TAG, "No location permission at the moment. Requesting...");
+            ActivityCompat.requestPermissions(this, permissions, REQUEST_LOCATION);
+        } else {
+            Log.e(TAG, "We already have location permission. Yay!");
+        }
+    }
+
+    // check is location permission granted
+    private boolean hasLocationPermission() {
+        String locationPermission = Manifest.permission.ACCESS_FINE_LOCATION;
+        int hasPermission = ContextCompat.checkSelfPermission(this, locationPermission);
+        return (hasPermission == PackageManager.PERMISSION_GRANTED);
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
@@ -623,6 +715,15 @@ public class MainActivity extends Activity {
                 } else {
                     Log.e(TAG, "Storage permission denied");
                     Toast.makeText(getApplicationContext(), getString(R.string.no_storage_permission), Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case REQUEST_LOCATION:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Log.e(TAG, "Location permission granted");
+                    webView.reload();
+                } else {
+                    Log.e(TAG, "Location permission denied");
+                    Toast.makeText(getApplicationContext(), getString(R.string.no_location_permission), Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
@@ -690,7 +791,7 @@ public class MainActivity extends Activity {
         } // end of code for Lollipop only
     }
 
-    private SwipeRefreshLayout.OnRefreshListener onRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
+    private final SwipeRefreshLayout.OnRefreshListener onRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
 
         // refreshing pages
         @Override
@@ -698,6 +799,8 @@ public class MainActivity extends Activity {
             // notify when there is no internet connection (offline mode have its own messages)
             if (!Connectivity.isConnected(getApplicationContext()) && !preferences.getBoolean("offline_mode", false))
                 Toast.makeText(getApplicationContext(), getString(R.string.no_network), Toast.LENGTH_SHORT).show();
+
+            webView.stopLoading();
 
             // reloading page (if offline try to load a live version first)
             if (preferences.getBoolean("offline_mode", false) && MyWebViewClient.wasOffline)
@@ -728,7 +831,9 @@ public class MainActivity extends Activity {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             String baseAddress = "https://m.facebook.com/";
 
-            if (preferences.getBoolean("basic_mode", false))
+            if (preferences.getBoolean("touch_mode", false))
+                baseAddress = "https://touch.facebook.com/";
+            else if (preferences.getBoolean("basic_mode", false))
                 baseAddress = "https://mbasic.facebook.com/";
             if (preferences.getBoolean("facebook_zero", false) && Connectivity.isConnectedMobile(getApplicationContext()))
                 baseAddress = "https://0.facebook.com/";
@@ -739,12 +844,20 @@ public class MainActivity extends Activity {
 
     // when a drawer item is clicked do instructions from below
     private void selectItem(int position, String baseAddress) {
+        webView.stopLoading();
+        setUserAgent();
+
         switch (position) {
             case 0:
-                webView.loadUrl(baseAddress);
+                webView.loadUrl(appendMostRecentInfix(baseAddress));
                 break;
             case 1:
-                webView.loadUrl(baseAddress + "messages");
+                if (preferences.getBoolean("facebook_zero", false) && Connectivity.isConnectedMobile(this)) {
+                    Toast.makeText(getApplicationContext(), getString(R.string.facebook_zero_active), Toast.LENGTH_SHORT).show();
+                    break;
+                }
+                webView.getSettings().setUserAgentString(MainActivity.USER_AGENT_MESSENGER);
+                webView.loadUrl(MESSENGER_URL);
                 break;
             case 2:
                 webView.loadUrl(baseAddress + "buddylist.php");
@@ -764,7 +877,7 @@ public class MainActivity extends Activity {
                 startActivity(about);
                 break;
             case 7:
-                trayPreferences.put("activity_visible", false);
+                preferences.edit().putBoolean("activity_visible", false).apply();
                 //finish();
                 System.exit(0); // ugly, ugly, ugly! They wanted it :(
                 break;
@@ -812,6 +925,13 @@ public class MainActivity extends Activity {
         super.onNewIntent(intent);
         setIntent(intent);
 
+        // recreate activity when something important was just changed
+        if (getIntent().getBooleanExtra("core_settings_changed", false)) {
+            finish(); // finish and create a new Instance
+            Intent restart = new Intent(MainActivity.this, MainActivity.class);
+            startActivity(restart);
+        }
+
         // grab an url if opened by clicking a link
         String webViewUrl = getIntent().getDataString();
 
@@ -820,10 +940,7 @@ public class MainActivity extends Activity {
         boolean isFacebookZero = preferences.getBoolean("facebook_zero", false);
 
         // set the right user agent
-        if (preferences.getBoolean("basic_mode", false))
-            webView.getSettings().setUserAgentString(USER_AGENT_BASIC);
-        else
-            webView.getSettings().setUserAgentString(userAgentDefault);
+        setUserAgent();
 
         /** get a subject and text and check if this is a link trying to be shared */
         String sharedSubject = getIntent().getStringExtra(Intent.EXTRA_SUBJECT);
@@ -843,7 +960,10 @@ public class MainActivity extends Activity {
                 }
                 // final step, set the proper Sharer...
                 webViewUrl = String.format("https://m.facebook.com/sharer.php?u=%s&t=%s", sharedUrl, sharedSubject);
-                if (preferences.getBoolean("basic_mode", false))
+
+                if (preferences.getBoolean("touch_mode", false))
+                    webViewUrl = String.format("https://touch.facebook.com/sharer.php?u=%s&t=%s", sharedUrl, sharedSubject);
+                else if (preferences.getBoolean("basic_mode", false))
                     webViewUrl = String.format("https://mbasic.facebook.com/sharer.php?u=%s&t=%s", sharedUrl, sharedSubject);
                 // ... and parse it just in case
                 webViewUrl = Uri.parse(webViewUrl).toString();
@@ -852,29 +972,40 @@ public class MainActivity extends Activity {
 
         /** if opened by a notification or a shortcut */
         try {
-            if (getIntent().getExtras().getString("start_url") != null)
+            if (getIntent().getExtras().getString("start_url") != null) {
                 webViewUrl = getIntent().getExtras().getString("start_url");
-                // cancel all notifications if 'All notifications' button was clicked
-                if ("https://m.facebook.com/notifications".equals(webViewUrl))
-                    NotificationsService.cancelAllNotifications();
+            }
         } catch (Exception ignored) {}
 
         /** load a grabbed url instead of the current page */
         if (isFacebookZero && isConnectedMobile)
             Toast.makeText(getApplicationContext(), getString(R.string.facebook_zero_active), Toast.LENGTH_SHORT).show();
-        else
+        else {
+            if (webViewUrl != null && webViewUrl.equals(MESSENGER_URL))
+                webView.getSettings().setUserAgentString(MainActivity.USER_AGENT_MESSENGER);
+            else
+                setUserAgent();
+            webView.stopLoading();
             webView.loadUrl(webViewUrl);
+        }
 
         // notify when there is no internet connection
         if (!Connectivity.isConnected(getApplicationContext()) && !preferences.getBoolean("offline_mode", false))
             Toast.makeText(getApplicationContext(), getString(R.string.no_network), Toast.LENGTH_SHORT).show();
 
-        // recreate activity when something important was just changed
-        if (getIntent().getBooleanExtra("core_settings_changed", false)) {
-            finish(); // finish and create a new Instance
-            Intent restart = new Intent(MainActivity.this, MainActivity.class);
-            startActivity(restart);
+        // location
+        if (preferences.getBoolean("location", false)) {
+            webView.getSettings().setGeolocationEnabled(true);
+            if (Build.VERSION.SDK_INT < 24) {
+                //noinspection deprecation
+                webView.getSettings().setGeolocationDatabasePath(getFilesDir().getPath());
+            }
+        } else {
+            webView.getSettings().setGeolocationEnabled(false);
         }
+
+        // text size (percent)
+        webView.getSettings().setTextZoom(Integer.valueOf(preferences.getString("font_size", "100")));
     }
 
     // handling back button
@@ -882,10 +1013,16 @@ public class MainActivity extends Activity {
     public void onBackPressed() {
         if (inCustomView())
             hideCustomView();
-        else if (mCustomView == null && webView.canGoBack())
+        else if (mCustomView == null && webView.canGoBack()) {
+            webView.stopLoading();
+            setUserAgent();
             webView.goBack();
-        else
-            super.onBackPressed();
+        } else {
+            if (preferences.getBoolean("confirm_exit", false))
+                showExitDialog();
+            else
+                super.onBackPressed();
+        }
     }
 
     @Override
@@ -894,7 +1031,7 @@ public class MainActivity extends Activity {
         webView.onResume();
         webView.resumeTimers();
         registerForContextMenu(webView);
-        trayPreferences.put("activity_visible", true);
+        preferences.edit().putBoolean("activity_visible", true).apply();
     }
 
     @Override
@@ -905,7 +1042,7 @@ public class MainActivity extends Activity {
             webView.onPause();
             webView.pauseTimers();
         }
-        trayPreferences.put("activity_visible", false);
+        preferences.edit().putBoolean("activity_visible", false).apply();
     }
 
     @Override
@@ -961,14 +1098,20 @@ public class MainActivity extends Activity {
                  */
                 requestStoragePermission();
                 break;
+            case ID_CONTEXT_MENU_SHARE_IMAGE:
+                Intent share = new Intent(Intent.ACTION_SEND);
+                share.setType("text/plain");
+                share.putExtra(Intent.EXTRA_TEXT, mPendingImageUrlToSave);
+                startActivity(Intent.createChooser(share, getString(R.string.share_link)));
+                break;
         }
         return super.onContextItemSelected(item);
     }
 
-
     private void showLongPressedImageMenu(ContextMenu menu, String imageUrl) {
         mPendingImageUrlToSave = imageUrl;
         menu.add(0, ID_CONTEXT_MENU_SAVE_IMAGE, 0, getString(R.string.save_img));
+        menu.add(0, ID_CONTEXT_MENU_SHARE_IMAGE, 1, getString(R.string.share_link));
     }
 
     private void saveImageToDisk(String imageUrl) {
@@ -994,7 +1137,7 @@ public class MainActivity extends Activity {
                 imgExtension = ".png";
 
             String date = DateFormat.getDateTimeInstance().format(new Date());
-            String file = "IMG_" + date.replace(" ", "-") + imgExtension;
+            String file = "faceslim-saved-image-" + date.replace(" ", "").replace(":", "").replace(".", "") + imgExtension;
 
             DownloadManager dm = (DownloadManager) this.getSystemService(Context.DOWNLOAD_SERVICE);
             Uri downloadUri = Uri.parse(imageUrl);
@@ -1017,6 +1160,12 @@ public class MainActivity extends Activity {
         }
     }
 
+    private String appendMostRecentInfix(String url) {
+        if (preferences.getBoolean("most_recent", false))
+            url += "?sk=h_chr";
+        return url;
+    }
+
     // first run dialog with introduction
     private void onCoachMark() {
         final Dialog dialog = new Dialog(this);
@@ -1037,8 +1186,58 @@ public class MainActivity extends Activity {
         dialog.show();
     }
 
+    private AlertDialog createExitDialog() {
+        AppCompatTextView messageTextView = new AppCompatTextView(this);
+        messageTextView.setTextSize(16f);
+        messageTextView.setText(getString(R.string.really_quit_question));
+        messageTextView.setPadding(50, 50, 50, 0);
+        messageTextView.setTextColor(ContextCompat.getColor(this, R.color.black));
+        return new AlertDialog.Builder(this)
+                .setView(messageTextView)
+                .setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                })
+                .setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // nothing to do here
+                    }
+                })
+                .setCancelable(true)
+                .create();
+    }
+
+    private void showExitDialog() {
+        AlertDialog alertDialog = createExitDialog();
+        alertDialog.show();
+        alertDialog.getButton(DialogInterface.BUTTON_POSITIVE)
+                .setTextColor(ContextCompat.getColor(this, R.color.colorAccent));
+        alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE)
+                .setTextColor(ContextCompat.getColor(this, R.color.colorAccent));
+    }
+
+    private void setUserAgent() {
+        // set the right user agent
+        if (!preferences.getString("custom_user_agent", getString(R.string.predefined_user_agent)).isEmpty()) {
+            webView.getSettings().setUserAgentString(preferences.getString("custom_user_agent", getString(R.string.predefined_user_agent)));
+            return;
+        }
+
+        if (preferences.getBoolean("basic_mode", false))
+            webView.getSettings().setUserAgentString(USER_AGENT_BASIC);
+        else
+            webView.getSettings().setUserAgentString(userAgentDefault);
+    }
+
     public static Activity getMainActivity() {
         return mainActivity;
+    }
+
+    public SwipeRefreshLayout getSwipeRefreshLayout() {
+        return swipeRefreshLayout;
     }
 
 }

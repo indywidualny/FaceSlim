@@ -3,15 +3,16 @@ language: android
 sudo: false
 
 jdk:
-  - oraclejdk7
+  - oraclejdk8
 
 android:
   components:
+    - tools
+    - tools
     - platform-tools
-    - tools     # see https://github.com/travis-ci/travis-ci/issues/5036
-    - android-23
-    - build-tools-23.0.2
+    - android-24
+    - build-tools-24.0.2
     - extra-google-m2repository
     - extra-android-m2repository
 
-script: ./gradlew build check --stacktrace
+script: GRADLE_OPTS="-Xmx768m -Xms256m -Xss1m" ./gradlew build check --stacktrace

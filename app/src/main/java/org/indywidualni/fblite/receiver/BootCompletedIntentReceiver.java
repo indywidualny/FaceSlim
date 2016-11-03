@@ -15,7 +15,7 @@ public class BootCompletedIntentReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        Log.i("BroadcastReceiver", "********** Boot time! **********");
+        Log.i("BroadcastReceiver", "********** Boot time or package replaced! **********");
         context = MyApplication.getContextOfApplication();
 
         Intent startIntent = new Intent(context, NotificationsService.class);

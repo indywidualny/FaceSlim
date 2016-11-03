@@ -20,12 +20,14 @@ public class AndroidBug5497Workaround {
         new AndroidBug5497Workaround(activity);
     }
 
-    private View mChildOfContent;
+    private final View mChildOfContent;
     private int usableHeightPrevious;
+
+    @SuppressWarnings("FieldCanBeLocal")
     private FrameLayout.LayoutParams frameLayoutParams;
 
     // get application context from MainActivity & get shared preferences
-    private static Context context = MyApplication.getContextOfApplication();
+    private static final Context context = MyApplication.getContextOfApplication();
     final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
 
     private AndroidBug5497Workaround(Activity activity) {

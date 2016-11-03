@@ -5,7 +5,7 @@
 
     <string-array name="item_array">
         <item>뉴스피드</item>
-        <item>메세지</item>
+        <item>Messenger.com</item>
         <item>대화 (접속중인 친구)</item>
         <item>그룹</item>
         <item>이벤트</item>

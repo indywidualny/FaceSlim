@@ -1,13 +1,51 @@
 ## Face Slim [![Build Status](https://travis-ci.org/indywidualny/FaceSlim.svg?branch=master)](https://travis-ci.org/indywidualny/FaceSlim)
 
-With Face Slim you can keep in touch with your friends even if you are not using the official Facebook app! Detailed description and more information below.
+Releases | [pl] wydania: https://github.com/indywidualny/FaceSlim/releases
 
 [![Face Slim on fdroid.org](https://f-droid.org/wiki/images/0/06/F-Droid-button_get-it-on.png "Download from fdroid.org")](https://f-droid.org/app/org.indywidualni.fblite)
 
-Releases | [pl] wydania: https://github.com/indywidualny/FaceSlim/releases
+Face Slim is an unofficial Facebook application for Android devices that resembles the Facebook Mobile Web Application before Facebook started removing features. FaceSlim is free of spyware, unlike what is built into the official Facebook and Facebook Messenger applications.
 
 ## Changelog
 & what makes the application awesome:
+
+**2.9**
+* share image link [#16](../../issues/16)
+* new filenames for saved images [#196](../../issues/196)
+* some translations updated
+
+**2.8**
+* possibility to change text size (text scale)
+* start with the most recent posts
+* confirm exiting the app
+* better update checking (more info, clickable)
+
+Sometimes to fully activate most recent posts you need to choose recent posts from your Facebook menu either.
+
+**2.7**
+* Android N support (the app is targeting upcoming Android release)
+* new predefined User Agent which is awesome [#180](../../issues/180)
+* blank page after returning to app finally fixed (eg opening external browser)
+
+User Agent **is not** updated automatically. If you upgraded the app to 2.7, change it manually.
+
+If you changed custom User Agent and you want to revert it, the predefined value is  
+`Mozilla/5.0 (BB10; Kbd) AppleWebKit/537.10+ (KHTML, like Gecko) Version/10.1.0.4633 Mobile Safari/537.10+`
+
+**2.6**
+* notifications reimplemented and fully functional again
+* custom User Agent String (to reenable "old" messages tab)
+* touch.facebook.com is supported
+* app checks for its updates
+
+If you changed custom User Agent and you want to revert it, the predefined value is  
+`Mozilla/5.0 (FuckMessenger 1.0; Mobile; rv:41.0) Gecko/41.0 Firefox/41.0`
+
+**2.5**
+* mobile Messenger integration. Drawer shortcut to messages opens mobile Messenger now (as well as a launcher shortcut and a message notification) - Facebook decided to disable messages tab soon [#155](../../issues/155)
+* geolocation access for checking-in automatically (optional) 
+* fix for not blinking LED on some devices 
+* minor fixes (thanks to your bug reports) 
 
 **2.4**
 * offline mode - When there is no network load pages from a database. It's not perfect and doesn't work for a dynamically loaded content automatically... but it may be useful! [#89](../../issues/89)
@@ -184,7 +222,7 @@ https://play.google.com/store/apps/details?id=org.indywidualni.faceslim_donation
 ___
 Copyright notice: Facebook is a trademark of Facebook Inc. This app is NOT connected to Facebook Inc. whatsoever. This app only helps using the official Facebook Mobile website.
 
-Important: The app has some limitations (eg. no access to your location so you cannot check-in automatically).<br />
+Important: The app has some limitations (just like the official Facebook mobile website).<br />
 Install using F-Droid client to get automatic updates.
 
 App suspended by Google Play.

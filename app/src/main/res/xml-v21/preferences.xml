@@ -10,6 +10,11 @@
             android:defaultValue="true"/>
 
         <SwitchPreference
+            android:key="confirm_exit"
+            android:title="@string/confirm_exit"
+            android:defaultValue="false"/>
+
+        <SwitchPreference
             android:key="long_clicks"
             android:title="@string/long_clicks"
             android:summary="@string/long_clicks_description"
@@ -26,6 +31,15 @@
             android:title="@string/transparent_nav"
             android:summary="@string/transparent_nav_description"
             android:defaultValue="false"/>
+
+        <EditTextPreference
+            android:title="@string/font_size"
+            android:summary="@string/font_size_description"
+            android:key="font_size"
+            android:defaultValue="100"
+            android:hint="@string/font_size_hint"
+            android:maxLength="3"
+            android:inputType="number"/>
 
         <ListPreference
             android:title="@string/drawer_pos"
@@ -69,6 +83,13 @@
             android:defaultValue="false"/>
 
         <SwitchPreference
+            android:key="touch_mode"
+            android:title="@string/touch_mode"
+            android:summary="@string/touch_mode_description"
+            android:enabled="false"
+            android:defaultValue="false"/>
+
+        <SwitchPreference
             android:key="basic_mode"
             android:title="@string/basic_mode"
             android:summary="@string/basic_mode_description"
@@ -83,17 +104,39 @@
             android:defaultValue="false"/>
 
         <SwitchPreference
+            android:key="location"
+            android:title="@string/location_access"
+            android:defaultValue="false"/>
+
+        <SwitchPreference
             android:key="load_extra"
             android:title="@string/load_extra"
             android:summary="@string/load_extra_description"
             android:defaultValue="false"/>
+
+        <SwitchPreference
+            android:key="use_tor"
+            android:title="@string/use_tor_title"
+            android:summary="@string/use_tor_summary"
+            android:defaultValue="false"/>
+
+        <SwitchPreference
+            android:key="app_updates"
+            android:title="@string/check_for_updates"
+            android:defaultValue="true"/>
 
     </PreferenceCategory>
 
 
     <PreferenceCategory
         android:title="@string/preference_category6">
-        
+
+        <SwitchPreference
+            android:key="most_recent"
+            android:title="@string/most_recent"
+            android:summary="@string/most_recent_description"
+            android:defaultValue="false"/>
+
         <SwitchPreference
             android:key="hide_sponsored"
             android:title="@string/hide_sponsored"
@@ -140,6 +183,7 @@
             android:inputType="number"
             android:title="@string/offline_keep_max"
             android:summary="@string/offline_keep_max_description"
+            android:maxLength="5"
             android:defaultValue="10"/>
 
         <Preference
@@ -168,6 +212,14 @@
             android:key="keyboard_fix"
             android:title="@string/keyboard_fix"
             android:defaultValue="false"/>
+
+        <EditTextPreference
+            android:key="custom_user_agent"
+            android:inputType="text"
+            android:title="@string/custom_user_agent"
+            android:summary="@string/custom_user_agent_description"
+            android:hint="@string/custom_user_agent_hint"
+            android:defaultValue="@string/predefined_user_agent"/>
 
         <Preference
             android:key="clear_cache"

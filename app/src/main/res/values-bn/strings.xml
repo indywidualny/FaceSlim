@@ -10,7 +10,7 @@
 
     <string-array name="item_array">
         <item>নিউজ ফিড</item>
-        <item>মেসেজেস </item>
+        <item>Messenger.com</item>
         <item>চ্যাট (ফ্রেন্ডস অনলাইন )</item>
         <item> গ্রুপ্স </item>
         <item>ইভেন্টস </item>
@@ -112,7 +112,7 @@
 
     <string name="message_notifications"> মেসেজ  নটিফিকেসন্স  </string>
     <string name="you_have_one_message"> আপনার একটি মেসেজ আছে .</string>
-    <string name="you_have_n_messages"> আপনার মেসেজ আছে .</string>
+    <string name="you_have_n_messages"> আপনার মেসেজ আছে (%d).</string>
     <string name="special_thanks_notifications"> নটিফিকেসন্স দিয়ে হেল্প করার জন্যে ধন্যবাদ </string>
     <string name="sync_problem"> কুকিস সিঙ্ক হয়না . প্রথম রান হাঁ? দয়া করে অ্যাপ্লিকেশন পুনরায় আরম্ভ করুন  </string>
     <string name="interval_pref_description_new"> নটিফিকেসন্স চেক হবে  </string>

@@ -19,7 +19,7 @@ public class OfflineDataSource {
     private SQLiteDatabase database;
     private MySQLiteHelper dbHelper;
 
-    private SharedPreferences preferences = PreferenceManager
+    private final SharedPreferences preferences = PreferenceManager
             .getDefaultSharedPreferences(MyApplication.getContextOfApplication());
 
     private OfflineDataSource() {}

@@ -23,7 +23,7 @@ public class FloatingActionButton extends View {
     final static OvershootInterpolator overshootInterpolator = new OvershootInterpolator();
     final static AccelerateInterpolator accelerateInterpolator = new AccelerateInterpolator();
 
-    Context context;
+    final Context context;
     Paint mButtonPaint;
     Paint mDrawablePaint;
     Bitmap mBitmap;
@@ -108,7 +108,7 @@ public class FloatingActionButton extends View {
     static public class Builder {
         private FrameLayout.LayoutParams params;
         private final Activity activity;
-        int gravity = Gravity.BOTTOM | Gravity.RIGHT; // default bottom right
+        int gravity = Gravity.BOTTOM | Gravity.END; // default bottom right
         Drawable drawable;
         int color = Color.WHITE;
         int size = 0;

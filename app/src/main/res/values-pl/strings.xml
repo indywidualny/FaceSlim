@@ -8,7 +8,7 @@
 
     <string-array name="item_array">
         <item>Aktualności</item>
-        <item>Wiadomości</item>
+        <item>Messenger.com</item>
         <item>Czat (osoby on-line)</item>
         <item>Grupy</item>
         <item>Wydarzenia</item>
@@ -98,13 +98,12 @@
     <string name="basic_mode">Tryb podstawowy</string>
     <string name="basic_mode_description">Używaj okrojonej strony zamiast zwykłej. Ciemny motyw musi być wyłączony. Może nie działać przy szybkim połączeniu.</string>
     <string name="preference_category6">Aktualności</string>
-    <string name="hide_sponsored">Ukryj posty sponsorowane</string>
+    <string name="hide_sponsored">Ukryj część postów sponsorowanych</string>
     <string name="hide_sponsored_description">Nie lubimy sponsorowanych postów i reklam.</string>
     <string name="hide_people">Ukryj osoby, które możesz znać</string>
     <string name="hide_people_description">Przejrzysty stumień, więcej miejsca.</string>
     <string name="hide_news_feed">Ukryj aktualności</string>
     <string name="hide_news_feed_description">[…] by uniknąć ślęczenia / prokrastynacji.</string>
-
     <string name="message_notifications">Powiadamiaj o wiadomościach</string>
     <string name="you_have_one_message">Masz nową wiadomość.</string>
     <string name="you_have_n_messages">Masz %d nowych wiadomości.</string>
@@ -128,7 +127,6 @@
     <string name="camera_exception">Nie mogę użyć aparatu</string>
     <string name="load_extra">Ładuj zewnętrzne obrazy</string>
     <string name="load_extra_description">Otwieraj zdjęcia z zewnętrznych serwisów. Obecnie niewiele stron jest wspieranych.</string>
-
     <string name="offline_mode">Tryb offline</string>
     <string name="offline_mode_enable">Aktywuj tryb offline</string>
     <string name="offline_mode_description">Gdy nie ma połączenia z Internetem spróbuj załadować stronę z cache i bazy danych.</string>
@@ -139,5 +137,23 @@
     <string name="offline_dummy_description">Kod źródłowy bieżącej strony jest asynchronicznie zapisywany w bazie danych. W przypadku duplikatu zachowam najnowszą wersję. Odśwież by wymusić aktualizację. Nie działa dla dynamicznych treści.</string>
     <string name="keyboard_fix">Napraw zasłonięte formularze &#8635;</string>
     <string name="offline_database_empty">Baza danych jest pusta</string>
+    <string name="no_location_permission">Zezwól na dostęp do lokalizacji, by użyć tej funkcji</string>
+    <string name="location_access">Dostęp do lokalizacji</string>
+    <string name="custom_user_agent">Własny User Agent &#8635;</string>
+    <string name="custom_user_agent_description">Podaj własny User Agent String.</string>
+    <string name="custom_user_agent_hint">Domyślny, gdy puste</string>
+    <string name="touch_mode">Tryb dotykowy</string>
+    <string name="touch_mode_description">Użyj strony touch.facebook.com.</string>
+    <string name="new_version_detected">Nowa wersja apki dostępna</string>
+    <string name="check_for_updates">Powiadamiaj o nowej wersji apki</string>
+    <string name="font_size">Skaluj tekst</string>
+    <string name="font_size_description">Zmień rozmiar czcionki (procentowo).</string>
+    <string name="font_size_hint">100 to 100%</string>
+    <string name="most_recent">Startuj z najświeższymi postami</string>
+    <string name="most_recent_description">Czasem by w pełni wymusić to zachowanie, musisz wybrać najnowsze posty również w menu Facebooka.</string>
+    <string name="really_quit_question">Czy na pewno chcesz wyjść z aplikacji?</string>
+    <string name="confirm_exit">Potwierdź wyjście z aplikacji</string>
+    <string name="yes">Tak</string>
+    <string name="no">Nie</string>
 
 </resources>

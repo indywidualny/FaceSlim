@@ -10,9 +10,8 @@ import android.util.Log;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
 
-import net.grandcentrix.tray.TrayAppPreferences;
-
 import org.indywidualni.fblite.MyApplication;
+import org.indywidualni.fblite.R;
 import org.indywidualni.fblite.util.database.OfflineDataSource;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -23,15 +22,17 @@ public class Offline {
 
     private static String userAgent;
     private static Context context;
-    private OfflineDataSource dataSource;
+    private final OfflineDataSource dataSource;
 
-    private SharedPreferences preferences = PreferenceManager
+    private final SharedPreferences preferences = PreferenceManager
             .getDefaultSharedPreferences(MyApplication.getContextOfApplication());
 
     public Offline() {
         context = MyApplication.getContextOfApplication();
-        TrayAppPreferences trayPreferences = new TrayAppPreferences(context);
-        userAgent = trayPreferences.getString("webview_user_agent", System.getProperty("http.agent"));
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        userAgent = preferences.getString("webview_user_agent", System.getProperty("http.agent"));
+        if (!preferences.getString("custom_user_agent", context.getString(R.string.predefined_user_agent)).isEmpty())
+            userAgent = preferences.getString("custom_user_agent", context.getString(R.string.predefined_user_agent));
         dataSource = OfflineDataSource.getInstance();
         syncCookies();
     }
@@ -57,12 +58,18 @@ public class Offline {
         @Override
         protected Void doInBackground(String... args) throws SQLException {
             try {
-                final Document response = Jsoup.connect(args[0]).userAgent(userAgent)
-                        .header("Accept-Encoding", "gzip, deflate").timeout(5000)
-                        .cookie("https://m.facebook.com", CookieManager.getInstance().getCookie("https://m.facebook.com")).get();
+                final Document response = Jsoup.connect(args[0])
+                        .userAgent(userAgent)
+                        .proxy(Miscellany.getProxy(preferences))
+                        .header("Accept-Encoding", "gzip, deflate")
+                        .timeout(5000)
+                        .cookie("https://m.facebook.com", CookieManager.getInstance().getCookie("https://m.facebook.com"))
+                        .get();
 
                 String base = "https://m.facebook.com";
-                if (preferences.getBoolean("basic_mode", false))
+                if (preferences.getBoolean("touch_mode", false))
+                    base = "https://touch.facebook.com";
+                else if (preferences.getBoolean("basic_mode", false))
                     base = "https://mbasic.facebook.com";
                 if (Connectivity.isConnectedMobile(context) && preferences.getBoolean("facebook_zero", false))
                     base = "https://0.facebook.com";

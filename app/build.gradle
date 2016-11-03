@@ -1,21 +1,20 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    compileSdkVersion 24
+    buildToolsVersion "24.0.2"
 
     defaultConfig {
-        applicationId "org.indywidualni.fblite"
-        resValue "string", "tray__authority", "${applicationId}.tray"
+        applicationId "org.indywidualni.fblite.debug"
         minSdkVersion 15
-        targetSdkVersion 23
-        versionCode 32
-        versionName "2.4.2"
+        targetSdkVersion 24
+        versionCode 43
+        versionName "2.9.0"
     }
     buildTypes {
         release {
             minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
             minifyEnabled true
@@ -26,11 +25,10 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:support-v4:23.2.1'
-    compile 'com.android.support:appcompat-v7:23.2.1'
-    compile 'net.grandcentrix.tray:tray:0.9.2'
-    compile 'org.jsoup:jsoup:1.8.3'
-    compile 'ch.acra:acra:4.7.0'
+    compile 'com.android.support:support-v4:24.2.1'
+    compile 'com.android.support:appcompat-v7:24.2.1'
+    compile 'org.jsoup:jsoup:1.9.2'
+    compile 'ch.acra:acra:4.9.0'
     compile 'com.github.johnkil.android-appmsg:appmsg:1.2.0'
-    compile project(':saxrssreader')
+    compile 'info.guardianproject.netcipher:netcipher:1.2.1'
 }

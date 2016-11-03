@@ -10,6 +10,7 @@
     <string name="get_feed_link" translatable="false">https://goo.gl/t3vJ33</string>
     <string name="facebook" translatable="false">Facebook</string>
     <string name="special_thanks_notifications_link" translatable="false"><a href="https://github.com/creativetrendsapps">Creative Trends</a></string>
+    <string name="predefined_user_agent" translatable="false">Mozilla/5.0 (BB10; Kbd) AppleWebKit/537.10+ (KHTML, like Gecko) Version/10.1.0.4633 Mobile Safari/537.10+</string>
 
     <!-- Strings to translate during creation of a new translation -->
     <string name="app_name">Face Slim</string>
@@ -19,7 +20,7 @@
 
     <string-array name="item_array">
         <item>News Feed</item>
-        <item>Messages</item>
+        <item>Messenger.com</item>
         <item>Chat (Friends Online)</item>
         <item>Groups</item>
         <item>Events</item>
@@ -110,13 +111,12 @@
     <string name="basic_mode">Basic mode</string>
     <string name="basic_mode_description">Use a basic website instead of a standard one. Dark theme has to be disabled. May not work during a fast connection.</string>
     <string name="preference_category6">News Feed</string>
-    <string name="hide_sponsored">Hide sponsored posts</string>
+    <string name="hide_sponsored">Hide some sponsored posts</string>
     <string name="hide_sponsored_description">We don\'t like sponsored posts and ads.</string>
     <string name="hide_people">Hide people you may know</string>
     <string name="hide_people_description">Cleaner feed, more room.</string>
     <string name="hide_news_feed">Hide News Feed</string>
     <string name="hide_news_feed_description">[…] to avoid sidetracking / procrastination.</string>
-
     <string name="message_notifications">Message notifications</string>
     <string name="you_have_one_message">You have one message.</string>
     <string name="you_have_n_messages">You have %d messages.</string>
@@ -138,7 +138,6 @@
     <string name="cannot_access_storage">No access to external storage</string>
     <string name="file_cannot_be_saved">A file cannot be saved</string>
     <string name="camera_exception">Problems with a camera</string>
-
     <string name="offline_mode">Offline mode</string>
     <string name="offline_mode_enable">Enable offline mode</string>
     <string name="offline_mode_description">When there is no Internet connection try to load a page from cache and the database.</string>
@@ -149,5 +148,25 @@
     <string name="offline_dummy_description">The source code of the current page is asynchronously saved in the database. If a duplicate is found it will be replaced. Refresh a page to force update it. It doesn\'t work for a dynamically loaded content.</string>
     <string name="keyboard_fix">Overlaying keyboard fix &#8635;</string>
     <string name="offline_database_empty">Offline database is empty</string>
+    <string name="no_location_permission">Grant location permission to use this feature</string>
+    <string name="location_access">Enable geolocation</string>
+    <string name="custom_user_agent">Custom User Agent &#8635;</string>
+    <string name="custom_user_agent_description">Use your own User Agent String.</string>
+    <string name="custom_user_agent_hint">Blank for default</string>
+    <string name="touch_mode">Touch mode</string>
+    <string name="touch_mode_description">Use touch.facebook.com website.</string>
+    <string name="new_version_detected">New app version is available</string>
+    <string name="check_for_updates">Check for app updates</string>
+    <string name="font_size">Text scale</string>
+    <string name="font_size_description">Change text size (percent).</string>
+    <string name="font_size_hint">100 is 100%</string>
+    <string name="most_recent">Start with most recent posts</string>
+    <string name="most_recent_description">Sometimes to fully activate this behaviour you need to choose recent posts from your Facebook menu either.</string>
+    <string name="really_quit_question">Do you really want to quit?</string>
+    <string name="confirm_exit">Confirm exiting the app</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="use_tor_title">Use Tor &#8635;</string>
+    <string name="use_tor_summary">Force all traffic through Tor for increased privacy. Requires Orbot.</string>
 
 </resources>
