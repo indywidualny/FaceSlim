@@ -101,7 +101,9 @@ public class CheckUpdatesTask extends AsyncTask<Void, Void, String> {
             return readIt(is, len);
         } finally {
             if (is != null) {
-                is.close();
+                try {
+                    is.close();
+                } catch (IOException ignore) {}
             }
         }
     }

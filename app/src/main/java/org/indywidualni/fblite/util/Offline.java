@@ -1,5 +1,6 @@
 package org.indywidualni.fblite.util;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.SQLException;
@@ -20,10 +21,11 @@ import org.jsoup.select.Elements;
 
 public class Offline {
 
-    private static String userAgent;
+    @SuppressLint("StaticFieldLeak")
     private static Context context;
-    private final OfflineDataSource dataSource;
 
+    private static String userAgent;
+    private final OfflineDataSource dataSource;
     private final SharedPreferences preferences = PreferenceManager
             .getDefaultSharedPreferences(MyApplication.getContextOfApplication());
 

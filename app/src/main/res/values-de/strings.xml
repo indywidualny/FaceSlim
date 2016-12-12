@@ -13,6 +13,7 @@
         <item>Veranstaltungen</item>
         <item>App Einstellungen</item>
         <item>@string/title_activity_about</item>
+        <item>Copy current URL</item>
         <item>Beenden</item>
         <item>Nach oben\u0020 &#8593;</item>
     </string-array>

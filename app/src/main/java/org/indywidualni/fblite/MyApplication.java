@@ -1,5 +1,6 @@
 package org.indywidualni.fblite;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 import android.provider.Settings;
@@ -27,7 +28,9 @@ import java.net.MalformedURLException;
 
 public class MyApplication extends Application {
 
+    @SuppressLint("StaticFieldLeak")
     private static Context mContext;
+
     private Tracker mPiwikTracker;
 
     @Override

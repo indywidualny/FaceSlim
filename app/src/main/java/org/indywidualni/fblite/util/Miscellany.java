@@ -1,15 +1,19 @@
 package org.indywidualni.fblite.util;
 
 import android.app.Activity;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import info.guardianproject.netcipher.NetCipher;
 
 import java.net.Proxy;
 import java.util.Locale;
+
+import info.guardianproject.netcipher.NetCipher;
 
 public class Miscellany {
 
@@ -75,6 +79,12 @@ public class Miscellany {
         return (useTor)
                 ? NetCipher.getProxy()
                 : Proxy.NO_PROXY;
+    }
+
+    public static void copyTextToClipboard(Context context, String label, String text) {
+        ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText(label, text);
+        clipboard.setPrimaryClip(clip);
     }
 
 }

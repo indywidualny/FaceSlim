@@ -1,7 +1,6 @@
 package org.indywidualni.fblite.util.logger;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Environment;
@@ -23,16 +22,16 @@ public final class Logger {
 
     private static volatile Logger instance;
     private static final int MSG_SHOW_TOAST = 1;
-    private static final Context context = MyApplication.getContextOfApplication();
     private final SharedPreferences preferences;
     private final String logFilePath;
     private final MyHandler messageHandler;
 
     private Logger() {
         messageHandler = new MyHandler(this);
-        preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        preferences = PreferenceManager.getDefaultSharedPreferences(MyApplication.getContextOfApplication());
         logFilePath = Environment.getExternalStorageDirectory().getAbsolutePath()
-                + File.separator + context.getString(R.string.app_name).replace(" ", "") + ".log";
+                + File.separator + MyApplication.getContextOfApplication().getString(R.string.app_name)
+                .replace(" ", "") + ".log";
     }
 
     public static Logger getInstance() {
@@ -47,7 +46,8 @@ public final class Logger {
 
     private boolean checkStoragePermission() {
         String storagePermission = Manifest.permission.WRITE_EXTERNAL_STORAGE;
-        int hasPermission = ContextCompat.checkSelfPermission(context, storagePermission);
+        int hasPermission = ContextCompat.checkSelfPermission(MyApplication.getContextOfApplication(),
+                storagePermission);
         return hasPermission == PackageManager.PERMISSION_GRANTED;
     }
 
@@ -64,7 +64,8 @@ public final class Logger {
             if (logger != null) {
                 if (msg.what == MSG_SHOW_TOAST) {
                     String message = (String) msg.obj;
-                    Toast.makeText(context, message , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MyApplication.getContextOfApplication(), message , Toast.LENGTH_SHORT)
+                            .show();
                 }
             }
         }
@@ -73,7 +74,7 @@ public final class Logger {
     private void displayStoragePermissionRefused() {
         Message msg = new Message();
         msg.what = MSG_SHOW_TOAST;
-        msg.obj = context.getString(R.string.file_logger_needs_permission);
+        msg.obj = MyApplication.getContextOfApplication().getString(R.string.file_logger_needs_permission);
         messageHandler.sendMessage(msg);
     }
 

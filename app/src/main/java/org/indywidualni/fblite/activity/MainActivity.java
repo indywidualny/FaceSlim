@@ -64,6 +64,7 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.text.DateFormat;
 import java.util.Date;
 
@@ -73,6 +74,7 @@ import info.guardianproject.netcipher.web.WebkitProxy;
 public class MainActivity extends Activity {
 
     // reference to this object
+    @SuppressLint("StaticFieldLeak")
     private static Activity mainActivity;
 
     // variables for drawer layout
@@ -257,9 +259,12 @@ public class MainActivity extends Activity {
 
         // Tor proxy
         try {
-            InetSocketAddress isa = (InetSocketAddress) Miscellany.getProxy(preferences).address();
-            WebkitProxy.setProxy("org.indywidualni.fblite.MyApplication", getApplicationContext(), webView,
-                                 isa.getHostName(), isa.getPort());
+            Proxy proxy = Miscellany.getProxy(preferences);
+            if (proxy != null) {
+                InetSocketAddress isa = (InetSocketAddress) proxy.address();
+                WebkitProxy.setProxy("org.indywidualni.fblite.MyApplication", getApplicationContext(), webView,
+                        isa.getHostName(), isa.getPort());
+            }
         } catch (Exception e) {
             Log.w(TAG, "Failed to set webview proxy", e);
             //Toast.makeText(this, "" + e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
@@ -877,11 +882,14 @@ public class MainActivity extends Activity {
                 startActivity(about);
                 break;
             case 7:
+                Miscellany.copyTextToClipboard(getApplicationContext(), "URL", webView.getUrl());
+                break;
+            case 8:
                 preferences.edit().putBoolean("activity_visible", false).apply();
                 //finish();
                 System.exit(0); // ugly, ugly, ugly! They wanted it :(
                 break;
-            case 8:
+            case 9:
                 webView.loadUrl("javascript:scroll(0,0)");
                 break;
             default:
@@ -1135,6 +1143,8 @@ public class MainActivity extends Activity {
                 imgExtension = ".gif";
             else if (imageUrl.contains(".png"))
                 imgExtension = ".png";
+            else if (imageUrl.contains(".3gp"))
+                imgExtension = ".3gp";
 
             String date = DateFormat.getDateTimeInstance().format(new Date());
             String file = "faceslim-saved-image-" + date.replace(" ", "").replace(":", "").replace(".", "") + imgExtension;

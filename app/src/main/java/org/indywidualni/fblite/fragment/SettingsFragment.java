@@ -1,6 +1,7 @@
 package org.indywidualni.fblite.fragment;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -25,7 +26,10 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
     private static final String TAG = SettingsFragment.class.getSimpleName();
     private static final int REQUEST_STORAGE = 1;
+
+    @SuppressLint("StaticFieldLeak")
     private static Context context;
+
     private SharedPreferences.OnSharedPreferenceChangeListener prefChangeListener;
     private SharedPreferences preferences;
 

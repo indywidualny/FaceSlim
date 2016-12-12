@@ -50,10 +50,11 @@ public class MyWebViewClient extends WebViewClient {
     private boolean refreshed;
 
     // get application context
+    @SuppressLint("StaticFieldLeak")
     private static final Context context = MyApplication.getContextOfApplication();
 
     // get shared preferences
-    final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+    private final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
 
     // convert css file to string only one time
     private static String cssFile;
@@ -61,6 +62,8 @@ public class MyWebViewClient extends WebViewClient {
     // object for offline mode management
     private Offline offline;
     private FloatingActionButton fab;
+
+    @SuppressLint("StaticFieldLeak")
     private static WebView webView;
 
     // in order to load pages we need a reference to a WebView object from MainActivity

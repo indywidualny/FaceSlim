@@ -1,5 +1,6 @@
 package org.indywidualni.fblite.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,7 +19,9 @@ import org.indywidualni.fblite.service.NotificationsService;
 
 public class NotificationsSettingsFragment extends PreferenceFragment {
 
+    @SuppressLint("StaticFieldLeak")
     private static Context context;
+
     private SharedPreferences preferences;
     private SharedPreferences.OnSharedPreferenceChangeListener prefChangeListener;
 
