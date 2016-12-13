@@ -883,6 +883,7 @@ public class MainActivity extends Activity {
                 break;
             case 7:
                 Miscellany.copyTextToClipboard(getApplicationContext(), "URL", webView.getUrl());
+                Toast.makeText(this, webView.getUrl(), Toast.LENGTH_SHORT).show();
                 break;
             case 8:
                 preferences.edit().putBoolean("activity_visible", false).apply();
