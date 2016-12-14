@@ -101,6 +101,7 @@ public class MyWebViewClient extends WebViewClient {
                     || Uri.parse(url).getHost().endsWith("zero.facebook.com")
                     || Uri.parse(url).getHost().endsWith("fbcdn.net")
                     || Uri.parse(url).getHost().endsWith("akamaihd.net")
+                    || Uri.parse(url).getHost().endsWith("ad.doubleclick.net")
                     || Uri.parse(url).getHost().endsWith("fb.me")) {
                 return false;
             } else if (preferences.getBoolean("load_extra", false)
