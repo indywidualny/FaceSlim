@@ -20,7 +20,6 @@ import org.indywidualni.fblite.R;
 import org.indywidualni.fblite.activity.MainActivity;
 import org.indywidualni.fblite.service.NotificationsService;
 import org.indywidualni.fblite.util.FileOperation;
-import org.indywidualni.fblite.util.Miscellany;
 
 public class SettingsFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener {
 
@@ -115,7 +114,6 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
                     case "keyboard_fix":
                     case "hardware_acceleration":
                     case "custom_user_agent":
-                    case "use_tor":
                         relaunch();
                         break;
                 }
@@ -156,13 +154,6 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         super.onResume();
         // register the listener
         preferences.registerOnSharedPreferenceChangeListener(prefChangeListener);
-        // update tor (proxy) info
-        try {
-            findPreference("use_tor").setSummary(getString(R.string.use_tor_summary) + " ― Proxy: " +
-                    Miscellany.getProxy(preferences).toString());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     @Override

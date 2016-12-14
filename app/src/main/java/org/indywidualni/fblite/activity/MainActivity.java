@@ -63,12 +63,8 @@ import org.indywidualni.fblite.webview.MyWebViewClient;
 import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
-import java.net.InetSocketAddress;
-import java.net.Proxy;
 import java.text.DateFormat;
 import java.util.Date;
-
-import info.guardianproject.netcipher.web.WebkitProxy;
 
 @SuppressWarnings("UnusedDeclaration")
 public class MainActivity extends Activity {
@@ -255,19 +251,6 @@ public class MainActivity extends Activity {
                 //noinspection deprecation
                 webView.getSettings().setGeolocationDatabasePath(getFilesDir().getPath());
             }
-        }
-
-        // Tor proxy
-        try {
-            Proxy proxy = Miscellany.getProxy(preferences);
-            if (proxy != null) {
-                InetSocketAddress isa = (InetSocketAddress) proxy.address();
-                WebkitProxy.setProxy("org.indywidualni.fblite.MyApplication", getApplicationContext(), webView,
-                        isa.getHostName(), isa.getPort());
-            }
-        } catch (Exception e) {
-            Log.w(TAG, "Failed to set webview proxy", e);
-            //Toast.makeText(this, "" + e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
         }
 
         // since API 18 cache quota is managed automatically

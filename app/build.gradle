@@ -25,10 +25,9 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:support-v4:25.0.1'
-    compile 'com.android.support:appcompat-v7:25.0.1'
+    compile 'com.android.support:support-v4:25.1.0'
+    compile 'com.android.support:appcompat-v7:25.1.0'
     compile 'org.jsoup:jsoup:1.9.2'
     compile 'ch.acra:acra:4.9.0'
     compile 'com.github.johnkil.android-appmsg:appmsg:1.2.0'
-    compile 'info.guardianproject.netcipher:netcipher:1.2.1'
 }
