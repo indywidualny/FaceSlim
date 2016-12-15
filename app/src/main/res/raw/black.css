@@ -140,3 +140,15 @@ article h3 {
     border: 1px dotted #e9eaed !important;
 }
 
+/* badges */
+
+._59tg {
+    background:#da2929 !important;
+    color:#ffffff !important;
+}
+
+/* new messages */
+
+.chatHighlight{
+    -webkit-animation-duration:0s;
+}
