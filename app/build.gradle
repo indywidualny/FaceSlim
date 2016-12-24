@@ -9,7 +9,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 25
         versionCode 44
-        versionName "2.9.1-debug"
+        versionName "3.0.0"
     }
     buildTypes {
         release {
