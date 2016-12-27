@@ -9,6 +9,12 @@ Face Slim is an unofficial Facebook application for Android devices that resembl
 ## Changelog
 & what makes the application awesome:
 
+**3.0**
+* fixed problem with white pages
+* new, polished dark look
+* copy currently viewed URL
+* Android 7.1.1 (API 25) support
+
 **2.9**
 * share image link [#16](../../issues/16)
 * new filenames for saved images [#196](../../issues/196)
