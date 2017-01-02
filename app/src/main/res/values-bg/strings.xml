@@ -43,7 +43,7 @@
     <string name="me_google_play">Google Play</string>
     <string name="preference_category3">Експериментални</string>
     <string name="dark_theme">Тъмна тема</string>
-    <string name="dark_theme_description">Превръща Facebook черен. Вашият AMOLED екран ще го оцени.</string>
+    <string name="dark_theme_description">Превръща Facebook черен.</string>
     <string name="fixed_nav">Фиксирана синя лента</string>
     <string name="fixed_nav_description">Facebook навигираща лента винаги отгоре.</string>
     <string name="facebook_zero">Facebook Zero</string>

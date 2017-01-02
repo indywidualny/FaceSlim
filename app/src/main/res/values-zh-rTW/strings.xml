@@ -44,7 +44,7 @@
     <string name="me_google_play">Google Play</string>
     <string name="preference_category3">實驗性功能</string>
     <string name="dark_theme">黑化主題</string>
-    <string name="dark_theme_description">把Facebook黑化. 您的AMOLED螢幕會感謝您.</string>
+    <string name="dark_theme_description">把Facebook黑化.</string>
     <string name="fixed_nav">導航選單置頂</string>
     <string name="fixed_nav_description">將Facebook的選單維持在螢幕上方.</string>
     <string name="facebook_zero">Facebook Zero</string>

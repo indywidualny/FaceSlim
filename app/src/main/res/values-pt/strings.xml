@@ -44,7 +44,7 @@
     <string name="me_google_play">Google Play</string>
     <string name="preference_category3">Experimental</string>
     <string name="dark_theme">Tema Escuro</string>
-    <string name="dark_theme_description">Torne o Facebook preto. Sua tela AMOLED irá gostar.</string>
+    <string name="dark_theme_description">Torne o Facebook preto.</string>
     <string name="fixed_nav">Fixar a barra azul</string>
     <string name="fixed_nav_description">A barra de navegação do Facebook ficará sempre no topo.</string>
     <string name="facebook_zero">Facebook Zero</string>

@@ -53,7 +53,7 @@
     <string name="me_google_play">Google Play</string>
     <string name="preference_category3">Experimental</string>
     <string name="dark_theme">Dark theme</string>
-    <string name="dark_theme_description">Turn Facebook black. Your AMOLED screen will appreciate it.</string>
+    <string name="dark_theme_description">Turn Facebook black.</string>
     <string name="fixed_nav">Fixed blue bar</string>
     <string name="fixed_nav_description">Facebook navigation bar always on top.</string>
     <string name="facebook_zero">Facebook Zero</string>

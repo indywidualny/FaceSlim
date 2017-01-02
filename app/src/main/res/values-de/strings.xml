@@ -40,7 +40,7 @@
     <string name="me_google_play">Google Play</string>
     <string name="preference_category3">Experimentell</string>
     <string name="dark_theme">Dunkle Ansicht</string>
-    <string name="dark_theme_description">Facebook schwärzen. Dein AMOLED Display wird es zu schätzen wissen.</string>
+    <string name="dark_theme_description">Facebook schwärzen.</string>
     <string name="fixed_nav">Fixierte blaue Leiste</string>
     <string name="fixed_nav_description">Facebook Navigationsleiste immer ganz oben.</string>
     <string name="facebook_zero">Facebook Zero</string>

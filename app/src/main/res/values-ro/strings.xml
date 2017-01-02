@@ -44,7 +44,7 @@
     <string name="me_google_play">Google Play</string>
     <string name="preference_category3">Experimente</string>
     <string name="dark_theme">tema inchisa la culoare</string>
-    <string name="dark_theme_description">Activeaza tema inchisa la culoare. Ecranul tau AMOLED va consuma mai putin.</string>
+    <string name="dark_theme_description">Activeaza tema inchisa la culoare.</string>
     <string name="fixed_nav">Bara de navigare</string>
     <string name="fixed_nav_description">Bara de navigare nativa Facebook intotdeauna vizibila.</string>
     <string name="facebook_zero">Facebook Zero</string>

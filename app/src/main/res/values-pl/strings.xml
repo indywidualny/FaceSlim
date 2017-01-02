@@ -42,7 +42,7 @@
     <string name="me_google_play">Google Play</string>
     <string name="preference_category3">Eksperymentalne</string>
     <string name="dark_theme">Ciemny motyw</string>
-    <string name="dark_theme_description">Dla fanów czerni. Twój ekran AMOLED będzie zachwycony.</string>
+    <string name="dark_theme_description">Dla fanów czerni.</string>
     <string name="fixed_nav">Przyklej niebieski pasek</string>
     <string name="fixed_nav_description">Przyciski nawigacyjne zawsze na górze.</string>
     <string name="facebook_zero">Facebook Zero</string>

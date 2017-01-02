@@ -44,7 +44,7 @@
     <string name="me_google_play">Google Play</string>
     <string name="preference_category3">Experimentální</string>
     <string name="dark_theme">Tmavé téma</string>
-    <string name="dark_theme_description">Přepněte Facebook do černé. Váš displej typu AMOLED to ocení.</string>
+    <string name="dark_theme_description">Přepněte Facebook do černé.</string>
     <string name="fixed_nav">Trvalá modrá lišta</string>
     <string name="fixed_nav_description">Navigační lišta Facebooku vždy nahoře.</string>
     <string name="facebook_zero">Facebook Zero</string>

@@ -44,7 +44,7 @@
     <string name="me_google_play">Гуглов Плеј</string>
     <string name="preference_category3">Експериментално</string>
     <string name="dark_theme">Тамна тема</string>
-    <string name="dark_theme_description">Тамна позадина Фејсбука. Вашем АМОЛЕД екрану ово ће да поштеди батерију.</string>
+    <string name="dark_theme_description">Тамна позадина Фејсбука.</string>
     <string name="fixed_nav">Фиксирана плава трака</string>
     <string name="fixed_nav_description">Фејсбук навигација увек на врху.</string>
     <string name="facebook_zero">Фејсбук Зиро</string>

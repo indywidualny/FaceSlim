@@ -22,7 +22,7 @@
     <string name="custom_user_agent_description">Saját User Agent String használata.</string>
     <string name="custom_user_agent_hint">Alapértelmezetten üres</string>
     <string name="dark_theme">Sötét téma</string>
-    <string name="dark_theme_description">Fekete háttér. AMOLED kijelzőkhöz különösen ajánlott.</string>
+    <string name="dark_theme_description">Fekete háttér.</string>
     <string name="download_manager_disabled">A DownloadManager le lett tiltva. Kérem, engedélyezze.</string>
     <string name="downloading_img">Kép letöltése…</string>
     <string name="drawer_pos">Becsúszó menü helyzete ↻</string>
