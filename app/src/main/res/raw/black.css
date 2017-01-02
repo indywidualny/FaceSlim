@@ -152,3 +152,9 @@ article h3 {
 .chatHighlight{
     -webkit-animation-duration:0s;
 }
+
+/* unread */
+
+.aclb {
+    background: #323232 !important;
+}
