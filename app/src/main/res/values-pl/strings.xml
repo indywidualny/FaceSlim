@@ -74,6 +74,7 @@
     <string name="notifications_settings_description">Kompleksowe ustawienia. Wybierz interwał czasu, ustaw dźwięk, diodę LED oraz wibracje.</string>
 
     <string-array name="intervalPrefTitles">
+        <item>1 minuta</item>
         <item>2 minuty</item>
         <item>5 minut</item>
         <item>15 minut</item>

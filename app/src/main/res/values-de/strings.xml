@@ -74,6 +74,7 @@
     <string name="notifications_settings_description">Zusätzliche Einstellungen. Einstellen von Überprüfungs-Interval, Tönen, LED Farben und Vibration.</string>
 
     <string-array name="intervalPrefTitles">
+        <item>1 Minuten</item>
         <item>2 Minuten</item>
         <item>5 Minuten</item>
         <item>15 Minuten</item>

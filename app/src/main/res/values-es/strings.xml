@@ -75,6 +75,7 @@
     <string name="notifications_settings_description">Preferencias adicionales. Configure el intervalo, tonos, LED y vibración.</string>
 
     <string-array name="intervalPrefTitles">
+        <item>1 minutos</item>
         <item>2 minutos</item>
         <item>5 minutos</item>
         <item>15 minutos</item>

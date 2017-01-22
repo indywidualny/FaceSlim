@@ -78,6 +78,7 @@
     <string name="notifications_settings_description">選擇檢查通知的時間間隔, 設定通知鈴聲, LED和震動.</string>
 
     <string-array name="intervalPrefTitles">
+        <item>1分鐘</item>
         <item>2分鐘</item>
         <item>5分鐘</item>
         <item>15分鐘</item>

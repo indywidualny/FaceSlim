@@ -77,6 +77,7 @@
 	<string name="notifications_settings_description">Options avancées : intervalles, sons, LED et vibrations.</string>
 
 	<string-array name="intervalPrefTitles">
+		<item>1 minutes</item>
 		<item>2 minutes</item>
 		<item>5 minutes</item>
 		<item>15 minutes</item>

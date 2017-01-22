@@ -78,6 +78,7 @@
     <string name="notifications_settings_description">Setari aditionale. Alege intervalul de timp, sunetele emise, vibratiile si LED-ul.</string>
 
     <string-array name="intervalPrefTitles">
+        <item>1 minute</item>
         <item>2 minute</item>
         <item>5 minute</item>
         <item>15 minute</item>

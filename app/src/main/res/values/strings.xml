@@ -87,6 +87,7 @@
     <string name="notifications_settings_description">Additional settings. Choose time interval, set up sounds, LED and vibration.</string>
 
     <string-array name="intervalPrefTitles">
+        <item>1 minute</item>
         <item>2 minutes</item>
         <item>5 minutes</item>
         <item>15 minutes</item>

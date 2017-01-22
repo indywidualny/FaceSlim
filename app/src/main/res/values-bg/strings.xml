@@ -76,6 +76,7 @@
     <string name="notifications_settings_description">Допълнителни настройки. Изберете времеви интервал, задайте звуци. LED и вибрация.</string>
 
     <string-array name="intervalPrefTitles">
+        <item>1 минути</item>
 		<item>2 минути</item>
         <item>5 минути</item>
         <item>15 минути</item>

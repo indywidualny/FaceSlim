@@ -40,7 +40,7 @@ public class NotificationsSettingsFragment extends PreferenceFragment {
         String temp1 = getString(R.string.interval_pref_description_new).replace("%s", "");
         String temp2 = lp.getSummary().toString();
         if (temp1.equals(temp2))
-            lp.setValueIndex(2);
+            lp.setValueIndex(4);
 
         // listener for changing preferences (works after the value change)
         prefChangeListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
