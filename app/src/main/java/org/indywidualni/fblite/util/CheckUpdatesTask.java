@@ -57,6 +57,7 @@ public class CheckUpdatesTask extends AsyncTask<Void, Void, String> {
                 AppMsg appMsg = AppMsg.makeText(activity, activity.getString(R.string.new_version_detected)
                         + " (" + parts[1] + ")", new AppMsg.Style(AppMsg.LENGTH_LONG, R.color.colorAccent));
                 appMsg.setLayoutGravity(Gravity.TOP);
+                appMsg.setDuration(10000);  // 10 seconds
                 appMsg.getView().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
