@@ -170,5 +170,6 @@
     <string name="no">No</string>
     <string name="use_tor_title">Use Tor &#8635;</string>
     <string name="use_tor_summary">Force all traffic through Tor for increased privacy. Requires Orbot.</string>
+    <string name="version">Version %s</string>
 
 </resources>

@@ -21,7 +21,7 @@ public class AboutFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         // fill several TextView elements with strings
-        String versionName = BuildConfig.VERSION_NAME;
+        String versionName = getString(R.string.version, BuildConfig.VERSION_NAME);
         String authorInfo = getString(R.string.app_name) + " " + getString(R.string.author);
 
         //noinspection ConstantConditions

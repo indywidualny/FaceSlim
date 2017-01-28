@@ -157,5 +157,6 @@
     <string name="confirm_exit">Potwierdź wyjście z aplikacji</string>
     <string name="yes">Tak</string>
     <string name="no">Nie</string>
+    <string name="version">Wersja %s</string>
 
 </resources>
