@@ -9,7 +9,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 25
         versionCode 47
-        versionName "3.0.3"
+        versionName "3.0.3 Beta"
     }
     buildTypes {
         release {
