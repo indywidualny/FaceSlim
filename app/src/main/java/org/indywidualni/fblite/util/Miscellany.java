@@ -21,8 +21,11 @@ public class Miscellany {
     // "clean" an url and remove Facebook tracking redirection
     private static String cleanUrl(String url) {
         return url.replace("http://lm.facebook.com/l.php?u=", "")
+                .replace("https://lm.facebook.com/l.php?u=", "")
+                .replace("http://m.facebook.com/l.php?u=", "")
                 .replace("https://m.facebook.com/l.php?u=", "")
                 .replace("http://0.facebook.com/l.php?u=", "")
+                .replace("https://0.facebook.com/l.php?u=", "")
                 .replaceAll("&h=.*", "").replaceAll("\\?acontext=.*", "");
     }
 
