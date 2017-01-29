@@ -97,7 +97,6 @@ public class MyWebViewClient extends WebViewClient {
                     || Uri.parse(url).getHost().endsWith("m.facebook.com")
                     || Uri.parse(url).getHost().endsWith("h.facebook.com")
                     || Uri.parse(url).getHost().endsWith("l.facebook.com")
-                    || Uri.parse(url).getHost().endsWith("lm.facebook.com")
                     || Uri.parse(url).getHost().endsWith("0.facebook.com")
                     || Uri.parse(url).getHost().endsWith("zero.facebook.com")
                     || Uri.parse(url).getHost().endsWith("fbcdn.net")
