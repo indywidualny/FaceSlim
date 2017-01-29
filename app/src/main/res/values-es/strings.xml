@@ -16,7 +16,7 @@
         <item>Eventos</item>
         <item>Preferencias (App)</item>
         <item>Acerca de</item>
-        <item>Copy current URL</item>
+        <item>Copiar la URL</item>
         <item>Salir</item>
         <item>Ir al inicio\u0020 &#8593;</item>
     </string-array>
@@ -37,6 +37,13 @@
     <string name="no_network">Estás desconectado ;)</string>
     <string name="hardware_acceleration">Aceleración por hardware &#8635;</string>
     <string name="hardware_acceleration_description">Deshabilitar solo en dispositivos con poca memoria (en caso de problemas).</string>
+    <string name="file_logger">Guardar los logs en un fichero</string>
+    <string name="file_logger_description">Guarda los logs del servicio de notificaciones en la memoria externa. Requiere permisos de escritura en memoria externa.</string>
+    <string name="file_logger_needs_permission">No hay acceso a la memoria externa. No se guardó en log</string>
+    <string name="keyboard_fix">Corregir la superposición del teclado &#8635;</string>
+    <string name="custom_user_agent">Cambiar el User Agent &#8635;</string>
+    <string name="custom_user_agent_description">Use su propio User Agent.</string>
+    <string name="custom_user_agent_hint">Vacio por defecto</string>
     <string name="share_link">Compartir enlace</string>
     <string name="long_clicks">Clicks prolongados</string>
     <string name="long_clicks_description">Hacer click prolongado sobre un enlace o imagen para compartirlos.</string>
@@ -49,6 +56,12 @@
     <string name="facebook_zero">Facebook Zero</string>
     <string name="facebook_zero_description">Sin cargos por datos. Depende del proveedor GSM. Funciona utilizando datos móviles.</string>
     <string name="facebook_zero_active">Facebook Zero está activado</string>
+    <string name="touch_mode">Modo Touch</string>
+    <string name="touch_mode_description">Carga la web en touch.facebook.com.</string>
+    <string name="basic_mode">Modo Básico</string>
+    <string name="basic_mode_description">Carga el modo básico de Facebook. El tema oscuro será desactivado. Puede no funcionar en todas las conexiones.</string>
+    <string name="load_extra">Cargar imágenes externas</string>
+    <string name="load_extra_description">Abre imágenes en la app. Actualmente hay pocos sitios soportados.</string>
     <string name="preference_category4">Otros</string>
     <string name="quick_guide">Guía de inicio rápida</string>
     <string name="messages">Mensajes</string>
@@ -73,6 +86,7 @@
     <string name="notifications_service_created">Notificaciones activas</string>
     <string name="notifications_settings">Preferencias de notificación</string>
     <string name="notifications_settings_description">Preferencias adicionales. Configure el intervalo, tonos, LED y vibración.</string>
+    <string name="notification_sound_msg">Sonido de mensages</string>
 
     <string-array name="intervalPrefTitles">
         <item>1 minutos</item>
@@ -86,6 +100,8 @@
     </string-array>
 
     <string name="all_notifications">Todas las notificaciones</string>
+    <string name="message_notifications">Notificaciones de mensajes</string>
+    <string name="facebook_notifications">Notificationes de Facebook</string>
     <string name="notification_sound">Tono de notificación</string>
     <string name="notification_sound_description">Elija un sonido o silencio: \u0020</string>
     <string name="silent">Sin sonido</string>
@@ -97,5 +113,35 @@
     <string name="setup_notifications">Puede configurar las notificaciones desde Preferencias</string>
     <string name="no_images">Deshabilitar imágenes &#8635;</string>
     <string name="no_images_description">No cargar imágenes. Reduce drásticamente el uso de datos.</string>
+    <string name="confirm_exit">Confirmar al salir</string>
+    <string name="check_for_updates">Comprobar actualizacioes</string>
+    <string name="font_size">Escala de texto</string>
+    <string name="font_size_description">Cambia el tamaño del texto (en porciento).</string>
+    <string name="font_size_hint">100 es 100%</string>
+    <string name="location_access">Habilitar geolocalización.</string>
+    <string name="preference_category6">Noticias</string>
+    <string name="most_recent">Comenzar con publicaciones recientes</string>
+    <string name="most_recent_description">Algunas veces necesitarás activar los post recientes de Facebook para que esta característica funcione completamente.</string>
+    <string name="hide_sponsored">Oculta post de patrocinadores</string>
+    <string name="hide_sponsored_description">No nos gusta la publicidad en Facebook.</string>
+    <string name="hide_people">Oculta personas que quizás conozcas</string>
+    <string name="hide_people_description">Un apartado de noticias más limpio y con más espacio.</string>
+    <string name="hide_news_feed">Oculta las nuevas noticias</string>
+    <string name="hide_news_feed_description">[…] para evitar sidetracking / procrastination.</string>
+    <string name="offline_mode">Modo sin conexión</string>
+    <string name="offline_mode_enable">Activa el modo sin conexión</string>
+    <string name="offline_mode_description">Cuando no hay conexión a internet, se cargarán algunas páginas desde la base de datos.</string>
+    <string name="not_found_offline" formatted="false"><![CDATA[<div style=\"position: absolute;top: 50%;left: 50%;transform: translateX(-50%) translateY(-50%);\"><div><h1>Desafortunadamente esta página no se cargó en la base de datos</h1><h1>Tip: Ve atras para intentar nuevamente</h1></div></div>]]></string>
+    <string name="loading_offline_database">Cargando página desde la base de datos</string>
+    <string name="offline_keep_max">Máximo número de páginas para guardar</string>
+    <string name="offline_keep_max_description">Cuando visitas una página estando conectado, ésta se guardará en la base de datos. El valor por defecto es (últimas) 10 páginas.</string>
+    <string name="offline_dummy_description">El código de la página se guardará en la base de datos. Si se repite la página, se guardará la última. Esto no funciona con contenido dinámico.</string>
+    <string name="offline_database_empty">No hay nada en la base de datos</string>
+    <string name="save_img">Guardar imágen</string>
+    <string name="downloading_img">Guardando imágen&#8230;</string>
+    <string name="download_manager_disabled">Administrador de descargas desactivado, por favor actívelo.</string>
+    <string name="cannot_access_storage">No hay acceso a la memoria externa</string>
+    <string name="file_cannot_be_saved">El archivo no pudo ser guardado</string>
+    <string name="camera_exception">Problemas con la cámara</string>
 
 </resources>
