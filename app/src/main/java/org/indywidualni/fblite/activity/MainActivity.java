@@ -315,6 +315,10 @@ public class MainActivity extends Activity {
         /** when someone clicks a Facebook link start the app with this link */
         if ((getIntent() != null && getIntent().getDataString() != null) && (!isFacebookZero || !isConnectedMobile)) {
             webViewUrl = getIntent().getDataString();
+
+            // handle  fb://profile/<facebook_id>  links
+            webViewUrl = webViewUrl.replace("fb://profile/", "https://facebook.com/");
+
             // show information about loading an external link
             Toast.makeText(getApplicationContext(), getString(R.string.loading_link), Toast.LENGTH_SHORT).show();
         } else if (isFacebookZero && isConnectedMobile) {
@@ -932,6 +936,9 @@ public class MainActivity extends Activity {
 
         // grab an url if opened by clicking a link
         String webViewUrl = getIntent().getDataString();
+
+        // handle  fb://profile/<facebook_id>  links
+        webViewUrl = webViewUrl.replace("fb://profile/", "https://facebook.com/");
 
         // code optimization
         boolean isConnectedMobile = Connectivity.isConnectedMobile(getApplicationContext());
