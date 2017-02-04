@@ -317,7 +317,8 @@ public class MainActivity extends Activity {
             webViewUrl = getIntent().getDataString();
 
             // handle  fb://profile/<facebook_id>  links
-            webViewUrl = webViewUrl.replace("fb://profile/", "https://facebook.com/");
+            if (!TextUtils.isEmpty(webViewUrl))
+                webViewUrl = webViewUrl.replace("fb://profile/", "https://facebook.com/");
 
             // show information about loading an external link
             Toast.makeText(getApplicationContext(), getString(R.string.loading_link), Toast.LENGTH_SHORT).show();
@@ -938,7 +939,8 @@ public class MainActivity extends Activity {
         String webViewUrl = getIntent().getDataString();
 
         // handle  fb://profile/<facebook_id>  links
-        webViewUrl = webViewUrl.replace("fb://profile/", "https://facebook.com/");
+        if (!TextUtils.isEmpty(webViewUrl))
+            webViewUrl = webViewUrl.replace("fb://profile/", "https://facebook.com/");
 
         // code optimization
         boolean isConnectedMobile = Connectivity.isConnectedMobile(getApplicationContext());
