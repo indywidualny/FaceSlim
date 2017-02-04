@@ -144,5 +144,22 @@
     <string name="cannot_access_storage">No hay acceso a la memoria externa</string>
     <string name="file_cannot_be_saved">El archivo no pudo ser guardado</string>
     <string name="camera_exception">Problemas con la cámara</string>
+    <string name="crash_toast_text">Face Slim: Algo salió muy mal. Preparando un informe de errores</string>
+    <string name="crash_dialog_title">Face Slim se ha cerrado inesperadamente</string>
+    <string name="crash_dialog_text">Ocurrió un error inesperado y la aplicación se ha cerrado. Ayudame a resolver esto enviando los detalles del error. Solo debes presionar en OK y enviar un e-mail.</string>
+    <string name="crash_dialog_comment_prompt">Agrega comentarios sobre el problema:</string>
+    <string name="new_version_detected">Una nueva versión de la aplicación está disponible</string>
+    <string name="no">No</string>
+    <string name="no_location_permission">Debes aceptar los permisos de ubicación para usar esta característica</string>
+    <string name="no_storage_permission">Debes aceptar el acceso a tus archivos para usar esta característica</string>
+    <string name="really_quit_question">¿Realmente quieres salir?</string>
+    <string name="special_thanks_notifications">Agradecimientos especiales por haber ayudado con las notificaciones:</string>
+    <string name="sync_problem">No se puede sincronizar las cookies. ¿Es la primera vez aquí, cierto?, Por favor reinicia la aplicación :)</string>
+    <string name="use_tor_summary">Obliga el uso de la red Tor para todo el tráfico. Necesita Orbot.</string>
+    <string name="use_tor_title">Usar la red Tor &#8635;</string>
+    <string name="version">Versión %s</string>
+    <string name="yes">Si</string>
+    <string name="you_have_one_message">Tienes 1 mensaje</string>
+    <string name="you_have_n_messages">Tienes %d mensajes.</string>
 
 </resources>
