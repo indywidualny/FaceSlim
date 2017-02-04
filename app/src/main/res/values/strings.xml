@@ -19,7 +19,7 @@
     <string name="applying_changes">Applying changes</string>
 
     <string-array name="item_array">
-        <item>News Feed</item>
+        <item>News Feed (Home)</item>
         <item>Messenger.com</item>
         <item>Chat (Friends Online)</item>
         <item>Groups</item>

@@ -7,7 +7,7 @@
     <string name="applying_changes">Stosuję zmiany</string>
 
     <string-array name="item_array">
-        <item>Aktualności</item>
+        <item>Aktualności (Główna)</item>
         <item>Messenger.com</item>
         <item>Czat (osoby on-line)</item>
         <item>Grupy</item>
