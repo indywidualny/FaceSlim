@@ -16,7 +16,7 @@
         <item>Události</item>
         <item>Nastavení aplikace</item>
         <item>O aplikaci a vývojáři</item>
-        <item>Copy current URL</item>
+        <item>Kopírovat aktuální adresu</item>
         <item>Ukončit</item>
         <item>Na začátek\u0020 &#8593;</item>
     </string-array>
@@ -78,8 +78,8 @@
     <string name="notifications_settings_description">Další nastavení. Nastavte časovou prodlevu, zvuky, LED a vibrace.</string>
 
     <string-array name="intervalPrefTitles">
-        <item>1 minut</item>
-        <item>2 minut</item>
+        <item>1 minuta</item>
+        <item>2 minuty</item>
         <item>5 minut</item>
         <item>15 minut</item>
         <item>30 minut</item>
@@ -161,5 +161,6 @@
     <string name="no">Ne</string>
     <string name="use_tor_title">Používat Tor &#8635;</string>
     <string name="use_tor_summary">Pro zajištění vyššího soukromí přenášet veškerý provoz přes Tor. Vyžaduje Orbot.</string>
+    <string name="version">Verze %s</string>
     
 </resources>
