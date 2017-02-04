@@ -27,6 +27,7 @@
         <item>App Settings</item>
         <item>About &amp; Dev</item>
         <item>Copy current URL</item>
+        <item>Add launcher shortcut</item>
         <item>Terminate</item>
         <item>Jump to Top\u0020 &#8593;</item>
     </string-array>
@@ -171,5 +172,6 @@
     <string name="use_tor_title">Use Tor &#8635;</string>
     <string name="use_tor_summary">Force all traffic through Tor for increased privacy. Requires Orbot.</string>
     <string name="version">Version %s</string>
+    <string name="label">Label</string>
 
 </resources>

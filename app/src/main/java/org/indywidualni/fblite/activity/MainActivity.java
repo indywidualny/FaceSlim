@@ -29,11 +29,14 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatTextView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.GeolocationPermissions;
@@ -869,11 +872,14 @@ public class MainActivity extends Activity {
                 Toast.makeText(this, webView.getUrl(), Toast.LENGTH_SHORT).show();
                 break;
             case 8:
+                addLauncherShortcut();
+                break;
+            case 9:
                 preferences.edit().putBoolean("activity_visible", false).apply();
                 //finish();
                 System.exit(0); // ugly, ugly, ugly! They wanted it :(
                 break;
-            case 9:
+            case 10:
                 webView.loadUrl("javascript:scroll(0,0)");
                 break;
             default:
@@ -1224,6 +1230,46 @@ public class MainActivity extends Activity {
             webView.getSettings().setUserAgentString(USER_AGENT_BASIC);
         else
             webView.getSettings().setUserAgentString(userAgentDefault);
+    }
+
+    private void addLauncherShortcut() {
+        final Intent shortcut = new Intent(this, CustomShortcutActivity.class);
+        shortcut.putExtra(CustomShortcutActivity.URL_FIELD, webView.getUrl());
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(getString(R.string.label));
+        final AppCompatEditText input = new AppCompatEditText(this);
+        input.setHint(webView.getTitle());
+        input.setSingleLine();
+
+        FrameLayout container = new FrameLayout(this);
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.leftMargin = 50;
+        params.rightMargin = 50;
+        input.setLayoutParams(params);
+        container.addView(input);
+        builder.setView(container);
+
+        builder.setPositiveButton(getString(android.R.string.ok), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int whichButton) {
+                String label = input.getText().toString();
+                if (TextUtils.isEmpty(label))
+                    label = webView.getTitle();
+                shortcut.putExtra(CustomShortcutActivity.NAME_FIELD, label);
+                startActivity(shortcut);
+                Toast.makeText(getApplicationContext(), "\uD83D\uDC4C", Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.setNegativeButton(getString(android.R.string.cancel), null);
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+        alertDialog.getButton(DialogInterface.BUTTON_POSITIVE)
+                .setTextColor(ContextCompat.getColor(this, R.color.colorAccent));
+        alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE)
+                .setTextColor(ContextCompat.getColor(this, R.color.colorAccent));
     }
 
     public static Activity getMainActivity() {

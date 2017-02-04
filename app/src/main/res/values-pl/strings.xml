@@ -15,6 +15,7 @@
         <item>Ustawienia aplikacji</item>
         <item>Informacje &amp; autor</item>
         <item>Skopiuj ten adres</item>
+        <item>Dodaj skrót launchera</item>
         <item>Zabij aplikację</item>
         <item>Skocz na górę\u0020 &#8593;</item>
     </string-array>
@@ -158,5 +159,6 @@
     <string name="yes">Tak</string>
     <string name="no">Nie</string>
     <string name="version">Wersja %s</string>
+    <string name="label">Etykieta</string>
 
 </resources>
