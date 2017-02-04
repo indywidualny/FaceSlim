@@ -6,10 +6,18 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.DisplayMetrics;
 import android.util.Log;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Miscellany {
 
@@ -74,6 +82,45 @@ public class Miscellany {
         ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newPlainText(label, text);
         clipboard.setPrimaryClip(clip);
+    }
+
+    /**
+     * Extracts URL from a given string
+     * @param string Text which may contain an URL
+     * @return Extracted URL or empty string if URL not found inside
+     */
+    public static String extractUrl(String string) {
+        final Pattern urlPattern = Pattern.compile(
+                "(?:^|[\\W])((ht|f)tp(s?):\\/\\/|www\\.)"
+                        + "(([\\w\\-]+\\.){1,}?([\\w\\-.~]+\\/?)*"
+                        + "[\\p{Alnum}.,%_=?&#\\-+()\\[\\]\\*$~@!:/{};']*)",
+                Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
+        Matcher matcher = urlPattern.matcher(string);
+        int matchStart = 0;
+        int matchEnd = 0;
+        while (matcher.find()) {
+            matchStart = matcher.start(1);
+            matchEnd = matcher.end();
+        }
+        return string.substring(matchStart, matchEnd);
+    }
+
+    /**
+     * Download an image as Bitmap object (run always outside the Main Thread)
+     */
+    public static Bitmap getBitmapFromURL(String src) {
+        try {
+            URL url = new URL(src);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            return BitmapFactory.decodeStream(input);
+        } catch (IOException e) {
+            return null;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
 }

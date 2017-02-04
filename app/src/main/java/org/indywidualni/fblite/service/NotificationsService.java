@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -27,6 +28,7 @@ import org.indywidualni.fblite.MyApplication;
 import org.indywidualni.fblite.R;
 import org.indywidualni.fblite.activity.MainActivity;
 import org.indywidualni.fblite.util.Connectivity;
+import org.indywidualni.fblite.util.Miscellany;
 import org.indywidualni.fblite.util.logger.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
@@ -229,26 +231,40 @@ public class NotificationsService extends Service {
         }
 
         @Override
-        protected void onPostExecute(Element result) {
+        protected void onPostExecute(final Element result) {
             try {
                 if (result == null)
                     return;
                 if (result.text() == null)
                     return;
 
-                String time = result.select("span.mfss.fcg").text();
-                String text = result.text().replace(time, "");
+                final String time = result.select("span.mfss.fcg").text();
+                final String text = result.text().replace(time, "");
+                final String pictureStyle = result.select("i.img.l.profpic").attr("style");
 
                 if (!preferences.getBoolean("activity_visible", false) || preferences.getBoolean("notifications_everywhere", true)) {
-                    if (!preferences.getString("last_notification_text", "").equals(text))
-                        notifier(text, BASE_URL + result.attr("href"), false);
-                    preferences.edit().putString("last_notification_text", text).apply();
+                    if (!preferences.getString("last_notification_text", "").equals(text)) {
+
+                        // try to download a picture and send the notification
+                        new AsyncTask<Void, Void, Void>() {
+                            @Override
+                            protected Void doInBackground (Void[] params){
+                                Bitmap picture = Miscellany.getBitmapFromURL(Miscellany.extractUrl(pictureStyle));
+                                notifier(text, BASE_URL + result.attr("href"), false, picture);
+                                return null;
+                            }
+                        }.execute();
+
+                    }
                 }
+
+                // save as shown (or ignored) to avoid showing it again
+                preferences.edit().putString("last_notification_text", text).apply();
 
                 // save this check status
                 preferences.edit().putBoolean("ntf_last_status", true).apply();
                 Log.i("CheckNotificationsTask", "onPostExecute: Aight biatch ;)");
-            } catch (NumberFormatException ex) {
+            } catch (Exception ex) {
                 // save this check status
                 preferences.edit().putBoolean("ntf_last_status", false).apply();
                 Log.i("CheckNotificationsTask", "onPostExecute: Failure");
@@ -318,9 +334,9 @@ public class NotificationsService extends Service {
 
                 if (!preferences.getBoolean("activity_visible", false) || preferences.getBoolean("notifications_everywhere", true)) {
                     if (newMessages == 1)
-                        notifier(getString(R.string.you_have_one_message), NOTIFICATION_OLD_MESSAGE_URL, true);
+                        notifier(getString(R.string.you_have_one_message), NOTIFICATION_OLD_MESSAGE_URL, true, null);
                     else if (newMessages > 1)
-                        notifier(String.format(getString(R.string.you_have_n_messages), newMessages), NOTIFICATION_OLD_MESSAGE_URL, true);
+                        notifier(String.format(getString(R.string.you_have_n_messages), newMessages), NOTIFICATION_OLD_MESSAGE_URL, true, null);
                 }
 
                 // save this check status
@@ -368,7 +384,7 @@ public class NotificationsService extends Service {
     }
 
     // create a notification and display it
-    private void notifier(String title, String url, boolean isMessage) {
+    private void notifier(String title, String url, boolean isMessage, Bitmap picture) {
         // let's display a notification, dude!
         final String contentTitle;
         if (isMessage)
@@ -389,6 +405,10 @@ public class NotificationsService extends Service {
                         .setTicker(title)
                         .setWhen(System.currentTimeMillis())
                         .setAutoCancel(true);
+
+        // picture is available
+        if (picture != null)
+            mBuilder.setLargeIcon(picture);
 
         // ringtone
         String ringtoneKey = "ringtone";
