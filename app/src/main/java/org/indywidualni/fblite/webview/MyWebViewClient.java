@@ -196,7 +196,10 @@ public class MyWebViewClient extends WebViewClient {
 
         // hide sponsored posts and ads (works only for an originally loaded section, not for a dynamically loaded content)
         if (preferences.getBoolean("hide_sponsored", false)) {
-            final String cssHideSponsored = "#m_newsfeed_stream article[data-ft*=\"\\\"ei\\\":\\\"\"], " +
+            final String cssHideSponsored = "#div[role=\"article\"]:has(iframe[src^=\"/xti.php?"])" +
+                    "#m_newsfeed_stream section article:has(iframe[src^=\"/xti.php?\"])" +
+                    "#m_newsfeed_stream section article:has(span[data-sigil=\"pixelContainer\"])" +
+                    "#m_newsfeed_stream article[data-ft*=\"\\\"ei\\\":\\\"\"], " +
                     ".aymlCoverFlow, .aymlNewCoverFlow[data-ft*=\"\\\"is_sponsored\\\":\\\"1\\\"\"], .pyml, " +
                     ".storyStream > ._6t2[data-sigil=\"marea\"], .storyStream > .fullwidth._539p, .storyStream > " +
                     "article[id^=\"u_\"]._676, .storyStream > article[id^=\"u_\"].storyAggregation { display: none; }";
