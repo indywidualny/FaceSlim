@@ -196,7 +196,7 @@ public class NotificationsService extends Service {
                         .userAgent(userAgent).timeout(JSOUP_TIMEOUT)
                         .cookie("https://mobile.facebook.com", CookieManager.getInstance().getCookie("https://mobile.facebook.com"))
                         .get()
-                        .select("a.touchable")
+                        .select("div.touchable-notification")
                         .not("a._19no")
                         .not("a.button")
                         .first();
