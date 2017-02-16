@@ -108,6 +108,14 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
                         if (prefs.getBoolean("file_logging", false))
                             requestStoragePermission();
                         break;
+                    case "font_size":
+                        try {
+                            //noinspection ResultOfMethodCallIgnored
+                            Integer.valueOf(prefs.getString("font_size", "100"));
+                        } catch (NumberFormatException e) {
+                            prefs.edit().remove("font_size").apply();
+                        }
+                        break;
                     case "transparent_nav":
                     case "drawer_pos":
                     case "no_images":

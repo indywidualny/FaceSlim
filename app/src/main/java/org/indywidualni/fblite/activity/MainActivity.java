@@ -245,7 +245,15 @@ public class MainActivity extends Activity {
         webView.getSettings().setDisplayZoomControls(false);
 
         // text size (percent)
-        webView.getSettings().setTextZoom(Integer.valueOf(preferences.getString("font_size", "100")));
+        try {
+            int textScale = Integer.valueOf(preferences.getString("font_size", "100"));
+            if (textScale > 0 && textScale < 1000)
+                webView.getSettings().setTextZoom(textScale);
+            else
+                preferences.edit().remove("font_size").apply();
+        } catch (NumberFormatException e) {
+            preferences.edit().remove("font_size").apply();
+        }
 
         // location
         if (preferences.getBoolean("location", false)) {
@@ -1012,7 +1020,18 @@ public class MainActivity extends Activity {
         }
 
         // text size (percent)
-        webView.getSettings().setTextZoom(Integer.valueOf(preferences.getString("font_size", "100")));
+        try {
+            int textScale = Integer.valueOf(preferences.getString("font_size", "100"));
+            if (textScale > 0 && textScale < 1000)
+                webView.getSettings().setTextZoom(textScale);
+            else {
+                preferences.edit().remove("font_size").apply();
+                webView.getSettings().setTextZoom(100);
+            }
+        } catch (NumberFormatException e) {
+            preferences.edit().remove("font_size").apply();
+            webView.getSettings().setTextZoom(100);
+        }
     }
 
     // handling back button
