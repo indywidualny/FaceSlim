@@ -48,7 +48,7 @@
     <string name="facebook_zero">Facebook Zero</string>
     <string name="facebook_zero_description">Без отчитане на данни. Зависи от GSM доставчика. Работи при мобилна мрежова връзка</string>
     <string name="facebook_zero_active">Facebook Zero е активен</string>
-    <string name="load_extra">Зареждай външни изображения</string>
+    <string name="load_extra">Зареждай външни изображ.</string>
     <string name="load_extra_description">Отваряй външни изображения в приложението. За сега само някои сайтове се поддържат.</string>
     <string name="preference_category4">Допълнително</string>
     <string name="quick_guide">Отвори Бързи стъпки</string>
@@ -102,8 +102,8 @@
     <string name="preference_category6">Новини</string>
     <string name="hide_sponsored">Скрий спонсорските постове</string>
     <string name="hide_sponsored_description">Не харесваме спонсорирани постове и реклами.</string>
-    <string name="hide_people">Скриване на "Хора които можеби познавам"</string>
-    <string name="hide_people_description">По-чист фийд и повече място.</string>
+    <string name="hide_people">Скриване на Хора</string>
+    <string name="hide_people_description">Скрива "Хора, които можеби познавам".</string>
     <string name="hide_news_feed">Скрий Новини</string>
     <string name="hide_news_feed_description">[…] за избягване на разсейването.</string>
 
@@ -135,10 +135,30 @@
     <string name="offline_mode_description">Когато няма интернет връзка се опитай да заредиш страницата от локалния кеш и база.</string>
     <string name="not_found_offline" formatted="false"><![CDATA[<div style=\"position: absolute;top: 50%;left: 50%;transform: translateX(-50%) translateY(-50%);\"><div><h1>За съжаление тази страница не беше намерена в локалната база.</h1><h1>Съвет: За връщане натиснете назад два пъти</h1></div></div>]]></string>
     <string name="loading_offline_database">Зареждане на страницата от локалната база</string>
-    <string name="offline_keep_max">Максимален брой страници за съхранение</string>
+    <string name="offline_keep_max">Max страници за съхранение</string>
     <string name="offline_keep_max_description">Когато сте онлайн постените страници асинхронно се запазват в локална база. По подразбиране са последните 10 страници.</string>
     <string name="offline_dummy_description">Кодът на текущата страница асинхронно се запазва в локалната база. При дублиране се замества. Презаредете страницата, за да предизвикате обновяване. Не работи за динамично съдържание.</string>
-    <string name="keyboard_fix">Поправка за застъпващата клавиатура &#8635;</string>
+    <string name="keyboard_fix">Поправка за заст. клав.&#8635;</string>
     <string name="offline_database_empty">Локалната база е празна</string>
+    <string name="no_location_permission">Разреши използване на Местонахождение, за да използваш тази функция.</string>
+    <string name="location_access">Разреши местоположение</string>
+    <string name="custom_user_agent">Собствен User Agent &#8635;</string>
+    <string name="custom_user_agent_description">Използвай собствен User Agent низ.</string>
+    <string name="custom_user_agent_hint">Празно за подразбиране</string>
+    <string name="touch_mode">Touch режим</string>
+    <string name="touch_mode_description">Използвай touch.facebook.com сайт.</string>
+    <string name="new_version_detected">Налична е нова версия</string>
+    <string name="check_for_updates">Проверка за нова версия</string>
+    <string name="font_size">Размер на текст</string>
+    <string name="font_size_description">Промени размер на текст (процент).</string>
+    <string name="font_size_hint">100 е 100%</string>
+    <string name="most_recent">Започни с най-скорошни постове</string>
+    <string name="most_recent_description">Понякога, за да активирате напълно това поведение, трябва да изберете Най-скоршни постове и от Facebook менюто.</string>
+    <string name="really_quit_question">Наистина ли искате да излезете?</string>
+    <string name="confirm_exit">Потвърди изход от приложението</string>
+    <string name="yes">Да</string>
+    <string name="no">Не</string>
+    <string name="use_tor_title">Използвай Tor &#8635;</string>
+    <string name="use_tor_summary">Прекарва целия трафик през Tor за увеличена поверителност. Изисква Orbot.</string>
 
 </resources>
