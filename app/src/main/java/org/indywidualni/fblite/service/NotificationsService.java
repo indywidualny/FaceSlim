@@ -39,7 +39,7 @@ public class NotificationsService extends Service {
     // Facebook URL constants
     private static final String BASE_URL = "https://mobile.facebook.com";
     private static final String NOTIFICATIONS_URL = "https://m.facebook.com/notifications.php";
-    private static final String MESSAGES_URL = "https://m.facebook.com/messages";
+    private static final String MESSAGES_URL = "https://m.facebook.com/messages/?more";
     private static final String MESSAGES_URL_BACKUP = "https://mobile.facebook.com/messages";
     private static final String NOTIFICATION_MESSAGE_URL = "https://www.messenger.com/login";
     private static final String NOTIFICATION_OLD_MESSAGE_URL = "https://m.facebook.com/messages#";
