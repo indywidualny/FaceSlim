@@ -9,6 +9,15 @@ Face Slim is an unofficial Facebook application for Android devices that resembl
 ## Changelog
 & what makes the application awesome:
 
+**3.1**
+* Show notification images
+* Add current URL to home screen
+* Handle `fb://profile/<facebook_id>` links
+* Spanish translation updated
+* Block sponsored posts on News Feed (fixed)
+* Fix text size when wrong value
+* Update messages URL to full list of conversation and search functionality
+
 **3.0**
 * fixed problem with white pages
 * new, polished dark look
