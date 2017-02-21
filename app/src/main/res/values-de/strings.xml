@@ -6,29 +6,29 @@
     <string name="applying_changes">Änderungen werden angewendet</string>
 
     <string-array name="item_array">
-        <item>Neuigkeiten</item>
+        <item>News Feed</item>
         <item>Messenger.com</item>
         <item>Chat (Online Freunde)</item>
         <item>Gruppen</item>
         <item>Veranstaltungen</item>
         <item>App Einstellungen</item>
         <item>@string/title_activity_about</item>
-        <item>Copy current URL</item>
-        <item>Add launcher shortcut</item>
+        <item>URL kopieren</item>
+        <item>Verknüpfung hinzufügen</item>
         <item>Beenden</item>
         <item>Nach oben\u0020 &#8593;</item>
     </string-array>
 
     <string name="author">von Krzysztof \'Koras\' Grabowski</string>
     <string name="title_activity_settings">Einstellungen</string>
-    <string name="title_activity_about">Über</string>
+    <string name="title_activity_about">Über Face Slim</string>
     <string name="preference_category1">Oberfläche</string>
     <string name="preference_category2">Erweiterte Einstellungen</string>
     <string name="progress_bar">Fortschrittsanzeige</string>
     <string name="transparent_nav">Transparente Navigationsleiste &#8635;</string>
     <string name="transparent_nav_description">KitKat und Lollipop. Transparente Navigationstasten.</string>
-    <string name="clear_cache">Zwischenspeicher leeren</string>
-    <string name="clear_cache_description">Anwendungsspeicher leeren. Du wirst dabei ausgeloggt.</string>
+    <string name="clear_cache">Cache leeren</string>
+    <string name="clear_cache_description">Anwendungscache leeren. Du wirst dabei ausgeloggt.</string>
     <string name="email_author">Mich kontaktieren</string>
     <string name="choose_email_client">E-Mail-Anwendung auswählen</string>
     <string name="notifications">Benachrichtigungen</string>
@@ -61,7 +61,7 @@
         <item>rechts</item>
     </string-array>
 
-    <string name="drawer_pos">Gleitmenü Position &#8635;</string>
+    <string name="drawer_pos">Appmenü Position &#8635;</string>
     <string name="drawer_pos_description">Menü befindet sich derzeit %s.</string>
     <string name="preference_category5">Benachrichtigungen</string>
     <string name="notifications_feed_url">Benachrichtigungs-Feed</string>
@@ -75,7 +75,7 @@
     <string name="notifications_settings_description">Zusätzliche Einstellungen. Einstellen von Überprüfungs-Interval, Tönen, LED Farben und Vibration.</string>
 
     <string-array name="intervalPrefTitles">
-        <item>1 Minuten</item>
+        <item>1 Minute</item>
         <item>2 Minuten</item>
         <item>5 Minuten</item>
         <item>15 Minuten</item>
@@ -107,7 +107,6 @@
     <string name="hide_people_description">Saubere Neuigkeiten, mehr Platz.</string>
     <string name="hide_news_feed">Neuigkeiten verstecken</string>
     <string name="hide_news_feed_description">[…] Ablenkung / Nichtstun vermeiden.</string>
-
     <string name="message_notifications">Benachrichtigung über Nachrichten</string>
     <string name="you_have_one_message">Du hast eine Nachricht.</string>
     <string name="you_have_n_messages">Du hast %d Nachrichten.</string>
@@ -129,7 +128,6 @@
     <string name="cannot_access_storage">Kein Zugang zu externem Speicher</string>
     <string name="file_cannot_be_saved">Eine Datei konnte nicht gespeichert werden</string>
     <string name="camera_exception">Probleme mit der Kamera</string>
-
     <string name="offline_mode">Offline-Modus</string>
     <string name="offline_mode_enable">Offline-Modus aktivieren</string>
     <string name="offline_mode_description">Bei fehledner Internetverbindung wird versucht eine Seite aus dem Zwischenspeicher und der Datenbank zu laden.</string>
@@ -140,4 +138,26 @@
     <string name="offline_dummy_description">Der Source Code der aktuellen Seite wird asynchron in der Datenbank gespeichert.Duplikate werden ersetzt. Seite aktualisieren um sie manuell zu updaten. Funktioniert nicht für alle dynamisch geladenen Inhalte.</string>
     <string name="keyboard_fix">Fix für überlappende Tastatur &#8635;</string>
     <string name="offline_database_empty">Offline-Datenbank ist leer.</string>
+    <string name="no_location_permission">Zugriff auf den Standort geben um die Funktion zu benutzen</string>
+    <string name="location_access">Geolocation aktivieren</string>
+    <string name="custom_user_agent">Benutzerdefinierter User Agent &#8635;</string>
+    <string name="custom_user_agent_description">Eigenen User Agent String benutzen.</string>
+    <string name="custom_user_agent_hint">Freilassen für Standard</string>
+    <string name="touch_mode">Touch modus</string>
+    <string name="touch_mode_description">Benutzt touch.facebook.com website.</string>
+    <string name="new_version_detected">Eine neue Version der App ist verfügbar</string>
+    <string name="check_for_updates">Nach Aktualisierung suchen</string>
+    <string name="font_size">Schriftgröße</string>
+    <string name="font_size_description">Ändere Schriftgröße (in Prozent).</string>
+    <string name="font_size_hint">100 ist 100%</string>
+    <string name="most_recent">Starte mit "Neuste Meldungen"</string>
+    <string name="most_recent_description">Manchmal ist es erforderlich "Neuste Meldungen" im Facebook Menü zu wählen um diese Funktion zu benutzen.</string>
+    <string name="really_quit_question">Soll die App beendet werden?</string>
+    <string name="confirm_exit">Beenden bestätigen</string>
+    <string name="yes">Ja</string>
+    <string name="no">Nein</string>
+    <string name="use_tor_title">Tor benutzen &#8635;</string>
+    <string name="use_tor_summary">Leitet den kompletten Traffic durch Tor für erhöhte Privatsphäre. Benötigt Orbot.</string>
+    <string name="version">Version %s</string>
+    <string name="label">Label</string>
 </resources>
