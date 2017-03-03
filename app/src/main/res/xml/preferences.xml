@@ -113,6 +113,12 @@
             android:title="@string/load_extra"
             android:summary="@string/load_extra_description"
             android:defaultValue="false"/>
+        
+        <CheckBoxPreference
+            android:key="custom_tabs"
+            android:title="Chrome Custom Tabs"
+            android:summary="Load external site in Chrome Custom Tabs."
+            android:defaultValue="false"/>
 
         <CheckBoxPreference
             android:key="app_updates"
