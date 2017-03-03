@@ -11,6 +11,7 @@ import android.content.res.Configuration;
 import android.database.SQLException;
 import android.net.Uri;
 import android.preference.PreferenceManager;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.Gravity;
@@ -105,14 +106,25 @@ public class MyWebViewClient extends WebViewClient {
                     || Uri.parse(url).getHost().endsWith("sync.liverail.com")
                     || Uri.parse(url).getHost().endsWith("fb.me")) {
                 return false;
-            } else if (preferences.getBoolean("load_extra", false)
+            }
+            if (preferences.getBoolean("load_extra", false)
                     && (Uri.parse(url).getHost().endsWith("googleusercontent.com")
                     || Uri.parse(url).getHost().endsWith("tumblr.com")
                     || Uri.parse(url).getHost().endsWith("pinimg.com")
                     || Uri.parse(url).getHost().endsWith("media.giphy.com"))) {
                 return false;
             }
+            if (preferences.getBoolean("custom_tabs", false)) {
+                try {
+                    CustomTabsIntent.Builder intentBuilder = new CustomTabsIntent.Builder();
+                    intentBuilder.setShowTitle(true);
+                    intentBuilder.setToolbarColor(ContextCompat.getColor(MainActivity.getMainActivity(), R.color.colorPrimary));
+                    intentBuilder.build().launchUrl(MainActivity.getMainActivity(), Uri.parse(url));
+                    return true;
+                }catch(Exception ignored){
 
+                }
+            }
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             try {
                 view.getContext().startActivity(intent);
@@ -147,28 +159,27 @@ public class MyWebViewClient extends WebViewClient {
     }
 
     @Override
-    public void onPageFinished(WebView view, String url) {
-        if (url.contains("messenger.com"))
-            ((MainActivity) MainActivity.getMainActivity()).getSwipeRefreshLayout().setEnabled(false);
-        else
-            ((MainActivity) MainActivity.getMainActivity()).getSwipeRefreshLayout().setEnabled(true);
-
-        // when Zero is activated and there is a mobile network connection ignore extra customizations
-        if (!preferences.getBoolean("facebook_zero", false) || !Connectivity.isConnectedMobile(context)) {
-
-            // hide install messenger notice by default
+    public void onLoadResource(WebView view, String url) {
+        // hide sponsored posts and ads
+        if (preferences.getBoolean("hide_sponsored", false)) {
             view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); " +
                     "node.innerHTML = str; document.body.appendChild(node); } " +
-                    "addStyleString('[data-sigil*=m-promo-jewel-header]{ display: none; }');");
+                    "addStyleString('article[data-ft*=ei]{display: none !important;}');");
+        }
 
-            // turn facebook black (experimental)
-            if (preferences.getBoolean("dark_theme", false)) {
-                // fill it with data only one time
-                if (cssFile == null)
-                    cssFile = FileOperation.readRawTextFile(context, R.raw.black);
-                view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); " +
-                        "node.innerHTML = str; document.body.appendChild(node); } addStyleString('" + cssFile + "');");
-            }
+        // hide people you may know
+        if (preferences.getBoolean("hide_people", false))
+            view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); " +
+                    "node.innerHTML = str; document.body.appendChild(node); } " +
+                    "addStyleString('article._55wo._5rgr._5gh8._35au{ display: none; }');");
+
+        // turn facebook black (experimental)
+        if (preferences.getBoolean("dark_theme", false)) {
+            // fill it with data only one time
+            if (cssFile == null)
+                cssFile = FileOperation.readRawTextFile(context, R.raw.black);
+            view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); " +
+                    "node.innerHTML = str; document.body.appendChild(node); } addStyleString('" + cssFile + "');");
         }
 
         // blue navigation bar always on top
@@ -189,29 +200,6 @@ public class MyWebViewClient extends WebViewClient {
                     "node.innerHTML = str; document.body.appendChild(node); } addStyleString('" + cssFixed + "');");
         }
 
-        // apply extra bottom padding for transparent navigation
-        if (preferences.getBoolean("transparent_nav", false))
-            view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); " +
-                    "node.innerHTML = str; document.body.appendChild(node); } addStyleString('body{ padding-bottom: 48px; }');");
-
-        // hide sponsored posts and ads (works only for an originally loaded section, not for a dynamically loaded content)
-        if (preferences.getBoolean("hide_sponsored", false)) {
-            final String cssHideSponsored = "#div[role=\"article\"]:has(iframe[src^=\"/xti.php?\"])" +
-                    "#m_newsfeed_stream section article:has(iframe[src^=\"/xti.php?\"])" +
-                    "#m_newsfeed_stream section article:has(span[data-sigil=\"pixelContainer\"])" +
-                    "#m_newsfeed_stream article[data-ft*=\"\\\"ei\\\":\\\"\"], " +
-                    ".aymlCoverFlow, .aymlNewCoverFlow[data-ft*=\"\\\"is_sponsored\\\":\\\"1\\\"\"], .pyml, " +
-                    ".storyStream > ._6t2[data-sigil=\"marea\"], .storyStream > .fullwidth._539p, .storyStream > " +
-                    "article[id^=\"u_\"]._676, .storyStream > article[id^=\"u_\"].storyAggregation { display: none; }";
-            view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); " +
-                    "node.innerHTML = str; document.body.appendChild(node); } addStyleString('" + cssHideSponsored + "');");
-        }
-
-        // hide people you may know
-        if (preferences.getBoolean("hide_people", false))
-            view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); " +
-                    "node.innerHTML = str; document.body.appendChild(node); } " +
-                    "addStyleString('article._55wo._5rgr._5gh8._35au{ display: none; }');");
 
         // hide news feed (a feature requested by drjedd)
         if (preferences.getBoolean("hide_news_feed", false))
@@ -231,6 +219,33 @@ public class MyWebViewClient extends WebViewClient {
                     "node.innerHTML = str; document.body.appendChild(node); } " +
                     "addStyleString('._s15{ display: none; }');");
         }
+
+        // when Zero is activated and there is a mobile network connection ignore extra customizations
+        if (!preferences.getBoolean("facebook_zero", false) || !Connectivity.isConnectedMobile(context)) {
+
+            // hide install messenger notice by default
+            view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); " +
+                    "node.innerHTML = str; document.body.appendChild(node); } " +
+                    "addStyleString('[data-sigil*=m-promo-jewel-header]{ display: none; }');");
+
+        }
+
+
+    }
+
+    @Override
+    public void onPageFinished(WebView view, String url) {
+        if (url.contains("messenger.com"))
+            ((MainActivity) MainActivity.getMainActivity()).getSwipeRefreshLayout().setEnabled(false);
+        else
+            ((MainActivity) MainActivity.getMainActivity()).getSwipeRefreshLayout().setEnabled(true);
+
+
+        // apply extra bottom padding for transparent navigation
+        if (preferences.getBoolean("transparent_nav", false))
+            view.loadUrl("javascript:function addStyleString(str) { var node = document.createElement('style'); " +
+                    "node.innerHTML = str; document.body.appendChild(node); } addStyleString('body{ padding-bottom: 48px; }');");
+
 
         // offline mode
         if (preferences.getBoolean("offline_mode", false)) {
