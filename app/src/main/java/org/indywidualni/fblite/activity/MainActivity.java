@@ -461,7 +461,11 @@ public class MainActivity extends Activity {
 
             Intent contentSelectionIntent = new Intent(Intent.ACTION_GET_CONTENT);
             contentSelectionIntent.addCategory(Intent.CATEGORY_OPENABLE);
-            contentSelectionIntent.setType("image/*");
+            if(webView.getUrl().contains("add_video")) {
+                    contentSelectionIntent.setType("video/*");
+                }else{
+                    contentSelectionIntent.setType("image/*");
+                }
 
             Intent[] intentArray;
             if (takePictureIntent != null) {
@@ -516,7 +520,11 @@ public class MainActivity extends Activity {
 
                 Intent i = new Intent(Intent.ACTION_GET_CONTENT);
                 i.addCategory(Intent.CATEGORY_OPENABLE);
-                i.setType("image/*");
+                if(webView.getUrl().contains("add_video")) {
+                        i.setType("video/*");
+                    }else{
+                        i.setType("image/*");
+                    }
 
                 Intent chooserIntent = Intent.createChooser(i, getString(R.string.image_chooser));
                 chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Parcelable[]{captureIntent});
