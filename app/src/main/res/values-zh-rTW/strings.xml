@@ -160,5 +160,8 @@
     <string name="confirm_exit">確認離開本程式?</string>
     <string name="yes">嗯…</string>
     <string name="no">不要啊啊~</string>
+    <string name="use_tor_summary">強制透過Tor傳輸資料以增強安全性. 需要安裝Orbot.</string>
+    <string name="use_tor_title">使用Tor連線 &#8635;</string>
+    <string name="version">版本 %s</string>
 
 </resources>
