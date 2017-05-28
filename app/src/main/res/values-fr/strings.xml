@@ -16,7 +16,7 @@
 		<item>Événements</item>
 		<item>Paramètres</item>
 		<item>À propos</item>
-		<item>Copier l'URL</item>
+		<item>Copier l\'URL</item>
 		<item>Ajouter un raccourci</item>
 		<item>Quitter</item>
 		<item>Revenir en haut\u0020 &#8593;</item>
@@ -134,15 +134,15 @@
 	
 	<string name="offline_mode">Mode hors-ligne</string>
 	<string name="offline_mode_enable">Activer le mode Hors-ligne</string>
-	<string name="offline_mode_description">Quand il n'y a aucune connexion à Internet, essaye de charger une page de la mémoire cache et de la base de données.</string>
-	<string name="not_found_offline" formatted="false"><![CDATA[<div style=\"position: absolute;top: 50%;left: 50%;transform: translateX(-50%) translateY(-50%);\"><div><h1>Malheureusement cette page n'a pas été trouvée dans la base de données hors ligne</h1><h1>Astuce: pour quitter, revenez en arrière 2 fois</h1></div></div>]]></string>
+	<string name="offline_mode_description">Quand il n\'y a aucune connexion à Internet, essaye de charger une page de la mémoire cache et de la base de données.</string>
+	<string name="not_found_offline" formatted="false"><![CDATA[<div style=\"position: absolute;top: 50%;left: 50%;transform: translateX(-50%) translateY(-50%);\"><div><h1>Malheureusement cette page n\'a pas été trouvée dans la base de données hors ligne</h1><h1>Astuce: pour quitter, revenez en arrière 2 fois</h1></div></div>]]></string>
 	<string name="loading_offline_database">Charger la page depuis la base de données hors-ligne</string>
 	<string name="offline_keep_max">Nombre maxi de pages à conserver</string>
-	<string name="offline_keep_max_description">Quand les pages visitées en ligne sont sauvées d'une manière asynchrone dans la base de données. Une valeur par défaut est les 10 (dernières) pages.</string>
-	<string name="offline_dummy_description">Le code source de la page actuelle est sauvé d'une manière asynchrone dans la base de données. Si un duplicata est trouvé, il sera remplacé. Rafraîchissez la page pour forcer la mise à jour. Il ne marche pas pour le contenu chargé dynamiquement.</string>
+	<string name="offline_keep_max_description">Quand les pages visitées en ligne sont sauvées d\'une manière asynchrone dans la base de données. Une valeur par défaut est les 10 (dernières) pages.</string>
+	<string name="offline_dummy_description">Le code source de la page actuelle est sauvé d\'une manière asynchrone dans la base de données. Si un duplicata est trouvé, il sera remplacé. Rafraîchissez la page pour forcer la mise à jour. Il ne marche pas pour le contenu chargé dynamiquement.</string>
 	<string name="keyboard_fix">Correction du clavier recouvrant &#8635;</string>
 	<string name="offline_database_empty">Base de données hors-ligne vide</string>
-	<string name="no_location_permission">Autoriser l'utilisation du GPS pour utiliser cette fonctionalité</string>
+	<string name="no_location_permission">Autoriser l\'utilisation du GPS pour utiliser cette fonctionalité</string>
 	<string name="location_access">Activer la géolocalisation</string>
 	<string name="custom_user_agent">User-Agent Personnalisé &#8635;</string>
 	<string name="custom_user_agent_description">Utiliser votre propre chaîne User-Agent.</string>
@@ -150,14 +150,14 @@
 	<string name="touch_mode">Mode Touch</string>
 	<string name="touch_mode_description">Utiliser le site touch.facebook.com.</string>
 	<string name="new_version_detected">Une nouvelle version est disponible</string>
-	<string name="check_for_updates">Vérifier la mise à jour de l'appli</string>
+	<string name="check_for_updates">Vérifier la mise à jour de l\'appli</string>
 	<string name="font_size">Taille du texte</string>
 	<string name="font_size_description">Changer la taille du texte (%).</string>
 	<string name="font_size_hint">100 est 100%</string>
 	<string name="most_recent">Débuter par les messages les plus récents</string>
-	<string name="most_recent_description">Parfois pour activer entièrement ce comportement vous devez choisir Le plus Récent dans l'un ou l'autre de votre menu Facebook.</string>
+	<string name="most_recent_description">Parfois pour activer entièrement ce comportement vous devez choisir Le plus Récent dans l\'un ou l\'autre de votre menu Facebook.</string>
 	<string name="really_quit_question">Voulez-vous vraiment quitter?</string>
-	<string name="confirm_exit">Confirmer la sortie de l'appli</string>
+	<string name="confirm_exit">Confirmer la sortie de l\'appli</string>
 	<string name="yes">Oui</string>
 	<string name="no">Non</string>
 	<string name="use_tor_title">Utiliser Tor &#8635;</string>
