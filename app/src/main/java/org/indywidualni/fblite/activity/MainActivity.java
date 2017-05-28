@@ -126,7 +126,7 @@ public class MainActivity extends Activity {
 
     public static final String MESSENGER_URL = "https://www.messenger.com/login";
     public static final String NOTIFICATION_OLD_MESSAGES_URL = "https://m.facebook.com/messages#";
-    private static final long UPDATE_CHECK_INTERVAL = 43200000;  // 12 hours
+    private static final long UPDATE_CHECK_INTERVAL = 43200000L;  // 12 hours
 
     @Override
     @SuppressLint("setJavaScriptEnabled")
@@ -392,7 +392,7 @@ public class MainActivity extends Activity {
         // check for app updates
         if (preferences.getBoolean("app_updates", true)) {
             final long now = System.currentTimeMillis();
-            final long lastUpdateCheck = preferences.getLong("latest_update_check", 0);
+            final long lastUpdateCheck = preferences.getLong("latest_update_check", 0L);
             final long sinceLastCheck = now - lastUpdateCheck;
             if (sinceLastCheck > UPDATE_CHECK_INTERVAL && Connectivity.isConnected(this) && !preferences.getBoolean("first_run", true)) {
                 new CheckUpdatesTask(this).execute();
