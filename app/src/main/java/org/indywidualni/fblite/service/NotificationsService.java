@@ -251,7 +251,10 @@ public class NotificationsService extends Service {
                             @Override
                             protected Void doInBackground (Void[] params){
                                 Bitmap picture = Miscellany.getBitmapFromURL(Miscellany.extractUrl(pictureStyle));
-                                notifier(text, BASE_URL + result.attr("href"), false, picture);
+                                String address = result.attr("href");
+                                if (!address.contains("https"))
+                                    address = BASE_URL + address;
+                                notifier(text, address, false, picture);
                                 return null;
                             }
                         }.execute();
