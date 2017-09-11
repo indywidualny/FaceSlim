@@ -197,7 +197,7 @@ public class NotificationsService extends Service {
                         .proxy(Miscellany.getProxy(preferences))
                         .cookie("https://mobile.facebook.com", CookieManager.getInstance().getCookie("https://mobile.facebook.com"))
                         .get()
-                        .select("div.touchable-notification")
+                        .select("a.touchable")
                         .not("a._19no")
                         .not("a.button")
                         .first();
