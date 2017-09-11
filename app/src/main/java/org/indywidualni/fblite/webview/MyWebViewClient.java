@@ -103,7 +103,9 @@ public class MyWebViewClient extends WebViewClient {
                     || Uri.parse(url).getHost().endsWith("akamaihd.net")
                     || Uri.parse(url).getHost().endsWith("ad.doubleclick.net")
                     || Uri.parse(url).getHost().endsWith("sync.liverail.com")
-                    || Uri.parse(url).getHost().endsWith("fb.me")) {
+                    || Uri.parse(url).getHost().endsWith("fb.me")
+                    || Uri.parse(url).getHost().endsWith("facebookcorewwwi.onion")
+                    || Uri.parse(url).getHost().endsWith("fbcdn23dssr3jqnq.onion")) {
                 return false;
             } else if (preferences.getBoolean("load_extra", false)
                     && (Uri.parse(url).getHost().endsWith("googleusercontent.com")
