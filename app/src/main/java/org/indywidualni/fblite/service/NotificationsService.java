@@ -194,6 +194,7 @@ public class NotificationsService extends Service {
             try {
                 return Jsoup.connect(connectUrl)
                         .userAgent(userAgent).timeout(JSOUP_TIMEOUT)
+                        .proxy(Miscellany.getProxy(preferences))
                         .cookie("https://mobile.facebook.com", CookieManager.getInstance().getCookie("https://mobile.facebook.com"))
                         .get()
                         .select("div.touchable-notification")
@@ -282,6 +283,7 @@ public class NotificationsService extends Service {
             try {
                 Elements message = Jsoup.connect(connectUrl)
                         .userAgent(userAgent)
+                        .proxy(Miscellany.getProxy(preferences))
                         .timeout(JSOUP_TIMEOUT)
                         .cookie("https://m.facebook.com", CookieManager.getInstance().getCookie("https://m.facebook.com"))
                         .get()

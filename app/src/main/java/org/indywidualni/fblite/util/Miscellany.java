@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -14,6 +15,8 @@ import android.util.Log;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.net.URL;
 import java.util.Locale;
 import java.util.regex.Matcher;
@@ -76,6 +79,16 @@ public class Miscellany {
         sb.append("\nLocale: ").append(Locale.getDefault().toString());
 
         return sb.toString();
+    }
+
+    /**
+     * Returns a Tor proxy if the option is enabled, or no proxy.
+     */
+    public static Proxy getProxy(SharedPreferences preferences) {
+        boolean useTor = preferences.getBoolean("use_tor", false);
+        return (useTor)
+                ? new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", 8118))
+                : Proxy.NO_PROXY;
     }
 
     public static void copyTextToClipboard(Context context, String label, String text) {

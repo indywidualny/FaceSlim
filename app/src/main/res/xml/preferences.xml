@@ -115,6 +115,12 @@
             android:defaultValue="false"/>
 
         <CheckBoxPreference
+            android:key="use_tor"
+            android:title="@string/use_tor_title"
+            android:summary="@string/use_tor_summary"
+            android:defaultValue="false"/>
+
+        <CheckBoxPreference
             android:key="app_updates"
             android:title="@string/check_for_updates"
             android:defaultValue="true"/>

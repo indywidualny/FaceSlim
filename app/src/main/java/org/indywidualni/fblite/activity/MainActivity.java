@@ -61,11 +61,14 @@ import org.indywidualni.fblite.util.Connectivity;
 import org.indywidualni.fblite.util.Dimension;
 import org.indywidualni.fblite.util.DownloadManagerResolver;
 import org.indywidualni.fblite.util.Miscellany;
+import org.indywidualni.fblite.util.WebViewProxyUtil;
 import org.indywidualni.fblite.webview.MyWebViewClient;
 
 import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.text.DateFormat;
 import java.util.Date;
 
@@ -216,6 +219,8 @@ public class MainActivity extends Activity {
             webViewUrl = "https://touch.facebook.com";
         else if (preferences.getBoolean("basic_mode", false))
             webViewUrl = "https://mbasic.facebook.com";
+        else if (preferences.getBoolean("use_tor", false))
+            webViewUrl = "https://m.facebookcorewwwi.onion/";
 
         // most recent posts
         webViewUrl = appendMostRecentInfix(webViewUrl);
@@ -262,6 +267,18 @@ public class MainActivity extends Activity {
                 //noinspection deprecation
                 webView.getSettings().setGeolocationDatabasePath(getFilesDir().getPath());
             }
+        }
+
+        // Tor proxy
+        final Proxy proxy = Miscellany.getProxy(preferences);
+        if (proxy != Proxy.NO_PROXY) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    InetSocketAddress isa = (InetSocketAddress) proxy.address();
+                    WebViewProxyUtil.setProxy(getApplication(), webView, isa.getHostName(), isa.getPort());
+                }
+            }).start();
         }
 
         // since API 18 cache quota is managed automatically
@@ -938,9 +955,11 @@ public class MainActivity extends Activity {
 
         // recreate activity when something important was just changed
         if (getIntent().getBooleanExtra("core_settings_changed", false)) {
-            finish(); // finish and create a new Instance
-            Intent restart = new Intent(MainActivity.this, MainActivity.class);
-            startActivity(restart);
+            //finish(); // finish and create a new Instance
+            //Intent restart = new Intent(MainActivity.this, MainActivity.class);
+            //startActivity(restart);
+            recreate();
+            // TODO: tor proxy is not removed here, need to recreate webview?
         }
 
         // grab an url if opened by clicking a link
