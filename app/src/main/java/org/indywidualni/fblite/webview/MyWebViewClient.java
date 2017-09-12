@@ -120,11 +120,10 @@ public class MyWebViewClient extends WebViewClient {
                 view.getContext().startActivity(intent);
             } catch (ActivityNotFoundException e) {
                 Log.e("shouldOverrideUrlLoad", "No Activity to handle action", e);
-                e.printStackTrace();
             }
             return true;
         } catch (NullPointerException npe) {
-            npe.printStackTrace();
+            Log.e("shouldOverrideUrlLoad", "No Activity to handle action", npe);
             return true;
         }
     }
@@ -331,7 +330,7 @@ public class MyWebViewClient extends WebViewClient {
                         fab.showFloatingActionButton();
                 }
             } catch (SQLException e) {
-                e.printStackTrace();
+                Log.w("shouldOverrideUrlLoad", e);
             }
         } else
             offline = null;

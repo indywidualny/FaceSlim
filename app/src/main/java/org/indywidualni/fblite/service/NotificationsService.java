@@ -178,7 +178,7 @@ public class NotificationsService extends Service {
                     Log.i(TAG, "Notified to stop running. Exiting...");
 
             } catch (RuntimeException re) {
-                Log.i(TAG, "RuntimeException caught");
+                Log.i(TAG, "RuntimeException caught", re);
                 restartItself();
             }
         }
@@ -192,23 +192,23 @@ public class NotificationsService extends Service {
 
         private Element getElement(String connectUrl) {
             try {
+                CookieManager cm = CookieManager.getInstance();
                 return Jsoup.connect(connectUrl)
                         .userAgent(userAgent).timeout(JSOUP_TIMEOUT)
                         .proxy(Miscellany.getProxy(preferences))
-                        .cookie("https://mobile.facebook.com", CookieManager.getInstance().getCookie("https://mobile.facebook.com"))
+                        .cookie("https://mobile.facebook.com", cm.getCookie("https://mobile.facebook.com"))
+                        .cookie("https://m.facebookcorewwwi.onion", cm.getCookie("https://m.facebookcorewwwi.onion"))
                         .get()
                         .select("a.touchable")
                         .not("a._19no")
                         .not("a.button")
                         .first();
-            } catch (IllegalArgumentException ex) {
-                Log.i("CheckNotificationsTask", "Cookie sync problem occurred");
+            } catch (IllegalArgumentException | IOException ex) {
+                Log.i("CheckNotificationsTask", "Cookie sync problem occurred", ex);
                 if (!syncProblemOccurred) {
                     syncProblemToast();
                     syncProblemOccurred = true;
                 }
-            } catch (IOException ex) {
-                ex.printStackTrace();
             }
             return null;
         }
@@ -271,7 +271,7 @@ public class NotificationsService extends Service {
             } catch (Exception ex) {
                 // save this check status
                 preferences.edit().putBoolean("ntf_last_status", false).apply();
-                Log.i("CheckNotificationsTask", "onPostExecute: Failure");
+                Log.i("CheckNotificationsTask", "onPostExecute: Failure", ex);
             }
         }
 
@@ -284,24 +284,24 @@ public class NotificationsService extends Service {
 
         private String getNumber(String connectUrl) {
             try {
+                CookieManager cm = CookieManager.getInstance();
                 Elements message = Jsoup.connect(connectUrl)
                         .userAgent(userAgent)
                         .proxy(Miscellany.getProxy(preferences))
                         .timeout(JSOUP_TIMEOUT)
-                        .cookie("https://m.facebook.com", CookieManager.getInstance().getCookie("https://m.facebook.com"))
+                        .cookie("https://m.facebook.com", cm.getCookie("https://m.facebook.com"))
+                        .cookie("https://m.facebookcorewwwi.onion", cm.getCookie("https://m.facebookcorewwwi.onion"))
                         .get()
                         .select("div#viewport").select("div#page").select("div._129-")
                         .select("#messages_jewel").select("span._59tg");
 
                 return message.html();
-            } catch (IllegalArgumentException ex) {
-                Log.i("CheckMessagesTask", "Cookie sync problem occurred");
+            } catch (IllegalArgumentException | IOException ex) {
+                Log.i("CheckMessagesTask", "Cookie sync problem occurred", ex);
                 if (!syncProblemOccurred) {
                     syncProblemToast();
                     syncProblemOccurred = true;
                 }
-            } catch (IOException ex) {
-                ex.printStackTrace();
             }
             return "failure";
         }
@@ -350,7 +350,7 @@ public class NotificationsService extends Service {
             } catch (NumberFormatException ex) {
                 // save this check status
                 preferences.edit().putBoolean("msg_last_status", false).apply();
-                Log.i("CheckMessagesTask", "onPostExecute: Failure");
+                Log.i("CheckMessagesTask", "onPostExecute: Failure", ex);
             }
         }
 

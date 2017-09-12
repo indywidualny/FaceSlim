@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import org.indywidualni.fblite.MyApplication;
 import org.indywidualni.fblite.R;
@@ -56,7 +57,7 @@ public class OfflineDataSource {
         try {  // just in case
             maxPages = Integer.parseInt(preferences.getString("offline_keep_max", "10"));
         } catch (NumberFormatException e) {
-            e.printStackTrace();
+            Log.w("OfflineDataSource", e);
         }
         // delete the oldest rows leaving the latest maxPages rows
         database.execSQL("DELETE FROM Pages WHERE ROWID IN (" +

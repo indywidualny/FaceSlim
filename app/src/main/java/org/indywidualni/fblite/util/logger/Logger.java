@@ -79,20 +79,24 @@ public final class Logger {
     }
 
     public synchronized void i(String tag, String msg) {
+        i(tag, msg, null);
+    }
+
+    public synchronized void i(String tag, String msg, Throwable throwable) {
         final boolean fileLoggingEnabled = preferences.getBoolean("file_logging", false);
         final boolean mounted = Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState());
         final boolean storageReady = mounted && checkStoragePermission();
 
         if (fileLoggingEnabled && storageReady) {
             FileLog.open(logFilePath, Log.VERBOSE, 1000000);  // 1 megabyte
-            FileLog.i(tag, msg);
+            FileLog.i(tag, msg, throwable);
             FileLog.close();
         } else if (fileLoggingEnabled) {
             displayStoragePermissionRefused();
-            Log.i(tag, msg);
+            Log.i(tag, msg, throwable);
         } else {
             // use a standard logger instead
-            Log.i(tag, msg);
+            Log.i(tag, msg, throwable);
         }
     }
 
