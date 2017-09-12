@@ -10,6 +10,7 @@ import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatTextView;
+import android.util.Log;
 
 import org.indywidualni.fblite.R;
 
@@ -81,7 +82,7 @@ public final class DownloadManagerResolver {
             intent.setData(Uri.parse("package:" + DOWNLOAD_MANAGER_PACKAGE_NAME));
             context.startActivity(intent);
         } catch (ActivityNotFoundException e) {
-            e.printStackTrace();
+            Log.w("DownloadManagerResolver", e);
 
             // open the generic Apps page
             try {

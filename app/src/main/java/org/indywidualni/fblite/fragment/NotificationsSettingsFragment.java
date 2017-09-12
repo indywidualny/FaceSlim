@@ -12,6 +12,7 @@ import android.preference.ListPreference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
+import android.util.Log;
 
 import org.indywidualni.fblite.MyApplication;
 import org.indywidualni.fblite.R;
@@ -88,7 +89,7 @@ public class NotificationsSettingsFragment extends PreferenceFragment {
             Ringtone ringtone = RingtoneManager.getRingtone(context, ringtoneUri);
             name = ringtone.getTitle(context);
         } catch (Exception ex) {
-            ex.printStackTrace();
+            Log.w("NotificationsSettings", ex);
             name = "Default";
         }
 
@@ -106,7 +107,7 @@ public class NotificationsSettingsFragment extends PreferenceFragment {
             Ringtone ringtone = RingtoneManager.getRingtone(context, ringtoneUri);
             name = ringtone.getTitle(context);
         } catch (Exception ex) {
-            ex.printStackTrace();
+            Log.w("NotificationsSettings", ex);
             name = "Default";
         }
 

@@ -35,7 +35,7 @@ public class FileLog {
                 //noinspection ResultOfMethodCallIgnored
                 sTheLogFile.createNewFile();
             } catch (IOException e) {
-                Log.e("FileLog", Log.getStackTraceString(e));
+                Log.w("FileLog", e);
             }
         }
 
@@ -44,7 +44,7 @@ public class FileLog {
         try {
             sBufferedWriter = new BufferedWriter(new FileWriter(sTheLogFile, true));
         } catch (IOException e) {
-            Log.e("FileLog", Log.getStackTraceString(e));
+            Log.w("FileLog", e);
         }
     }
 
@@ -60,7 +60,7 @@ public class FileLog {
                 sBufferedWriter.close( );
             }
         } catch (IOException e) {
-            Log.e("FileLog", Log.getStackTraceString(e));
+            Log.w("FileLog", e);
         }
     }
 
@@ -164,7 +164,7 @@ public class FileLog {
 
                 sBufferedWriter.flush();
             } catch (IOException e) {
-                Log.e("FileLog", Log.getStackTraceString(e));
+                Log.w("FileLog", e);
             }
         }
 
@@ -185,7 +185,7 @@ public class FileLog {
                     java.util.Locale.getDefault());
             currentTimeStamp = dateFormat.format(new Date());
         } catch (Exception e) {
-            Log.e("FileLog", Log.getStackTraceString(e));
+            Log.w("FileLog", e);
         }
 
         return currentTimeStamp;
@@ -211,7 +211,7 @@ public class FileLog {
                 createdNewLogFile = true;
             }
         } catch (IOException e) {
-            Log.e("FileLog", Log.getStackTraceString(e));
+            Log.w("FileLog", e);
         }
 
         return createdNewLogFile;
