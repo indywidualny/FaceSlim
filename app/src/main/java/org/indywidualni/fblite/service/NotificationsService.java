@@ -192,10 +192,12 @@ public class NotificationsService extends Service {
 
         private Element getElement(String connectUrl) {
             try {
+                CookieManager cm = CookieManager.getInstance();
                 return Jsoup.connect(connectUrl)
                         .userAgent(userAgent).timeout(JSOUP_TIMEOUT)
                         .proxy(Miscellany.getProxy(preferences))
-                        .cookie("https://mobile.facebook.com", CookieManager.getInstance().getCookie("https://mobile.facebook.com"))
+                        .cookie("https://mobile.facebook.com", cm.getCookie("https://mobile.facebook.com"))
+                        .cookie("https://m.facebookcorewwwi.onion", cm.getCookie("https://m.facebookcorewwwi.onion"))
                         .get()
                         .select("div.touchable-notification")
                         .not("a._19no")
@@ -281,11 +283,13 @@ public class NotificationsService extends Service {
 
         private String getNumber(String connectUrl) {
             try {
+                CookieManager cm = CookieManager.getInstance();
                 Elements message = Jsoup.connect(connectUrl)
                         .userAgent(userAgent)
                         .proxy(Miscellany.getProxy(preferences))
                         .timeout(JSOUP_TIMEOUT)
-                        .cookie("https://m.facebook.com", CookieManager.getInstance().getCookie("https://m.facebook.com"))
+                        .cookie("https://m.facebook.com", cm.getCookie("https://m.facebook.com"))
+                        .cookie("https://m.facebookcorewwwi.onion", cm.getCookie("https://m.facebookcorewwwi.onion"))
                         .get()
                         .select("div#viewport").select("div#page").select("div._129-")
                         .select("#messages_jewel").select("span._59tg");
