@@ -132,6 +132,7 @@ public class Miscellany {
         } catch (IOException e) {
             return null;
         } catch (Exception e) {
+            Log.w("Miscellany", e);
             return null;
         }
     }

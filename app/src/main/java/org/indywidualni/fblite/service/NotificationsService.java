@@ -178,7 +178,7 @@ public class NotificationsService extends Service {
                     Log.i(TAG, "Notified to stop running. Exiting...");
 
             } catch (RuntimeException re) {
-                Log.i(TAG, "RuntimeException caught");
+                Log.i(TAG, "RuntimeException caught", re);
                 restartItself();
             }
         }
@@ -203,14 +203,12 @@ public class NotificationsService extends Service {
                         .not("a._19no")
                         .not("a.button")
                         .first();
-            } catch (IllegalArgumentException ex) {
-                Log.i("CheckNotificationsTask", "Cookie sync problem occurred");
+            } catch (IllegalArgumentException | IOException ex) {
+                Log.i("CheckNotificationsTask", "Cookie sync problem occurred", ex);
                 if (!syncProblemOccurred) {
                     syncProblemToast();
                     syncProblemOccurred = true;
                 }
-            } catch (IOException ex) {
-                ex.printStackTrace();
             }
             return null;
         }
@@ -270,7 +268,7 @@ public class NotificationsService extends Service {
             } catch (Exception ex) {
                 // save this check status
                 preferences.edit().putBoolean("ntf_last_status", false).apply();
-                Log.i("CheckNotificationsTask", "onPostExecute: Failure");
+                Log.i("CheckNotificationsTask", "onPostExecute: Failure", ex);
             }
         }
 
@@ -295,14 +293,12 @@ public class NotificationsService extends Service {
                         .select("#messages_jewel").select("span._59tg");
 
                 return message.html();
-            } catch (IllegalArgumentException ex) {
-                Log.i("CheckMessagesTask", "Cookie sync problem occurred");
+            } catch (IllegalArgumentException | IOException ex) {
+                Log.i("CheckMessagesTask", "Cookie sync problem occurred", ex);
                 if (!syncProblemOccurred) {
                     syncProblemToast();
                     syncProblemOccurred = true;
                 }
-            } catch (IOException ex) {
-                ex.printStackTrace();
             }
             return "failure";
         }
@@ -351,7 +347,7 @@ public class NotificationsService extends Service {
             } catch (NumberFormatException ex) {
                 // save this check status
                 preferences.edit().putBoolean("msg_last_status", false).apply();
-                Log.i("CheckMessagesTask", "onPostExecute: Failure");
+                Log.i("CheckMessagesTask", "onPostExecute: Failure", ex);
             }
         }
 

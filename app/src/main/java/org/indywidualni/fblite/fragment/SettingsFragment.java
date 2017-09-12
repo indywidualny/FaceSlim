@@ -169,7 +169,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
             findPreference("use_tor").setSummary(getString(R.string.use_tor_summary) + " ― Proxy: " +
                     Miscellany.getProxy(preferences).toString());
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.w("SettingsFragment", e);
         }
     }
 

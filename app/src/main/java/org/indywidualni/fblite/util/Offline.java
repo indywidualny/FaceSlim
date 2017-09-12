@@ -88,8 +88,7 @@ public class Offline {
                 // insert values into a database
                 dataSource.insertPage(args[0], doc.toString());
             } catch (Exception e) {
-                Log.e(getClass().getSimpleName(), "Problem saving the current page");
-                e.printStackTrace();
+                Log.e("Offline", "Problem saving the current page", e);
             }
             return null;
         }

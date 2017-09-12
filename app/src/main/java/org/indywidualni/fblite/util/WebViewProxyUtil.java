@@ -106,7 +106,7 @@ public class WebViewProxyUtil {
             Log.d(LOG_TAG, "Setting proxy with 4.0 API successful!");
             return true;
         } catch (Exception ex) {
-            Log.e(LOG_TAG, "failed to set HTTP proxy: " + ex);
+            Log.e(LOG_TAG, "failed to set HTTP proxy: ", ex);
             return false;
         }
     }
@@ -151,7 +151,7 @@ public class WebViewProxyUtil {
 
             updateProxyInstance.invoke(sJavaBridge, ppcont.newInstance(host, port, null));
         } catch (Exception ex) {
-            Log.e(LOG_TAG, "Setting proxy with >= 4.1 API failed with error: " + ex.getMessage());
+            Log.e(LOG_TAG, "Setting proxy with >= 4.1 API failed with error: ", ex);
             return false;
         }
 
@@ -197,26 +197,10 @@ public class WebViewProxyUtil {
                     }
                 }
             }
-        } catch (ClassNotFoundException e) {
-            Log.e(LOG_TAG, "Setting proxy with >= 4.4 API failed with error: " + e.getMessage());
-            return false;
-        } catch (NoSuchFieldException e) {
-            Log.e(LOG_TAG, "Setting proxy with >= 4.4 API failed with error: " + e.getMessage());
-            return false;
-        } catch (IllegalAccessException e) {
-            Log.e(LOG_TAG, "Setting proxy with >= 4.4 API failed with error: " + e.getMessage());
-            return false;
-        } catch (IllegalArgumentException e) {
-            Log.e(LOG_TAG, "Setting proxy with >= 4.4 API failed with error: " + e.getMessage());
-            return false;
-        } catch (NoSuchMethodException e) {
-            Log.e(LOG_TAG, "Setting proxy with >= 4.4 API failed with error: " + e.getMessage());
-            return false;
-        } catch (InvocationTargetException e) {
-            Log.e(LOG_TAG, "Setting proxy with >= 4.4 API failed with error: " + e.getMessage());
-            return false;
-        } catch (InstantiationException e) {
-            Log.e(LOG_TAG, "Setting proxy with >= 4.4 API failed with error: " + e.getMessage());
+        } catch (ClassNotFoundException | NoSuchFieldException | IllegalAccessException |
+                IllegalArgumentException | NoSuchMethodException | InvocationTargetException |
+                InstantiationException e) {
+            Log.e(LOG_TAG, "Setting proxy with >= 4.4 API failed with error: ", e);
             return false;
         }
 
@@ -259,7 +243,7 @@ public class WebViewProxyUtil {
                 }
             }
         } catch (Exception e) {
-            Log.e(LOG_TAG, "Setting proxy with >= 5.0 API failed with " + e.getClass().getName() + ": " + e.getMessage());
+            Log.e(LOG_TAG, "Setting proxy with >= 5.0 API failed with", e);
             return false;
         }
         Log.d(LOG_TAG, "Setting proxy with >= 5.0 API successful!");
