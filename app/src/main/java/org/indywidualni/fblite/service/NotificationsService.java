@@ -205,7 +205,7 @@ public class NotificationsService extends Service {
                         .first();
             } catch (IllegalArgumentException | IOException ex) {
                 Log.i("CheckNotificationsTask", "Cookie sync problem occurred", ex);
-                if (!syncProblemOccurred) {
+                if (ex instanceof IllegalArgumentException && !syncProblemOccurred) {
                     syncProblemToast();
                     syncProblemOccurred = true;
                 }
@@ -298,7 +298,7 @@ public class NotificationsService extends Service {
                 return message.html();
             } catch (IllegalArgumentException | IOException ex) {
                 Log.i("CheckMessagesTask", "Cookie sync problem occurred", ex);
-                if (!syncProblemOccurred) {
+                if (ex instanceof IllegalArgumentException && !syncProblemOccurred) {
                     syncProblemToast();
                     syncProblemOccurred = true;
                 }
