@@ -9,6 +9,11 @@ Face Slim is an unofficial Facebook application for Android devices that resembl
 ## Changelog
 & what makes the application awesome:
 
+**3.2**
+* TOR support introduced (thanks [Nutomic](https://github.com/Nutomic))
+* Notification opens the specific link again
+* Turkish added (thanks to [Erdener](https://github.com/Erdener))
+
 **3.1**
 * Show notification images
 * Add current URL to home screen
