@@ -160,5 +160,7 @@
     <string name="no">Nie</string>
     <string name="version">Wersja %s</string>
     <string name="label">Etykieta</string>
+    <string name="use_tor_title">Używaj Tor &#8635;</string>
+    <string name="use_tor_summary">Wymuś ruch przez Tor celem większej prywatności. Wymaga Orbot.</string>
 
 </resources>

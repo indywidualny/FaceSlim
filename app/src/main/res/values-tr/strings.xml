@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingTranslation">
+
+    <!-- Strings to translate during creation of a new translation -->
+    <string name="app_name">Face Slim</string>
+    <string name="image_chooser">Resim Seçici</string>
+    <string name="loading_link">Bir bağlantı açılıyor</string>
+    <string name="applying_changes">Değişiklikler uygulanıyor</string>
+
+    <string-array name="item_array">
+        <item>Haber Kaynağı (Ana Sayfa)</item>
+        <item>Messenger.com</item>
+        <item>Sohbet (Çevrimiçi Arkadaşlar)</item>
+        <item>Gruplar</item>
+        <item>Etkinlikler</item>
+        <item>Uygulama Ayarları</item>
+        <item>Hakkında ve Geliştiriciler</item>
+        <item>Şimdiki adresi kopyala</item>
+        <item>Çalıştırma kısayolu ekle</item>
+        <item>Çık</item>
+        <item>En Yukarı Çık\\u0020 ↑</item>
+    </string-array>
+
+    <string name="author">Krzysztof \'Koras\' Grabowski tarafından</string>
+    <string name="title_activity_settings">Ayarlar</string>
+    <string name="title_activity_about">Hakkında ve Geliştiriciler</string>
+    <string name="preference_category1">Arayüz</string>
+    <string name="preference_category2">Gelişmiş Ayarlar</string>
+    <string name="progress_bar">İşlem çubuğu</string>
+    <string name="transparent_nav">Saydam gezinti çubuğu  ↻</string>
+    <string name="transparent_nav_description">KitKat ve Lollipop. Saydam sistem gezinti tuşları.</string>
+    <string name="clear_cache">Önbelleği temizle</string>
+    <string name="clear_cache_description">Uygulama önbelleğini temizle. Bu ayrıca oturumunuzu kapatacaktır.</string>
+    <string name="email_author">Benimle iletişime geç</string>
+    <string name="choose_email_client">E-posta istemcisini seç</string>
+    <string name="notifications">Bildirimler</string>
+    <string name="no_network">Çevrim dışısın ;)</string>
+    <string name="hardware_acceleration">Donanım Hızlandırması ↻</string>
+    <string name="hardware_acceleration_description">Yalnızca düşük hafızalı cihazlarda devre dışı bırakın. Videolar çalışmayabilir.</string>
+    <string name="share_link">Bağlantıyı paylaş</string>
+    <string name="long_clicks">Uzun tıklamalar</string>
+    <string name="long_clicks_description">Paylaşmak için bağlantıya ya da resim bağlantısına uzun tıkla.</string>
+    <string name="me_google_play">Google Play</string>
+    <string name="preference_category3">Deneysel</string>
+    <string name="dark_theme">Koyu tema</string>
+    <string name="dark_theme_description">Facebook\'u siyaha çevir.</string>
+    <string name="fixed_nav">Sabitlenmiş mavi çubuk</string>
+    <string name="fixed_nav_description">Facebook gezinti çubuğu her zaman yukarıda.</string>
+    <string name="facebook_zero">Facebook Zero</string>
+    <string name="facebook_zero_description">Veri ücretlendirmesi yok. GSM sağlayıcıya bağlı. Mobil ağ bağlantılarında çalışır.</string>
+    <string name="facebook_zero_active">Facebook Zero etkin</string>
+    <string name="load_extra">Harici resimleri yükle</string>
+    <string name="load_extra_description">Harici resimleri uygulama içinde aç. Şu anda yalnızca birkaç sayfa destekleniyor.</string>
+    <string name="preference_category4">Ek</string>
+    <string name="quick_guide">Hızlı Başlangıç Kılavuzu</string>
+    <string name="messages">Mesajlar</string>
+    <string name="donate_paypal">Bağış yap\\u0020 –\\u0020 PayPal</string>
+    <string name="donate_google">Bağış yap\\u0020 –\\u0020 Google</string>
+    <string name="paypal_url" formatted="false">https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=koras%2eevil%40gmail%2ecom&amp;lc=GB&amp;item_name=Krzysztof%20Grabowski&amp;currency_code=USD&amp;bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted</string>
+
+    <string-array name="drawerPosTitles">
+        <item>sol</item>
+        <item>sağ</item>
+    </string-array>
+
+    <string name="drawer_pos">Kayan menü konumu ↻</string>
+    <string name="drawer_pos_description">Menü ekranın %s tarafında.</string>
+    <string name="preference_category5">Bildirimler</string>
+    <string name="notifications_feed_url">Bildirimler beslemesi</string>
+    <string name="interval_pref">Kontrol etmek için zaman aralığı</string>
+    <string name="interval_pref_description">Bildirim kaynağı %s bir kontrol edilecek.</string>
+    <string name="activate_notifications">Bildirimleri etkinleştir</string>
+    <string name="get_feed">Bildirim beslemelerini al</string>
+    <string name="get_feed_description">Alana tıkla, sana özel bildirim RSS\'sini bul ve yukarıya yapıştır.</string>
+    <string name="notifications_service_created">Bildirimler etkin</string>
+    <string name="notifications_settings">Bildirim ayarları</string>
+    <string name="notifications_settings_description">Ek ayarlar. Zaman aralığını seç; sesleri, LEDi ve titreşimi ayarla.</string>
+
+    <string-array name="intervalPrefTitles">
+        <item>1 dakika</item>
+        <item>2 dakika</item>
+        <item>5 dakika</item>
+        <item>15 dakika</item>
+        <item>30 dakika</item>
+        <item>1 saat</item>
+        <item>3 saat</item>
+        <item>6 saat</item>
+    </string-array>
+
+    <string name="all_notifications">Tüm bildirimler</string>
+    <string name="notification_sound">Bildirim sesi</string>
+    <string name="notification_sound_description">Bir zil sesini ya da sessizi seçin: \\u0020</string>
+    <string name="silent">Ses yok</string>
+    <string name="vibrate">Titreşimler</string>
+    <string name="led_light">LED ışık</string>
+    <string name="notifications_extra">Ek</string>
+    <string name="notifications_everywhere">Her zaman bildir</string>
+    <string name="notifications_everywhere_description">Uygulamanın ana ekranında olduğunuzda dahi.</string>
+    <string name="setup_notifications">Bildirimleri ayarlamak için uygulama ayarlarını ziyaret et</string>
+    <string name="no_images">Resimleri devre dışı bırak ↻</string>
+    <string name="no_images_description">Hiçbir resmi yükleme. Veri kullanımını çok büyük miktarda düşürür.</string>
+    <string name="no_storage_permission">Bu özelliği kullanmak için depolama iznini verin</string>
+    <string name="basic_mode">Temel mod</string>
+    <string name="basic_mode_description">Standart olan yerine temel ağ sayfasını kullan. Koyu tema devre dışı bırakılmalıdır. Hızlı bir bağlantıda çalışmayabilir.</string>
+    <string name="preference_category6">Haber Kaynağı</string>
+    <string name="hide_sponsored">Bazı sponsorlu gönderileri gizle</string>
+    <string name="hide_sponsored_description">Sponsorlu gönderilerden ve reklamlardan hoşlanmıyoruz.</string>
+    <string name="hide_people">Tanıyor olabileceğiniz kişiler\'i gizle</string>
+    <string name="hide_people_description">Daha temiz kaynak, daha fazla alan.</string>
+    <string name="hide_news_feed">Haber Kaynağı\'nı gizle</string>
+    <string name="hide_news_feed_description">[…] dikkatinin dağılmasından / gecikmeden kaçınmak için.</string>
+    <string name="message_notifications">Mesaj bildirimleri</string>
+    <string name="you_have_one_message">Bir mesajınız var.</string>
+    <string name="you_have_n_messages">%d mesajınız var.</string>
+    <string name="special_thanks_notifications">Bildirimlerle ilgili yardımlarından dolayı özel teşekkürler:</string>
+    <string name="sync_problem">Çerezler eşzamanlanamıyor. İlk çalıştırma, değil mi? Lütfen yalnızca uygulamayı yeniden başlatın :)</string>
+    <string name="interval_pref_description_new">Bildirimler %s bir kontrol edilecek.</string>
+    <string name="facebook_notifications">Facebook bildirimleri</string>
+    <string name="notification_sound_msg">Mesaj sesi</string>
+    <string name="crash_toast_text">Face Slim: Birşey çok yanlış. Çökme raporu hazırlanıyor.</string>
+    <string name="crash_dialog_title">Face Slim çöktü</string>
+    <string name="crash_dialog_text">Uygulamayı durmaya zorlarken beklenmeyen bir hata oluştu. Lütfen hata verisini bana göndererek bunu çözmeme yardım edin. Tüm yapmanız gereken Tamam\'a basmak ve bir e-posta göndermektir.</string>
+    <string name="crash_dialog_comment_prompt">Sorunla ilgili yorumlarınızı aşağıya ekleyebilirsiniz:</string>
+    <string name="file_logger">Kayıtları bir dosyaya kaydet</string>
+    <string name="file_logger_description">Bildirim Servisi kayıtlarını harici hafızaya kaydet. Depolama iznine ihtiyaç duyar.</string>
+    <string name="file_logger_needs_permission">Harici depolanmaya erişelemiyor. Kayıt kaydedilemedi.</string>
+    <string name="save_img">Resmi kaydet</string>
+    <string name="downloading_img">Resim indiriliyor…</string>
+    <string name="download_manager_disabled">DownloadManager devre dışı. Lütfen etkinleştirin.</string>
+    <string name="cannot_access_storage">Harici depolama alanına erişilemiyor</string>
+    <string name="file_cannot_be_saved">Bir dosya kaydedilemedi</string>
+    <string name="camera_exception">Kamerayla ilgili sorunlar</string>
+    <string name="offline_mode">Çevrim dışı modu</string>
+    <string name="offline_mode_enable">Çevrim dışı modunu etkinleştir</string>
+    <string name="offline_mode_description">İnternet bağlantısı olmadığında sayfayı önbellekten ve veritabanından yüklemeyi dene.</string>
+    <string name="loading_offline_database">Sayfa çevrimdışı veritabanından yükleniyor.</string>
+    <string name="offline_keep_max">En fazla saklanacak sayfa</string>
+    <string name="offline_keep_max_description">Çevrim içi ziyaret edilen sayfalar eşzamansız olarak veritabanına kaydedildiğinde. Öntanımlı değer (en son) 10 sayfadır.</string>
+    <string name="offline_dummy_description">Şu anki sayfanın kaynak kodu veritabanına eşzamansız olarak kaydedildi. Bir kopyası bulunduğuna değiştirilecek. Sayfayı zorla güncellemek için yenileyin. Dinamik olarak yüklenen bir içerik için çalışmaz.</string>
+    <string name="keyboard_fix">Üste binen klavye çözümü ↻</string>
+    <string name="offline_database_empty">Çevrim dışı veritabanı boş</string>
+    <string name="no_location_permission">Bu özelliği kullanmak için konum iznini verin</string>
+    <string name="location_access">Konumu etkinleştir</string>
+    <string name="custom_user_agent">Özel Kullanıcı Aracısı ↻</string>
+    <string name="custom_user_agent_description">Kendi Kullanıcı Aracısı Dizgini kullan.</string>
+    <string name="custom_user_agent_hint">Öntanımlı için boş bırak</string>
+    <string name="touch_mode">Dokunma modu</string>
+    <string name="touch_mode_description">touch.facebook.com ağ adresini kullan.</string>
+    <string name="new_version_detected">Yeni uygulama sürümü var</string>
+    <string name="check_for_updates">Uygulama güncellemelerini kontrol et</string>
+    <string name="font_size">Metin ölçeği</string>
+    <string name="font_size_description">Metin boyutunu değiştir (yüzde).</string>
+    <string name="font_size_hint">100, %100\'dür.</string>
+    <string name="most_recent">En yeniler ile başla</string>
+    <string name="most_recent_description">Bazen bunu tamamen etkinleştirmek için Facebook menünüzden de en yeni gönderilerin seçilmesi gerekir.</string>
+    <string name="really_quit_question">Gerçekten çıkmak istiyor musun?</string>
+    <string name="confirm_exit">Uygulamadan çıkışı doğrula</string>
+    <string name="yes">Evet</string>
+    <string name="no">Hayır</string>
+    <string name="use_tor_title">Tor kullan ↻</string>
+    <string name="use_tor_summary">Artırılmış gizlilik için tüm trafiği Tor üzerine zorla. Orbot gereklidir.</string>
+    <string name="version">Sürüm %s</string>
+    <string name="label">Etiket</string>
+
+    <string name="not_found_offline" formatted="false"><![CDATA[<div style=\"position: absolute;top: 50%;left: 50%;transform: translateX(-50%) translateY(-50%);\"><div><h1>Ne yazık ki bu sayfa çevrim dışı veritabanında bulunamadı</h1><h1>İpucu: geri gitmek için yalnızca iki kez geri gidin</h1></div></div>]]></string>
+
+</resources>

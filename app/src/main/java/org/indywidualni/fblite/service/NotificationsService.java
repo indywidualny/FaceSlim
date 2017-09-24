@@ -199,13 +199,13 @@ public class NotificationsService extends Service {
                         .cookie("https://mobile.facebook.com", cm.getCookie("https://mobile.facebook.com"))
                         .cookie("https://m.facebookcorewwwi.onion", cm.getCookie("https://m.facebookcorewwwi.onion"))
                         .get()
-                        .select("div.touchable-notification")
+                        .select("a.touchable")
                         .not("a._19no")
                         .not("a.button")
                         .first();
             } catch (IllegalArgumentException | IOException ex) {
                 Log.i("CheckNotificationsTask", "Cookie sync problem occurred", ex);
-                if (!syncProblemOccurred) {
+                if (ex instanceof IllegalArgumentException && !syncProblemOccurred) {
                     syncProblemToast();
                     syncProblemOccurred = true;
                 }
@@ -251,7 +251,10 @@ public class NotificationsService extends Service {
                             @Override
                             protected Void doInBackground (Void[] params){
                                 Bitmap picture = Miscellany.getBitmapFromURL(Miscellany.extractUrl(pictureStyle));
-                                notifier(text, BASE_URL + result.attr("href"), false, picture);
+                                String address = result.attr("href");
+                                if (!address.contains("https"))
+                                    address = BASE_URL + address;
+                                notifier(text, address, false, picture);
                                 return null;
                             }
                         }.execute();
@@ -295,7 +298,7 @@ public class NotificationsService extends Service {
                 return message.html();
             } catch (IllegalArgumentException | IOException ex) {
                 Log.i("CheckMessagesTask", "Cookie sync problem occurred", ex);
-                if (!syncProblemOccurred) {
+                if (ex instanceof IllegalArgumentException && !syncProblemOccurred) {
                     syncProblemToast();
                     syncProblemOccurred = true;
                 }

@@ -676,10 +676,16 @@ public class MainActivity extends Activity {
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
                         | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+
+        // keep screen on when in fullscreen mode
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
     private void showSystemUI() {
+        // disable keep screen on flag when leaving fullscreen mode
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
         contentMain.setSystemUiVisibility(previousUiVisibility);
         // fake a configuration change to set the right padding
         onConfigurationChanged(getResources().getConfiguration());
