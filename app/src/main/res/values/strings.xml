@@ -124,7 +124,7 @@
     <string name="you_have_one_message">You have one message.</string>
     <string name="you_have_n_messages">You have %d messages.</string>
     <string name="special_thanks_notifications">Special thanks for help with notifications:</string>
-    <string name="sync_problem">Cookies cannot be synced. First run, yeah? Please just restart the app :)</string>
+    <string name="sync_problem">Cookies cannot be synced. First run, yeah? Please just restart Face Slim :)</string>
     <string name="interval_pref_description_new">Notifications will be checked every %s.</string>
     <string name="facebook_notifications">Facebook notifications</string>
     <string name="notification_sound_msg">Message sound</string>
