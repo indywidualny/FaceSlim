@@ -128,25 +128,7 @@ public class MyWebViewClient extends WebViewClient {
         }
     }
 
-    @SuppressWarnings("deprecation")
-    @Override
-    public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-        // refresh on connection error (sometimes there is an error even when there is a network connection)
-        if (Connectivity.isConnected(context) && !failingUrl.contains("edge-chat") && !failingUrl.contains("akamaihd")
-                && !failingUrl.contains("atdmt") && !refreshed) {
-            view.loadUrl(failingUrl);
-            // when network error is real do not reload url again
-            refreshed = true;
-        }
-    }
-
-    @TargetApi(android.os.Build.VERSION_CODES.M)
-    @Override
-    public void onReceivedError(WebView view, WebResourceRequest req, WebResourceError err) {
-        // redirect to deprecated method, so we can use it in all SDK versions
-        onReceivedError(view, err.getErrorCode(), err.getDescription().toString(), req.getUrl().toString());
-    }
-
+   
     @Override
     public void onPageFinished(WebView view, String url) {
         if (url.contains("messenger.com"))
