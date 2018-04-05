@@ -45,7 +45,7 @@
     <string name="email_author">Contact me</string>
     <string name="choose_email_client">Choose e-mail client</string>
     <string name="notifications">Notifications</string>
-    <string name="no_network">You are offline ;)</string>
+    <string name="no_network">You are offline</string>
     <string name="hardware_acceleration">Hardware Acceleration &#8635;</string>
     <string name="hardware_acceleration_description">Disable it only on low memory devices. Videos may not work.</string>
     <string name="share_link">Share the link</string>
