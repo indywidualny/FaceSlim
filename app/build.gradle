@@ -24,10 +24,10 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:support-v4:25.3.1'
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'org.jsoup:jsoup:1.9.2'
-    compile 'ch.acra:acra:4.9.0'
-    compile 'com.github.johnkil.android-appmsg:appmsg:1.2.0'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:support-v4:25.3.1'
+    implementation 'com.android.support:appcompat-v7:25.3.1'
+    implementation 'org.jsoup:jsoup:1.9.2'
+    implementation 'ch.acra:acra:4.9.0'
+    implementation 'com.github.johnkil.android-appmsg:appmsg:1.2.0'
 }
