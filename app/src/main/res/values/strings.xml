@@ -10,7 +10,7 @@
     <string name="get_feed_link" translatable="false">https://goo.gl/t3vJ33</string>
     <string name="facebook" translatable="false">Facebook</string>
     <string name="special_thanks_notifications_link" translatable="false"><a href="https://github.com/creativetrendsapps">Creative Trends</a></string>
-    <string name="predefined_user_agent" translatable="false">Mozilla/5.0 (BB10; Kbd) AppleWebKit/537.10+ (KHTML, like Gecko) Version/10.1.0.4633 Mobile Safari/537.10+</string>
+    <string name="predefined_user_agent" translatable="false">Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36</string>
 
     <!-- Strings to translate during creation of a new translation -->
     <string name="app_name">Face Slim</string>
@@ -45,7 +45,7 @@
     <string name="email_author">Contact me</string>
     <string name="choose_email_client">Choose e-mail client</string>
     <string name="notifications">Notifications</string>
-    <string name="no_network">You are offline ;)</string>
+    <string name="no_network">You are offline</string>
     <string name="hardware_acceleration">Hardware Acceleration &#8635;</string>
     <string name="hardware_acceleration_description">Disable it only on low memory devices. Videos may not work.</string>
     <string name="share_link">Share the link</string>
@@ -124,7 +124,7 @@
     <string name="you_have_one_message">You have one message.</string>
     <string name="you_have_n_messages">You have %d messages.</string>
     <string name="special_thanks_notifications">Special thanks for help with notifications:</string>
-    <string name="sync_problem">Cookies cannot be synced. First run, yeah? Please just restart the app :)</string>
+    <string name="sync_problem">Cookies cannot be synced. First run, yeah? Please just restart Face Slim :)</string>
     <string name="interval_pref_description_new">Notifications will be checked every %s.</string>
     <string name="facebook_notifications">Facebook notifications</string>
     <string name="notification_sound_msg">Message sound</string>

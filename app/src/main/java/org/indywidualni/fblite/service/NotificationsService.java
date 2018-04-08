@@ -193,18 +193,29 @@ public class NotificationsService extends Service {
         private Element getElement(String connectUrl) {
             try {
                 CookieManager cm = CookieManager.getInstance();
-                return Jsoup.connect(connectUrl)
-                        .userAgent(userAgent).timeout(JSOUP_TIMEOUT)
-                        .proxy(Miscellany.getProxy(preferences))
-                        .cookie("https://mobile.facebook.com", cm.getCookie("https://mobile.facebook.com"))
-                        .cookie("https://m.facebookcorewwwi.onion", cm.getCookie("https://m.facebookcorewwwi.onion"))
-                        .get()
-                        .select("a.touchable")
-                        .not("a._19no")
-                        .not("a.button")
-                        .first();
+                if (preferences.getBoolean("use_tor", false)) {
+                    return Jsoup.connect(connectUrl)
+                            .userAgent(userAgent).timeout(JSOUP_TIMEOUT)
+                            .proxy(Miscellany.getProxy(preferences))
+                            .cookie("https://mobile.facebook.com", cm.getCookie("https://mobile.facebook.com"))
+                            .cookie("https://m.facebookcorewwwi.onion", cm.getCookie("https://m.facebookcorewwwi.onion"))
+                            .get()
+                            .select("a.touchable")
+                            .not("a._19no")
+                            .not("a.button")
+                            .first();
+                } else {
+                    return Jsoup.connect(connectUrl)
+                            .userAgent(userAgent).timeout(JSOUP_TIMEOUT)
+                            .cookie("https://mobile.facebook.com", cm.getCookie("https://mobile.facebook.com"))
+                            .get()
+                            .select("a.touchable")
+                            .not("a._19no")
+                            .not("a.button")
+                            .first();
+                }
             } catch (IllegalArgumentException | IOException ex) {
-                Log.i("CheckNotificationsTask", "Cookie sync problem occurred", ex);
+                Log.i("CheckNotificationsTask", "Cookie sync problem or IOException", ex);
                 if (ex instanceof IllegalArgumentException && !syncProblemOccurred) {
                     syncProblemToast();
                     syncProblemOccurred = true;
@@ -285,19 +296,29 @@ public class NotificationsService extends Service {
         private String getNumber(String connectUrl) {
             try {
                 CookieManager cm = CookieManager.getInstance();
-                Elements message = Jsoup.connect(connectUrl)
-                        .userAgent(userAgent)
-                        .proxy(Miscellany.getProxy(preferences))
-                        .timeout(JSOUP_TIMEOUT)
-                        .cookie("https://m.facebook.com", cm.getCookie("https://m.facebook.com"))
-                        .cookie("https://m.facebookcorewwwi.onion", cm.getCookie("https://m.facebookcorewwwi.onion"))
-                        .get()
-                        .select("div#viewport").select("div#page").select("div._129-")
-                        .select("#messages_jewel").select("span._59tg");
-
+                Elements message;
+                if (preferences.getBoolean("use_tor", false)) {
+                    message = Jsoup.connect(connectUrl)
+                            .userAgent(userAgent)
+                            .proxy(Miscellany.getProxy(preferences))
+                            .timeout(JSOUP_TIMEOUT)
+                            .cookie("https://m.facebook.com", cm.getCookie("https://m.facebook.com"))
+                            .cookie("https://m.facebookcorewwwi.onion", cm.getCookie("https://m.facebookcorewwwi.onion"))
+                            .get()
+                            .select("div#viewport").select("div#page").select("div._129-")
+                            .select("#messages_jewel").select("span._59tg");
+                } else {
+                    message = Jsoup.connect(connectUrl)
+                            .userAgent(userAgent)
+                            .timeout(JSOUP_TIMEOUT)
+                            .cookie("https://m.facebook.com", cm.getCookie("https://m.facebook.com"))
+                            .get()
+                            .select("div#viewport").select("div#page").select("div._129-")
+                            .select("#messages_jewel").select("span._59tg");
+                }
                 return message.html();
             } catch (IllegalArgumentException | IOException ex) {
-                Log.i("CheckMessagesTask", "Cookie sync problem occurred", ex);
+                Log.i("CheckMessagesTask", "Cookie sync problem or IOException", ex);
                 if (ex instanceof IllegalArgumentException && !syncProblemOccurred) {
                     syncProblemToast();
                     syncProblemOccurred = true;
