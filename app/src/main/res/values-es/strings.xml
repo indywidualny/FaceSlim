@@ -51,7 +51,7 @@
     <string name="me_google_play">Google Play</string>
     <string name="preference_category3">Experimental</string>
     <string name="dark_theme">Tema oscuro</string>
-    <string name="dark_theme_description">Vestir Facebook de negro.</string>
+    <string name="dark_theme_description">Cambiar a Facebook Negro.</string>
     <string name="fixed_nav">Corregir barra azul</string>
     <string name="fixed_nav_description">Barra de navegación de Facebook siempre arriba.</string>
     <string name="facebook_zero">Facebook Zero</string>
@@ -79,8 +79,8 @@
     <string name="drawer_pos_description">El menú está en el %s de la pantalla.</string>
     <string name="preference_category5">Notificaciones</string>
     <string name="notifications_feed_url">Fuente de notificaciones</string>
-    <string name="interval_pref">Intervalo de comprobación</string>
-    <string name="interval_pref_description">La fuente de notificaciones será comprobada cada %s.</string>
+    <string name="interval_pref">Intervalo de chequeo</string>
+    <string name="interval_pref_description">Las notificaciones van a ser chequeadas cada %s.</string>
     <string name="activate_notifications">Activar notificaciones</string>
     <string name="get_feed">Obtener su fuente de notificaciones</string>
     <string name="get_feed_description">Pulse este ítem, obtenga su fuente web RSS única, copie la dirección URL y peguela en el campo superior.</string>
@@ -117,7 +117,7 @@
     <string name="confirm_exit">Confirmar al salir</string>
     <string name="check_for_updates">Comprobar actualizacioes</string>
     <string name="font_size">Escala de texto</string>
-    <string name="font_size_description">Cambia el tamaño del texto (en porciento).</string>
+    <string name="font_size_description">Cambia el tamaño del texto (en porcentaje).</string>
     <string name="font_size_hint">100 es 100%</string>
     <string name="location_access">Habilitar geolocalización.</string>
     <string name="preference_category6">Noticias</string>
@@ -154,7 +154,7 @@
     <string name="no_storage_permission">Debes aceptar el acceso a tus archivos para usar esta característica</string>
     <string name="really_quit_question">¿Realmente quieres salir?</string>
     <string name="special_thanks_notifications">Agradecimientos especiales por haber ayudado con las notificaciones:</string>
-    <string name="sync_problem">No se puede sincronizar las cookies. ¿Es la primera vez aquí, cierto?, Por favor reinicia la aplicación :)</string>
+    <string name="sync_problem">No se puede sincronizar las cookies. ¿Primera vez que la ejecuta, cierto?, Por favor reinicia la aplicación :)</string>
     <string name="use_tor_summary">Obliga el uso de la red Tor para todo el tráfico. Necesita Orbot.</string>
     <string name="use_tor_title">Usar la red Tor &#8635;</string>
     <string name="version">Versión %s</string>
