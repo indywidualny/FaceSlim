@@ -6,5 +6,6 @@ file_filter = app/src/main/res/values-<lang>/strings.xml
 minimum_perc = 0
 source_file = app/src/main/res/values/strings.xml
 source_lang = en
+trans.zh_TW = app/src/main/res/values-zh-rTW/strings.xml
 type = ANDROID
 
