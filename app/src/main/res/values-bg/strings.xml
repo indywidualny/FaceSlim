@@ -2,6 +2,7 @@
 <resources
     xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="MissingTranslation">
+
     <!-- Strings to translate during creation of a new translation -->
     <string name="app_name">Face Slim</string>
     <string name="image_chooser">Избери изображение</string>
@@ -78,7 +79,7 @@
 
     <string-array name="intervalPrefTitles">
         <item>1 минути</item>
-		<item>2 минути</item>
+        <item>2 минути</item>
         <item>5 минути</item>
         <item>15 минути</item>
         <item>30 минути</item>
@@ -109,7 +110,6 @@
     <string name="hide_people_description">Скрива "Хора, които можеби познавам".</string>
     <string name="hide_news_feed">Скрий Новини</string>
     <string name="hide_news_feed_description">[…] за избягване на разсейването.</string>
-
     <string name="message_notifications">Уведмоления за съобщения</string>
     <string name="you_have_one_message">Имаш едно ново съобщение.</string>
     <string name="you_have_n_messages">Имаш %d нови съобщения</string>
@@ -127,13 +127,11 @@
     <string name="file_logger_needs_permission">Няма достъп до външния носител. Журналът не може да бъде запазен</string>
     <string name="save_img">Запази изображение</string>
     <string name="downloading_img">Сваляне изображение&#8230;</string>
-
     <string name="download_manager_disabled">Мениджърът за сваляне е забранен. Моля разрешете го.</string>
     <string name="cannot_access_storage">Няма достъп до външен носител</string>
     <string name="file_cannot_be_saved">Файлът не може да бъде запазен</string>
     <string name="camera_exception">Проблеми с камерата</string>
-	
-	<string name="offline_mode">Офлайн режим</string>
+    <string name="offline_mode">Офлайн режим</string>
     <string name="offline_mode_enable">Разреши Офлайн режим</string>
     <string name="offline_mode_description">Когато няма интернет връзка се опитай да заредиш страницата от локалния кеш и база.</string>
     <string name="not_found_offline" formatted="false"><![CDATA[<div style=\"position: absolute;top: 50%;left: 50%;transform: translateX(-50%) translateY(-50%);\"><div><h1>За съжаление тази страница не беше намерена в локалната база.</h1><h1>Съвет: За връщане натиснете назад два пъти</h1></div></div>]]></string>
@@ -163,5 +161,4 @@
     <string name="no">Не</string>
     <string name="use_tor_title">Използвай Tor &#8635;</string>
     <string name="use_tor_summary">Прекарва целия трафик през Tor за увеличена поверителност. Изисква Orbot.</string>
-
-</resources>
+    </resources>
