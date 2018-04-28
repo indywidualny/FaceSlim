@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingTranslation">
+
+    <!-- Strings to translate during creation of a new translation -->
     <string name="app_name">Face Slim</string>
     <string name="image_chooser">Bildwähler</string>
     <string name="loading_link">Link öffnen</string>
@@ -160,4 +164,5 @@
     <string name="use_tor_summary">Leitet den kompletten Traffic durch Tor für erhöhte Privatsphäre. Benötigt Orbot.</string>
     <string name="version">Version %s</string>
     <string name="label">Label</string>
+
 </resources>

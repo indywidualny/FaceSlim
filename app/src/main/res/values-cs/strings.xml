@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="MissingTranslation">
 
+    <!-- Strings to translate during creation of a new translation -->
     <string name="app_name">Face Slim</string>
     <string name="image_chooser">Výběr obrázku</string>
     <string name="loading_link">Otevírání odkazu</string>
@@ -23,7 +24,6 @@
     </string-array>
 
     <string name="author">by Krzysztof \'Koras\' Grabowski</string>
-
     <string name="title_activity_settings">Nastavení</string>
     <string name="title_activity_about">O aplikaci a vývojáři</string>
     <string name="preference_category1">Vzhled</string>
@@ -150,7 +150,7 @@
     <string name="touch_mode">Dotykový režim</string>
     <string name="touch_mode_description">Používá stránky touch.facebook.com.</string>
     <string name="new_version_detected">Je dostupná nová verze aplikace</string>
-    <string name="check_for_updates">Zkontrolovat aktualizace</string>    
+    <string name="check_for_updates">Zkontrolovat aktualizace</string>
     <string name="font_size">Velikost textu</string>
     <string name="font_size_description">Změnit velikost textu (v procentech).</string>
     <string name="font_size_hint">100 je 100%</string>
@@ -164,5 +164,5 @@
     <string name="use_tor_summary">Pro zajištění vyššího soukromí přenášet veškerý provoz přes Tor. Vyžaduje Orbot.</string>
     <string name="version">Verze %s</string>
     <string name="label">Popisek</string>
-    
+
 </resources>

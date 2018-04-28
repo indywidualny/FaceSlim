@@ -111,7 +111,7 @@
     <string name="hide_people_description">還您更乾淨的動態.更多的空間.</string>
     <string name="hide_news_feed">隱藏動態訊息</string>
     <string name="hide_news_feed_description">[…] 避免側錄以及節省您的寶貴時間.</string>
-	<string name="message_notifications">訊息通知</string>
+    <string name="message_notifications">訊息通知</string>
     <string name="you_have_one_message">您有一則新訊息.</string>
     <string name="you_have_n_messages">您有 %d 則新訊息.</string>
     <string name="special_thanks_notifications">特別感謝加入通知功能:</string>
@@ -160,8 +160,7 @@
     <string name="confirm_exit">確認離開本程式?</string>
     <string name="yes">嗯…</string>
     <string name="no">不要啊啊~</string>
-    <string name="use_tor_summary">強制透過Tor傳輸資料以增強安全性. 需要安裝Orbot.</string>
     <string name="use_tor_title">使用Tor連線 &#8635;</string>
+    <string name="use_tor_summary">強制透過Tor傳輸資料以增強安全性. 需要安裝Orbot.</string>
     <string name="version">版本 %s</string>
-
-</resources>
+    </resources>

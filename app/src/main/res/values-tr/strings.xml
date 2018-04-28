@@ -135,6 +135,7 @@
     <string name="offline_mode">Çevrim dışı modu</string>
     <string name="offline_mode_enable">Çevrim dışı modunu etkinleştir</string>
     <string name="offline_mode_description">İnternet bağlantısı olmadığında sayfayı önbellekten ve veritabanından yüklemeyi dene.</string>
+    <string name="not_found_offline" formatted="false"><![CDATA[<div style=\"position: absolute;top: 50%;left: 50%;transform: translateX(-50%) translateY(-50%);\"><div><h1>Ne yazık ki bu sayfa çevrim dışı veritabanında bulunamadı</h1><h1>İpucu: geri gitmek için yalnızca iki kez geri gidin</h1></div></div>]]></string>
     <string name="loading_offline_database">Sayfa çevrimdışı veritabanından yükleniyor.</string>
     <string name="offline_keep_max">En fazla saklanacak sayfa</string>
     <string name="offline_keep_max_description">Çevrim içi ziyaret edilen sayfalar eşzamansız olarak veritabanına kaydedildiğinde. Öntanımlı değer (en son) 10 sayfadır.</string>
@@ -163,7 +164,5 @@
     <string name="use_tor_summary">Artırılmış gizlilik için tüm trafiği Tor üzerine zorla. Orbot gereklidir.</string>
     <string name="version">Sürüm %s</string>
     <string name="label">Etiket</string>
-
-    <string name="not_found_offline" formatted="false"><![CDATA[<div style=\"position: absolute;top: 50%;left: 50%;transform: translateX(-50%) translateY(-50%);\"><div><h1>Ne yazık ki bu sayfa çevrim dışı veritabanında bulunamadı</h1><h1>İpucu: geri gitmek için yalnızca iki kez geri gidin</h1></div></div>]]></string>
 
 </resources>
