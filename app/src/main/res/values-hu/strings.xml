@@ -1,124 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="activate_notifications">Értesítések aktiválása</string>
-    <string name="all_notifications">Minden értesítés</string>
+<resources
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingTranslation">
+
+    <!-- Strings to translate during creation of a new translation -->
     <string name="app_name">Face Slim</string>
-    <string name="applying_changes">Változások alkalmazása</string>
-    <string name="author">Krzysztof \'Koras\' Grabowski által</string>
-    <string name="basic_mode">Alap mód</string>
-    <string name="basic_mode_description">Egy egyszerűbb weboldal használata a normál helyett. A sőtét témát ki kell kapcsolni. Gyors kapcsolat esetén nem működhet.</string>
-    <string name="camera_exception">Problémák a kamerával</string>
-    <string name="cannot_access_storage">Nincs hozzáférés a külső tárhelyhez</string>
-    <string name="check_for_updates">Frissítések keresése</string>
-    <string name="choose_email_client">Válasszon e-mail klienst</string>
-    <string name="clear_cache">Cache tárhely ürítése</string>
-    <string name="clear_cache_description">Alkalmazás-cache ürítése. Egyúttal kijelentkeztet.</string>
-    <string name="confirm_exit">Kilépés megerősítése</string>
-    <string name="crash_dialog_comment_prompt">Alább megjegyzést fűzhet a problémához:</string>
-    <string name="crash_dialog_text">Váratlan hiba történt, ami megállásra kényszerítette a programot. Kérem, segítsen a kijavításában azzal, hogy elküldi a hibaadatokat. Csupán annyit kell tennie, hogy az OK-ra nyom es küld egy e-mailt.</string>
-    <string name="crash_dialog_title">A Face Slim összeomlott</string>
-    <string name="crash_toast_text">Face Slim: Valami komoly probléma van. Hibajelentés előkészítése</string>
-    <string name="custom_user_agent">Egyedi User Agent ↻</string>
-    <string name="custom_user_agent_description">Saját User Agent String használata.</string>
-    <string name="custom_user_agent_hint">Alapértelmezetten üres</string>
-    <string name="dark_theme">Sötét téma</string>
-    <string name="dark_theme_description">Fekete háttér.</string>
-    <string name="download_manager_disabled">A DownloadManager le lett tiltva. Kérem, engedélyezze.</string>
-    <string name="downloading_img">Kép letöltése…</string>
-    <string name="drawer_pos">Becsúszó menü helyzete ↻</string>
-    <string name="drawer_pos_description">A menü a kijelző %s oldalán.</string>
-    <string name="email_author">Kapcsolat</string>
-    <string name="facebook_notifications">Facebook-értesítések</string>
-    <string name="facebook_zero">Facebook Zero</string>
-    <string name="facebook_zero_active">A Facebook Zero aktív</string>
-    <string name="facebook_zero_description">Nem számolják az adatforgalmat. Szolgáltatófüggő. Mobil adatkapcsolatnál működik.</string>
-    <string name="file_cannot_be_saved">Fájl nem menthető.</string>
-    <string name="file_logger">Naplók mentése fájlba</string>
-    <string name="file_logger_description">A Save Notification Service külső memóriába naplóz. Tárhelyhozzáférési engedélyre van szüksége.</string>
-    <string name="file_logger_needs_permission">Nincs hozzáférés a külső tárhelyhez. A napló nem menthető</string>
-    <string name="fixed_nav">Rögzített kék sáv</string>
-    <string name="fixed_nav_description">Facebook menüsáv mindig felül.</string>
-    <string name="font_size">Szövegméret</string>
-    <string name="font_size_description">Szövegméret változtatása (százalék).</string>
-    <string name="font_size_hint">A 100 100%-ot jelent</string>
-    <string name="get_feed">Értesítési feed fogadása</string>
-    <string name="get_feed_description">Kattintson a mezőbe, keresse meg az egyedi értesítési RSS címét, másolja és illessze be fentebb.</string>
-    <string name="hardware_acceleration">Hardveres gyorsítás ↻</string>
-    <string name="hardware_acceleration_description">Csak kevés memóriával rendelkező eszközökön tiltsa. A videók esetleg nem fognak működni.</string>
-    <string name="hide_news_feed">Hírfolyam elrejtése</string>
-    <string name="hide_news_feed_description">[…] figyelemelterelés / halogatás elkerülése végett.</string>
-    <string name="hide_people">"Emberek, akiket ismerhetsz" elrejtése</string>
-    <string name="hide_people_description">Tisztább hírfolyam, több hely.</string>
-    <string name="hide_sponsored">Egyes szponzorált tartalmak elrejtése</string>
-    <string name="hide_sponsored_description">Nem szeretjük a szponzorált bejegyzéseket és a reklámokat.</string>
     <string name="image_chooser">Képválasztó</string>
-    <string name="interval_pref">Ellenőrzési időköz</string>
-    <string name="interval_pref_description">Az értesítési folyamot az alábbi gyakorisággal ellenőrizzük: %s.</string>
-    <string name="interval_pref_description_new">Az értesítéseket az alábbi gyakorisággal ellenőrizzük: %s.</string>
-    <string name="keyboard_fix">Átfedő billentyűzet javítása ↻</string>
-    <string name="led_light">LED jelzőfény</string>
-    <string name="load_extra">Külső képek betöltése</string>
-    <string name="load_extra_description">Külső képek betöltése az alkalmazásban. Jelenleg csupán egy kevés oldal támogatott.</string>
     <string name="loading_link">Link megnyitása</string>
-    <string name="loading_offline_database">Oldal betöltése offline adatbázisból</string>
-    <string name="location_access">Helymeghatározás engedélyezése</string>
+    <string name="applying_changes">Változások alkalmazása</string>
+
+    <string-array name="item_array">
+        <item>Hírfolyam (Kezdőlap)</item>
+        <item>Messenger.com</item>
+        <item>Chat (Online barátok)</item>
+        <item>Csoportok</item>
+        <item>Események</item>
+        <item>App beállítások</item>
+        <item>Névjegy & Fejlesztő</item>
+        <item>Jelenlegi URL másolása</item>
+        <item>Parancsikon létrehozása</item>
+        <item>Leállítás</item>
+        <item>Ugrás az elejére\u0020 &#8593;</item>
+    </string-array>
+
+    <string name="author">készítette: Krzysztof \'Koras\' Grabowski</string>
+    <string name="title_activity_settings">Beállítások</string>
+    <string name="title_activity_about">Névjegy &amp; Fejlesztő</string>
+    <string name="preference_category1">Felület</string>
+    <string name="preference_category2">Haladó beállítások</string>
+    <string name="progress_bar">Folyamatsáv</string>
+    <string name="transparent_nav">Átlátszó Android menüsor &#8635;</string>
+    <string name="transparent_nav_description">KitKat és Lollipop. Átlátszóvá teszi a rendszer navigációs gombsorát.</string>
+    <string name="clear_cache">Cache ürítése</string>
+    <string name="clear_cache_description">Alkalmazás-cache ürítése. Egyben ki is léptet a Facebook-ról.</string>
+    <string name="email_author">Kapcsolat</string>
+    <string name="choose_email_client">Válassz e-mail klienst</string>
+    <string name="notifications">Értesítések</string>
+    <string name="no_network">Nincs kapcsolat</string>
+    <string name="hardware_acceleration">Hardveres gyorsítás &#8635;</string>
+    <string name="hardware_acceleration_description">Csak kevés memóriával rendelkező eszközökön tiltsd le. A videók esetleg nem fognak működni.</string>
+    <string name="share_link">Hivatkozás megosztása</string>
     <string name="long_clicks">Hosszú kattintások</string>
     <string name="long_clicks_description">Hosszú kattintás egy linken vagy képlinken a megosztáshoz.</string>
     <string name="me_google_play">Google Play</string>
-    <string name="message_notifications">Üzenetértesítések</string>
+    <string name="preference_category3">Kísérleti</string>
+    <string name="dark_theme">Sötét téma</string>
+    <string name="dark_theme_description">A Facebook feketévé változtatása.</string>
+    <string name="fixed_nav">Rögzített kék sáv</string>
+    <string name="fixed_nav_description">A Facebook menüsáv legyen mindig felül.</string>
+    <string name="facebook_zero">Facebook Zero</string>
+    <string name="facebook_zero_description">Nincs adatforgalmi díj. Szolgáltatófüggő. Mobil adatkapcsolatnál működik.</string>
+    <string name="facebook_zero_active">A Facebook Zero aktív</string>
+    <string name="load_extra">Külső képek betöltése</string>
+    <string name="load_extra_description">Külső képek betöltése az alkalmazáson belül. Egyelőre csak néhány oldal támogatott.</string>
+    <string name="preference_category4">Továbbiak</string>
+    <string name="quick_guide">Rövid útmutató</string>
     <string name="messages">Üzenetek</string>
-    <string name="most_recent">Kezdés a legfrissebb postokkal</string>
-    <string name="most_recent_description">Néha ennek a funkciónak a teljes aktiválásához a Facebook menüjében is a legfrissebb bejegyzéseket kell választani.</string>
-    <string name="new_version_detected">Új verzió érhető el</string>
-    <string name="no">Nem</string>
-    <string name="no_images">Képek letiltása ↻</string>
-    <string name="no_images_description">Semmilyen képet nem töltünk le. Drasztikusan csökkenti az adatforgalmat.</string>
-    <string name="no_location_permission">Ennek a funkciónak a használatához engedélyezze a helymeghatározást</string>
-    <string name="no_network">Nincs kapcsolat</string>
-    <string name="no_storage_permission">Ennek a funkciónak a használatához engedélyezze a tárhelyhozzáférést</string>
-    <string name="notification_sound">Értesítési hang</string>
-    <string name="notification_sound_description">Válasszon csengőhangot vagy némítás: \u0020</string>
-    <string name="notification_sound_msg">Üzenethang</string>
-    <string name="notifications">Értesítések</string>
-    <string name="notifications_everywhere">Mindig értesítsen</string>
-    <string name="notifications_everywhere_description">Akkor is, ha az alkalmazás főképernyőjén van.</string>
-    <string name="notifications_extra">Továbbiak</string>
+    <string name="donate_paypal">Adományozás\u0020 –\u0020 PayPal</string>
+    <string name="donate_google">Adományozás\u0020 –\u0020 Google</string>
+    <string name="paypal_url" formatted="false">https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=koras%2eevil%40gmail%2ecom&amp;lc=GB&amp;item_name=Krzysztof%20Grabowski&amp;currency_code=USD&amp;bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted</string>
+
+    <string-array name="drawerPosTitles">
+        <item>bal</item>
+        <item>jobb</item>
+    </string-array>
+
+    <string name="drawer_pos">Becsúszó menü helyzete ↻</string>
+    <string name="drawer_pos_description">A menü a kijelző %s oldalán legyen.</string>
+    <string name="preference_category5">Értesítések</string>
     <string name="notifications_feed_url">Értesítési folyam</string>
+    <string name="interval_pref">Ellenőrzés gyakorisága</string>
+    <string name="interval_pref_description">Az értesítési folyam ellenőrzésének gyakorisága: %s.</string>
+    <string name="activate_notifications">Értesítések aktiválása</string>
+    <string name="get_feed">Értesítési folyam fogadása</string>
+    <string name="get_feed_description">Kattints a mezőbe, keresd meg és másold vágólapra az egyedi értesítési RSS címed, majd illeszd be fentebb!</string>
     <string name="notifications_service_created">Az értesítések aktívak</string>
     <string name="notifications_settings">Értesítési beállítások</string>
     <string name="notifications_settings_description">További beállítások. Időintervallum, hangok, LED jelzőfény és rezgés beállítása.</string>
-    <string name="offline_database_empty">A helyi adatbázis üres</string>
-    <string name="offline_dummy_description">Az aktuális lap aszinkron mentésre kerül az adatbázisba. Ha duplikátumot találunk, lecserélésre kerül. Töltsön újra egy oldalt az erőltetett frissítéshez. Dinamikus tartalmakkal nem működik.</string>
-    <string name="offline_keep_max">A helyben tartott oldalak maximális száma</string>
-    <string name="offline_keep_max_description">Az online meglátogatott oldalak aszinkron mentésre kerülnek az adatbázisba. Alapértelmezetten a legutóbbi 10 oldal.</string>
-    <string name="offline_mode">Offline mód</string>
-    <string name="offline_mode_description">Ha nincs internetkapcsolat, megpróbáljuk gyorsítótárból és a helyi adatbázisból betölteni az oldalakat.</string>
-    <string name="offline_mode_enable">Offline mód engedélyezése</string>
-    <string name="preference_category1">Interfész</string>
-    <string name="preference_category2">Haladó beállítások</string>
-    <string name="preference_category3">Kísérleti</string>
-    <string name="preference_category4">Továbbiak</string>
-    <string name="preference_category5">Értesítések</string>
-    <string name="preference_category6">Hírfolyam</string>
-    <string name="progress_bar">Folyamatsáv</string>
-    <string name="quick_guide">Rövid útmutató</string>
-    <string name="really_quit_question">Biztosan ki akar lépni?</string>
-    <string name="save_img">Kép mentése</string>
-    <string name="setup_notifications">Menjen az alkalmazásbeállításokba az értesítések beállításához</string>
-    <string name="share_link">Link megosztása</string>
+
+    <string-array name="intervalPrefTitles">
+        <item>1 perc</item>
+        <item>2 perc</item>
+        <item>5 perc</item>
+        <item>15 perc</item>
+        <item>30 perc</item>
+        <item>1 óra</item>
+        <item>3 óra</item>
+        <item>6 óra</item>
+    </string-array>
+
+    <string name="all_notifications">Összes értesítés</string>
+    <string name="notification_sound">Értesítési hang</string>
+    <string name="notification_sound_description">Válassz csengőhangot vagy némítást: \u0020</string>
     <string name="silent">Nincs hang</string>
+    <string name="vibrate">Rezgés</string>
+    <string name="led_light">LED jelzőfény</string>
+    <string name="notifications_extra">Egyebek</string>
+    <string name="notifications_everywhere">Mindig értesítsen</string>
+    <string name="notifications_everywhere_description">Akkor is, ha az alkalmazás főképernyőjén van.</string>
+    <string name="setup_notifications">Menj az alkalmazás-beállításokba az értesítések beállításához</string>
+    <string name="no_images">Képek letiltása &#8635;</string>
+    <string name="no_images_description">Egy képet se töltsön le. Drasztikusan csökkenti az adatforgalmat.</string>
+    <string name="no_storage_permission">Ennek a funkciónak a használatához engedélyezd a tárhelyhozzáférést</string>
+    <string name="basic_mode">Alap mód</string>
+    <string name="basic_mode_description">Egy egyszerűbb weboldal használata a normál helyett. A sötét témát ki kell kapcsolni. Gyors kapcsolat esetén előfordulhat, hogy nem működik.</string>
+    <string name="preference_category6">Hírfolyam</string>
+    <string name="hide_sponsored">Egyes szponzorált tartalmak elrejtése</string>
+    <string name="hide_sponsored_description">Nem szeretjük a szponzorált bejegyzéseket és a reklámokat.</string>
+    <string name="hide_people">"Emberek, akiket ismerhetsz" elrejtése</string>
+    <string name="hide_people_description">Tisztább hírfolyam, több hely.</string>
+    <string name="hide_news_feed">Hírfolyam elrejtése</string>
+    <string name="hide_news_feed_description">[…] figyelemelterelés / halogatás elkerülése végett.</string>
+    <string name="message_notifications">Üzenetértesítések</string>
+    <string name="you_have_one_message">Egy üzeneted van.</string>
+    <string name="you_have_n_messages">%d db üzeneted van.</string>
     <string name="special_thanks_notifications">Külön köszönet az értesítésekhez nyújtott segítségért:</string>
-    <string name="sync_problem">A cookie-kat nem sikerült szinkronizálni. Első futás, igaz? Kérem, indítsa újra az alkalmazást.</string>
-    <string name="title_activity_about">Névjegy és Fejlesztés</string>
-    <string name="title_activity_settings">Beállítások</string>
+    <string name="sync_problem">A cookie-kat nem sikerült szinkronizálni. Első futtatás, igaz? Kérlek indítsd újra az alkalmazást.</string>
+    <string name="interval_pref_description_new">Az értesítések az alábbi gyakorisággal lesznek ellenőrizve: %s.</string>
+    <string name="facebook_notifications">Facebook-értesítések</string>
+    <string name="notification_sound_msg">Üzenethang</string>
+    <string name="crash_toast_text">Face Slim: Valami komoly probléma van. Hibajelentés előkészítése</string>
+    <string name="crash_dialog_title">A Face Slim összeomlott</string>
+    <string name="crash_dialog_text">Váratlan hiba miatt az alkalmazás leállt. Kérlek segíts a kijavításában azzal, hogy elküldöd a hibaadatokat. Csupán annyit kell tenned, hogy az OK-ra nyomsz, és elküldesz egy e-mailt.</string>
+    <string name="crash_dialog_comment_prompt">Alább megjegyzést fűzhetsz a problémához:</string>
+    <string name="file_logger">Naplók mentése fájlba</string>
+    <string name="file_logger_description">A Save Notification Service külső memóriába naplóz. Ehhez tárhelyhozzáférési engedélyre van szüksége.</string>
+    <string name="file_logger_needs_permission">Nincs hozzáférés a külső tárhelyhez. A naplót nem lehet elmenteni</string>
+    <string name="save_img">Kép mentése</string>
+    <string name="downloading_img">Kép letöltése&#8230;</string>
+    <string name="download_manager_disabled">A DownloadManager le lett tiltva. Kérlek engedélyezd!</string>
+    <string name="cannot_access_storage">Nincs hozzáférés a külső tárhelyhez</string>
+    <string name="file_cannot_be_saved">A fájlt nem lehet elmenteni</string>
+    <string name="camera_exception">Problémák a kamerával</string>
+    <string name="offline_mode">Offline mód</string>
+    <string name="offline_mode_enable">Offline mód engedélyezése</string>
+    <string name="offline_mode_description">Ha nincs internetkapcsolat, megpróbáljuk gyorsítótárból és a helyi adatbázisból betölteni az oldalakat.</string>
+    <string name="not_found_offline" formatted="false"><![CDATA[<div style=\"position: absolute;top: 50%;left: 50%;transform: translateX(-50%) translateY(-50%);\"><div><h1>Sajnos az oldal nem található az offline adatbázisban</h1><h1>Tipp: a visszatéréshez menj vissza kétszer</h1></div></div>]]></string>
+    <string name="loading_offline_database">Oldal betöltése offline adatbázisból</string>
+    <string name="offline_keep_max">Megtartott oldalak maximális száma</string>
+    <string name="offline_keep_max_description">Az online meglátogatott oldalak aszinkron mentésre kerülnek az adatbázisba. Alapértelmezetten a legutóbbi 10 oldal.</string>
+    <string name="offline_dummy_description">Az aktuális lap aszinkron mentésre kerül az adatbázisba. Ha duplikátumot találunk, lecserélésre kerül. Tölts újra egy oldalt az erőltetett frissítéshez. Dinamikus tartalmakkal nem működik.</string>
+    <string name="keyboard_fix">Átfedő billentyűzet javítása &#8635;</string>
+    <string name="offline_database_empty">A helyi adatbázis üres</string>
+    <string name="no_location_permission">Ennek a funkciónak a használatához engedélyezd a helymeghatározást</string>
+    <string name="location_access">Helymeghatározás engedélyezése</string>
+    <string name="custom_user_agent">Egyedi User Agent &#8635;</string>
+    <string name="custom_user_agent_description">Saját User Agent String használata.</string>
+    <string name="custom_user_agent_hint">Üres: alapértelmezett</string>
     <string name="touch_mode">Touch mód</string>
     <string name="touch_mode_description">A touch.facebook.com weboldal használata.</string>
-    <string name="transparent_nav">Átlátszó Android menüsor ↻</string>
-    <string name="transparent_nav_description">KitKat és Lollipop. Átlátszóvá teszi a rendszer navigációs gombsorát.</string>
-    <string name="use_tor_summary">Minden adatforgalmat Toron keresztül kényszeríteni. Orbotot igényel.</string>
-    <string name="use_tor_title">Tor használata ↻</string>
-    <string name="vibrate">Rezgések</string>
+    <string name="new_version_detected">Új verzió érhető el</string>
+    <string name="check_for_updates">Frissítések keresése</string>
+    <string name="font_size">Szövegméret</string>
+    <string name="font_size_description">Szövegméret változtatása (százalék).</string>
+    <string name="font_size_hint">100 = 100%</string>
+    <string name="most_recent">Kezdje a legfrissebb postokkal</string>
+    <string name="most_recent_description">Ennek a funkciónak a teljes aktiválásához néha a Facebook menüjében is ki kell választanod a legfrissebb bejegyzéseket.</string>
+    <string name="really_quit_question">Biztosan ki akarsz lépni?</string>
+    <string name="confirm_exit">Kilépés megerősítése</string>
     <string name="yes">Igen</string>
-    <string name="you_have_n_messages">Önnek %d db üzenete van.</string>
-    <string name="you_have_one_message">Önnek egy üzenete van.</string>
+    <string name="no">Nem</string>
+    <string name="use_tor_title">Tor használata ↻</string>
+    <string name="use_tor_summary">Minden adatforgalmat Toron keresztül küldjön. Orbotot igényel.</string>
+    <string name="version">%s verzió</string>
+    <string name="label">Címke</string>
+
 </resources>
