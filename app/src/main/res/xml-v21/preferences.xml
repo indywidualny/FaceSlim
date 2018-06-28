@@ -26,6 +26,12 @@
             android:summary="@string/fixed_nav_description"
             android:defaultValue="false"/>
 
+        <CheckBoxPreference
+            android:key="supress_audio_media"
+            android:title="@string/supress_audio_media"
+            android:summary="@string/supress_audio_media_description"
+            android:defaultValue="false"/>
+
         <SwitchPreference
             android:key="transparent_nav"
             android:title="@string/transparent_nav"
