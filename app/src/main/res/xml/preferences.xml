@@ -27,9 +27,9 @@
             android:defaultValue="false"/>
 
         <CheckBoxPreference
-            android:key="supress_audio_media"
-            android:title="@string/supress_audio_media"
-            android:summary="@string/supress_audio_media_description"
+            android:key="suppress_audio_media"
+            android:title="@string/suppress_audio_media"
+            android:summary="@string/suppress_audio_media_description"
             android:defaultValue="false"/>
 
         <CheckBoxPreference

@@ -173,13 +173,15 @@ public class MyWebViewClient extends WebViewClient {
         }
 
         // mute audio clips - such as the reaction button sound
-        if (preferences.getBoolean("supress_audio_media", true)) {
-            view.loadUrl("javascript:function supressAudioMedia() {" + 
+        if (preferences.getBoolean("suppress_audio_media", true)) {
+            view.loadUrl("javascript:function suppressAudioMedia() {" +
                     "Object.defineProperty(HTMLAudioElement.prototype.__proto__, 'play', {" +
                     "    value: function () {}," +
                     "    writable: false" +
                     "});" +
-                    "supressAudioMedia();");
+                    "}" +
+                    " suppressAudioMedia();"
+            );
         }
 
         // blue navigation bar always on top

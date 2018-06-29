@@ -38,8 +38,8 @@
     <string name="preference_category1">Interface</string>
     <string name="preference_category2">Advanced Settings</string>
     <string name="progress_bar">Progress bar</string>
-    <string name="supress_audio_media">Supress Audio Media</string>
-    <string name="supress_audio_media_description">Prohibit playing of reaction sounds and media clips.</string>
+    <string name="suppress_audio_media">Disable Button Sounds</string>
+    <string name="suppress_audio_media_description">Prohibit playing of 'Like Button' reaction sounds and media clips.</string>
     <string name="transparent_nav">Transparent navbar &#8635;</string>
     <string name="transparent_nav_description">KitKat and Lollipop. Transparent system navigation keys.</string>
     <string name="clear_cache">Clear cache</string>
