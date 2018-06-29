@@ -180,7 +180,7 @@ public class MyWebViewClient extends WebViewClient {
                     "    writable: false" +
                     "});" +
                     "}" +
-                    " suppressAudioMedia();"
+                    "suppressAudioMedia();"
             );
         }
 
