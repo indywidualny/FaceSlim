@@ -118,6 +118,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
                         }
                         break;
                     case "transparent_nav":
+                    case "suprress_audio_media":
                     case "drawer_pos":
                     case "no_images":
                     case "keyboard_fix":
