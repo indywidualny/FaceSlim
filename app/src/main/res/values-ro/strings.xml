@@ -111,7 +111,6 @@
     <string name="hide_people_description">Un flux de informatii mai rapid si mai curat.</string>
     <string name="hide_news_feed">Ascunde fluxul de informatii</string>
     <string name="hide_news_feed_description">[…] pentru a preveni sidetracking-ul / procrastination-ul.</string>
-
     <string name="message_notifications">Notificarile de mesaje</string>
     <string name="you_have_one_message">Ai un mesaj.</string>
     <string name="you_have_n_messages">Ai %d mesaje.</string>
@@ -133,7 +132,6 @@
     <string name="cannot_access_storage">Accesul la memoria interna e interzis.</string>
     <string name="file_cannot_be_saved">Un fisier nu poate fi salvat</string>
     <string name="camera_exception">Probleme cu aparatul foto</string>
-
     <string name="offline_mode">Modul de lucru deconectat</string>
     <string name="offline_mode_enable">Activarea modului de lucru deconectat</string>
     <string name="offline_mode_description">Cand nu e acces la internet se va incerca incarcarea paginilor din baza de date.</string>
@@ -144,5 +142,4 @@
     <string name="offline_dummy_description">Pagina curenta e salvata in baza de date. Daca exista deja in baza de date se va rescrie. Re-incarca o pagina pentru a forta re-actualizarea ei. Nu functioneaza pentru continutul dinamic.</string>
     <string name="keyboard_fix">Fixarea erorii cu tastatura deasupra &#8635;</string>
     <string name="offline_database_empty">Baza de date este goala</string>
-
-</resources>
+    </resources>

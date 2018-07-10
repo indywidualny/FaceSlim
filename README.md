@@ -219,6 +219,9 @@ Refresh the page by pulling down with your finger. External links will open in y
 [pl] Temat na polskim forum dotyczący aplikacji:
 * http://forum.android.com.pl/topic/211657-face-slim/
 
+## Translation
+If you want to help translate this project to your language please visit [Face Slim on Transifex](https://www.transifex.com/faceslim/faceslim/)!
+
 ## Screenshots
 
 * [Lollipop]( https://www.dropbox.com/s/4s0x88sp49hxm4n/en_Lollipop_2015-01-06.png)

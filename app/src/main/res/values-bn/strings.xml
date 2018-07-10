@@ -104,7 +104,7 @@
     <string name="no_images_description"> কোন ইমেজ লোড করবেন না। বহুলাংসে ডেটার ব্যবহার হ্রাস করে  </string>
     <string name="no_storage_permission"> এই সুবিধা টি ব্যবহার করতে স্টোরেজ পারমিশন গ্রান্ট করুন  </string>
     <string name="basic_mode"> বেসিক মুড  </string>
-    <string name ="basic_mode_description"> স্ট্যান্ডার্ড সাইট এর পরিবর্তে বেসিক সাইট ব্যবহার করুন । ডার্ক থিম ডিস এবল করুন।  ফাস্ট কানেকশন এ কাজ নাও করতে পারে .  </string>
+    <string name="basic_mode_description"> স্ট্যান্ডার্ড সাইট এর পরিবর্তে বেসিক সাইট ব্যবহার করুন । ডার্ক থিম ডিস এবল করুন।  ফাস্ট কানেকশন এ কাজ নাও করতে পারে .  </string>
     <string name="preference_category6"> নিউজ ফিড </string>
     <string name="hide_sponsored"> স্পন্সর পোস্ট হাইড করুন   </string>
     <string name="hide_sponsored_description"> আমরা স্পন্সর পোস্ট ও অ্যাড পছন্দ করিনা .  </string>

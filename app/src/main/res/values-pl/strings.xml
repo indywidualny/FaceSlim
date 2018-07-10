@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingTranslation">
 
+    <!-- Strings to translate during creation of a new translation -->
     <string name="app_name">Face Slim</string>
     <string name="image_chooser">Wybierz źródło</string>
     <string name="loading_link">Otwieram link</string>
@@ -21,17 +24,16 @@
     </string-array>
 
     <string name="author">by Krzysztof \'Koras\' Grabowski</string>
-
     <string name="title_activity_settings">Ustawienia aplikacji</string>
     <string name="title_activity_about">Informacje &amp; autor</string>
-    <string name="clear_cache">Wyczyść cache</string>
-    <string name="clear_cache_description">Wyczyść pamięć podręczną aplikacji. Zostaniesz też wylogowany / wylogowana ;)</string>
-    <string name="email_author">Napisz do mnie</string>
     <string name="preference_category1">Interfejs</string>
     <string name="preference_category2">Zaawansowane</string>
     <string name="progress_bar">Pasek postępu</string>
     <string name="transparent_nav">Przezroczysty navbar &#8635;</string>
     <string name="transparent_nav_description">KitKat lub Lollipop. Przezroczyste, systemowe przyciski nawigacyjne.</string>
+    <string name="clear_cache">Wyczyść cache</string>
+    <string name="clear_cache_description">Wyczyść pamięć podręczną aplikacji. Zostaniesz też wylogowany / wylogowana ;)</string>
+    <string name="email_author">Napisz do mnie</string>
     <string name="choose_email_client">Wybierz klienta poczty</string>
     <string name="notifications">Powiadomienia</string>
     <string name="no_network">Jesteś offline ;)</string>
@@ -49,6 +51,8 @@
     <string name="facebook_zero">Facebook Zero</string>
     <string name="facebook_zero_description">Darmowy transfer. Zależne od operatora. Tylko podczas połączenia komórkowego.</string>
     <string name="facebook_zero_active">Facebook Zero aktywny</string>
+    <string name="load_extra">Ładuj zewnętrzne obrazy</string>
+    <string name="load_extra_description">Otwieraj zdjęcia z zewnętrznych serwisów. Obecnie niewiele stron jest wspieranych.</string>
     <string name="preference_category4">Dodatkowe</string>
     <string name="quick_guide">Szybkie wprowadzenie</string>
     <string name="messages">Wiadomości</string>
@@ -128,8 +132,6 @@
     <string name="cannot_access_storage">Brak dostępu do pamięci zewnętrznej</string>
     <string name="file_cannot_be_saved">Plik nie może zostać zapisany</string>
     <string name="camera_exception">Nie mogę użyć aparatu</string>
-    <string name="load_extra">Ładuj zewnętrzne obrazy</string>
-    <string name="load_extra_description">Otwieraj zdjęcia z zewnętrznych serwisów. Obecnie niewiele stron jest wspieranych.</string>
     <string name="offline_mode">Tryb offline</string>
     <string name="offline_mode_enable">Aktywuj tryb offline</string>
     <string name="offline_mode_description">Gdy nie ma połączenia z Internetem spróbuj załadować stronę z cache i bazy danych.</string>
@@ -158,9 +160,11 @@
     <string name="confirm_exit">Potwierdź wyjście z aplikacji</string>
     <string name="yes">Tak</string>
     <string name="no">Nie</string>
-    <string name="version">Wersja %s</string>
-    <string name="label">Etykieta</string>
     <string name="use_tor_title">Używaj Tor &#8635;</string>
     <string name="use_tor_summary">Wymuś ruch przez Tor celem większej prywatności. Wymaga Orbot.</string>
+    <string name="version">Wersja %s</string>
+    <string name="label">Etykieta</string>
+    <string name="suppress_audio_media">Wycisz dźwięki</string>
+    <string name="suppress_audio_media_description">Nie odtwarzaj dźwięków polubień i klipów</string>
 
 </resources>

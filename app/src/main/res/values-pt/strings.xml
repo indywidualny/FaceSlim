@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="MissingTranslation">
 
+    <!-- Strings to translate during creation of a new translation -->
     <string name="app_name">Face Slim</string>
     <string name="image_chooser">Escolher imagem</string>
     <string name="loading_link">Abrindo um link</string>
@@ -23,7 +24,6 @@
     </string-array>
 
     <string name="author">por Krzysztof \'Koras\' Grabowski</string>
-
     <string name="title_activity_settings">Configurações</string>
     <string name="title_activity_about">Sobre</string>
     <string name="preference_category1">Interface</string>
@@ -109,7 +109,6 @@
     <string name="hide_people_description">Feed limpo, mais espaço.</string>
     <string name="hide_news_feed">Ocultar Feed de Notícias</string>
     <string name="hide_news_feed_description">[…] para evitar distração/procrastinação.</string>
-
     <string name="message_notifications">Notificações de mensagens</string>
     <string name="you_have_one_message">Você tem uma mensagem.</string>
     <string name="you_have_n_messages">Você tem %d mensagens.</string>
@@ -127,10 +126,8 @@
     <string name="file_logger_needs_permission">Sem permissão para armazenar. O log não foi salvo</string>
     <string name="save_img">Salvar imagem</string>
     <string name="downloading_img">Baixando imagem&#8230;</string>
-
     <string name="download_manager_disabled">Gerenciador de downloads desativado. Ative-o por favor.</string>
     <string name="cannot_access_storage">Sem permissão no armazenamento externo</string>
     <string name="file_cannot_be_saved">Um arquivo não pôde ser salvo</string>
     <string name="camera_exception">Problemas com uma câmera</string>
-
-</resources>
+    </resources>
