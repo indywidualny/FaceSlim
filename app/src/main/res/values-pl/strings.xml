@@ -164,5 +164,7 @@
     <string name="use_tor_summary">Wymuś ruch przez Tor celem większej prywatności. Wymaga Orbot.</string>
     <string name="version">Wersja %s</string>
     <string name="label">Etykieta</string>
+    <string name="suppress_audio_media">Wycisz dźwięki</string>
+    <string name="suppress_audio_media_description">Nie odtwarzaj dźwięków polubień i klipów</string>
 
 </resources>
