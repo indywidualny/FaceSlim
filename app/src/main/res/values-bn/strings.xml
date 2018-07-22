@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="MissingTranslation">
 
+    <!-- Strings to translate during creation of a new translation -->
     <string name="app_name">Face Slim</string>
     <string name="image_chooser">ইমেজ চুজার </string>
     <string name="loading_link">লিঙ্ক ওপেন করা হছে </string>
@@ -23,7 +24,6 @@
     </string-array>
 
     <string name="author">by Krzysztof \'Koras\' Grabowski</string>
-  
     <string name="title_activity_settings">সেটিংস</string>
     <string name="title_activity_about"> অ্যাবাউট &amp; author</string>
     <string name="preference_category1">ইন্টারফেস</string>
@@ -50,7 +50,7 @@
     <string name="fixed_nav_description">ফেসবুক  নেভিগেসান  বার  অলয়েস  অন  টপ .</string>
     <string name="facebook_zero">ফেসবুক জিরো </string>
     <string name="facebook_zero_description">নো ডাটা চেঞ্জেস . জি এস এম  ডিপেনডেন্ত .  ওয়ার্কস  ডিউরিং  মোবাইল  নেটওয়ার্ক  কানেকশন .</string>
-    <string name="facebook_zero_active">ফেসবুক  জিরো  ইজ  একটিভ </string> 
+    <string name="facebook_zero_active">ফেসবুক  জিরো  ইজ  একটিভ </string>
     <string name="preference_category4">এডিশোনাল </string>
     <string name="quick_guide">কুইক স্টার্ট  গাইড </string>
     <string name="messages">মেসেজেস </string>
@@ -72,9 +72,7 @@
     <string name="activate_notifications"> অ্যাক্টিভ  নটিফিকেসন্স </string>
     <string name="get_feed">গেট  ইয়র  নটিফিকেসন্স ফিড </string>
     <string name="get_feed_description"> নিজের  উনিক নটিফিকেসান  খুঁজে পেতে ফিল্ড এ ক্লিক করুন  অ্যাড্রেস কপি করুন  ও পেস্ট করুন .</string>
-    
     <string name="notifications_service_created"> নটিফিকেসন্স অ্যাক্টিভ আছে   </string>
-   
     <string name="notifications_settings">নটিফিকেসান সেটিংস্‌ </string>
     <string name="notifications_settings_description"> অতিরিক্ত সেটিংস্‌ . সময় বিরতি , সাউন্ড সেট আপ , লেড ও ভাইব্রেসন চুজ করুন .</string>
 
@@ -99,7 +97,6 @@
     <string name="notifications_everywhere"> অলয়েস নটিফাই </string>
     <string name="notifications_everywhere_description"> আপনি যখন অ্যাপ এর মেইন স্ক্রীন এ আছেন .</string>
     <string name="setup_notifications"> নটিফিকেসন্স সেট করতে অ্যাপ সেটিং দেখুন </string>
-
     <string name="no_images"> ইমেজ ডিস এবল করুন &#8635;</string>
     <string name="no_images_description"> কোন ইমেজ লোড করবেন না। বহুলাংসে ডেটার ব্যবহার হ্রাস করে  </string>
     <string name="no_storage_permission"> এই সুবিধা টি ব্যবহার করতে স্টোরেজ পারমিশন গ্রান্ট করুন  </string>
@@ -112,7 +109,6 @@
     <string name="hide_people_description"> বেশি জায়গা পেতে ফিড পরিষ্কার করুন .</string>
     <string name="hide_news_feed"> নিউজ ফিড হাইড করুন  </string>
     <string name="hide_news_feed_description">[…] সাইড ট্র্যাক এড়িয়ে জান .</string>
-
     <string name="message_notifications"> মেসেজ  নটিফিকেসন্স  </string>
     <string name="you_have_one_message"> আপনার একটি মেসেজ আছে .</string>
     <string name="you_have_n_messages"> আপনার মেসেজ আছে (%d).</string>
@@ -121,7 +117,7 @@
     <string name="interval_pref_description_new"> নটিফিকেসন্স চেক হবে  </string>
     <string name="facebook_notifications"> ফেসবুক নটিফিকেসন্স  </string>
     <string name="notification_sound_msg">মেসেজ সাউন্ড </string>
-    <string name="crash_toast_text">ফেস স্লিম  : কিছু একটা ঠিক নেই ।  ক্র্যাশ রিপোর্ট তৈরি হছে  </string> 
+    <string name="crash_toast_text">ফেস স্লিম  : কিছু একটা ঠিক নেই ।  ক্র্যাশ রিপোর্ট তৈরি হছে  </string>
     <string name="crash_dialog_title"> ফেস স্লিম ক্র্যাশ হয়ে গেছে     </string>
     <string name="crash_dialog_text"> অযাচিত  সমস্যা দেখা দিয়েছে , অ্যাপ্লিকেশন বন্দ হছে . এরর ডাটা পাঠিয়ে সমস্যা সমাধান করতে সাহায্য করুন . আপনাকে শুধু মাত্র ওকে ক্লিক করতে হবে মেইল সেন্ড করতে হবে .</string>
     <string name="crash_dialog_comment_prompt"> আপনি চাইলে আপনার মন্তব্য লিখতে পারেন :</string>
@@ -134,7 +130,6 @@
     <string name="cannot_access_storage"> এক্সটারনাল স্টোরেজ এ অ্যাক্সেস নেই  </string>
     <string name="file_cannot_be_saved">ফাইল সেভ হছেনা </string>
     <string name="camera_exception">ক্যামেরা তে প্রব্লেম আছে </string>
-
     <string name="offline_mode"> অফলাইন মোড </string>
     <string name="offline_mode_enable"> অফলাইন মোড এনএবল করুন   </string>
     <string name="offline_mode_description"> যখন ইন্টারনেট কানেকশন থাকবেনা তখন ডাটাবেস অথবা ক্যাচে থেকে পেইজ লোড করুন .</string>
@@ -145,5 +140,4 @@
     <string name="offline_dummy_description"> কারেন্ট পেইজ এর সোর্স কোড ডাটাবেস এ সেভ হছে . ডুপ্লিকেট পাওয়া গেলে নিজে থেকেই সরিয়ে দেবে . পেইজ রিফ্রেশ করুন . লোডে ভরা কন্টেন্ট এ এটা কাজ করেনা .</string>
     <string name="keyboard_fix"> কিবোর্ড ফিক্স  &#8635;</string>
     <string name="offline_database_empty"> অফ লাইন ডাটাবেস এ ডাটা নেই </string>
-
-</resources>
+    </resources>
