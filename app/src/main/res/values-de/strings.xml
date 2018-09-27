@@ -36,7 +36,7 @@
     <string name="email_author">Mich kontaktieren</string>
     <string name="choose_email_client">E-Mail-Anwendung auswählen</string>
     <string name="notifications">Benachrichtigungen</string>
-    <string name="no_network">Du bist offline ;)</string>
+    <string name="no_network">Du bist offline</string>
     <string name="hardware_acceleration">Hardware Beschleunigung &#8635;</string>
     <string name="hardware_acceleration_description">Nur auf Geräten mit wenig Arbeitsspeicher deaktivieren. Videos funktionieren vielleicht nicht.</string>
     <string name="share_link">Link teilen</string>

@@ -7,5 +7,6 @@ minimum_perc = 0
 source_file = app/src/main/res/values/strings.xml
 source_lang = en
 trans.zh_TW = app/src/main/res/values-zh-rTW/strings.xml
+trans.nl_NL = app/src/main/res/values-nl-rNL/strings.xml
 type = ANDROID
 
