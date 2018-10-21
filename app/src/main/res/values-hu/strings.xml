@@ -29,6 +29,8 @@
     <string name="preference_category1">Felület</string>
     <string name="preference_category2">Haladó beállítások</string>
     <string name="progress_bar">Folyamatsáv</string>
+    <string name="suppress_audio_media">Gombok hangjelzésének letiltása</string>
+    <string name="suppress_audio_media_description">A Tetszik gomb lenyomásakor játszott hangok és médiaklipek lejátszásának tiltása.</string>
     <string name="transparent_nav">Átlátszó Android menüsor &#8635;</string>
     <string name="transparent_nav_description">KitKat és Lollipop. Átlátszóvá teszi a rendszer navigációs gombsorát.</string>
     <string name="clear_cache">Cache ürítése</string>
