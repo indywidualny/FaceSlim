@@ -29,12 +29,14 @@
     <string name="preference_category1">Uiterlijk</string>
     <string name="preference_category2">Geavanceerde instellingen</string>
     <string name="progress_bar">Voortgangsbalk</string>
+    <string name="suppress_audio_media">Knopgeluiden uitschakelen</string>
+    <string name="suppress_audio_media_description">Geen geluid afspelen bij drukken op de Leuk-knop, reageren en mediabestanden.</string>
     <string name="transparent_nav">Doorzichtige voortgangsbalk &#8635;</string>
     <string name="transparent_nav_description">KitKat en Lollipop. Doorzichtige systeemnavigatiebalk.</string>
     <string name="clear_cache">Cache leegmaken</string>
-    <string name="clear_cache_description">App-cache leegmaken. Dit logt je uit uit de app.</string>
+    <string name="clear_cache_description">App-cache leegmaken. Dit zorgt ervoor dat je wordt uitgelogd.</string>
     <string name="email_author">Neem contact op</string>
-    <string name="choose_email_client">E-mailapp kiezen</string>
+    <string name="choose_email_client">Kies een e-mailapp</string>
     <string name="notifications">Meldingen</string>
     <string name="no_network">Je bent offline</string>
     <string name="hardware_acceleration">Hardwareversnelling &#8635;</string>
