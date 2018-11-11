@@ -476,9 +476,9 @@ public class MainActivity extends Activity {
                 }
             }
 
-            Intent contentSelectionIntent = new Intent(Intent.ACTION_GET_CONTENT);
-            contentSelectionIntent.addCategory(Intent.CATEGORY_OPENABLE);
+            Intent contentSelectionIntent = new Intent(Intent.ACTION_PICK);
             contentSelectionIntent.setType("*/*");
+            contentSelectionIntent.putExtra(Intent.EXTRA_MIME_TYPES, new String[] {"image/*", "video/*"});
 
             Intent[] intentArray;
             if (takePictureIntent != null) {
