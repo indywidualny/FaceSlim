@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="org.indywidualni.fblite"
-    android:installLocation="internalOnly" >
+    android:installLocation="internalOnly">
 
     <!-- Normal Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -22,11 +22,11 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <receiver
             android:name=".receiver.BootCompletedIntentReceiver"
             android:enabled="true"
-            android:permission="android.permission.RECEIVE_BOOT_COMPLETED" >
+            android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.QUICKBOOT_POWERON" />
@@ -34,23 +34,26 @@
         </receiver>
         <receiver
             android:name=".receiver.PackageReplacedIntentReceiver"
-            android:enabled="true" >
+            android:enabled="true">
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_REPLACED" />
-                <data android:scheme="package" android:path="org.indywidualni.fblite" />
+                <data
+                    android:path="org.indywidualni.fblite"
+                    android:scheme="package" />
             </intent-filter>
         </receiver>
+
         <service
             android:name=".service.NotificationsService"
             android:enabled="true"
             android:exported="false"
-            android:icon="@mipmap/ic_launcher" >
-        </service>
+            android:icon="@mipmap/ic_launcher"></service>
+
         <activity
             android:name=".activity.SplashActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@style/SplashTheme" >
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -58,19 +61,33 @@
         </activity>
         <activity
             android:name=".activity.MainActivity"
-            android:label="@string/app_name"
             android:configChanges="keyboard|keyboardHidden|screenSize|orientation"
-            android:launchMode="singleTask" >
+            android:label="@string/app_name"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:host="facebook.com" android:scheme="http" />
-                <data android:host="facebook.com" android:scheme="https" />
-                <data android:host="*.facebook.com" android:scheme="http" />
-                <data android:host="*.facebook.com" android:scheme="https" />
-                <data android:host="fb.me" android:scheme="http" />
-                <data android:host="fb.me" android:scheme="https" />
+
+                <data
+                    android:host="facebook.com"
+                    android:scheme="http" />
+                <data
+                    android:host="facebook.com"
+                    android:scheme="https" />
+                <data
+                    android:host="*.facebook.com"
+                    android:scheme="http" />
+                <data
+                    android:host="*.facebook.com"
+                    android:scheme="https" />
+                <data
+                    android:host="fb.me"
+                    android:scheme="http" />
+                <data
+                    android:host="fb.me"
+                    android:scheme="https" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
@@ -79,16 +96,18 @@
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.DEFAULT" />
+
                 <data android:scheme="fb" />
             </intent-filter>
         </activity>
         <activity
             android:name=".activity.SettingsActivity"
+            android:configChanges="screenSize|orientation"
             android:label="@string/title_activity_settings"
             android:parentActivityName=".activity.MainActivity"
-            android:configChanges="screenSize|orientation"
             android:theme="@style/AppPreferences"
             tools:ignore="UnusedAttribute">
             <meta-data
@@ -107,8 +126,8 @@
         </activity>
         <activity
             android:name=".activity.MessagesShortcutActivity"
-            android:label="@string/messages"
-            android:icon="@mipmap/ic_messages" >
+            android:icon="@mipmap/ic_messages"
+            android:label="@string/messages">
             <intent-filter>
                 <action android:name="android.intent.action.CREATE_SHORTCUT" />
                 <category android:name="android.intent.category.DEFAULT" />

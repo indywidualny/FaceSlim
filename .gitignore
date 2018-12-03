@@ -1,10 +1,7 @@
 *.iml
 *.directory
 .gradle
-.idea/
-/local.properties
+.idea
+local.properties
 .DS_Store
-/build
-/saxrssreader/build
-#/.idea/workspace.xml
-#/.idea/libraries
+build
