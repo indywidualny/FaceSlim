@@ -21,7 +21,6 @@ import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.devspark.appmsg.AppMsg;
@@ -308,35 +307,30 @@ public class MyWebViewClient extends WebViewClient {
                             fab.setY(-Dimension.getNavigationBarHeight(context, 0));
 
                         // on click listener for fab
-                        fab.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                if (offline == null) {
-                                    fab.hideFloatingActionButton();
-                                    return;
-                                }
-
-                                LayoutInflater inflater = MainActivity.getMainActivity().getLayoutInflater();
-                                @SuppressLint("InflateParams") View customView = inflater
-                                        .inflate(R.layout.dialog_offline_list, null);
-
-                                final Dialog dialog = new Dialog(MainActivity.getMainActivity(), R.style.CustomDialogTheme);
-                                dialog.setContentView(customView);
-                                dialog.show();
-
-                                final ArrayList<String> page = offline.getDataSource().getAllPages();
-                                ListView lv = (ListView) dialog.findViewById(R.id.list_offline);
-                                OfflinePagesAdapter opa = new OfflinePagesAdapter(MainActivity.getMainActivity(), page);
-                                lv.setEmptyView(dialog.findViewById(R.id.empty_element));
-                                lv.setAdapter(opa);
-
-                                lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                        webView.loadUrl(page.get(position));
-                                        dialog.dismiss();
-                                    }
-                                });
+                        fab.setOnClickListener(v -> {
+                            if (offline == null) {
+                                fab.hideFloatingActionButton();
+                                return;
                             }
+
+                            LayoutInflater inflater = MainActivity.getMainActivity().getLayoutInflater();
+                            @SuppressLint("InflateParams") View customView = inflater
+                                    .inflate(R.layout.dialog_offline_list, null);
+
+                            final Dialog dialog = new Dialog(MainActivity.getMainActivity(), R.style.CustomDialogTheme);
+                            dialog.setContentView(customView);
+                            dialog.show();
+
+                            final ArrayList<String> page = offline.getDataSource().getAllPages();
+                            ListView lv = dialog.findViewById(R.id.list_offline);
+                            OfflinePagesAdapter opa = new OfflinePagesAdapter(MainActivity.getMainActivity(), page);
+                            lv.setEmptyView(dialog.findViewById(R.id.empty_element));
+                            lv.setAdapter(opa);
+
+                            lv.setOnItemClickListener((parent, view1, position, id) -> {
+                                webView.loadUrl(page.get(position));
+                                dialog.dismiss();
+                            });
                         });
                     } else if (fab.isHidden())
                         fab.showFloatingActionButton();

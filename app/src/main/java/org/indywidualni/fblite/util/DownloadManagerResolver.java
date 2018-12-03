@@ -62,12 +62,7 @@ public final class DownloadManagerResolver {
         messageTextView.setTextColor(ContextCompat.getColor(context, R.color.black));
         return new AlertDialog.Builder(context)
                 .setView(messageTextView)
-                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        enableDownloadManager(context);
-                    }
-                })
+                .setPositiveButton("ok", (dialog, which) -> enableDownloadManager(context))
                 .setCancelable(false)
                 .create();
     }
@@ -88,7 +83,8 @@ public final class DownloadManagerResolver {
             try {
                 Intent intent = new Intent(android.provider.Settings.ACTION_MANAGE_APPLICATIONS_SETTINGS);
                 context.startActivity(intent);
-            } catch (ActivityNotFoundException ignored) {}
+            } catch (ActivityNotFoundException ignored) {
+            }
         }
     }
 

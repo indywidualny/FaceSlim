@@ -23,7 +23,8 @@ public class OfflineDataSource {
     private final SharedPreferences preferences = PreferenceManager
             .getDefaultSharedPreferences(MyApplication.getContextOfApplication());
 
-    private OfflineDataSource() {}
+    private OfflineDataSource() {
+    }
 
     public static OfflineDataSource getInstance() {
         if (instance == null) {
@@ -82,15 +83,10 @@ public class OfflineDataSource {
 
     // insertPage helper, the database have to be open to use it
     private boolean rowExists(String url) {
-        Cursor cursor = null;
-        boolean exists = false;
+        boolean exists;
 
-        try {
-            cursor = database.rawQuery("select 1 from Pages where url=?;", new String[] {url});
+        try (Cursor cursor = database.rawQuery("select 1 from Pages where url=?;", new String[]{url})) {
             exists = (cursor.getCount() > 0);
-        } finally {
-            if (cursor != null)
-                cursor.close();
         }
 
         return exists;
@@ -98,18 +94,13 @@ public class OfflineDataSource {
 
     public synchronized String getPage(String url) throws SQLException {
         open();
-        Cursor cursor = null;
         String html = MyApplication.getContextOfApplication().getString(R.string.not_found_offline);
 
-        try {
-            cursor = database.rawQuery("SELECT html FROM Pages WHERE url=?;", new String[] { url });
-            if(cursor.getCount() > 0) {
+        try (Cursor cursor = database.rawQuery("SELECT html FROM Pages WHERE url=?;", new String[]{url})) {
+            if (cursor.getCount() > 0) {
                 cursor.moveToFirst();
                 html = cursor.getString(cursor.getColumnIndex("html"));
             }
-        } finally {
-            if (cursor != null)
-                cursor.close();
         }
 
         close();
@@ -118,12 +109,10 @@ public class OfflineDataSource {
 
     public synchronized ArrayList<String> getAllPages() {
         open();
-        Cursor cursor = null;
         ArrayList<String> list = new ArrayList<>();
 
-        try {
-            cursor = database.rawQuery("Select url from Pages ORDER BY ROWID DESC", new String[] {});
-            if(cursor.getCount() > 0) {
+        try (Cursor cursor = database.rawQuery("Select url from Pages ORDER BY ROWID DESC", new String[]{})) {
+            if (cursor.getCount() > 0) {
                 // retrieve the data to my custom model
                 cursor.moveToFirst();
 
@@ -133,9 +122,6 @@ public class OfflineDataSource {
                     cursor.moveToNext();
                 }
             }
-        } finally {
-            if (cursor != null)
-                cursor.close();
         }
 
         close();

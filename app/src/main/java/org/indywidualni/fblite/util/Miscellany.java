@@ -99,13 +99,14 @@ public class Miscellany {
 
     /**
      * Extracts URL from a given string
+     *
      * @param string Text which may contain an URL
      * @return Extracted URL or empty string if URL not found inside
      */
     public static String extractUrl(String string) {
         final Pattern urlPattern = Pattern.compile(
                 "(?:^|[\\W])((ht|f)tp(s?):\\/\\/|www\\.)"
-                        + "(([\\w\\-]+\\.){1,}?([\\w\\-.~]+\\/?)*"
+                        + "(([\\w\\-]+\\.)+?([\\w\\-.~]+\\/?)*"
                         + "[\\p{Alnum}.,%_=?&#\\-+()\\[\\]\\*$~@!:/{};']*)",
                 Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
         Matcher matcher = urlPattern.matcher(string);

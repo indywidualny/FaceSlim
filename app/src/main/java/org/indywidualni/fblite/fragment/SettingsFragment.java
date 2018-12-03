@@ -61,77 +61,75 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         preference_touch.setEnabled(!preferences.getBoolean("basic_mode", false));
 
         // listener for changing preferences (works after the value change)
-        prefChangeListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
-            public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
-                // service intent (start, stop)
-                final Intent intent = new Intent(context, NotificationsService.class);
+        prefChangeListener = (prefs, key) -> {
+            // service intent (start, stop)
+            final Intent intent = new Intent(context, NotificationsService.class);
 
-                switch (key) {
-                    case "notifications_activated":
-                        if (prefs.getBoolean("notifications_activated", false) && preferences.getBoolean("message_notifications", false)) {
-                            context.stopService(intent);
+            switch (key) {
+                case "notifications_activated":
+                    if (prefs.getBoolean("notifications_activated", false) && preferences.getBoolean("message_notifications", false)) {
+                        context.stopService(intent);
+                        context.startService(intent);
+                    } else //noinspection StatementWithEmptyBody
+                        if (!prefs.getBoolean("notifications_activated", false) && preferences.getBoolean("message_notifications", false)) {
+                            // ignore this case
+                        } else if (prefs.getBoolean("notifications_activated", false) && !preferences.getBoolean("message_notifications", false)) {
                             context.startService(intent);
-                        } else //noinspection StatementWithEmptyBody
-                            if (!prefs.getBoolean("notifications_activated", false) && preferences.getBoolean("message_notifications", false)) {
-                                // ignore this case
-                            } else if (prefs.getBoolean("notifications_activated", false) && !preferences.getBoolean("message_notifications", false)) {
-                                context.startService(intent);
-                            } else
-                                context.stopService(intent);
-                        break;
-                    case "message_notifications":
-                        if (prefs.getBoolean("message_notifications", false) && preferences.getBoolean("notifications_activated", false)) {
+                        } else
                             context.stopService(intent);
+                    break;
+                case "message_notifications":
+                    if (prefs.getBoolean("message_notifications", false) && preferences.getBoolean("notifications_activated", false)) {
+                        context.stopService(intent);
+                        context.startService(intent);
+                    } else //noinspection StatementWithEmptyBody
+                        if (!prefs.getBoolean("message_notifications", false) && preferences.getBoolean("notifications_activated", false)) {
+                            // ignore this case
+                        } else if (prefs.getBoolean("message_notifications", false) && !preferences.getBoolean("notifications_activated", false)) {
                             context.startService(intent);
-                        } else //noinspection StatementWithEmptyBody
-                            if (!prefs.getBoolean("message_notifications", false) && preferences.getBoolean("notifications_activated", false)) {
-                                // ignore this case
-                            } else if (prefs.getBoolean("message_notifications", false) && !preferences.getBoolean("notifications_activated", false)) {
-                                context.startService(intent);
-                            } else
-                                context.stopService(intent);
-                        break;
-                    case "basic_mode":
-                        Preference preference_dark = findPreference("dark_theme");
-                        preference_dark.setEnabled(!prefs.getBoolean("basic_mode", false));
-                        Preference preference_touch = findPreference("touch_mode");
-                        preference_touch.setEnabled(!prefs.getBoolean("basic_mode", false));
-                        break;
-                    case "touch_mode":
-                        Preference preference_basic = findPreference("basic_mode");
-                        preference_basic.setEnabled(!prefs.getBoolean("touch_mode", false));
-                        break;
-                    case "dark_theme":
-                        Preference basic = findPreference("basic_mode");
-                        basic.setEnabled(!prefs.getBoolean("dark_theme", false));
-                        break;
-                    case "file_logging":
-                        if (prefs.getBoolean("file_logging", false))
-                            requestStoragePermission();
-                        break;
-                    case "font_size":
-                        try {
-                            //noinspection ResultOfMethodCallIgnored
-                            Integer.valueOf(prefs.getString("font_size", "100"));
-                        } catch (NumberFormatException e) {
-                            prefs.edit().remove("font_size").apply();
-                        }
-                        break;
-                    case "transparent_nav":
-                    case "suprress_audio_media":
-                    case "drawer_pos":
-                    case "no_images":
-                    case "keyboard_fix":
-                    case "hardware_acceleration":
-                    case "custom_user_agent":
-                    case "use_tor":
-                        relaunch();
-                        break;
-                }
-
-                // what's going on, dude?
-                Log.v("SharedPreferenceChange", key + " changed in SettingsFragment");
+                        } else
+                            context.stopService(intent);
+                    break;
+                case "basic_mode":
+                    Preference preference_dark1 = findPreference("dark_theme");
+                    preference_dark1.setEnabled(!prefs.getBoolean("basic_mode", false));
+                    Preference preference_touch1 = findPreference("touch_mode");
+                    preference_touch1.setEnabled(!prefs.getBoolean("basic_mode", false));
+                    break;
+                case "touch_mode":
+                    Preference preference_basic1 = findPreference("basic_mode");
+                    preference_basic1.setEnabled(!prefs.getBoolean("touch_mode", false));
+                    break;
+                case "dark_theme":
+                    Preference basic = findPreference("basic_mode");
+                    basic.setEnabled(!prefs.getBoolean("dark_theme", false));
+                    break;
+                case "file_logging":
+                    if (prefs.getBoolean("file_logging", false))
+                        requestStoragePermission();
+                    break;
+                case "font_size":
+                    try {
+                        //noinspection ResultOfMethodCallIgnored
+                        Integer.valueOf(prefs.getString("font_size", "100"));
+                    } catch (NumberFormatException e) {
+                        prefs.edit().remove("font_size").apply();
+                    }
+                    break;
+                case "transparent_nav":
+                case "suprress_audio_media":
+                case "drawer_pos":
+                case "no_images":
+                case "keyboard_fix":
+                case "hardware_acceleration":
+                case "custom_user_agent":
+                case "use_tor":
+                    relaunch();
+                    break;
             }
+
+            // what's going on, dude?
+            Log.v("SharedPreferenceChange", key + " changed in SettingsFragment");
         };
     }
 
@@ -196,7 +194,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     private void requestStoragePermission() {
         String storagePermission = Manifest.permission.WRITE_EXTERNAL_STORAGE;
         int hasPermission = ContextCompat.checkSelfPermission(context, storagePermission);
-        String[] permissions = new String[] { storagePermission };
+        String[] permissions = new String[]{storagePermission};
         if (hasPermission != PackageManager.PERMISSION_GRANTED) {
             Log.e(TAG, "No storage permission at the moment. Requesting...");
             ActivityCompat.requestPermissions(getActivity(), permissions, REQUEST_STORAGE);

@@ -28,7 +28,7 @@ public class OfflinePagesAdapter extends ArrayAdapter<String> {
         if (convertView == null)
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_item_offline_page, parent, false);
 
-        TextView page = (TextView) convertView.findViewById(R.id.page);
+        TextView page = convertView.findViewById(R.id.page);
 
         @SuppressLint("DefaultLocale") String formattedId = "" + String.format("%02d", position + 1);
         String stringToSet = formattedId + ":  " + item;

@@ -9,7 +9,6 @@ import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.View;
 
 import com.devspark.appmsg.AppMsg;
 
@@ -41,7 +40,7 @@ public class CheckUpdatesTask extends AsyncTask<Void, Void, String> {
     @Override
     protected String doInBackground(Void... ignored) {
         try {
-            return downloadUrl(URL);
+            return downloadUrl();
         } catch (IOException e) {
             return "";
         }
@@ -58,12 +57,8 @@ public class CheckUpdatesTask extends AsyncTask<Void, Void, String> {
                         + " (" + parts[1] + ")", new AppMsg.Style(AppMsg.LENGTH_LONG, R.color.colorAccent));
                 appMsg.setLayoutGravity(Gravity.TOP);
                 appMsg.setDuration(8000);  // 8 seconds
-                appMsg.getView().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        view.getContext().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(NOTES)));
-                    }
-                });
+                appMsg.getView().setOnClickListener(view ->
+                        view.getContext().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(NOTES))));
                 if (preferences.getBoolean("transparent_nav", false) && activity.getResources()
                         .getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
                     appMsg.setLayoutParams(Dimension.getParamsAppMsg(activity));
@@ -80,12 +75,12 @@ public class CheckUpdatesTask extends AsyncTask<Void, Void, String> {
         }
     }
 
-    private String downloadUrl(String myUrl) throws IOException {
+    private String downloadUrl() throws IOException {
         InputStream is = null;
         int len = 25;
-            
+
         try {
-            URL url = new URL(myUrl);
+            URL url = new URL(CheckUpdatesTask.URL);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection(Miscellany.getProxy(preferences));
             conn.setReadTimeout(10000 /* milliseconds */);
             conn.setConnectTimeout(15000 /* milliseconds */);
@@ -104,7 +99,8 @@ public class CheckUpdatesTask extends AsyncTask<Void, Void, String> {
             if (is != null) {
                 try {
                     is.close();
-                } catch (IOException ignore) {}
+                } catch (IOException ignore) {
+                }
             }
         }
     }

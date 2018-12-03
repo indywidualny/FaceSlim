@@ -111,8 +111,8 @@ public class FloatingActionButton extends View {
         int gravity = Gravity.BOTTOM | Gravity.END; // default bottom right
         Drawable drawable;
         int color = Color.WHITE;
-        int size = 0;
-        float scale = 0;
+        int size;
+        float scale;
 
         public Builder(Activity context) {
             scale = context.getResources().getDisplayMetrics().density;
@@ -173,7 +173,7 @@ public class FloatingActionButton extends View {
             button.setFloatingActionButtonColor(this.color);
             button.setFloatingActionButtonDrawable(this.drawable);
             params.gravity = this.gravity;
-            ViewGroup root = (ViewGroup) activity.findViewById(android.R.id.content);
+            ViewGroup root = activity.findViewById(android.R.id.content);
             root.addView(button, params);
             return button;
         }
@@ -181,8 +181,8 @@ public class FloatingActionButton extends View {
         // The calculation (value * scale + 0.5f) is a widely used to convert to dps to pixel units
         // based on density scale
         // see developer.android.com (Supporting Multiple Screen Sizes)
-        private int convertToPixels(int dp, float scale){
-            return (int) (dp * scale + 0.5f) ;
+        private int convertToPixels(int dp, float scale) {
+            return (int) (dp * scale + 0.5f);
         }
     }
 

@@ -7,12 +7,14 @@ import android.telephony.TelephonyManager;
 
 /**
  * Check device's network connectivity and speed
+ *
  * @author emil http://stackoverflow.com/users/220710/emil
  */
 public class Connectivity {
 
     /**
      * Get the network info
+     *
      * @param context app context
      * @return NetworkInfo
      */
@@ -23,6 +25,7 @@ public class Connectivity {
 
     /**
      * Check if there is any connectivity
+     *
      * @param context app context
      * @return boolean
      */
@@ -33,6 +36,7 @@ public class Connectivity {
 
     /**
      * Check if there is any connectivity to a Wifi network
+     *
      * @param context app context
      * @return boolean
      */
@@ -43,6 +47,7 @@ public class Connectivity {
 
     /**
      * Check if there is any connectivity to a mobile network
+     *
      * @param context app context
      * @return boolean
      */
@@ -53,17 +58,19 @@ public class Connectivity {
 
     /**
      * Check if there is fast connectivity
+     *
      * @param context app context
      * @return boolean
      */
     public static boolean isConnectedFast(Context context) {
         NetworkInfo info = Connectivity.getNetworkInfo(context);
-        return (info != null && info.isConnected() && Connectivity.isConnectionFast(info.getType(),info.getSubtype()));
+        return (info != null && info.isConnected() && Connectivity.isConnectionFast(info.getType(), info.getSubtype()));
     }
 
     /**
      * Check if the connection is fast
-     * @param type int
+     *
+     * @param type    int
      * @param subType int
      * @return boolean
      */
@@ -71,7 +78,7 @@ public class Connectivity {
         if (type == ConnectivityManager.TYPE_WIFI) {
             return true;
         } else if (type == ConnectivityManager.TYPE_MOBILE) {
-            switch(subType) {
+            switch (subType) {
                 case TelephonyManager.NETWORK_TYPE_1xRTT:
                     return false; // ~ 50-100 kbps
                 case TelephonyManager.NETWORK_TYPE_CDMA:
@@ -92,10 +99,10 @@ public class Connectivity {
                     return true; // ~ 1-23 Mbps
                 case TelephonyManager.NETWORK_TYPE_UMTS:
                     return true; // ~ 400-7000 kbps
-			/*
-			 * Above API level 7, make sure to set android:targetSdkVersion
-			 * to appropriate level to use these
-			 */
+                /*
+                 * Above API level 7, make sure to set android:targetSdkVersion
+                 * to appropriate level to use these
+                 */
                 case TelephonyManager.NETWORK_TYPE_EHRPD: // API level 11
                     return true; // ~ 1-2 Mbps
                 case TelephonyManager.NETWORK_TYPE_EVDO_B: // API level 9

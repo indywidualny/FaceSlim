@@ -56,8 +56,8 @@ public class FileLog {
         try {
             if (sBufferedWriter != null) {
                 //sBufferedWriter.newLine( );
-                sBufferedWriter.flush( );
-                sBufferedWriter.close( );
+                sBufferedWriter.flush();
+                sBufferedWriter.close();
             }
         } catch (IOException e) {
             Log.w("FileLog", e);
@@ -76,7 +76,7 @@ public class FileLog {
     public static int v(String tag, String msg) {
         writeToFile(Log.VERBOSE, tag, msg);
 
-        return Log.v( tag, msg );
+        return Log.v(tag, msg);
     }
 
     public static int v(String tag, String msg, Throwable tr) {

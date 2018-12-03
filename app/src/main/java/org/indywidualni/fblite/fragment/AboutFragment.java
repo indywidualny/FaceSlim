@@ -25,12 +25,12 @@ public class AboutFragment extends Fragment {
         String authorInfo = getString(R.string.app_name) + " " + getString(R.string.author);
 
         //noinspection ConstantConditions
-        TextView textAuthor = (TextView) getView().findViewById(R.id.textAuthor);
-        TextView textSpecialThanksLink = (TextView) getView().findViewById(R.id.textSpecialThanksLink);
-        TextView textGithub = (TextView) getView().findViewById(R.id.textGithub);
-        TextView textFdroid = (TextView) getView().findViewById(R.id.textFdroid);
-        TextView textIndywidualni = (TextView) getView().findViewById(R.id.textIndywidualni);
-        TextView textVersion = (TextView) getView().findViewById(R.id.textVersion);
+        TextView textAuthor = getView().findViewById(R.id.textAuthor);
+        TextView textSpecialThanksLink = getView().findViewById(R.id.textSpecialThanksLink);
+        TextView textGithub = getView().findViewById(R.id.textGithub);
+        TextView textFdroid = getView().findViewById(R.id.textFdroid);
+        TextView textIndywidualni = getView().findViewById(R.id.textIndywidualni);
+        TextView textVersion = getView().findViewById(R.id.textVersion);
 
         textAuthor.setText(authorInfo);
         textSpecialThanksLink.setMovementMethod(LinkMovementMethod.getInstance());

@@ -15,7 +15,7 @@ import org.piwik.sdk.Tracker;
 
 import java.net.MalformedURLException;
 
-@ReportsCrashes(formUri = "",  // will not be used
+@ReportsCrashes(  // will not be used
         mailTo = "koras@indywidualni.org",
         mode = ReportingInteractionMode.DIALOG,
         resToastText = R.string.crash_toast_text,
@@ -24,7 +24,7 @@ import java.net.MalformedURLException;
         resDialogTitle = R.string.crash_dialog_title,
         resDialogCommentPrompt = R.string.crash_dialog_comment_prompt,
         resDialogTheme = R.style.CrashDialog
-        )
+)
 
 public class MyApplication extends Application {
 
@@ -61,6 +61,7 @@ public class MyApplication extends Application {
 
     /**
      * Get context of application for non-context classes
+     *
      * @return context of application
      */
     public static Context getContextOfApplication() {
@@ -70,6 +71,7 @@ public class MyApplication extends Application {
     /**
      * Get Piwik tracker. No sensitive data is collected. Just app version, predicted location,
      * resolution, device model and system version. Location is based on anonymized IP address.
+     *
      * @return tracker instance
      */
     public synchronized Tracker getTracker() {

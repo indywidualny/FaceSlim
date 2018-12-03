@@ -117,7 +117,9 @@ public class NotificationsService extends Service {
         handlerThread.quit();
     }
 
-    /** A runnable used by the Handler to schedule checking. */
+    /**
+     * A runnable used by the Handler to schedule checking.
+     */
     private class HandlerRunnable implements Runnable {
 
         public void run() {
@@ -185,16 +187,18 @@ public class NotificationsService extends Service {
 
     }
 
-    /** Notifications checker task: it checks Facebook notifications only. */
+    /**
+     * Notifications checker task: it checks Facebook notifications only.
+     */
     private class CheckNotificationsTask extends AsyncTask<Void, Void, Element> {
 
         boolean syncProblemOccurred = false;
 
-        private Element getElement(String connectUrl) {
+        private Element getElement() {
             try {
                 CookieManager cm = CookieManager.getInstance();
                 if (preferences.getBoolean("use_tor", false)) {
-                    return Jsoup.connect(connectUrl)
+                    return Jsoup.connect(NotificationsService.NOTIFICATIONS_URL)
                             .userAgent(userAgent).timeout(JSOUP_TIMEOUT)
                             .proxy(Miscellany.getProxy(preferences))
                             .cookie("https://mobile.facebook.com", cm.getCookie("https://mobile.facebook.com"))
@@ -205,7 +209,7 @@ public class NotificationsService extends Service {
                             .not("a.button")
                             .first();
                 } else {
-                    return Jsoup.connect(connectUrl)
+                    return Jsoup.connect(NotificationsService.NOTIFICATIONS_URL)
                             .userAgent(userAgent).timeout(JSOUP_TIMEOUT)
                             .cookie("https://mobile.facebook.com", cm.getCookie("https://mobile.facebook.com"))
                             .get()
@@ -234,7 +238,7 @@ public class NotificationsService extends Service {
             while (tries++ < MAX_RETRY && result == null) {
                 Log.i("CheckNotificationsTask", "doInBackground: Processing... Trial: " + tries);
                 Log.i("CheckNotificationsTask", "Trying: " + NOTIFICATIONS_URL);
-                Element notification = getElement(NOTIFICATIONS_URL);
+                Element notification = getElement();
                 if (notification != null)
                     result = notification;
             }
@@ -260,7 +264,7 @@ public class NotificationsService extends Service {
                         // try to download a picture and send the notification
                         new AsyncTask<Void, Void, Void>() {
                             @Override
-                            protected Void doInBackground (Void[] params){
+                            protected Void doInBackground(Void[] params) {
                                 Bitmap picture = Miscellany.getBitmapFromURL(Miscellany.extractUrl(pictureStyle));
                                 String address = result.attr("href");
                                 if (!address.contains("https"))
@@ -288,7 +292,9 @@ public class NotificationsService extends Service {
 
     }
 
-    /** Messages checker task: it checks new messages only. */
+    /**
+     * Messages checker task: it checks new messages only.
+     */
     private class CheckMessagesTask extends AsyncTask<Void, Void, String> {
 
         boolean syncProblemOccurred = false;
@@ -377,9 +383,10 @@ public class NotificationsService extends Service {
 
     }
 
-    /** CookieSyncManager was deprecated in API level 21.
-     *  We need it for API level lower than 21 though.
-     *  In API level >= 21 it's done automatically.
+    /**
+     * CookieSyncManager was deprecated in API level 21.
+     * We need it for API level lower than 21 though.
+     * In API level >= 21 it's done automatically.
      */
     @SuppressWarnings("deprecation")
     private void syncCookies() {
@@ -392,13 +399,8 @@ public class NotificationsService extends Service {
     // show a Sync Problem Toast while not being on UI Thread
     private void syncProblemToast() {
         Handler handler = new Handler(Looper.getMainLooper());
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(getApplicationContext(), getString(R.string.sync_problem),
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
+        handler.post(() -> Toast.makeText(getApplicationContext(), getString(R.string.sync_problem),
+                Toast.LENGTH_SHORT).show());
     }
 
     // restart the service from inside the service
@@ -446,9 +448,9 @@ public class NotificationsService extends Service {
 
         // vibration
         if (preferences.getBoolean("vibrate", false))
-            mBuilder.setVibrate(new long[] {500, 500});
+            mBuilder.setVibrate(new long[]{500, 500});
         else
-            mBuilder.setVibrate(new long[] {0L});
+            mBuilder.setVibrate(new long[]{0L});
 
         // LED light
         if (preferences.getBoolean("led_light", false)) {

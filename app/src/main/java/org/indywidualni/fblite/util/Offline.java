@@ -95,9 +95,10 @@ public class Offline {
 
     }
 
-    /** CookieSyncManager was deprecated in API level 21.
-     *  We need it for API level lower than 21 though.
-     *  In API level >= 21 it's done automatically.
+    /**
+     * CookieSyncManager was deprecated in API level 21.
+     * We need it for API level lower than 21 though.
+     * In API level >= 21 it's done automatically.
      */
     @SuppressWarnings("deprecation")
     private void syncCookies() {
@@ -108,8 +109,8 @@ public class Offline {
     }
 
     private static String removeEndingSlash(String url) {
-        if (url.length() > 0 && url.charAt(url.length()-1)=='/')
-            url = url.substring(0, url.length()-1);
+        if (url.length() > 0 && url.charAt(url.length() - 1) == '/')
+            url = url.substring(0, url.length() - 1);
         return url;
     }
 

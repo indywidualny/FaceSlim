@@ -65,7 +65,6 @@ import org.indywidualni.fblite.util.WebViewProxyUtil;
 import org.indywidualni.fblite.webview.MyWebViewClient;
 
 import java.io.File;
-import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
@@ -150,7 +149,7 @@ public class MainActivity extends Activity {
             setContentView(R.layout.activity_main_drawer_right);
 
         // the main layout, everything is inside
-        contentMain = (LinearLayout) findViewById(R.id.content_main);
+        contentMain = findViewById(R.id.content_main);
 
         if (preferences.getBoolean("keyboard_fix", false))
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
@@ -189,7 +188,11 @@ public class MainActivity extends Activity {
 
                 // bug fix (1.4.1) for launching the app in landscape mode
                 if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE && Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT)
-                    contentMain.setPadding(0, Dimension.getStatusBarHeight(getApplicationContext()), Dimension.getNavigationBarHeight(getApplicationContext(), 0), 0);
+                    contentMain.setPadding(
+                            0,
+                            Dimension.getStatusBarHeight(getApplicationContext()),
+                            Dimension.getNavigationBarHeight(getApplicationContext(), 0),
+                            0);
                 else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE && Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
                     getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
                     contentMain.setPadding(0, 0, 0, Dimension.getStatusBarHeight(getApplicationContext()));
@@ -198,8 +201,8 @@ public class MainActivity extends Activity {
         }
 
         // piece of code for drawer layout
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerList = (ListView) findViewById(R.id.drawer_slider);
+        mDrawerLayout = findViewById(R.id.drawer_layout);
+        mDrawerList = findViewById(R.id.drawer_slider);
         // set up the drawer's list view with items and onClick listener
         String[] itemList = getResources().getStringArray(R.array.item_array);
         mDrawerList.setAdapter(new ArrayAdapter<>(this, R.layout.drawer_list_item, itemList));
@@ -225,19 +228,19 @@ public class MainActivity extends Activity {
         // most recent posts
         webViewUrl = appendMostRecentInfix(webViewUrl);
 
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
+        swipeRefreshLayout = findViewById(R.id.swipe_container);
         swipeRefreshLayout.setVisibility(View.VISIBLE);
         swipeRefreshLayout.setOnRefreshListener(onRefreshListener);
         swipeRefreshLayout.setColorSchemeColors(Color.BLUE);
 
         // fullscreen videos display here
-        customViewContainer = (FrameLayout) findViewById(R.id.customViewContainer);
+        customViewContainer = findViewById(R.id.customViewContainer);
 
         // bind progress bar
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        progressBar = findViewById(R.id.progressBar);
 
         // webView code without handling external links
-        webView = (WebView) findViewById(R.id.webView);
+        webView = findViewById(R.id.webView);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setAllowFileAccess(true);
         webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
@@ -272,12 +275,9 @@ public class MainActivity extends Activity {
         // Tor proxy
         final Proxy proxy = Miscellany.getProxy(preferences);
         if (proxy != Proxy.NO_PROXY) {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    InetSocketAddress isa = (InetSocketAddress) proxy.address();
-                    WebViewProxyUtil.setProxy(getApplication(), webView, isa.getHostName(), isa.getPort());
-                }
+            new Thread(() -> {
+                InetSocketAddress isa = (InetSocketAddress) proxy.address();
+                WebViewProxyUtil.setProxy(getApplication(), webView, isa.getHostName(), isa.getPort());
             }).start();
         }
 
@@ -365,7 +365,8 @@ public class MainActivity extends Activity {
                         webView.getSettings().setUserAgentString(MainActivity.USER_AGENT_MESSENGER);
                 }
             }
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+        }
 
         // notify when there is no internet connection (offline mode have its own messages)
         if (!Connectivity.isConnected(this) && !preferences.getBoolean("offline_mode", false))
@@ -390,20 +391,19 @@ public class MainActivity extends Activity {
         webView.loadUrl(webViewUrl);
 
         // OnLongClickListener for detecting long clicks on links and images
-        webView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                // activate long clicks on links and image links according to settings
-                if (preferences.getBoolean("long_clicks", true)) {
-                    WebView.HitTestResult result = webView.getHitTestResult();
-                    if (result.getType() == WebView.HitTestResult.SRC_ANCHOR_TYPE || result.getType() == WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE) {
-                        Message msg = linkHandler.obtainMessage();
-                        webView.requestFocusNodeHref(msg);
-                        return true;
-                    }
+        webView.setOnLongClickListener(v -> {
+            // activate long clicks on links and image links according to settings
+            if (preferences.getBoolean("long_clicks", true)) {
+                WebView.HitTestResult result = webView.getHitTestResult();
+                if (result.getType()
+                        == WebView.HitTestResult.SRC_ANCHOR_TYPE || result.getType()
+                        == WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE) {
+                    Message msg = linkHandler.obtainMessage();
+                    webView.requestFocusNodeHref(msg);
+                    return true;
                 }
-                return false;
             }
+            return false;
         });
 
         // check for app updates
@@ -411,7 +411,10 @@ public class MainActivity extends Activity {
             final long now = System.currentTimeMillis();
             final long lastUpdateCheck = preferences.getLong("latest_update_check", 0L);
             final long sinceLastCheck = now - lastUpdateCheck;
-            if (sinceLastCheck > UPDATE_CHECK_INTERVAL && Connectivity.isConnected(this) && !preferences.getBoolean("first_run", true)) {
+            if (sinceLastCheck
+                    > UPDATE_CHECK_INTERVAL
+                    && Connectivity.isConnected(this)
+                    && !preferences.getBoolean("first_run", true)) {
                 new CheckUpdatesTask(this).execute();
             }
         }
@@ -457,14 +460,9 @@ public class MainActivity extends Activity {
             if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
 
                 // create the file where the photo should go
-                File photoFile = null;
-                try {
-                    photoFile = createImageFile();
-                    takePictureIntent.putExtra("PhotoPath", mCameraPhotoPath);
-                } catch (IOException ex) {
-                    // Error occurred while creating the File
-                    Log.e(TAG, "Unable to create Image File", ex);
-                }
+                File photoFile;
+                photoFile = createImageFile();
+                takePictureIntent.putExtra("PhotoPath", mCameraPhotoPath);
 
                 // continue only if the file was successfully created
                 if (photoFile != null) {
@@ -498,8 +496,9 @@ public class MainActivity extends Activity {
         }
 
         // creating image files (Lollipop only)
-        private File createImageFile() throws IOException {
-            File imageStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), appDirectoryName);
+        private File createImageFile() {
+            File imageStorageDir = new File(Environment.getExternalStoragePublicDirectory(
+                    Environment.DIRECTORY_PICTURES), appDirectoryName);
 
             if (!imageStorageDir.exists()) {
                 //noinspection ResultOfMethodCallIgnored
@@ -507,7 +506,8 @@ public class MainActivity extends Activity {
             }
 
             // create an image file name
-            imageStorageDir = new File(imageStorageDir + File.separator + "IMG_" + String.valueOf(System.currentTimeMillis()) + ".jpg");
+            imageStorageDir = new File(imageStorageDir + File.separator + "IMG_"
+                    + String.valueOf(System.currentTimeMillis()) + ".jpg");
             return imageStorageDir;
         }
 
@@ -516,14 +516,16 @@ public class MainActivity extends Activity {
             mUploadMessage = uploadMsg;
 
             try {
-                File imageStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), appDirectoryName);
+                File imageStorageDir = new File(Environment.getExternalStoragePublicDirectory(
+                        Environment.DIRECTORY_PICTURES), appDirectoryName);
 
                 if (!imageStorageDir.exists()) {
                     //noinspection ResultOfMethodCallIgnored
                     imageStorageDir.mkdirs();
                 }
 
-                File file = new File(imageStorageDir + File.separator + "IMG_" + String.valueOf(System.currentTimeMillis()) + ".jpg");
+                File file = new File(imageStorageDir + File.separator + "IMG_"
+                        + String.valueOf(System.currentTimeMillis()) + ".jpg");
 
                 mCapturedImageURI = Uri.fromFile(file); // save to the private variable
 
@@ -552,16 +554,20 @@ public class MainActivity extends Activity {
         }
 
         // openFileChooser for other Android versions
-        /** may not work on KitKat due to lack of implementation of openFileChooser() or onShowFileChooser()
-         *  https://code.google.com/p/android/issues/detail?id=62220
-         *  however newer versions of KitKat fixed it on some devices */
+
+        /**
+         * may not work on KitKat due to lack of implementation of openFileChooser() or onShowFileChooser()
+         * https://code.google.com/p/android/issues/detail?id=62220
+         * however newer versions of KitKat fixed it on some devices
+         */
         public void openFileChooser(ValueCallback<Uri> uploadMsg, String acceptType, String capture) {
             openFileChooser(uploadMsg, acceptType);
         }
 
-        /** This method was deprecated in API level 18.
-         *  This method supports the obsolete plugin mechanism,
-         *  and will not be invoked in future
+        /**
+         * This method was deprecated in API level 18.
+         * This method supports the obsolete plugin mechanism,
+         * and will not be invoked in future
          */
         @SuppressWarnings("deprecation")
         @Override
@@ -570,7 +576,7 @@ public class MainActivity extends Activity {
         }
 
         @Override
-        public void onShowCustomView(View view,CustomViewCallback callback) {
+        public void onShowCustomView(View view, CustomViewCallback callback) {
             // if a view already exists then immediately terminate the new one
             if (mCustomView != null) {
                 callback.onCustomViewHidden();
@@ -693,7 +699,7 @@ public class MainActivity extends Activity {
 
     // request storage permission
     private void requestStoragePermission() {
-        String[] permissions = new String[] { Manifest.permission.WRITE_EXTERNAL_STORAGE };
+        String[] permissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
         if (!hasStoragePermission()) {
             Log.e(TAG, "No storage permission at the moment. Requesting...");
             ActivityCompat.requestPermissions(this, permissions, REQUEST_STORAGE);
@@ -714,7 +720,7 @@ public class MainActivity extends Activity {
 
     // request location permission
     private void requestLocationPermission() {
-        String[] permissions = new String[] { Manifest.permission.ACCESS_FINE_LOCATION };
+        String[] permissions = new String[]{Manifest.permission.ACCESS_FINE_LOCATION};
         if (!hasLocationPermission()) {
             Log.e(TAG, "No location permission at the moment. Requesting...");
             ActivityCompat.requestPermissions(this, permissions, REQUEST_LOCATION);
@@ -731,7 +737,8 @@ public class MainActivity extends Activity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
         switch (requestCode) {
             case REQUEST_STORAGE:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -741,7 +748,8 @@ public class MainActivity extends Activity {
                         saveImageToDisk(mPendingImageUrlToSave);
                 } else {
                     Log.e(TAG, "Storage permission denied");
-                    Toast.makeText(getApplicationContext(), getString(R.string.no_storage_permission), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),
+                            getString(R.string.no_storage_permission), Toast.LENGTH_SHORT).show();
                 }
                 break;
             case REQUEST_LOCATION:
@@ -750,7 +758,8 @@ public class MainActivity extends Activity {
                     webView.reload();
                 } else {
                     Log.e(TAG, "Location permission denied");
-                    Toast.makeText(getApplicationContext(), getString(R.string.no_location_permission), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),
+                            getString(R.string.no_location_permission), Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
@@ -759,7 +768,7 @@ public class MainActivity extends Activity {
 
     // return here when file selected from camera or from SD Card
     @Override
-    public void onActivityResult (int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         // code for all versions except of Lollipop
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
 
@@ -776,9 +785,8 @@ public class MainActivity extends Activity {
                         // retrieve from the private variable if the intent is null
                         result = data == null ? mCapturedImageURI : data.getData();
                     }
-                }
-                catch(Exception e) {
-                    Toast.makeText(getApplicationContext(), "activity :"+e, Toast.LENGTH_LONG).show();
+                } catch (Exception e) {
+                    Toast.makeText(getApplicationContext(), "activity :" + e, Toast.LENGTH_LONG).show();
                 }
 
                 mUploadMessage.onReceiveValue(result);
@@ -802,12 +810,12 @@ public class MainActivity extends Activity {
                 if (data == null || data.getData() == null) {
                     // if there is not data, then we may have taken a photo
                     if (mCameraPhotoPath != null) {
-                        results = new Uri[] {Uri.parse(mCameraPhotoPath)};
+                        results = new Uri[]{Uri.parse(mCameraPhotoPath)};
                     }
                 } else {
                     String dataString = data.getDataString();
                     if (dataString != null) {
-                        results = new Uri[] {Uri.parse(dataString)};
+                        results = new Uri[]{Uri.parse(dataString)};
                     }
                 }
             }
@@ -818,13 +826,15 @@ public class MainActivity extends Activity {
         } // end of code for Lollipop only
     }
 
-    private final SwipeRefreshLayout.OnRefreshListener onRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
+    private final SwipeRefreshLayout.OnRefreshListener onRefreshListener
+            = new SwipeRefreshLayout.OnRefreshListener() {
 
         // refreshing pages
         @Override
         public void onRefresh() {
             // notify when there is no internet connection (offline mode have its own messages)
-            if (!Connectivity.isConnected(getApplicationContext()) && !preferences.getBoolean("offline_mode", false))
+            if (!Connectivity.isConnected(getApplicationContext())
+                    && !preferences.getBoolean("offline_mode", false))
                 Toast.makeText(getApplicationContext(), getString(R.string.no_network), Toast.LENGTH_SHORT).show();
 
             webView.stopLoading();
@@ -836,20 +846,17 @@ public class MainActivity extends Activity {
                 webView.reload();
 
             // if no internet connection and offline mode enabled show a different loading indicator
-            if (preferences.getBoolean("offline_mode", false) && !Connectivity.isConnected(getApplicationContext()))
+            if (preferences.getBoolean("offline_mode", false)
+                    && !Connectivity.isConnected(getApplicationContext()))
                 swipeRefreshLayout.setRefreshing(false);
             else {
-                new Handler().postDelayed(new Runnable() {
-
-                    @Override
-                    public void run() {
-                        swipeRefreshLayout.setRefreshing(false);
-                        // done!
-                    }
-
+                new Handler().postDelayed(() -> {
+                    swipeRefreshLayout.setRefreshing(false);
+                    // done!
                 }, 2000);
             }
-        }};
+        }
+    };
 
     // the click listener for ListView in the navigation drawer
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
@@ -862,7 +869,8 @@ public class MainActivity extends Activity {
                 baseAddress = "https://touch.facebook.com/";
             else if (preferences.getBoolean("basic_mode", false))
                 baseAddress = "https://mbasic.facebook.com/";
-            if (preferences.getBoolean("facebook_zero", false) && Connectivity.isConnectedMobile(getApplicationContext()))
+            if (preferences.getBoolean("facebook_zero", false)
+                    && Connectivity.isConnectedMobile(getApplicationContext()))
                 baseAddress = "https://0.facebook.com/";
 
             selectItem(position, baseAddress);
@@ -937,7 +945,11 @@ public class MainActivity extends Activity {
             // bug fix (1.4.1) for landscape mode
             if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE && preferences.getBoolean("transparent_nav", false)) {
                 if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
-                    contentMain.setPadding(0, Dimension.getStatusBarHeight(getApplicationContext()), Dimension.getNavigationBarHeight(getApplicationContext(), 0), 0);
+                    contentMain.setPadding(
+                            0,
+                            Dimension.getStatusBarHeight(getApplicationContext()),
+                            Dimension.getNavigationBarHeight(getApplicationContext(), 0),
+                            0);
                 } else if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
                     getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
                     contentMain.setPadding(0, 0, 0, Dimension.getStatusBarHeight(getApplicationContext()));
@@ -1015,7 +1027,8 @@ public class MainActivity extends Activity {
             if (getIntent().getExtras().getString("start_url") != null) {
                 webViewUrl = getIntent().getExtras().getString("start_url");
             }
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+        }
 
         /** load a grabbed url instead of the current page */
         if (isFacebookZero && isConnectedMobile)
@@ -1228,13 +1241,10 @@ public class MainActivity extends Activity {
         dialog.setCanceledOnTouchOutside(true);
         //for dismissing anywhere you touch
         View masterView = dialog.findViewById(R.id.coach_mark_master_view);
-        masterView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-                // notifications setup notice
-                Toast.makeText(getApplicationContext(), getString(R.string.setup_notifications), Toast.LENGTH_SHORT).show();
-            }
+        masterView.setOnClickListener(view -> {
+            dialog.dismiss();
+            // notifications setup notice
+            Toast.makeText(getApplicationContext(), getString(R.string.setup_notifications), Toast.LENGTH_SHORT).show();
         });
         dialog.show();
     }
@@ -1247,17 +1257,9 @@ public class MainActivity extends Activity {
         messageTextView.setTextColor(ContextCompat.getColor(this, R.color.black));
         return new AlertDialog.Builder(this)
                 .setView(messageTextView)
-                .setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        finish();
-                    }
-                })
-                .setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // nothing to do here
-                    }
+                .setPositiveButton(getString(R.string.yes), (dialog, which) -> finish())
+                .setNegativeButton(getString(R.string.no), (dialog, which) -> {
+                    // nothing to do here
                 })
                 .setCancelable(true)
                 .create();
@@ -1304,16 +1306,13 @@ public class MainActivity extends Activity {
         container.addView(input);
         builder.setView(container);
 
-        builder.setPositiveButton(getString(android.R.string.ok), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int whichButton) {
-                String label = input.getText().toString();
-                if (TextUtils.isEmpty(label))
-                    label = webView.getTitle();
-                shortcut.putExtra(CustomShortcutActivity.NAME_FIELD, label);
-                startActivity(shortcut);
-                Toast.makeText(getApplicationContext(), "\uD83D\uDC4C", Toast.LENGTH_SHORT).show();
-            }
+        builder.setPositiveButton(getString(android.R.string.ok), (dialog, whichButton) -> {
+            String label = input.getText().toString();
+            if (TextUtils.isEmpty(label))
+                label = webView.getTitle();
+            shortcut.putExtra(CustomShortcutActivity.NAME_FIELD, label);
+            startActivity(shortcut);
+            Toast.makeText(getApplicationContext(), "\uD83D\uDC4C", Toast.LENGTH_SHORT).show();
         });
         builder.setNegativeButton(getString(android.R.string.cancel), null);
 
@@ -1332,5 +1331,4 @@ public class MainActivity extends Activity {
     public SwipeRefreshLayout getSwipeRefreshLayout() {
         return swipeRefreshLayout;
     }
-
 }

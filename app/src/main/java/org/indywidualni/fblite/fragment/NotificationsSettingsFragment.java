@@ -44,20 +44,19 @@ public class NotificationsSettingsFragment extends PreferenceFragment {
             lp.setValueIndex(4);
 
         // listener for changing preferences (works after the value change)
-        prefChangeListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
-            public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
-                // service intent (start, stop)
-                final Intent intent = new Intent(context, NotificationsService.class);
+        prefChangeListener = (prefs, key) -> {
+            // service intent (start, stop)
+            final Intent intent = new Intent(context, NotificationsService.class);
 
-                switch (key) {
-                    case "interval_pref":
-                        // restart the service after time interval change
-                        if (prefs.getBoolean("notifications_activated", false) || prefs.getBoolean("message_notifications", false)) {
-                            context.stopService(intent);
-                            context.startService(intent);
-                        }
-                        break;
-                }
+            switch (key) {
+                case "interval_pref":
+                    // restart the service after time interval change
+                    if (prefs.getBoolean("notifications_activated", false)
+                            || prefs.getBoolean("message_notifications", false)) {
+                        context.stopService(intent);
+                        context.startService(intent);
+                    }
+                    break;
             }
         };
     }
@@ -81,7 +80,8 @@ public class NotificationsSettingsFragment extends PreferenceFragment {
         super.onResume();
 
         // update notification ringtone preference summary
-        String ringtoneString = preferences.getString("ringtone", "content://settings/system/notification_sound");
+        String ringtoneString = preferences.getString(
+                "ringtone", "content://settings/system/notification_sound");
         Uri ringtoneUri = Uri.parse(ringtoneString);
         String name;
 
@@ -100,7 +100,8 @@ public class NotificationsSettingsFragment extends PreferenceFragment {
         rpn.setSummary(getString(R.string.notification_sound_description) + name);
 
         // update message ringtone preference summary
-        ringtoneString = preferences.getString("ringtone_msg", "content://settings/system/notification_sound");
+        ringtoneString = preferences.getString(
+                "ringtone_msg", "content://settings/system/notification_sound");
         ringtoneUri = Uri.parse(ringtoneString);
 
         try {

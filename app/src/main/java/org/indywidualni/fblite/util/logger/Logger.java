@@ -17,7 +17,9 @@ import org.indywidualni.fblite.R;
 import java.io.File;
 import java.lang.ref.WeakReference;
 
-/** Singleton pattern */
+/**
+ * Singleton pattern
+ */
 public final class Logger {
 
     private static volatile Logger instance;
@@ -64,7 +66,7 @@ public final class Logger {
             if (logger != null) {
                 if (msg.what == MSG_SHOW_TOAST) {
                     String message = (String) msg.obj;
-                    Toast.makeText(MyApplication.getContextOfApplication(), message , Toast.LENGTH_SHORT)
+                    Toast.makeText(MyApplication.getContextOfApplication(), message, Toast.LENGTH_SHORT)
                             .show();
                 }
             }

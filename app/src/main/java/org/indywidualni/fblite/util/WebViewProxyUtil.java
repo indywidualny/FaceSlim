@@ -45,9 +45,8 @@ public class WebViewProxyUtil {
      *
      * @param context {@link Context}
      * @param webview {@link android.webkit.WebView}
-     * @param host {@link String}
-     * @param port {@link int}
-     *
+     * @param host    {@link String}
+     * @param port    {@link int}
      * @return {@link boolean}
      */
     public static boolean setProxy(Context context, WebView webview, String host, int port) {
@@ -207,6 +206,7 @@ public class WebViewProxyUtil {
         Log.d(LOG_TAG, "Setting proxy with >= 4.4 API successful!");
         return true;
     }
+
     /**
      * Set Proxy for Android 5.0 and above.
      */
