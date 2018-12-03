@@ -5,33 +5,31 @@
 
     <ListView
         android:id="@+id/list_offline"
-        android:dividerHeight="1dp"
-        android:divider="@drawable/list_divider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:footerDividersEnabled="false"
-        android:scrollbarStyle="outsideInset"
-        android:overScrollFooter="@android:color/transparent"
         android:clipToPadding="false"
-        android:paddingBottom="10dp"
+        android:divider="@drawable/list_divider"
+        android:dividerHeight="1dp"
+        android:footerDividersEnabled="false"
+        android:overScrollFooter="@android:color/transparent"
         android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="10dp"
-        />
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingBottom="10dp"
+        android:scrollbarStyle="outsideInset" />
 
     <TextView
         android:id="@+id/empty_element"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="@string/offline_database_empty"
-        android:textSize="16sp"
-        android:textColor="@color/black"
-        android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        android:visibility="gone"
-        />
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:text="@string/offline_database_empty"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:visibility="gone" />
 
 </RelativeLayout>

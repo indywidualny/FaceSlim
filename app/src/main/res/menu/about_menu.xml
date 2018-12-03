@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/email_me"
-        android:title="@string/email_author"/>
+    <item
+        android:id="@+id/email_me"
+        android:title="@string/email_author" />
 
-    <item android:id="@+id/donate_google"
-        android:title="@string/donate_google"/>
+    <item
+        android:id="@+id/donate_google"
+        android:title="@string/donate_google" />
 
-    <item android:id="@+id/paypal"
-        android:title="@string/donate_paypal"/>
+    <item
+        android:id="@+id/paypal"
+        android:title="@string/donate_paypal" />
 
-    <item android:id="@+id/me_google_play"
-        android:title="@string/me_google_play"/>
+    <item
+        android:id="@+id/me_google_play"
+        android:title="@string/me_google_play" />
 </menu>

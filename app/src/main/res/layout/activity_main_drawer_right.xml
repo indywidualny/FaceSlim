@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/content_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.v4.widget.DrawerLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <!-- The main content view -->
-        <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -30,7 +27,7 @@
                 <WebView
                     android:id="@+id/webView"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent" />
 
             </android.support.v4.widget.SwipeRefreshLayout>
 
@@ -41,10 +38,9 @@
                 android:layout_height="0px"
                 android:layout_weight="1"
                 android:background="@color/black"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
-            <include
-                layout="@layout/progress_bar"/>
+            <include layout="@layout/progress_bar" />
 
         </LinearLayout>
 
@@ -54,10 +50,10 @@
             android:layout_width="240dp"
             android:layout_height="match_parent"
             android:layout_gravity="end"
+            android:background="@color/colorPrimary"
             android:choiceMode="singleChoice"
             android:divider="@android:color/transparent"
-            android:dividerHeight="0dp"
-            android:background="@color/colorPrimary"/>
+            android:dividerHeight="0dp" />
 
     </android.support.v4.widget.DrawerLayout>
 

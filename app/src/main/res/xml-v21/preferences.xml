@@ -1,171 +1,166 @@
-<PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory
-        android:title="@string/preference_category1">
+    <PreferenceCategory android:title="@string/preference_category1">
 
         <SwitchPreference
+            android:defaultValue="true"
             android:key="progress_bar"
-            android:title="@string/progress_bar"
-            android:defaultValue="true"/>
+            android:title="@string/progress_bar" />
 
         <SwitchPreference
+            android:defaultValue="false"
             android:key="confirm_exit"
-            android:title="@string/confirm_exit"
-            android:defaultValue="false"/>
+            android:title="@string/confirm_exit" />
 
         <SwitchPreference
+            android:defaultValue="true"
             android:key="long_clicks"
-            android:title="@string/long_clicks"
             android:summary="@string/long_clicks_description"
-            android:defaultValue="true"/>
+            android:title="@string/long_clicks" />
 
         <SwitchPreference
+            android:defaultValue="false"
             android:key="fixed_nav"
-            android:title="@string/fixed_nav"
             android:summary="@string/fixed_nav_description"
-            android:defaultValue="false"/>
+            android:title="@string/fixed_nav" />
 
         <SwitchPreference
+            android:defaultValue="false"
             android:key="suppress_audio_media"
-            android:title="@string/suppress_audio_media"
             android:summary="@string/suppress_audio_media_description"
-            android:defaultValue="false"/>
+            android:title="@string/suppress_audio_media" />
 
         <SwitchPreference
+            android:defaultValue="false"
             android:key="transparent_nav"
-            android:title="@string/transparent_nav"
             android:summary="@string/transparent_nav_description"
-            android:defaultValue="false"/>
+            android:title="@string/transparent_nav" />
 
         <EditTextPreference
-            android:title="@string/font_size"
-            android:summary="@string/font_size_description"
-            android:key="font_size"
             android:defaultValue="100"
             android:hint="@string/font_size_hint"
+            android:inputType="number"
+            android:key="font_size"
             android:maxLength="3"
-            android:inputType="number"/>
+            android:summary="@string/font_size_description"
+            android:title="@string/font_size" />
 
         <ListPreference
-            android:title="@string/drawer_pos"
-            android:summary="@string/drawer_pos_description"
-            android:key="drawer_pos"
             android:defaultValue="0"
             android:entries="@array/drawerPosTitles"
-            android:entryValues="@array/drawerPosValues"/>
+            android:entryValues="@array/drawerPosValues"
+            android:key="drawer_pos"
+            android:summary="@string/drawer_pos_description"
+            android:title="@string/drawer_pos" />
 
     </PreferenceCategory>
 
 
-    <PreferenceCategory
-        android:title="@string/preference_category5">
+    <PreferenceCategory android:title="@string/preference_category5">
 
         <Preference
             android:key="notifications_settings"
-            android:title="@string/notifications_settings"
-            android:summary="@string/notifications_settings_description"/>
+            android:summary="@string/notifications_settings_description"
+            android:title="@string/notifications_settings" />
 
         <SwitchPreference
+            android:defaultValue="false"
             android:key="notifications_activated"
-            android:title="@string/facebook_notifications"
-            android:defaultValue="false"/>
+            android:title="@string/facebook_notifications" />
 
         <SwitchPreference
+            android:defaultValue="false"
             android:key="message_notifications"
-            android:title="@string/message_notifications"
-            android:defaultValue="false"/>
+            android:title="@string/message_notifications" />
 
     </PreferenceCategory>
 
 
-    <PreferenceCategory
-        android:title="@string/preference_category4">
+    <PreferenceCategory android:title="@string/preference_category4">
 
         <SwitchPreference
+            android:defaultValue="false"
             android:key="facebook_zero"
-            android:title="@string/facebook_zero"
             android:summary="@string/facebook_zero_description"
-            android:defaultValue="false"/>
+            android:title="@string/facebook_zero" />
 
         <SwitchPreference
+            android:defaultValue="false"
+            android:enabled="false"
             android:key="touch_mode"
-            android:title="@string/touch_mode"
             android:summary="@string/touch_mode_description"
-            android:enabled="false"
-            android:defaultValue="false"/>
+            android:title="@string/touch_mode" />
 
         <SwitchPreference
+            android:defaultValue="false"
+            android:enabled="false"
             android:key="basic_mode"
-            android:title="@string/basic_mode"
             android:summary="@string/basic_mode_description"
-            android:enabled="false"
-            android:defaultValue="false"/>
+            android:title="@string/basic_mode" />
 
         <SwitchPreference
+            android:defaultValue="false"
+            android:enabled="false"
             android:key="dark_theme"
-            android:title="@string/dark_theme"
             android:summary="@string/dark_theme_description"
-            android:enabled="false"
-            android:defaultValue="false"/>
+            android:title="@string/dark_theme" />
 
         <SwitchPreference
+            android:defaultValue="false"
             android:key="location"
-            android:title="@string/location_access"
-            android:defaultValue="false"/>
+            android:title="@string/location_access" />
 
         <SwitchPreference
+            android:defaultValue="false"
             android:key="load_extra"
-            android:title="@string/load_extra"
             android:summary="@string/load_extra_description"
-            android:defaultValue="false"/>
+            android:title="@string/load_extra" />
 
         <SwitchPreference
+            android:defaultValue="false"
             android:key="use_tor"
-            android:title="@string/use_tor_title"
             android:summary="@string/use_tor_summary"
-            android:defaultValue="false"/>
+            android:title="@string/use_tor_title" />
 
         <SwitchPreference
+            android:defaultValue="true"
             android:key="app_updates"
-            android:title="@string/check_for_updates"
-            android:defaultValue="true"/>
+            android:title="@string/check_for_updates" />
 
     </PreferenceCategory>
 
 
-    <PreferenceCategory
-        android:title="@string/preference_category6">
+    <PreferenceCategory android:title="@string/preference_category6">
 
         <SwitchPreference
+            android:defaultValue="false"
             android:key="most_recent"
-            android:title="@string/most_recent"
             android:summary="@string/most_recent_description"
-            android:defaultValue="false"/>
+            android:title="@string/most_recent" />
 
         <SwitchPreference
+            android:defaultValue="false"
             android:key="hide_sponsored"
-            android:title="@string/hide_sponsored"
             android:summary="@string/hide_sponsored_description"
-            android:defaultValue="false"/>
-            
+            android:title="@string/hide_sponsored" />
+
         <SwitchPreference
+            android:defaultValue="false"
             android:key="hide_people"
-            android:title="@string/hide_people"
             android:summary="@string/hide_people_description"
-            android:defaultValue="false"/>
-            
+            android:title="@string/hide_people" />
+
         <SwitchPreference
+            android:defaultValue="false"
             android:key="no_images"
-            android:title="@string/no_images"
             android:summary="@string/no_images_description"
-            android:defaultValue="false"/>
-            
+            android:title="@string/no_images" />
+
         <SwitchPreference
+            android:defaultValue="false"
             android:key="hide_news_feed"
-            android:title="@string/hide_news_feed"
             android:summary="@string/hide_news_feed_description"
-            android:defaultValue="false"/>
+            android:title="@string/hide_news_feed" />
 
     </PreferenceCategory>
 
@@ -175,62 +170,60 @@
     </PreferenceCategory> -->
 
 
-    <PreferenceCategory
-    android:title="@string/offline_mode">
+    <PreferenceCategory android:title="@string/offline_mode">
 
         <SwitchPreference
+            android:defaultValue="false"
             android:key="offline_mode"
-            android:title="@string/offline_mode_enable"
             android:summary="@string/offline_mode_description"
-            android:defaultValue="false"/>
+            android:title="@string/offline_mode_enable" />
 
         <EditTextPreference
-            android:key="offline_keep_max"
+            android:defaultValue="10"
             android:inputType="number"
-            android:title="@string/offline_keep_max"
-            android:summary="@string/offline_keep_max_description"
+            android:key="offline_keep_max"
             android:maxLength="5"
-            android:defaultValue="10"/>
+            android:summary="@string/offline_keep_max_description"
+            android:title="@string/offline_keep_max" />
 
         <Preference
-            android:summary="@string/offline_dummy_description"
-            android:selectable="false"/>
+            android:selectable="false"
+            android:summary="@string/offline_dummy_description" />
 
     </PreferenceCategory>
 
 
-    <PreferenceCategory
-        android:title="@string/preference_category2">
+    <PreferenceCategory android:title="@string/preference_category2">
 
         <SwitchPreference
+            android:defaultValue="true"
             android:key="hardware_acceleration"
-            android:title="@string/hardware_acceleration"
             android:summary="@string/hardware_acceleration_description"
-            android:defaultValue="true"/>
+            android:title="@string/hardware_acceleration" />
 
         <SwitchPreference
+            android:defaultValue="false"
             android:key="file_logging"
-            android:title="@string/file_logger"
             android:summary="@string/file_logger_description"
-            android:defaultValue="false"/>
+            android:title="@string/file_logger" />
 
         <SwitchPreference
+            android:defaultValue="false"
             android:key="keyboard_fix"
-            android:title="@string/keyboard_fix"
-            android:defaultValue="false"/>
+            android:title="@string/keyboard_fix" />
 
         <EditTextPreference
-            android:key="custom_user_agent"
-            android:inputType="text"
-            android:title="@string/custom_user_agent"
-            android:summary="@string/custom_user_agent_description"
+            android:defaultValue="@string/predefined_user_agent"
             android:hint="@string/custom_user_agent_hint"
-            android:defaultValue="@string/predefined_user_agent"/>
+            android:inputType="text"
+            android:key="custom_user_agent"
+            android:summary="@string/custom_user_agent_description"
+            android:title="@string/custom_user_agent" />
 
         <Preference
             android:key="clear_cache"
-            android:title="@string/clear_cache"
-            android:summary="@string/clear_cache_description"/>
+            android:summary="@string/clear_cache_description"
+            android:title="@string/clear_cache" />
 
     </PreferenceCategory>
 

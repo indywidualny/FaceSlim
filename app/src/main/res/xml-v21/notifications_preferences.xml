@@ -1,56 +1,53 @@
-<PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory
-        android:title="@string/notifications_settings">
+    <PreferenceCategory android:title="@string/notifications_settings">
 
         <ListPreference
-            android:title="@string/interval_pref"
-            android:summary="@string/interval_pref_description_new"
-            android:key="interval_pref"
+            android:defaultValue="1800000"
             android:entries="@array/intervalPrefTitles"
             android:entryValues="@array/intervalPrefValues"
-            android:defaultValue="1800000" />
+            android:key="interval_pref"
+            android:summary="@string/interval_pref_description_new"
+            android:title="@string/interval_pref" />
 
         <RingtonePreference
+            android:defaultValue="content://settings/system/notification_sound"
             android:key="ringtone"
             android:ringtoneType="notification"
             android:showDefault="true"
             android:showSilent="true"
-            android:defaultValue="content://settings/system/notification_sound"
-            android:title="@string/notification_sound"
-            android:summary="@string/notification_sound_description" />
+            android:summary="@string/notification_sound_description"
+            android:title="@string/notification_sound" />
 
         <RingtonePreference
+            android:defaultValue="content://settings/system/notification_sound"
             android:key="ringtone_msg"
             android:ringtoneType="notification"
             android:showDefault="true"
             android:showSilent="true"
-            android:defaultValue="content://settings/system/notification_sound"
-            android:title="@string/notification_sound_msg"
-            android:summary="@string/notification_sound_description" />
+            android:summary="@string/notification_sound_description"
+            android:title="@string/notification_sound_msg" />
 
         <SwitchPreference
+            android:defaultValue="false"
             android:key="vibrate"
-            android:title="@string/vibrate"
-            android:defaultValue="false"/>
+            android:title="@string/vibrate" />
 
         <SwitchPreference
+            android:defaultValue="false"
             android:key="led_light"
-            android:title="@string/led_light"
-            android:defaultValue="false"/>
+            android:title="@string/led_light" />
 
     </PreferenceCategory>
 
 
-    <PreferenceCategory
-        android:title="@string/notifications_extra">
+    <PreferenceCategory android:title="@string/notifications_extra">
 
         <SwitchPreference
+            android:defaultValue="true"
             android:key="notifications_everywhere"
-            android:title="@string/notifications_everywhere"
             android:summary="@string/notifications_everywhere_description"
-            android:defaultValue="true"/>
+            android:title="@string/notifications_everywhere" />
 
     </PreferenceCategory>
 
