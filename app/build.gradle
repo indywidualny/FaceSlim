@@ -38,5 +38,6 @@ dependencies {
 
     implementation 'org.jsoup:jsoup:1.11.3'
     implementation 'ch.acra:acra:4.9.2' //4.11
+    //implementation 'ch.acra:acra-core:5.2.1'
     implementation 'com.github.johnkil.android-appmsg:appmsg:1.2.0'
 }
