@@ -186,7 +186,7 @@ public class MyWebViewClient extends WebViewClient {
 
         // blue navigation bar always on top
         if (preferences.getBoolean("fixed_nav", false)) {
-            String cssFixed = "#header{ position: fixed; z-index: 11; top: 0px; } #root{ padding-top: 44px; } " +
+            String cssFixed = "._52z5{ position: fixed; z-index: 11; top: 0px; } #root{ padding-top: 44px; } " +
                     ".flyout{ max-height: " + Dimension.heightForFixedFacebookNavbar(context) + "px; overflow-y: scroll; }";
 
             // there is no host in offline mode
