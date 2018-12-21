@@ -3,13 +3,16 @@ package org.indywidualni.fblite.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.pm.ShortcutInfoCompat;
+import android.support.v4.content.pm.ShortcutManagerCompat;
+import android.support.v4.graphics.drawable.IconCompat;
 import android.util.Log;
 
 import org.indywidualni.fblite.R;
 
 public class CustomShortcutActivity extends Activity {
 
-    public static final String ACTION = "com.android.launcher.action.INSTALL_SHORTCUT";
+    //public static final String ACTION = "com.android.launcher.action.INSTALL_SHORTCUT";
     public static final String NAME_FIELD = "name";
     public static final String URL_FIELD = "url";
 
@@ -36,17 +39,17 @@ public class CustomShortcutActivity extends Activity {
 
         Log.v("Installing shortcut", url + ", " + name);
         Intent shortcutIntent = new Intent(getApplicationContext(), MainActivity.class);
-        shortcutIntent.putExtra("start_url", url);
         shortcutIntent.setAction(Intent.ACTION_MAIN);
-        Intent addIntent = new Intent();
-        addIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
-        addIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, name);
-        addIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE,
-                Intent.ShortcutIconResource.fromContext(getApplicationContext(),
-                        R.mipmap.ic_launcher));
-        addIntent.setAction(ACTION);
-        getApplicationContext().sendBroadcast(addIntent);
-
+        shortcutIntent.putExtra("start_url", url);
+        if(name == null){
+            name = "FaceSlim Shortcut";
+        }
+        ShortcutInfoCompat pinShortcutInfo = new ShortcutInfoCompat.Builder(getApplicationContext(), name)
+                .setShortLabel(name)
+                .setIcon(IconCompat.createWithResource(getApplicationContext(), R.mipmap.ic_launcher))
+                .setIntent(shortcutIntent)
+                .build();
+        ShortcutManagerCompat.requestPinShortcut(getApplicationContext(), pinShortcutInfo, null);
         finish();
     }
 
