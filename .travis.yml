@@ -16,3 +16,10 @@ android:
     - extra-android-m2repository
 
 script: GRADLE_OPTS="-Xmx768m -Xms256m -Xss1m" ./gradlew build check --stacktrace
+
+after_success:
+  - virtualenv ~/env
+  - source ~/env/bin/activate
+  - pip install transifex-client
+  - sudo echo $'[https://www.transifex.com]\nhostname = https://www.transifex.com\nusername = 'api$'\npassword = '"$TRANSIFEX_API_TOKEN"$'\n' > ~/.transifexrc
+  - tx push -s
