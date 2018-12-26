@@ -10,7 +10,7 @@
     <string name="get_feed_link" translatable="false">https://goo.gl/t3vJ33</string>
     <string name="facebook" translatable="false">Facebook</string>
     <string name="special_thanks_notifications_link" translatable="false"><a href="https://github.com/creativetrendsapps">Creative Trends</a></string>
-    <string name="predefined_user_agent" translatable="false">Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36</string>
+    <string name="predefined_user_agent" translatable="false">Mozilla/5.0 (BB10; Kbd) AppleWebKit/537.35+ (KHTML, like Gecko) Version/10.3.3.3057 Mobile Safari/537.35+</string>
 
     <!-- Strings to translate during creation of a new translation -->
     <string name="app_name">Face Slim</string>
