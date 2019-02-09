@@ -17,13 +17,13 @@
         <item>活動</item>
         <item>程式設定</item>
         <item>關於開發人員</item>
-        <item>Copy current URL</item>
-        <item>Add launcher shortcut</item>
+        <item>複製目前的網址</item>
+        <item>加入啟動器捷徑</item>
         <item>關閉程式</item>
         <item>回到頁首\u0020 &#8593;</item>
     </string-array>
 
-    <string name="author">by Krzysztof \'Koras\' Grabowski</string>
+    <string name="author">由 Krzysztof \'Koras\' Grabowski 製作</string>
     <string name="title_activity_settings">設定</string>
     <string name="title_activity_about">關於開發人員</string>
     <string name="preference_category1">介面</string>
