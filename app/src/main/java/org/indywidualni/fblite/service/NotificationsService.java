@@ -200,7 +200,7 @@ public class NotificationsService extends Service {
                             .cookie("https://mobile.facebook.com", cm.getCookie("https://mobile.facebook.com"))
                             .cookie("https://m.facebookcorewwwi.onion", cm.getCookie("https://m.facebookcorewwwi.onion"))
                             .get()
-                            .select("a.touchable")
+                            .select("div.touchable-notification")
                             .not("a._19no")
                             .not("a.button")
                             .first();
@@ -209,7 +209,7 @@ public class NotificationsService extends Service {
                             .userAgent(userAgent).timeout(JSOUP_TIMEOUT)
                             .cookie("https://mobile.facebook.com", cm.getCookie("https://mobile.facebook.com"))
                             .get()
-                            .select("a.touchable")
+                            .select("div.touchable-notification")
                             .not("a._19no")
                             .not("a.button")
                             .first();
@@ -242,6 +242,7 @@ public class NotificationsService extends Service {
             return result;
         }
 
+        @SuppressLint("StaticFieldLeak")
         @Override
         protected void onPostExecute(final Element result) {
             try {
@@ -251,17 +252,23 @@ public class NotificationsService extends Service {
                     return;
 
                 final String time = result.select("span.mfss.fcg").text();
-                final String text = result.text().replace(time, "");
-                final String pictureStyle = result.select("i.img.l.profpic").attr("style");
+                final String text = result.select("div.c").text().replace(time, "");
+                Element image_div = result.select("div.ib > i").first();
+                String image_url_style = Pattern.quote("url(\"") + "(.*?)" + Pattern.quote("\")");
+                String pictureStyle = Miscellany.getTextBetween(image_div.attr("style"), image_url_style);
+                if(TextUtils.isEmpty(pictureStyle)){
+                    String real_url = Pattern.quote("url('") +"(.*?)" + Pattern.quote("')");
+                    pictureStyle = Miscellany.getTextBetween(image_div.attr("style"), real_url);
+                }
 
                 if (!preferences.getBoolean("activity_visible", false) || preferences.getBoolean("notifications_everywhere", true)) {
                     if (!preferences.getString("last_notification_text", "").equals(text)) {
-
-                        // try to download a picture and send the notification
+                        final String finalPictureStyle = pictureStyle;
                         new AsyncTask<Void, Void, Void>() {
+                            @SuppressLint("WrongThread")
                             @Override
                             protected Void doInBackground (Void[] params){
-                                Bitmap picture = Miscellany.getBitmapFromURL(Miscellany.extractUrl(pictureStyle));
+                                Bitmap picture = Miscellany.getBitmapFromURL(Miscellany.extractUrl(finalPictureStyle));
                                 String address = result.attr("href");
                                 if (!address.contains("https"))
                                     address = BASE_URL + address;
@@ -269,7 +276,6 @@ public class NotificationsService extends Service {
                                 return null;
                             }
                         }.execute();
-
                     }
                 }
 
