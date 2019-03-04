@@ -205,7 +205,7 @@ public class NotificationsService extends Service {
                             .cookie("https://mobile.facebook.com", cm.getCookie("https://mobile.facebook.com"))
                             .cookie("https://m.facebookcorewwwi.onion", cm.getCookie("https://m.facebookcorewwwi.onion"))
                             .get()
-                            .select("div.touchable-notification")
+                            .select("a.touchable")
                             .not("a._19no")
                             .not("a.button")
                             .first();
@@ -214,7 +214,7 @@ public class NotificationsService extends Service {
                             .userAgent(userAgent).timeout(JSOUP_TIMEOUT)
                             .cookie("https://mobile.facebook.com", cm.getCookie("https://mobile.facebook.com"))
                             .get()
-                            .select("div.touchable-notification")
+                            .select("a.touchable")
                             .not("a._19no")
                             .not("a.button")
                             .first();
