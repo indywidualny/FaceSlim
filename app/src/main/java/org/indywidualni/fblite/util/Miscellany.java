@@ -136,5 +136,13 @@ public class Miscellany {
             return null;
         }
     }
+    
+    public static String getTextBetween(String string_one, String string_two) {
+        Matcher matcher = Pattern.compile(string_two).matcher(string_one);
+        if (matcher.find()) {
+            return matcher.group(1);
+        }
+        return "";
+    }
 
 }
