@@ -1,5 +1,6 @@
 package org.indywidualni.fblite.service;
 
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -9,6 +10,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -20,6 +22,8 @@ import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
+import android.text.TextUtils;
+import android.util.Log;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
 import android.widget.Toast;
@@ -35,6 +39,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 public class NotificationsService extends Service {
 
@@ -418,6 +423,7 @@ public class NotificationsService extends Service {
     // create a notification and display it
     private void notifier(String title, String url, boolean isMessage, Bitmap picture) {
         // let's display a notification, dude!
+        Bitmap pic = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
         final String contentTitle;
         if (isMessage)
             contentTitle = getString(R.string.app_name) + ": " + getString(R.string.messages);
@@ -439,8 +445,11 @@ public class NotificationsService extends Service {
                         .setAutoCancel(true);
 
         // picture is available
-        if (picture != null)
+        if (picture != null) {
             mBuilder.setLargeIcon(picture);
+        }else{
+            mBuilder.setLargeIcon(pic);
+        }
 
         // ringtone
         String ringtoneKey = "ringtone";
