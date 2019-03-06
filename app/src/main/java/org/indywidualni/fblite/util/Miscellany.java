@@ -102,20 +102,8 @@ public class Miscellany {
      * @param string Text which may contain an URL
      * @return Extracted URL or empty string if URL not found inside
      */
-    public static String extractUrl(String string) {
-        final Pattern urlPattern = Pattern.compile(
-                "(?:^|[\\W])((ht|f)tp(s?):\\/\\/|www\\.)"
-                        + "(([\\w\\-]+\\.){1,}?([\\w\\-.~]+\\/?)*"
-                        + "[\\p{Alnum}.,%_=?&#\\-+()\\[\\]\\*$~@!:/{};']*)",
-                Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
-        Matcher matcher = urlPattern.matcher(string);
-        int matchStart = 0;
-        int matchEnd = 0;
-        while (matcher.find()) {
-            matchStart = matcher.start(1);
-            matchEnd = matcher.end();
-        }
-        return string.substring(matchStart, matchEnd);
+    public static String extractUrl(String img_url) {
+        return img_url.replace("\\3a ", ":").replace("efg\\3d ", "oh=").replace("\\3d ", "=").replace("\\26 ", "&").replace("\\", "").replace("&amp;", "&");
     }
 
     /**
