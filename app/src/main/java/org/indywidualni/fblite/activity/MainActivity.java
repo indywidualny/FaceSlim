@@ -344,6 +344,9 @@ public class MainActivity extends Activity {
             // handle  fb://profile/<facebook_id>  links
             if (!TextUtils.isEmpty(webViewUrl))
                 webViewUrl = webViewUrl.replace("fb://profile/", "https://facebook.com/");
+            if (!TextUtils.isEmpty(webViewUrl))
+            if(webViewUrl.startsWith("https://www.facebook.com/") || webViewUrl.startsWith("http://www.facebook.com/") || webViewUrl.startsWith("http://facebook.com/") || webViewUrl.startsWith("https://facebook.com/"))
+            webViewUrl = webViewUrl.replace("www.facebook.com", "m.facebook.com");
 
             // show information about loading an external link
             Toast.makeText(getApplicationContext(), getString(R.string.loading_link), Toast.LENGTH_SHORT).show();
@@ -974,6 +977,9 @@ public class MainActivity extends Activity {
         // handle  fb://profile/<facebook_id>  links
         if (!TextUtils.isEmpty(webViewUrl))
             webViewUrl = webViewUrl.replace("fb://profile/", "https://facebook.com/");
+        if (!TextUtils.isEmpty(webViewUrl))
+            if(webViewUrl.startsWith("https://www.facebook.com/") || webViewUrl.startsWith("http://www.facebook.com/") || webViewUrl.startsWith("http://facebook.com/") || webViewUrl.startsWith("https://facebook.com/"))
+            webViewUrl = webViewUrl.replace("www.facebook.com", "m.facebook.com");
 
         // code optimization
         boolean isConnectedMobile = Connectivity.isConnectedMobile(getApplicationContext());
